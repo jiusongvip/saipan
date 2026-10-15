@@ -77,3 +77,9 @@ Added DestinationPage to the existing English/Traditional Chinese why-saipan pag
 Narrow-screen consultation card occupies document flow rather than covering the hero. Navigation now highlights the parent group of the current page and uses clearer full-width accordion summaries on mobile. Added a reusable local preview bundler for homepage/destination and language selection.
 
 Validation: TypeScript and all 60 existing tests passed. Demo build produced 50 pages; 1,433 links and generated-site audit passed. Supported browser QA is unavailable, so visual/interaction rendering remains unverified.
+
+## Costs and services page
+
+Added PricingPage to existing en/zh-hant pricing routes and the Simplified Chinese cost-breakdown guide. Shared editorial styling includes a consultation-image hero, four photographic budget categories, service-scope questions, included/separately-charged verification table and native FAQs. Added a browser-local consultation brief builder with need, travel-party and accommodation selections; changes immediately update the visible brief, with copy-to-clipboard and an honest fallback message. No quotation amount or unverified package inclusion is invented. Existing MDX detail stays available in disclosure, retaining metadata/publication/form gates.
+
+Preview now supports Home, Destination and Costs in all three languages. TypeScript, 60 existing tests, 50-page demo build, 1,443 links and generated-site audit passed. Browser visual and clipboard interaction QA remain unverified due to unavailable supported browser capability.

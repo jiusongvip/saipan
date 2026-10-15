@@ -1,5 +1,6 @@
 ---
 import { buildVisible, loadAllPages, pathToRoute, type PageData } from '../lib/content';
+import PricingPage from '../components/PricingPage.astro';
 import DestinationPage from '../components/DestinationPage.astro';
 import EditorialHome from '../components/EditorialHome.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
@@ -32,6 +33,6 @@ const rendered = await page.render?.();
 const Content = rendered?.Content;
 ---
 
-{page.template === 'home' ? <EditorialHome lang={page.lang} page={page} /> : (page.translation_key === 'why_saipan' || (page.lang === 'zh-hans' && page.translation_key === 'article_saipan_vs_us_mainland')) ? <DestinationPage page={page}>{Content ? <Content /> : null}</DestinationPage> : <Layout page={page} withForm={withForm}>
+{page.template === 'home' ? <EditorialHome lang={page.lang} page={page} /> : (page.translation_key === 'why_saipan' || (page.lang === 'zh-hans' && page.translation_key === 'article_saipan_vs_us_mainland')) ? <DestinationPage page={page}>{Content ? <Content /> : null}</DestinationPage> : (page.translation_key === 'pricing' || (page.lang === 'zh-hans' && page.translation_key === 'article_price_ranges_and_addon_items')) ? <PricingPage page={page}>{Content ? <Content /> : null}</PricingPage> : <Layout page={page} withForm={withForm}>
   {Content ? <Content /> : null}
 </Layout>}
