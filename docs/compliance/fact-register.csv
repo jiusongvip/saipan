@@ -1,0 +1,114 @@
+fact_id,claim_topic,langs_used,required_evidence_type,source_name,source_url,obtained,verified_by,verified_at,expires_at,publishable,notes
+inst-legal-entity-name,机构对外使用的法定/注册名称,all-five,institution_written_confirmation,,,no,,,,false,待院方提供注册文件；未确认前不得对外声称具体法律主体；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-brand-logo,唯一品牌 logo 与标识使用规范,all-five,institution_written_confirmation,,,no,,,,false,待院方提供正式 logo 源文件与旧标识停用说明；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-primary-domain-control,唯一主域 saipanivf.org 的注册、DNS、SSL、托管与验证权限归属,all-five,institution_written_confirmation,,,no,,,,false,待项目负责人确认控制权限；sivf-asia.com 归属未决前站内零引用；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-address,诊所实际地址与地图位置,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；页脚与结构化数据共用同一来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-map-location,地图坐标/图示与配套 HTML 地址文本,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；关键政策信息不得只做在图片里；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-phone,对外公开电话号码,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-business-hours,营业时间与服务时区,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；须与客服值班表一致；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-timezone,机构所在时区与预约时区口径,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+inst-service-scope,诊所实际提供的服务范围与不提供的服务,all-five,legal_written_approval,,,no,,,,false,待法律顾问与院方共同确认；不得暗示协助规避本地法律；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+emergency-care-pathway,并发症或紧急情况的接诊与转诊安排,all-five,institution_written_confirmation,,,no,,,,false,待院方提供书面流程；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-roster,可公开宣传的医生名单,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；未提供前医生页不得建立真实页面；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-real-name,医生真实姓名,"zh-hant,zh-hans,en",institution_written_confirmation,,,no,,,,false,待院方提供，禁止生成假医生；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-license-state,医生执照州别,"zh-hant,zh-hans,en",license_document,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-license-number,医生执照编号与可核验链接,"zh-hant,zh-hans,en",license_document,,,no,,,,false,待院方提供可公开核验链接；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-board-certification,专科认证（委员会认证）,"zh-hant,zh-hans,en",license_document,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-education-training,教育与训练经历,"zh-hant,zh-hans,en",institution_written_confirmation,,,no,,,,false,待院方提供且需可核验；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-cycle-volume,可公开的年周期量/临床数据,"zh-hant,zh-hans,en",original_dataset,,,no,,,,false,待院方批准公开后才可展示；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-society-memberships,学会成员资格,"zh-hant,zh-hans,en",license_document,,,no,,,,false,待院方提供可核验记录；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-clinic-languages,诊室可实际使用的语言（确认到具体人员）,all-five,institution_written_confirmation,,,no,,,,false,待院方确认；不得仅因网站有某语言版本就声称医生可用该语言诊疗；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+doc-photo-license,医生照片授权,"zh-hant,zh-hans,en",asset_license_agreement,,,no,,,,false,待院方提供授权，禁止假照片；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+lab-location-model,胚胎实验室位置与自建/外包情况,all-five,institution_written_confirmation,,,no,,,,false,待院方提供书面说明；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+lab-equipment-model,实际设备、制造商与型号,all-five,institution_written_confirmation,,,no,,,,false,有材料才显示；不得使用“先进设备”等无凭据表述；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+pgt-performer-credential,PGT 等检测的执行方与资质编号,all-five,license_document,,,no,,,,false,待院方与实验室出具；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+cold-chain-responsibility,标本运输与冷链责任方,all-five,contract_document,,,no,,,,false,待院方/运输方书面确认责任边界；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+lab-quality-control,质控流程与记录,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-ivf-icsi-clinical,标准 IVF/ICSI 的适应证、禁忌、流程与监测节点、风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供可公开医疗内容；不得自行补写临床方案；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-ivf-icsi-stay,标准 IVF/ICSI 的预计停留天数、赴塞班次数与可能变动,all-five,institution_written_confirmation,,,no,,,,false,待院方提供日程；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-pgt-clinical,PGT 与遗传筛查的适应证、禁忌、流程、风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；检测执行方与资质另见 pgt-performer-credential；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-pgt-stay,PGT 与遗传筛查的停留天数与周期时间线,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-donor-egg-clinical,供卵方案的适应证、禁忌、流程、风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-donor-egg-stay,供卵方案的停留天数、赴塞班次数与等待环节说明,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；不得写库存数量或匹配率承诺；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-donor-sperm-clinical,供精方案的适应证、禁忌、流程、风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-donor-sperm-stay,供精方案的停留天数与周期安排,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-freezing-clinical,冻卵与冻胚/生育力保存的适应证、禁忌、流程、风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-freezing-stay,冻卵与冻胚的停留天数与后续保存安排,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-tpr-clinical,第三方辅助生殖的适用情况、禁忌与流程,all-five,legal_written_approval,,,no,,,,false,待院方与法律顾问共同确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-tpr-stay,第三方辅助生殖的停留安排与各方行程,all-five,legal_written_approval,,,no,,,,false,待法律顾问确认表述；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-lgbtq-clinical,LGBTQ+ 与单身生育方案的适用情况、流程与风险,all-five,legal_written_approval,,,no,,,,false,待院方与法律顾问确认适用边界；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-lgbtq-stay,LGBTQ+ 与单身生育方案的停留天数与次数,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-rif-clinical,反复种植失败与反复流产评估的适应证、禁忌、流程与风险,all-five,institution_written_confirmation,,,no,,,,false,待院方提供评估路径；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-rif-stay,反复种植失败评估的停留天数与随访安排,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-remote-clinical,远程初诊与本地随访的医疗边界、流程与随访责任,all-five,legal_written_approval,,,no,,,,false,待院方与法律顾问确认；不在网站内作诊断或用药建议；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+prog-remote-stay,远程初诊与本地随访的日程结构与是否需赴塞班,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-program-ranges,各方案公开价格区间与币种,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；不得编造或以“起价”掩盖必发生费用；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-inclusions,价格包含项目明细,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-exclusions-addons,不包含项目与可能附加项（药费、监测、ICSI、PGT 等）,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-non-medical-included,住宿、翻译、接送等非医疗服务是否包含,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；未确认前不得写入套餐；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-payment-methods,可接受的支付方式,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-cancellation-refund,取消、改期与退款政策,all-five,institution_written_confirmation,,,no,,,,false,待院方提供书面政策；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-currency-validity,价格币种、适用时间与最后核对日期,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+price-approved-downloads,经审核的费用与行程说明下载文件,all-five,institution_written_confirmation,,,no,,,,false,待院方与法务审核；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-metric-definition,成功率指标定义（临床妊娠率/活产率等）,all-five,original_dataset,,,no,,,,false,待院方提供原始数据与定义；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-denominator-method,分母与统计口径（per cycle / per transfer）,all-five,original_dataset,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-age-strata,年龄分层口径,all-five,original_dataset,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-sample-size,样本量,all-five,original_dataset,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-reporting-year,统计年份,all-five,original_dataset,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-inclusion-exclusion,纳入/排除标准与局限说明,all-five,original_dataset,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+data-owner-source-file,数据负责人与来源文件,all-five,original_dataset,,,no,,,,false,待院方指定；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-tw,台湾护照持有者的入境计划、最长停留、电子授权、票据要求、地域范围与中转约束,"zh-hant,zh-hans,en",official_government_source,,,no,,,,false,待法律顾问依官方来源逐条核对；未 verified 的结论单元格必须隐藏；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-hk,香港护照/特区旅行证件持有者的入境条件,"zh-hant,zh-hans,en",official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-cn,中国护照持有者的入境路径、签证与电子授权要求,"zh-hans,zh-hant,en",official_government_source,,,no,,,,false,待法律顾问核对；简中页为《中国客人入境路径》，独立撰写；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-jp,日本护照持有者的入境条件,"ja,zh-hant,en",official_government_source,,,no,,,,false,待法律顾问核对；ja 页受 P3 母语人力阻塞；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-kr,韩国护照持有者的入境条件,"ko,zh-hant,en",official_government_source,,,no,,,,false,待法律顾问核对；ko 页受 P3 母语人力阻塞；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-passport-other,其他护照/居留身份持有者的入境条件与需个案确认范围,all-five,official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-electronic-authorization,电子授权/许可申请渠道与官方页面,all-five,official_government_source,,,no,,,,false,待法律顾问核对，不得自造申请链接；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-ticket-requirements,往返票、可退票性、可改期性与确认离境日期要求,all-five,official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-us-mainland-access,许可能够前往的地域范围/是否允许前往美国本土,all-five,official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-transit-constraints,中转约束（经美国本土转机等的限制）,all-five,official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-alternative-programs,可选的其他入境计划,all-five,official_government_source,,,no,,,,false,待法律顾问核对；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-official-sources,每条政策记录对应的官方来源 URL 与页面标题,all-five,official_government_source,,,no,,,,false,待收集并登记；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+entry-review-cycle,月度入境政策复核责任人与复核周期,all-five,institution_written_confirmation,,,no,,,,false,待项目负责人指派；见 docs/operations/entry-policy-review.md；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-taipei-saipan,台北—塞班航线、航司、航班号、直飞/中转与实际飞行时长,"zh-hant,zh-hans,en",timetable_source,,,no,,,,false,待取得时刻表来源与核对日期；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-hong-kong-saipan,香港—塞班航线与实际飞行时长,"zh-hant,zh-hans,en",timetable_source,,,no,,,,false,待取得时刻表来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-shanghai-saipan,上海—塞班航线与实际飞行时长,"zh-hant,zh-hans,en",timetable_source,,,no,,,,false,待取得时刻表来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-tokyo-saipan,东京—塞班航线与实际飞行时长,"ja,zh-hant,en",timetable_source,,,no,,,,false,待取得时刻表来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-seoul-saipan,首尔—塞班航线与实际飞行时长,"ko,zh-hant,en",timetable_source,,,no,,,,false,待取得时刻表来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-manila-saipan,马尼拉—塞班航线与实际飞行时长,"zh-hant,zh-hans,en",timetable_source,,,no,,,,false,待取得时刻表来源；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+flight-schedule-window,航班运行日期范围与时刻表版本有效期,all-five,timetable_source,,,no,,,,false,待取得；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+timezone-city-saipan,各出发城市与塞班的时差,all-five,institution_written_confirmation,,,no,,,,false,可由公开时区规则确认，但仍需登记来源与核对日期；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-line-zh-hant,繁中 LINE 客服账号与服务时段,zh-hant,account_and_rota_confirmation,,,no,,,,false,待院方提供账号与值班表；未确认前不得写入站内；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-email-zh-hans,简中客服邮箱地址,zh-hans,account_and_rota_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-line-ja,日文 LINE 客服账号,ja,account_and_rota_confirmation,,,no,,,,false,待院方提供；P3 前置条件；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-kakao-ko,韩文 KakaoTalk 客服账号,ko,account_and_rota_confirmation,,,no,,,,false,待院方提供；P3 前置条件；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-email-ko,韩文客服邮箱,ko,account_and_rota_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-whatsapp-en,英文 WhatsApp 客服账号,en,account_and_rota_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-email-en,英文客服邮箱,en,account_and_rota_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-staffing-rota,各语言客服责任队列与值班表,all-five,account_and_rota_confirmation,,,no,,,,false,待院方确认人力；响应承诺须与真实值班表一致；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+channel-response-commitment,对外展示的响应时限承诺,all-five,account_and_rota_confirmation,,,no,,,,false,待院方书面确认，未确认前不作时限承诺；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+donor-screening-process,潜在供者的筛查流程,all-five,institution_written_confirmation,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+donor-legal-agreements,供者相关法律协议与知情同意框架,all-five,legal_written_approval,,,no,,,,false,待法律顾问书面批准；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+donor-compensation-basis,供者补偿依据（合法范围）,all-five,legal_written_approval,,,no,,,,false,待法律顾问确认；不得表述为商业供给链；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+donor-disclosure-policy,知情披露政策（身份信息/后代联系等）,all-five,legal_written_approval,,,no,,,,false,待法律顾问确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-surrogacy-rules,第三方辅助生殖适用法条与结论,all-five,legal_written_approval,,,no,,,,false,仅使用法律顾问书面批准的结论；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-parenthood-birth,亲权认定与出生登记流程结论,all-five,legal_written_approval,,,no,,,,false,待法律顾问书面意见；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-birth-citizenship-scope,出生公民权相关表述的允许位置与口径,all-five,legal_written_approval,,,no,,,,false,限法律页内一节加 FAQ 单问；不单独建关键词页、不作营销卖点；律师书面审核前不发布正面结论；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-consent-agreements,知情同意与医疗/法律协议要点说明,all-five,legal_written_approval,,,no,,,,false,待法律顾问提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-doc-verification,旅行与医疗文件核验要求,all-five,legal_written_approval,,,no,,,,false,待法律顾问确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-privacy-retention,个人资料收集目的、保留期限、跨境传输与删除方式,all-five,legal_written_approval,,,no,,,,false,待隐私/法律顾问确认；五市场差异需分别意见；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-disclaimer-text,非医疗建议声明与非法律意见声明文案,all-five,legal_written_approval,,,no,,,,false,待法律顾问定稿；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-media-consent,患者故事与影像使用授权条款,all-five,legal_written_approval,,,no,,,,false,待法律顾问定稿；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+legal-mainland-audience,简中页面面向大陆用户的合规边界书面意见,zh-hans,legal_written_approval,,,no,,,,false,待法律顾问书面意见；上线前检查清单项目；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+asset-facility-photos,诊所实景照片及其使用授权,all-five,asset_license_agreement,,,no,,,,false,待院方提供授权记录；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+asset-equipment-photos,设备照片及型号说明授权,all-five,asset_license_agreement,,,no,,,,false,待院方提供；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+asset-story-media,患者故事所用影像/录音素材授权,all-five,asset_license_agreement,,,no,,,,false,待逐一确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+asset-font-license,字体授权（含 CJK 字体）,all-five,asset_license_agreement,,,no,,,,false,待确认授权范围与嵌入方式；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+story-written-consent,患者故事书面授权（姓名/影像/医疗信息使用范围）,all-five,signed_authorization,,,no,,,,false,待取得；无授权不得发布故事；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+story-anonymization-approval,匿名化处理经当事人确认,all-five,signed_authorization,,,no,,,,false,待取得；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+redirect-old-domain-list,旧域 saipan-ivf.com 约 10 个 URL 的可导出清单,all-five,institution_written_confirmation,,,no,,,,false,待确认旧域后台可访问并导出清单；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+redirect-sivf-asia-disposal,sivf-asia.com 归属与处置书面决策,all-five,institution_written_confirmation,,,no,,,,false,未决前站内零引用；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+api-contact-contract,集团 POST /api/contact 接口契约与鉴权,all-five,contract_document,,,no,,,,false,待集团确认；见 docs/decisions/ADR-002-api-contract.md，契约未定前不猜测接口；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+analytics-consent-policy,GA4/UTM 采集的同意机制与各市场隐私要求,all-five,legal_written_approval,,,no,,,,false,待法律/隐私负责人确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+native-reviewer-availability,简中/繁中/日文/韩文母语校对人力确认,"zh-hans,zh-hant,ja,ko",institution_written_confirmation,,,no,,,,false,待项目负责人确认；ja/ko 未确认则 P3 阻塞；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at
+institution-review-bandwidth,院方审核人、审批时限与送审 PR 流程,all-five,institution_written_confirmation,,,no,,,,false,待确认；取得证据并经审核后方可将 obtained 改为 yes、publishable 改为 true，并回填 verified_by/verified_at/expires_at

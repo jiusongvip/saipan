@@ -1,0 +1,4 @@
+# Cloudflare Pages 重定向文件。
+# 旧域 saipan-ivf.com 的约 10 个 URL 需逐页 301 到新站最匹配页面；清单以 docs/seo/redirect-map.csv 为唯一来源，
+# 旧站 URL 尚未导出（P0 任务 2），因此这里不预填任何猜测映射。
+# URL 规范：无尾斜杠（根路径除外）；托管层需与 astro.config.mjs 的 trailingSlash=never 保持一致。

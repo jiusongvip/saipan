@@ -1,0 +1,32 @@
+---
+import type { LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { buildVisible, loadAllPages, navItemsForLang, type PageData } from '../lib/content';
+
+export interface Props {
+  lang: LangCode;
+  page: PageData;
+}
+
+const { lang, page } = Astro.props;
+const pages = buildVisible(await loadAllPages());
+// 上層頁（如科普 hub）在導航裡有短標籤時用短標籤，麵包屑不放整段頁面標題。
+const labelByPath = new Map(navItemsForLang(pages, lang).map((item) => [item.path, t(lang, item.labelKey)]));
+const segments = page.path.split('/').filter(Boolean);
+const trail: { label: string; path: string }[] = [{ label: t(lang, 'common.home'), path: `/${lang}` }];
+for (let i = 2; i < segments.length; i += 1) {
+  const candidate = '/' + segments.slice(0, i).join('/');
+  const found = pages.find((entry) => entry.lang === lang && entry.path === candidate);
+  if (found) trail.push({ label: labelByPath.get(found.path) ?? found.title, path: found.path });
+}
+const show = trail.length > 1;
+---
+
+{show && (
+<nav class="breadcrumbs" aria-label={t(lang, 'breadcrumbs.title')}>
+  <ol>
+    {trail.map((item) => <li><a href={item.path}>{item.label}</a></li>)}
+    <li><span>{page.title}</span></li>
+  </ol>
+</nav>
+)}

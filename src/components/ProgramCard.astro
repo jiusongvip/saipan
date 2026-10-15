@@ -1,0 +1,30 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { verifiedProgramFact } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  program: Record<string, unknown>;
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { lang, program, title, description, path } = Astro.props;
+// 停留天数与费用区间只有在来源已核验时才出现（开发文档 4.7、4.8）。
+const stay = verifiedProgramFact<string>(program, 'stay_days');
+const price = verifiedProgramFact<string>(program, 'price_range');
+const reviewPending = program.medical_review_status !== 'approved';
+---
+
+<article class="card">
+  <h3 class="card__title"><a href={path}>{title}</a></h3>
+  <p class="card__body">{description}</p>
+  <div class="card__meta">
+    {stay && <span>{stay}</span>}
+    {price && <span>{price}</span>}
+    {reviewChrome && reviewPending && <span>{t(lang, 'common.pending_fact')}</span>}
+  </div>
+  <a class="cta-secondary" href={`${path}#consult`}>{t(lang, 'cta.assess_program')}</a>
+</article>

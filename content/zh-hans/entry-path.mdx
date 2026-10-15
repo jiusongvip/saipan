@@ -1,0 +1,85 @@
+---
+lang: zh-hans
+path: /zh-hans/entry-path
+translation_key: entry_path
+title: 中国客人入境路径
+description: 大陆旅客赴塞班的入境许可、电子授权、返程票要求、可行区域与中转说明，逐项标注官方来源与核对日期。
+template: entry_path
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - permit_table
+  - authorization
+  - ticket_requirements
+  - region_access
+  - transit
+  - official_sources
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+nationality_slots:
+  - nationality-cn
+hero:
+  eyebrow: 入境与停留
+  lede: 大陆客人最常问的是能不能直接入境、能停留多久、要不要先买好回程票、能不能再去美国本土。本页按官方来源逐项回答，并标注核对日期。
+  trust_items: []
+  image: null
+---
+
+import EntryPolicyTable from '../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../src/components/FactGate.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+
+<FactGate need="entry" nationalitySlots={['nationality-cn']}>
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>入境条件逐项说明</h2>
+        <p>许可或计划类型、最长停留、需要的电子授权、往返票与确认离境日、可行地域范围、中转限制与其他可选计划，逐行列出并附官方来源。</p>
+      </div>
+      <EntryPolicyTable lang="zh-hans" nationalitySlots={['nationality-cn']} />
+      <p class="source-note">入境条件以美国官方主管机关现行页面为准；每条记录均标注来源与最后核对日期。</p>
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>您的入境条件怎么定</h2>
+      <p>适用哪一种入境安排，取决于您持用的护照和实际出行日期，因此按个案查证后答复，不用一套说法覆盖所有客人。</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>第一步：说明护照与出行时间</h3>
+        <p>通过咨询表单或您选择的联系方式，告知护照类别、计划出发与返回日期，以及是否打算中转。</p>
+      </li>
+      <li>
+        <h3>第二步：核对主管机关现行页面</h3>
+        <p>每项条件都从管辖该护照的官方页面读取，保留页面名称与当次核对日期，不采用代办方的转述。</p>
+      </li>
+      <li>
+        <h3>第三步：由法律顾问复核表述</h3>
+        <p>条件与限制在写给您或发布到网站前，由署名的顾问复核用词，并记录复核人与复核日期。</p>
+      </li>
+      <li>
+        <h3>第四步：出发前再核对一次</h3>
+        <p>规则在出票之后仍可能调整，因此临近出发日期时会重新核对同一来源，把变化告知您。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>中转与转机安排</h2>
+      <p>是否需要中转、中转点与间隔时间取决于出发当天的实际航班，确认日期后逐段核对行李与登机证安排。</p>
+    </div>
+    <ReviewOnly>中转说明待航线与官方来源核对，见 docs/compliance/fact-register.csv。</ReviewOnly>
+  </div>
+</section>

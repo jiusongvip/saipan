@@ -1,0 +1,26 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import type { PageData } from '../lib/content';
+
+export interface Props {
+  lang: LangCode;
+  page: PageData;
+}
+
+const { lang, page } = Astro.props;
+// 文章上线前必须有医生书面审核签核（开发文档 4.9）：未签核只在审阅外壳中标注。
+const reviewPending = page.status !== 'published';
+const readMore = t(lang, 'articles.read');
+---
+
+<article class="card">
+  <h3 class="card__title">
+    <a href={page.path} aria-describedby={`${page.id}-summary`}>{page.title}</a>
+  </h3>
+  <p class="card__body" id={`${page.id}-summary`}>{page.description}</p>
+  <div class="card__meta">
+    {reviewChrome && reviewPending && <span>{t(lang, 'common.pending_fact')}</span>}
+  </div>
+  <a class="cta-secondary" href={page.path}>{readMore}<span class="visually-hidden">：{page.title}</span></a>
+</article>

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "review_note": "本文件是全站唯一的主域与联系方式来源（开发文档 5.2、7.1）。凡 status 不为 verified 或值为 null 的字段，模板层必须不渲染；validate-data.ts 会在生产构建前拦截。",
+  "primary_domain": {
+    "value": "saipanivf.org",
+    "status": "approved",
+    "source": "开发文档 0 项目主域 / 7.3",
+    "note": "站内链接、结构化数据、邮箱、社媒只允许使用该主域。"
+  },
+  "forbidden_domains": [
+    {
+      "value": "sivf-asia.com",
+      "status": "disposition_undecided",
+      "rule": "归属与处置方案确认前，禁止出现在站内链接、邮箱、结构化数据或公开配置中。"
+    },
+    {
+      "value": "saipan-ivf.com",
+      "status": "legacy_redirect_only",
+      "rule": "仅用于 docs/seo/redirect-map.csv 的旧域 301 来源，不作为站内对外链接目标。"
+    }
+  ],
+  "brand": {
+    "official_name": null,
+    "official_name_status": "pending",
+    "logo_path": null,
+    "logo_status": "pending",
+    "logo_asset_license_source": null,
+    "wordmark_draft": {
+      "zh-hant": "塞班生殖中心",
+      "zh-hans": "塞班生殖中心",
+      "en": "Saipan Reproductive Center",
+      "ja": "サイパン生殖医療センター",
+      "ko": "사이판 생식센터"
+    },
+    "wordmark_draft_status": "internal_placeholder",
+    "wordmark_note": "wordmark_draft 仅用于本地与预览环境的页头占位，不得进入生产构建或对外物料；正式名称与 logo 须由院方书面确认。"
+  },
+  "contact": {
+    "address": null,
+    "address_status": "pending",
+    "phone": null,
+    "phone_status": "pending",
+    "business_hours": null,
+    "business_hours_status": "pending",
+    "timezone": null,
+    "email": null,
+    "email_status": "pending",
+    "required_before_production": ["address", "phone", "business_hours", "email"]
+  },
+  "contact_api": {
+    "allowed_hosts": [],
+    "allowed_hosts_status": "pending_adr002",
+    "note": "表单接口 host 白名单（开发文档 6.2）。ADR-002 契约书面确认前保持为空：resolveEndpoint 拒绝任何已配置接口，表单安全降级为「未接入」。确认后在此填入集团 API host（仅 host，不含路径与密钥）。"
+  },
+  "social_channels": [],
+  "languages": [
+    {
+      "code": "zh-hant",
+      "hreflang": "zh-Hant",
+      "enabled": true,
+      "native_label": "繁體中文",
+      "page_count_quota": 51,
+      "status": "active_draft",
+      "note": "配額 45+1+1+4：科普 hub /zh-hant/articles 與工具層 /zh-hant/tools 為清單新增的結構頁；另四組獲客文章各佔一行（us-born-baby-advantages、flights-to-saipan-routes、amh-low-ovarian-reserve、saipan-vs-us-mainland）。"
+    },
+    {
+      "code": "zh-hans",
+      "hreflang": "zh-Hans",
+      "enabled": true,
+      "native_label": "简体中文",
+      "page_count_quota": 51,
+      "status": "active_draft",
+      "note": "独立撰写，不得由繁中转换；表单含是否持有效美国签证字段。配额 45+1+1+4：科普 hub /zh-hans/articles 与工具层 /zh-hans/tools 为清单新增的结构页；另四组获客文章各占一行（us-born-baby-advantages、flights-to-saipan-routes、amh-low-ovarian-reserve、saipan-vs-us-mainland）。"
+    },
+    {
+      "code": "en",
+      "hreflang": "en",
+      "enabled": true,
+      "native_label": "English",
+      "page_count_quota": 36,
+      "status": "active_draft"
+    },
+    {
+      "code": "ja",
+      "hreflang": "ja",
+      "enabled": false,
+      "native_label": "日本語",
+      "page_count_quota": 21,
+      "status": "blocked",
+      "blocked_reason": "P3 前置条件未确认：母语校对人力、LINE 客服账号与审核人。"
+    },
+    {
+      "code": "ko",
+      "hreflang": "ko",
+      "enabled": false,
+      "native_label": "한국어",
+      "page_count_quota": 21,
+      "status": "blocked",
+      "blocked_reason": "P3 前置条件未确认：母语校对人力、KakaoTalk 与邮箱客服账号与审核人。"
+    }
+  ],
+  "default_language": "zh-hant",
+  "x_default_target": "zh-hant",
+  "routing": {
+    "trailing_slash": "never",
+    "root_strategy": "language_selector",
+    "auto_redirect_by_ip": false,
+    "missing_translation_fallback": "language_home"
+  },
+  "analytics": {
+    "ga4_measurement_id_env": "PUBLIC_GA4_MEASUREMENT_ID",
+    "consent_required_before_tracking": true,
+    "pii_in_events": false
+  }
+}

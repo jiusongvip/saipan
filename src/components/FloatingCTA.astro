@@ -1,0 +1,103 @@
+---
+import { usableChannels } from '../lib/facts';
+import { t } from '../lib/i18n';
+import type { LangCode } from '../lib/config';
+
+export interface Props {
+  lang: LangCode;
+  pageType: string;
+  pagePath: string;
+  /** 槽位 1：评估向导锚点（如 #wizard） */
+  wizardAnchor?: string;
+  /** 槽位 2：已 verified 联络渠道（无渠道时整槽不渲染） */
+  audience?: 'patient' | 'donor';
+  /** 槽位 3：资料下载路径（如 /zh-hant/pricing） */
+  downloadPath?: string;
+}
+
+const { lang, pageType, pagePath, wizardAnchor, audience = 'patient', downloadPath } = Astro.props;
+
+const channels = usableChannels(lang, audience);
+---
+
+<div class="floating-cta-group" data-floating-cta-group>
+  {wizardAnchor && (
+    <a
+      class="btn btn--primary floating-cta"
+      href={wizardAnchor}
+      data-floating-cta
+      data-cta-id="wizard"
+      data-lang={lang}
+      data-page-type={pageType}
+      data-page-path={pagePath}
+    >
+      {t(lang, 'cta.wizard')}
+    </a>
+  )}
+  {channels.length > 0 && (
+    <div class="floating-cta-channels">
+      {channels.map((channel) => (
+        <a
+          class="btn btn--secondary floating-cta"
+          href={channel.handle_or_url!}
+          rel="noopener"
+          data-channel-link={channel.channel_type}
+          data-lang={lang}
+          data-page-type={pageType}
+          data-page-path={pagePath}
+          data-channel={channel.channel_type}
+        >
+          {t(lang, `channel.${channel.channel_type}`)}
+        </a>
+      ))}
+    </div>
+  )}
+  {downloadPath && (
+    <a
+      class="btn btn--secondary floating-cta"
+      href={downloadPath}
+      data-floating-cta
+      data-cta-id="download"
+      data-lang={lang}
+      data-page-type={pageType}
+      data-page-path={pagePath}
+    >
+      {t(lang, 'cta.download')}
+    </a>
+  )}
+</div>
+
+<script>
+  (() => {
+    const group = document.querySelector<HTMLElement>('[data-floating-cta-group]');
+    if (!group) return;
+    const threshold = 0.35;
+    const form = document.querySelector('#consult');
+    let scrolledPastThreshold = false;
+    let formVisible = false;
+    let goingUp = false;
+    const update = () => {
+      group.dataset.visible = scrolledPastThreshold && !formVisible && goingUp ? 'true' : 'false';
+    };
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      goingUp = y < lastY;
+      lastY = y;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrolledPastThreshold = max > 0 && y / max >= threshold;
+      update();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    if (form && 'IntersectionObserver' in window) {
+      new IntersectionObserver(
+        (entries) => {
+          formVisible = entries.some((entry) => entry.isIntersecting);
+          update();
+        },
+        { threshold: 0.05 },
+      ).observe(form);
+    }
+  })();
+</script>

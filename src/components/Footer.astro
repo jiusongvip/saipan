@@ -1,0 +1,63 @@
+---
+import { brandWordmark, reviewChrome, siteConfig, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { buildVisible, loadAllPages } from '../lib/content';
+import { businessHours, contactFact, usableChannels } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+const pages = buildVisible(await loadAllPages());
+const privacyPage = pages.find(
+  (page) => page.lang === lang && page.translation_key === 'legal_privacy_and_data_protection',
+);
+const channels = usableChannels(lang);
+const address = contactFact('address');
+const phone = contactFact('phone');
+const email = contactFact('email');
+const hours = businessHours();
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer__grid">
+    <div>
+      <h2>{t(lang, 'footer.channels')}</h2>
+      <ul>
+        {channels.map((channel) => (
+          <li>
+            <a href={channel.handle_or_url!} rel="noopener" data-channel-link={channel.channel_type}>
+              {t(lang, `channel.${channel.channel_type}`)}
+            </a>
+          </li>
+        ))}
+        {channels.length === 0 && <li>{t(lang, 'messaging.none_ready')}</li>}
+      </ul>
+    </div>
+
+    <div>
+      <h2>{brandWordmark(lang) ?? siteConfig.primary_domain.value}</h2>
+      {address && <p>{address}</p>}
+      {phone && <p>{t(lang, 'footer.phone')}: {phone}</p>}
+      {email && <p><a href={`mailto:${email}`}>{email}</a></p>}
+      {hours && <p>{t(lang, 'footer.hours')}: {hours}</p>}
+      {reviewChrome && !address && !phone && !hours && (
+        <p>{t(lang, 'common.pending_fact')}: {t(lang, 'footer.address')} / {t(lang, 'footer.phone')} / {t(lang, 'footer.hours')}</p>
+      )}
+    </div>
+
+    <div>
+      <h2>{t(lang, 'footer.privacy')}</h2>
+      <p>{t(lang, 'footer.notice')}</p>
+      {privacyPage ? <a href={privacyPage.path}>{t(lang, 'footer.privacy')}</a> : reviewChrome && <span>{t(lang, 'common.pending_legal')}</span>}
+    </div>
+  </div>
+
+  <div class="container footer__disclaimer">
+    <p><strong>{t(lang, 'footer.disclaimer_title')}</strong>: {t(lang, 'footer.disclaimer_body')}</p>
+    <p><strong>{t(lang, 'footer.legal_disclaimer_title')}</strong>: {t(lang, 'footer.legal_disclaimer_body')}</p>
+    <p>© {year} {siteConfig.brand.official_name ?? siteConfig.primary_domain.value}</p>
+  </div>
+</footer>

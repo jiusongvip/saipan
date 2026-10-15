@@ -1,0 +1,88 @@
+---
+lang: zh-hant
+path: /zh-hant/cities/taipei
+translation_key: city_taipei
+title: 從台北出發的就醫安排
+description: 自台北前往塞班的航線與飛行時間、入境條件、日程安排、出發前文件、語言與翻譯、費用區間入口。
+template: city
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - route
+  - entry_path
+  - timezone_schedule
+  - documents
+  - language_support
+  - cost_range
+  - objections
+  - city_cta
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+city: taipei
+nationality_slots:
+  - nationality-tw
+hero:
+  eyebrow: 台北出發
+  lede: 從台北安排赴塞班就醫，需要同時處理三件事：航班銜接、適用護照的入境條件、與週期配合的停留日程。本頁把這三項與出發前文件、語言安排、費用範圍集中在同一頁。
+  trust_items: []
+  image: null
+---
+
+import FlightTable from '../../../src/components/FlightTable.astro';
+import EntryPolicyTable from '../../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../../src/components/FactGate.astro';
+import FactSlot from '../../../src/components/FactSlot.astro';
+import ReviewOnly from '../../../src/components/ReviewOnly.astro';
+
+<FactGate need="flights">
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>航線與實際飛行時間</h2>
+        <p>台北與塞班之間的航班安排、直飛或中轉、實際飛行時間與適用日期，連同來源與核對日期。</p>
+      </div>
+      <FlightTable lang="zh-hant" originCity="台北" />
+    </div>
+  </section>
+</FactGate>
+
+<FactGate need="entry" nationalitySlots={['nationality-tw']}>
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>入境條件</h2>
+        <p>所持護照適用的入境計畫、最長停留與電子授權要求，決定您能停留多久、能否前往美國本土，也決定返程票要怎麼買。</p>
+      </div>
+      <EntryPolicyTable lang="zh-hant" nationalitySlots={['nationality-tw']} />
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>時差與日程安排</h2>
+    <p>週期中的到院時間、監測次數與返台航班要放在同一份日程裡計算，預留緩衝的環節尤需留意。客服會依醫療團隊給出的到院節點，與您逐段核對可在島上停留的天數。</p>
+    <FactSlot lang="zh-hant" slot="timezone_and_schedule" />
+
+    <h2>出發前文件與準備</h2>
+    <p>文件準備通常圍繞四項：護照效期、電子授權、返程票與住宿證明。清單依您適用的入境條件與方案內容調整，確認後以書面清單提供。</p>
+    <FactSlot lang="zh-hant" slot="documents" />
+
+    <h2>語言與翻譯安排</h2>
+    <p>需要翻譯的醫療溝通包括問診說明、同意書與用藥指示。中文文件的提供方式與病歷紀錄的保留形式，在評估階段一併確認，避免到院後才補件。</p>
+    <FactSlot lang="zh-hant" slot="language_support" />
+
+    <h2>費用區間與當地開支參考</h2>
+    <p>除醫療費用區間外，住宿、餐費與當地交通同樣影響整體預算。每筆金額都標示幣種、適用期間與最後核對日期，方便您自行查證。</p>
+    <FactSlot lang="zh-hant" slot="cost_range" />
+
+    <h2>從台北出發常被問到的問題</h2>
+    <p>旅客在評估階段最常提出三類疑慮：停留天數是否足夠、中轉銜接是否保險、以及返台後的追蹤由誰負責。這三項由醫療團隊與法律顧問依您的情況逐項回覆，客服整理後以書面送回。</p>
+    <ReviewOnly>三項台北客群異議：內容由院方與客服確認後撰寫，不由模型推測。</ReviewOnly>
+  </div>
+</section>

@@ -1,0 +1,109 @@
+---
+import { enabledLanguages, heroImage, reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { groupByTranslationKey, languageHomeIfBuilt, loadAllPages, TEMPLATE_PAGE_TYPE, type PageData } from '../lib/content';
+import { hreflangAlternates, pageMeta } from '../lib/seo';
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import PrimaryCTA from '../components/PrimaryCTA.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ProgramFitWizard from '../components/ProgramFitWizard.astro';
+import MessagingLinks from '../components/MessagingLinks.astro';
+import SourceNote from '../components/SourceNote.astro';
+
+export interface Props {
+  page: PageData;
+  withForm?: boolean;
+}
+
+const { page, withForm = true } = Astro.props;
+const lang = page.lang as LangCode;
+const pages = await loadAllPages();
+const group = groupByTranslationKey(pages).get(page.translation_key) ?? [page];
+const alternates = hreflangAlternates(page, group, enabledLanguages);
+const meta = pageMeta({ page, alternates });
+const pageType = TEMPLATE_PAGE_TYPE[page.template] ?? 'generic';
+const builtHome = languageHomeIfBuilt(pages, lang);
+
+// 首屏最多两条信任证据，且必须是已核准来源（开发文档 4.2）。
+const trustItems = (page.hero?.trust_items ?? []).slice(0, 2);
+const heroSrc = page.hero?.image ?? heroImage.src;
+const trustVerified = page.fact_sources.length > 0 && page.status === 'published';
+const primarySource = page.fact_sources[0] ?? null;
+---
+
+<BaseLayout
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  alternates={alternates}
+  noindex={page.noindex}
+  pageType={pageType}
+  page={page}
+  ogImage={page.og_image}
+  hasForm={withForm}
+  hasWizard={withForm}
+>
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <h1>{page.title}</h1>
+        {page.hero?.lede && <p class="hero__lede">{page.hero.lede}</p>}
+        <div class="hero__actions">
+          <PrimaryCTA lang={lang} cta={page.primary_cta} pageType={pageType} pagePath={page.path} homePath={builtHome} hasForm={withForm} />
+          {page.secondary_cta && (
+            <PrimaryCTA
+              lang={lang}
+              cta={page.secondary_cta}
+              pageType={pageType}
+              pagePath={page.path}
+              variant="text"
+              homePath={builtHome}
+              hasForm={withForm}
+            />
+          )}
+        </div>
+        {(trustVerified || reviewChrome) && trustItems.length > 0 && (
+          <ul class="trust-row">
+            {trustItems.map((item) => <li>{trustVerified ? item : `${item} · ${t(lang, 'common.pending_fact')}`}</li>)}
+          </ul>
+        )}
+        <SourceNote
+          lang={lang}
+          label={primarySource?.label ?? null}
+          url={primarySource?.url ?? null}
+          lastVerified={page.last_verified}
+        />
+      </div>
+      <figure class="hero-figure">
+        <img
+          src={heroSrc}
+          alt={t(lang, 'hero.image_alt')}
+          width={heroImage.width}
+          height={heroImage.height}
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </section>
+
+  {page.template !== 'home' && (
+    <div class="container">
+      <Breadcrumbs lang={lang} page={page} />
+    </div>
+  )}
+
+  <slot />
+
+  {withForm && (
+    <div class="container container--narrow">
+      <ProgramFitWizard lang={lang} />
+    </div>
+  )}
+  {withForm && <ContactForm lang={lang} pageType={pageType} pagePath={page.path} ctaLabel={page.primary_cta} />}
+  <div class="container">
+    <MessagingLinks lang={lang} pageType={pageType} pagePath={page.path} />
+  </div>
+</BaseLayout>

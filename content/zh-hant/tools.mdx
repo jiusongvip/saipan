@@ -1,0 +1,50 @@
+---
+lang: zh-hant
+path: /zh-hant/tools
+translation_key: tools
+title: 費用與停留天數對照工具
+description: 兩項對照工具：方案費用區間對照表與停留天數試算。費用與停留天數由院方書面確認後才會更新，並註明核對日期；未確認前，對應欄位不會顯示任何數字。
+template: tools
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+valid_until: null
+fact_sources: []
+required_sections:
+  - fee-comparison
+  - stay-estimator
+  - tool-disclaimer
+primary_cta: request_price_guide
+secondary_cta: assess_program
+noindex: true
+---
+
+import ProgramFeeTable from '../../src/components/ProgramFeeTable.astro';
+import StayEstimator from '../../src/components/StayEstimator.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>方案費用對照</h2>
+    <p>對照表列出各方案的公開費用區間、幣別與最後核對日期。費用由院方書面確認後才會出現在表中；確認前，表格不會顯示任何數字。</p>
+    <ProgramFeeTable lang="zh-hant" />
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container container--narrow prose">
+    <h2>停留天數試算</h2>
+    <p>選擇意向方案，查看該方案的參考停留天數。停留天數同樣由院方書面確認後才會更新。</p>
+    <StayEstimator lang="zh-hant" />
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>工具邊界</h2>
+    <p>兩項工具僅供初步對照：費用區間不等於個別報價，實際費用以院方依您的情況提供的書面報價為準；停留天數為一般參考，實際日程由醫療團隊依您的療程安排。工具輸出不構成醫療建議，也不取代遠端初診評估。</p>
+    <p>需要個別費用說明，可至費用頁索取費用區間說明，或直接提交諮詢。</p>
+    <p><a class="cta-link" href="/zh-hant/pricing">費用說明</a> · <a class="cta-link" href="/zh-hant/faq">常見問題</a></p>
+  </div>
+</section>

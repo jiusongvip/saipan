@@ -1,0 +1,33 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+
+export interface Props {
+  lang: LangCode;
+  /** 要素名称，例如 suitability / stay_days / price_range。 */
+  slot: string;
+  value?: string | number | null;
+  /** 已核验来源；缺少来源时生产构建不显示该结论。 */
+  sourceLabel?: string | null;
+  sourceUrl?: string | null;
+  lastVerified?: string | null;
+}
+
+const { lang, slot, value = null, sourceLabel = null, sourceUrl = null, lastVerified = null } = Astro.props;
+const publishable = value !== null && value !== undefined && String(value).trim() !== '' && Boolean(sourceLabel) && Boolean(lastVerified);
+---
+
+{publishable ? (
+  <div class="fact-slot">
+    <p>{String(value)}</p>
+    <p class="source-note">
+      {t(lang, 'common.source')}: {sourceLabel}
+      {sourceUrl && <> · <a href={sourceUrl} rel="noopener noreferrer">{sourceUrl.replace(/^https?:\/\//, '')}</a></>}
+      {lastVerified && <> · {t(lang, 'common.last_verified')} {lastVerified}</>}
+    </p>
+  </div>
+) : !reviewChrome ? null : (
+  <p class="pending-slot">
+    <code>{slot}</code>: {t(lang, 'common.pending_fact')}
+  </p>
+)}

@@ -1,0 +1,62 @@
+---
+lang: zh-hant
+path: /zh-hant/programs/ivf-icsi
+translation_key: program_ivf_icsi
+title: 標準試管受精與 ICSI 方案
+description: 標準 IVF 與單精子顯微注射（ICSI）的適用情況、需要先排除的情況、流程與監測節點、停留安排、風險說明與費用區間。
+template: program
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - suitability
+  - exclusions
+  - process
+  - stay_duration
+  - risks
+  - price_range
+primary_cta: assess_program
+secondary_cta: request_price_guide
+noindex: true
+program_slug: ivf-icsi
+hero:
+  eyebrow: 方案說明
+  lede: 本頁分六個部分說明此方案：適用情況、需要先進一步評估的條件、流程與監測節點、停留天數、風險說明與費用區間。是否適合您，由醫師在初診評估後回答。
+  trust_items: []
+  image: null
+---
+
+import FactSlot from '../../../src/components/FactSlot.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>適用對象</h2>
+    <p>本節說明醫療團隊在哪些情況下會考慮此方案，以及評估時需要看見的檢查結果與病史條件。</p>
+    <FactSlot lang="zh-hant" slot="suitability" />
+
+    <h2>可能不適合或需額外評估</h2>
+    <p>部分情況需要先完成額外檢查或改用其他方案；本節列出會先轉為進一步評估的條件。</p>
+    <FactSlot lang="zh-hant" slot="exclusions" />
+
+    <h2>流程與監測節點</h2>
+    <p>從初診評估、促排卵、取卵與受精，到培養、移植與驗孕，各節點的時間與需要到院的次數在本節逐段說明。</p>
+    <FactSlot lang="zh-hant" slot="process" />
+
+    <h2>預計停留天數與赴塞班次數</h2>
+    <p>有些人一次完成整個週期，有些人需要分兩次行程；本節說明影響天數的因素與常見的停留安排方式。</p>
+    <FactSlot lang="zh-hant" slot="stay_duration" />
+
+    <h2>風險與可能併發症</h2>
+    <p>本節列出同意書中會向您說明的風險與可能併發症類型，以及發生時醫療團隊的處理方式。</p>
+    <FactSlot lang="zh-hant" slot="risks" />
+
+    <h2>費用區間與包含項目</h2>
+    <p>費用依用藥劑量、是否需要附加技術與培養天數而變；本節列出區間、包含與不包含的項目。</p>
+    <FactSlot lang="zh-hant" slot="price_range" />
+
+    <p class="source-note">本頁的臨床說明與數字均由醫療團隊書面確認、標示來源與核對日期後發布，並與您個人情況一併討論。</p>
+  </div>
+</section>

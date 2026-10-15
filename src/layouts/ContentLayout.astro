@@ -1,0 +1,68 @@
+---
+import type { LangCode } from '../lib/config';
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SourceNote from '../components/SourceNote.astro';
+import ValidUntilNote from '../components/ValidUntilNote.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CrossLinks from '../components/CrossLinks.astro';
+import MessagingLinks from '../components/MessagingLinks.astro';
+import type { PageData } from '../lib/content';
+import { groupByTranslationKey, loadAllPages, TEMPLATE_PAGE_TYPE } from '../lib/content';
+import { enabledLanguages } from '../lib/config';
+import { hreflangAlternates, pageMeta } from '../lib/seo';
+
+export interface Props {
+  page: PageData;
+  /** contact_success 等页面不重复放表单。 */
+  withForm?: boolean;
+}
+
+const { page, withForm = true } = Astro.props;
+const pages = await loadAllPages();
+const group = groupByTranslationKey(pages).get(page.translation_key) ?? [page];
+const alternates = hreflangAlternates(page, group, enabledLanguages);
+const meta = pageMeta({ page, alternates });
+const pageType = TEMPLATE_PAGE_TYPE[page.template] ?? 'generic';
+const showBreadcrumbs = page.template !== 'home' && page.template !== 'contact_success';
+const primarySource = page.fact_sources[0] ?? null;
+---
+
+<BaseLayout
+  lang={page.lang as LangCode}
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  alternates={alternates}
+  noindex={page.noindex}
+  pageType={pageType}
+  page={page}
+  ogImage={page.og_image}
+  hasForm={withForm}
+>
+  <div class="container container--narrow">
+    {showBreadcrumbs && <Breadcrumbs lang={page.lang} page={page} />}
+    <article class="prose prose--padded">
+      <header>
+        <h1>{page.title}</h1>
+        <SourceNote
+          lang={page.lang}
+          label={primarySource?.label ?? null}
+          url={primarySource?.url ?? null}
+          lastVerified={page.last_verified}
+        />
+        <ValidUntilNote lang={page.lang} validUntil={page.valid_until} />
+      </header>
+      <slot />
+    </article>
+  </div>
+
+  <CrossLinks lang={page.lang} page={page} />
+
+  {withForm && (
+    <div class="container container--narrow">
+      <ContactForm lang={page.lang} pageType={pageType} pagePath={page.path} ctaLabel={page.primary_cta} />
+      <MessagingLinks lang={page.lang} pageType={pageType} pagePath={page.path} />
+    </div>
+  )}
+</BaseLayout>

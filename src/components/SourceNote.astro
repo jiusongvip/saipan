@@ -1,0 +1,28 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { isFresh } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  label?: string | null;
+  url?: string | null;
+  lastVerified?: string | null;
+  /** 来源未经核对时：只在审阅外壳中显示待核对提示，成品与演示构建不显示。 */
+  verified?: boolean;
+}
+
+const { lang, label = null, url = null, lastVerified = null } = Astro.props;
+const verified = Astro.props.verified ?? Boolean(label && isFresh(lastVerified, 400));
+const days = lastVerified ? Math.round((Date.now() - new Date(`${lastVerified}T00:00:00Z`).getTime()) / 86_400_000) : null;
+---
+
+{verified ? (
+  <p class="source-note">
+    <span>{t(lang, 'common.source')}: {label}</span>
+    {url && <a href={url} rel="noopener noreferrer">{url.replace(/^https?:\/\//, '')}</a>}
+    {lastVerified && <span>· {t(lang, 'common.last_verified')} {lastVerified}</span>}
+  </p>
+) : !reviewChrome ? null : (
+  <p class="source-note">{t(lang, 'common.pending_fact')}{days !== null ? ` · ${days}d` : ''}</p>
+)}

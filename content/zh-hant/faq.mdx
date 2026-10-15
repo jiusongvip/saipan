@@ -1,0 +1,49 @@
+---
+lang: zh-hant
+path: /zh-hant/faq
+translation_key: faq
+title: 常見問題：第一次聯繫前的實務回答
+description: 關於赴塞班就醫的實務問題：第一次聯繫要準備什麼、能否遠端初診、停留多久、費用何時確定、資料來自哪裡。
+template: faq
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections: []
+primary_cta: assess_program
+secondary_cta: contact_whatsapp
+noindex: true
+---
+
+import FAQList from '../../src/components/FAQList.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+
+<FAQList
+  lang="zh-hant"
+  lede="以下回答第一次聯繫前的實務問題。涉及醫療、入境與費用的個別結論，由醫師與法律顧問在您提交資料後逐項回覆。"
+  items={[
+    {
+      question: '第一次聯繫需要準備什麼？',
+      answer: '稱呼、所在國家或地區、方便聯繫的賬號、意向方案與期望時間即可。不需要提供病歷原件、檢查報告或診斷結論。',
+    },
+    {
+      question: '可以遠端完成初診嗎？',
+      answer: '可以。先以遠端方式了解您的情況並評估合適方案，確認安排之後才涉及機票、停留與到院日程。',
+    },
+    {
+      question: '需要在塞班停留多久？',
+      answer: '停留天數與到院次數取決於方案與個人對週期的反應，通常分段安排。醫療團隊會在評估後給出您的個別日程，本站不發布未經確認的統一天數。',
+    },
+    {
+      question: '費用什麼時候才能確定？',
+      answer: '費用依方案、週期反應與需要的附加項目而定。評估後的個人報價會逐項列出包含與不包含的內容，本站不發布未附來源的單一「起價」。',
+    },
+    {
+      question: '網站上的資料從哪裡來？',
+      answer: '涉及價格、醫師、數據、入境與法律的內容，只在來源可核驗、標示核對日期並經複核後才發布，因此各節的詳細程度不盡相同；需要個人情況的部分由醫師與顧問直接回覆。',
+    },
+  ]}
+/>
+<ReviewOnly>FAQ 條目待院方與法律顧問核准後從 docs/compliance/fact-register.csv 匯入。</ReviewOnly>

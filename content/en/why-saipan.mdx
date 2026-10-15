@@ -1,0 +1,101 @@
+---
+lang: en
+path: /en/why-saipan
+translation_key: why_saipan
+title: Why Saipan | Flights, entry conditions and stay planning
+description: Flight times from major departure cities, entry authorization by passport, stay scheduling and the support services that surround a treatment cycle in Saipan.
+template: why_destination
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - destination_facts
+  - flight_routes
+  - entry_paths
+  - stay_schedule
+  - support_services
+  - comparison
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+hero:
+  eyebrow: Northern Mariana Islands
+  lede: "Four things to settle before you book: how you fly in, how long you stay, which entry permission your passport needs, and who helps you on island. This page takes them one at a time."
+  trust_items: []
+  image: null
+---
+
+import FlightTable from '../../src/components/FlightTable.astro';
+import EntryPolicyTable from '../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../src/components/FactGate.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+
+<FactGate need="flights">
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Routes and actual flight time</h2>
+        <p>Flight numbers, nonstop or connecting service, block time and the timetable period it applies to, each with the source and the date it was last checked.</p>
+      </div>
+      <FlightTable lang="en" />
+    </div>
+  </section>
+</FactGate>
+
+<FactGate need="entry">
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>Entry authorization compared</h2>
+        <p>Program type, maximum stay, electronic authorization and return-ticket conditions differ by passport, so they are listed one row per nationality rather than summarized.</p>
+      </div>
+      <EntryPolicyTable lang="en" />
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>What decides how long you stay</h2>
+      <p>Days on island and clinic visits follow the program, the monitoring built into that cycle, and whether the plan is split across two trips. Your schedule is given after assessment; this page does not publish a single stay length for everyone.</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>1. Assessment before travel</h3>
+        <p>A remote review of your situation decides whether a Saipan plan fits and how many trips it needs.</p>
+      </li>
+      <li>
+        <h3>2. Clinic visits fix the days on island</h3>
+        <p>Monitoring and procedure dates set which days you must be present; the remaining days can be arranged around recovery and your own plans.</p>
+      </li>
+      <li>
+        <h3>3. Flights are booked after the schedule is set</h3>
+        <p>Booking once the schedule is agreed avoids change fees and an entry condition that no longer matches your dates.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>Support during care</h2>
+      <p>Time difference, interpretation, companion and transfer arrangements, accommodation and how your records are handled are part of trip planning — raise them at assessment and they are arranged with your schedule.</p>
+    </div>
+    <ReviewOnly>Source registration is open; see the destination and support-service rows in docs/compliance/fact-register.csv.</ReviewOnly>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>How destinations differ</h2>
+      <p>Where destinations are compared, the test is what can be checked: age-stratified data, a stated method, a sample size and a reporting period. Numbers without those are not used.</p>
+    </div>
+    <ReviewOnly>The comparison table is built after the public sources for each destination are checked.</ReviewOnly>
+  </div>
+</section>

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "review_note": "开发文档 5.2：不在代码中硬编码未经确认的个人账号。planned_channel_type 只是原方案给出的默认方向；enabled=true 必须以账号、值班表与负责人确认结果为准（当前全部为 false，站内不渲染任何渠道链接）。",
+  "records": [
+    {
+      "id": "line-zh-hant",
+      "lang": "zh-hant",
+      "channel_type": "line",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "pending",
+      "note": "方案默认方向：繁体中文以 LINE 优先。账号与值班表未确认。"
+    },
+    {
+      "id": "email-zh-hans",
+      "lang": "zh-hans",
+      "channel_type": "email",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "pending",
+      "note": "方案默认方向：简体中文以邮箱为主。地址未确认。"
+    },
+    {
+      "id": "line-ja",
+      "lang": "ja",
+      "channel_type": "line",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "blocked",
+      "note": "P3 前置条件：官方账号、值守人员、母语审核人未确认。"
+    },
+    {
+      "id": "kakaotalk-ko",
+      "lang": "ko",
+      "channel_type": "kakaotalk",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "blocked",
+      "note": "P3 前置条件：官方账号与值守人员未确认。"
+    },
+    {
+      "id": "email-ko",
+      "lang": "ko",
+      "channel_type": "email",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "blocked"
+    },
+    {
+      "id": "whatsapp-en",
+      "lang": "en",
+      "channel_type": "whatsapp",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "pending",
+      "note": "方案默认方向：英文 WhatsApp/邮箱。号码未确认。"
+    },
+    {
+      "id": "email-en",
+      "lang": "en",
+      "channel_type": "email",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "pending"
+    },
+    {
+      "id": "donor-intake-zh-hant",
+      "lang": "zh-hant",
+      "channel_type": "form_channel",
+      "handle_or_url": null,
+      "owner_or_queue": null,
+      "service_hours": null,
+      "timezone": null,
+      "response_promise_status": "pending",
+      "enabled": false,
+      "verification_status": "pending",
+      "audience": "donor",
+      "note": "供者申请独立通道，禁止与患者线索混用（开发文档 4.10、6.1）。"
+    }
+  ],
+  "rules": {
+    "render_only_when": ["enabled == true", "verification_status == \"verified\"", "handle_or_url != null"],
+    "never_render": ["未经确认的个人账号", "无值守渠道", "响应时限承诺"]
+  }
+}

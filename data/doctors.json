@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "review_note": "开发文档 4.6 与 4.9：每位医生一页，字段按实际资料渲染；不得生成假医生、假照片、假执照号或无法验证的履历。院方名单与执照材料未提供前，records 保持为空，医生页与首页信任证据模块不渲染，Doctor 模板页维持 draft/blocked。",
+  "records": [],
+  "required_before_publication": [
+    "真实姓名（院方书面提供）",
+    "执照州别与执照编号及可核验链接",
+    "专科认证、教育与训练经历",
+    "可公开的年周期量或临床数据（含来源与统计口径）",
+    "学会成员资格（可核验）",
+    "诊室可使用语言（确认到具体人员或服务流程）",
+    "授权照片及授权记录"
+  ],
+  "record_schema": {
+    "id": "string (slug)",
+    "translation_key": "doctor_{id}",
+    "name": "string",
+    "license_state": "string",
+    "license_number": "string",
+    "license_verify_url": "string",
+    "board_certifications": ["string"],
+    "education": ["string"],
+    "training": ["string"],
+    "society_memberships": ["string"],
+    "clinical_languages": ["string"],
+    "public_cycle_volume": { "value": "integer|null", "source_id": "string|null", "year": "integer|null" },
+    "photo": { "path": "string|null", "asset_license_source": "string|null" },
+    "fact_source_ids": ["string"],
+    "last_verified": "date|null",
+    "status": "pending | verified | expired"
+  },
+  "blocked_reason": "院方尚未提供可公开的医生名单、执照编号与照片授权，医生页清单中的 doctor 行为 BLOCKED。"
+}

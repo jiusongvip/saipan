@@ -1,0 +1,18 @@
+---
+import type { LangCode } from '../lib/config';
+import { loadAllPages, visibleArticles } from '../lib/content';
+import ArticleCard from './ArticleCard.astro';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+const articles = visibleArticles(await loadAllPages(), lang);
+---
+
+{articles.length > 0 && (
+  <div class="grid-cards">
+    {articles.map((page) => <ArticleCard lang={lang} page={page} />)}
+  </div>
+)}

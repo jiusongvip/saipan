@@ -1,0 +1,85 @@
+---
+import { brandWordmark, reviewChrome, siteConfig, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { loadAllPages, languageHomeIfBuilt, navItemsForLang, type PageData } from '../lib/content';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import PrimaryCTA from './PrimaryCTA.astro';
+
+export interface Props {
+  lang: LangCode;
+  page?: PageData | null;
+  /** 当前页是否渲染了咨询表单：决定导航里的咨询入口落在本页还是首页。 */
+  hasForm?: boolean;
+}
+
+const { lang, page = null, hasForm = false } = Astro.props;
+const pages = await loadAllPages();
+const navItems = navItemsForLang(pages, lang);
+const wordmark = brandWordmark(lang);
+const currentPath = page?.path ?? Astro.url.pathname;
+const builtHome = languageHomeIfBuilt(pages, lang);
+const homeHref = builtHome ?? '/';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={homeHref}>
+      <span>{wordmark ?? siteConfig.primary_domain.value}</span>
+      {reviewChrome && !siteConfig.brand.official_name && (
+        <span class="brand__pending">{t(lang, 'common.pending_fact')}</span>
+      )}
+    </a>
+
+    <input class="nav-toggle-input" type="checkbox" id="nav-toggle" aria-controls="site-nav" />
+    <label class="nav-toggle-label" for="nav-toggle">
+      <span>{t(lang, 'common.menu')}</span>
+      <span class="visually-hidden">{t(lang, 'common.close_menu')}</span>
+    </label>
+
+    <nav class="site-nav" id="site-nav" aria-label={t(lang, 'common.menu')}>
+      <ul class="site-nav__list">
+        {navItems.map((item) => (
+          <li>
+            {item.children ? (
+              <details class="nav-group">
+                <summary class="site-nav__link">{t(lang, item.labelKey)}</summary>
+                <ul class="nav-group__list">
+                  {item.children.map((child) => (
+                    <li>
+                      <a class="site-nav__link" href={child.path} aria-current={child.path === currentPath ? 'page' : undefined}>
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a
+                class="site-nav__link"
+                href={item.path}
+                aria-current={item.path === currentPath ? 'page' : undefined}
+                data-analytics-nav={item.labelKey}
+              >
+                {t(lang, item.labelKey)}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <LanguageSwitcher lang={lang} currentPath={currentPath} translationKey={page?.translation_key ?? null} />
+      <PrimaryCTA
+        lang={lang}
+        cta="book_consult"
+        pageType="header"
+        pagePath={currentPath}
+        variant="secondary"
+        label={t(lang, 'cta.book_consult')}
+        homePath={builtHome}
+        hasForm={hasForm}
+      />
+    </div>
+  </div>
+</header>

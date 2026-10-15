@@ -1,0 +1,40 @@
+---
+import type { LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { ctaHref } from '../lib/cta';
+
+export interface Props {
+  lang: LangCode;
+  cta: string;
+  pageType: string;
+  pagePath: string;
+  label?: string;
+  variant?: 'primary' | 'secondary' | 'link' | 'text';
+  /** 调用方已解析好的落点；给出即原样使用。 */
+  href?: string | null;
+  /** 该语言本次构建中的落点，本页无对应锚点时改指它。 */
+  homePath?: string | null;
+  /** 当前页是否渲染了表单与联络方式区块。 */
+  hasForm?: boolean;
+}
+
+const { lang, cta, pageType, pagePath, variant = 'primary', href, homePath = null, hasForm = false } = Astro.props;
+
+// 每页只有一个视觉主 CTA（开发文档 4.1）；次级动作用 .cta-secondary 文本链接。
+const resolved = href ?? ctaHref({ cta, hasForm, currentPagePath: pagePath, homePath });
+if (resolved === null) return null;
+
+const label = Astro.props.label ?? t(lang, `cta.${cta}`);
+const classes = variant === 'primary' ? 'btn btn--primary' : variant === 'secondary' ? 'btn btn--secondary' : 'cta-link';
+---
+
+<a
+  class:list={[classes, { 'cta-secondary': variant === 'text' }]}
+  href={resolved}
+  data-cta-id={cta}
+  data-lang={lang}
+  data-page-type={pageType}
+  data-page-path={pagePath}
+>
+  {label}
+</a>

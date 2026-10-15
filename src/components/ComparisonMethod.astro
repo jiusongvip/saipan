@@ -1,0 +1,88 @@
+---
+import { t } from '../lib/i18n';
+import type { LangCode } from '../lib/config';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+
+// 对照条目（只写判断方法；我方口径列写「该要求出示什么」，不替院方作答）
+const ITEMS: Record<string, { question: string; ours: string; industry: string }[]> = {
+  'zh-hant': [
+    {
+      question: '實驗室是否為院內自建？監測與培養是否在同一地點完成？',
+      ours: '要求出示：實驗室設置方式，以及監測與培養地點的書面說明',
+      industry: '有些機構將部分工序外包，需確認外包範圍與責任歸屬',
+    },
+    {
+      question: '監測需要在幾個城市之間往返？哪些節點必須本人到院？',
+      ours: '要求出示：監測涉及的城市數，以及必須本人到院的節點清單',
+      industry: '有些方案需要多次往返，需提前確認日程與費用',
+    },
+    {
+      question: '費用是否包含取卵麻醉？PGT 按胚胎數如何計費？',
+      ours: '要求出示：費用包含項目、取卵麻醉與 PGT 按胚胎數計費的明細',
+      industry: '有些機構的報價不含麻醉或 PGT 超量',
+    },
+  ],
+  'zh-hans': [
+    {
+      question: '实验室是否为院内自建？监测与培养是否在同一地点完成？',
+      ours: '要求出示：实验室设置方式，以及监测与培养地点的书面说明',
+      industry: '有些机构将部分工序外包，需确认外包范围与责任归属',
+    },
+    {
+      question: '监测需要在几个城市之间往返？哪些节点必须本人到院？',
+      ours: '要求出示：监测涉及的城市数，以及必须本人到院的节点清单',
+      industry: '有些方案需要多次往返，需提前确认日程与费用',
+    },
+    {
+      question: '费用是否包含取卵麻醉？PGT 按胚胎数如何计费？',
+      ours: '要求出示：费用包含项目、取卵麻醉与 PGT 按胚胎数计费的明细',
+      industry: '有些机构的报价不含麻醉或 PGT 超量',
+    },
+  ],
+  en: [
+    {
+      question: 'Is the lab in-house? Are monitoring and culture completed at the same location?',
+      ours: 'Ask to see: written documentation of how the lab is set up and where monitoring and culture take place',
+      industry: 'Some institutions outsource part of the process; outsourcing scope and liability need to be confirmed',
+    },
+    {
+      question: 'How many cities require travel for monitoring? Which nodes require in-person visits?',
+      ours: 'Ask to see: the number of cities involved in monitoring and the list of nodes requiring in-person visits',
+      industry: 'Some programs require multiple trips; schedule and costs need to be confirmed in advance',
+    },
+    {
+      question: 'Does the fee include egg retrieval anesthesia? How is PGT charged per embryo?',
+      ours: 'Ask to see: the itemized breakdown of what the fee includes, retrieval anesthesia, and PGT billing per embryo',
+      industry: 'Some institutions do not include anesthesia or PGT over-quota in their quotes',
+    },
+  ],
+};
+
+const items = ITEMS[lang] ?? ITEMS.en;
+---
+
+<div class="comparison-method" data-comparison-method>
+  <table class="comparison-method__table">
+    <thead>
+      <tr>
+        <th scope="col">{t(lang, 'comparison.question')}</th>
+        <th scope="col">{t(lang, 'comparison.ours')}</th>
+        <th scope="col">{t(lang, 'comparison.industry')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {items.map((item) => (
+        <tr>
+          <td>{item.question}</td>
+          <td>{item.ours}</td>
+          <td>{item.industry}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

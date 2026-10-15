@@ -1,0 +1,64 @@
+---
+lang: zh-hant
+path: /zh-hant/legal/privacy-and-data-protection
+translation_key: legal_privacy_and_data_protection
+title: 隱私聲明與資料處理
+description: 本站收集的資料項目、收集目的、保留期間、跨境傳輸、存取控制、刪除與查詢申請方式，以及行銷訂閱的單獨同意。
+template: legal
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - collected_data
+  - purposes
+  - retention
+  - cross_border
+  - access_control
+  - deletion
+  - marketing_consent
+primary_cta: contact_whatsapp
+secondary_cta: book_consult
+noindex: true
+hero:
+  eyebrow: 法律與流程
+  lede: 本頁說明本站收集哪些資料、為什麼收集、保留多久、誰能看到，以及您可以如何要求查詢或刪除。本頁內容不構成法律意見。
+  trust_items: []
+  image: null
+---
+
+import FactSlot from '../../../src/components/FactSlot.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>我們收集的資料</h2>
+    <p>諮詢表單只收集完成聯絡所必需的資料：稱呼、聯繫管道與賬號、所在國家或地區、意向方案、期望時間，以及選填的年齡、過往治療經歷與提問。表單不提供附件上傳。</p>
+    <p class="source-note">請勿在表單中填寫病歷號、診斷結論或檢查報告內容。</p>
+
+    <h2>收集目的</h2>
+    <p>提交的內容用於回覆您的諮詢、供醫師評估時預判合適方案，以及滿足記錄與稽核需要；不做其他用途，也不提供給第三方作行銷使用。</p>
+    <FactSlot lang="zh-hant" slot="purposes" />
+
+    <h2>保留期間</h2>
+    <p>資料不無限期限保留。本節涵蓋表單記錄的保留期間、到期後的處置方式，以及您可以提出刪除申請的時間窗口。</p>
+    <FactSlot lang="zh-hant" slot="retention" />
+
+    <h2>跨境傳輸</h2>
+    <p>本站的處理系統與院方系統可能位於不同國家或地區。本節說明哪些內容會跨境、以何種方式傳輸，以及傳輸過程中的保護措施。</p>
+    <FactSlot lang="zh-hant" slot="cross_border" />
+
+    <h2>存取控制</h2>
+    <p>本節涵蓋誰能讀取您提交的內容、權限如何分層，以及內部如何紀錄與複核存取行為。</p>
+    <FactSlot lang="zh-hant" slot="access_control" />
+
+    <h2>刪除與查詢申請</h2>
+    <p>您可以要求查看、更正或刪除已提交的內容。本節說明申請方式、需要驗證的資訊，以及處理所需的工作天數。</p>
+    <FactSlot lang="zh-hant" slot="deletion" />
+
+    <h2>行銷訂閱的單獨同意</h2>
+    <p>諮詢與收到行銷訊息是兩件分開的事：只有在您另行同意後才會發送更新，且可以隨時退出。</p>
+    <FactSlot lang="zh-hant" slot="marketing_consent" />
+  </div>
+</section>

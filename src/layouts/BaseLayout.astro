@@ -1,0 +1,150 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/components.css';
+import { siteConfig, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { organizationJsonLd, ogLocale } from '../lib/seo';
+import { loadAllPages } from '../lib/content';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import DraftBanner from '../components/DraftBanner.astro';
+import FloatingCTA from '../components/FloatingCTA.astro';
+import ConsentNotice from '../components/ConsentNotice.astro';
+import type { PageData } from '../lib/content';
+
+export interface Props {
+  lang: LangCode;
+  title: string;
+  description: string;
+  canonical: string;
+  alternates?: { hreflang: string; href: string }[];
+  noindex?: boolean;
+  pageType?: string;
+  page?: PageData | null;
+  ogImage?: string | null;
+  /** 本页是否渲染咨询表单与联络方式区块（contact_success、根选择页、404 为 false）。 */
+  hasForm?: boolean;
+  /** 本页是否真的渲染评估向导（仅 LandingLayout 且 withForm 为真）；决定浮动向导槽位是否出现。 */
+  hasWizard?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonical,
+  alternates = [],
+  noindex = true,
+  pageType = 'generic',
+  page = null,
+  ogImage = null,
+  hasForm = false,
+  hasWizard = false,
+} = Astro.props;
+
+const jsonLd = organizationJsonLd();
+const originBase = new URL(canonical).origin;
+const skipLabel = t(lang, 'common.skip_to_content');
+const pages = await loadAllPages();
+const pricingPath = pages.find((page) => page.lang === lang && page.translation_key === 'pricing')?.path ?? '';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+    {alternates.map((item) => <link rel="alternate" hreflang={item.hreflang} href={item.href} />)}
+    <meta property="og:type" content="website" />
+    {siteConfig.brand.official_name && <meta property="og:site_name" content={siteConfig.brand.official_name} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale(lang)} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, originBase).toString()} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>
+      // 入场动效开关：仅在未开启「减弱动效」时启用；无 JS 环境不写 data-motion，内容保持静态可见。
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.dataset.motion = 'on';
+      }
+    </script>
+  </head>
+  <body data-lang={lang} data-page-type={pageType}>
+    <a class="skip-link" href="#main">{skipLabel}</a>
+    <slot name="draft" />
+    {page && <DraftBanner status={page.status} blockedReason={page.blocked_reason} lang={lang} />}
+    <Header lang={lang} page={page} hasForm={hasForm} />
+    <main id="main">
+      <slot />
+    </main>
+    {page && hasForm && page.template !== 'contact_success' && (
+      <FloatingCTA
+        lang={lang}
+        pageType={pageType}
+        pagePath={page.path}
+        wizardAnchor={hasWizard ? '#wizard' : undefined}
+        downloadPath={pricingPath}
+      />
+    )}
+    <Footer lang={lang} />
+    <ConsentNotice lang={lang} />
+  </body>
+</html>
+
+<script>
+  // 转化入口计数（开发文档 1.1、6.4）：只上报匿名维度，未同意时 track 自身不发送。
+  import { initAnalytics, track, trackable } from '../lib/analytics';
+
+  // 已同意的回访访客在初始化时即加载 GA4（见 analytics.initAnalytics）。
+  initAnalytics();
+
+  const body = document.body;
+  if (body.dataset.pageType === 'success') {
+    track('success_page_view', {
+      lang: body.dataset.lang,
+      page_type: body.dataset.pageType,
+      page_path: window.location.pathname,
+    });
+  }
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const el = (event.target as HTMLElement | null)?.closest<HTMLElement>('[data-cta-id],[data-channel-link]');
+      if (!el) return;
+      const params = { ...trackable(el), page_path: window.location.pathname };
+      track(el.hasAttribute('data-channel-link') ? 'messaging_entry_click' : 'cta_click', params);
+    },
+    true,
+  );
+
+  // 入场动效：区块进入视口时显现一次；缺 IntersectionObserver 时全部立即可见。
+  const revealTargets = document.querySelectorAll<HTMLElement>(
+    '.hero__grid > *, .section__head, .grid-cards > *, .steps > *, .form, .wizard, .comparison-method, .story-stage, .prose > h2, .prose > :is(ul, ol, blockquote, .table-wrap), .footer__grid > *',
+  );
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    revealTargets.forEach((element) => revealObserver.observe(element));
+  } else {
+    revealTargets.forEach((element) => element.classList.add('is-revealed'));
+  }
+</script>

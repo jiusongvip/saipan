@@ -1,0 +1,53 @@
+---
+import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
+import { t } from '../lib/i18n';
+import type { LangCode } from '../lib/config';
+
+export interface Props {
+  lang: LangCode;
+  page: PageData;
+}
+
+const { lang, page } = Astro.props;
+
+/**
+ * 交叉链接槽位（优化方案 v3 第 1 批第 6 项）：方案 ↔ 文章 ↔ FAQ ↔ 工具 ↔ 费用。
+ * 落点一律经 buildVisiblePaths() 校验，不存在即不渲染、也不输出死入口；
+ * 当前页与目标相同（自链）时跳过；一个落点都没有时整块不渲染。
+ */
+const pages = await loadAllPages();
+const visiblePaths = buildVisiblePaths(pages);
+
+const candidates: { labelKey: string; match: (p: PageData) => boolean }[] = [
+  { labelKey: 'nav.programs', match: (p) => p.lang === lang && p.template === 'program' },
+  { labelKey: 'nav.articles', match: (p) => p.lang === lang && p.translation_key === 'articles' },
+  { labelKey: 'nav.faq', match: (p) => p.lang === lang && p.translation_key === 'faq' },
+  { labelKey: 'nav.tools', match: (p) => p.lang === lang && p.translation_key === 'tools' },
+  { labelKey: 'nav.pricing', match: (p) => p.lang === lang && p.translation_key === 'pricing' },
+];
+
+const links = candidates
+  .map((candidate) => {
+    const target = pages.filter(candidate.match).find((p) => visiblePaths.has(p.path));
+    if (!target || target.path === page.path) return null;
+    return { labelKey: candidate.labelKey, path: target.path };
+  })
+  .filter((entry): entry is { labelKey: string; path: string } => entry !== null);
+---
+
+{links.length > 0 && (
+  <div class="container container--narrow">
+    <nav class="cross-links" aria-labelledby="cross-links-title" data-cross-links>
+      <h2 id="cross-links-title">{t(lang, 'crosslinks.title')}</h2>
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a href={link.path} data-lang={lang} data-cross-link={link.labelKey}>
+              {t(lang, link.labelKey)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+)}

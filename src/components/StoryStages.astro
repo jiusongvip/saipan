@@ -1,0 +1,42 @@
+---
+import { groupStoryStages, type StoryStageKey } from '../lib/page-rules';
+import { t } from '../lib/i18n';
+import type { LangCode } from '../lib/config';
+
+export interface StoryItem {
+  title: string;
+  path: string;
+  stage: StoryStageKey | string;
+}
+
+export interface Props {
+  lang: LangCode;
+  stories: StoryItem[];
+}
+
+const { lang, stories } = Astro.props;
+
+/**
+ * 案例阶段分组（优化方案 v3 第 1 批第 5 项）。
+ * 按旅程阶段分组渲染；空阶段整项不输出入口，不写「敬请期待」。
+ * 无任何故事时整块不渲染；同源可见性由 scripts/guardrails.ts 断言兜底。
+ */
+const grouped = groupStoryStages(stories);
+---
+
+{grouped.length > 0 && (
+  <div class="story-stages" data-story-stages>
+    {grouped.map((group) => (
+      <section class="story-stage" data-stage={group.key} aria-labelledby={`stage-${group.key}`}>
+        <h3 id={`stage-${group.key}`}>{t(lang, `story.stage.${group.key}`)}</h3>
+        <ul>
+          {group.items.map((item) => (
+            <li>
+              <a href={item.path}>{item.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+)}

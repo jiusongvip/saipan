@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "review_note": "开发文档 5.2 与 4.3：航线、航司、航班号、直飞/中转、实际飞行时长、时刻表来源只能来自本文件。未核验字段不得以占位猜测形式公开显示；FlightTable 只渲染 status=verified 的记录。",
+  "records": [],
+  "required_routes": [
+    { "slot_id": "route-taipei", "origin_city": "台北", "origin_iata_working": "TPE", "destination": "塞班 (SPN)", "langs": ["zh-hant", "en"], "status": "pending", "needed_evidence": "航司现行时刻表或官方页面 + 最后核对日期" },
+    { "slot_id": "route-hong-kong", "origin_city": "香港", "origin_iata_working": "HKG", "destination": "塞班 (SPN)", "langs": ["zh-hant", "zh-hans", "en"], "status": "pending", "needed_evidence": "航司现行时刻表（含是否需中转与中转点）" },
+    { "slot_id": "route-shanghai", "origin_city": "上海", "origin_iata_working": "PVG", "destination": "塞班 (SPN)", "langs": ["zh-hans", "en"], "status": "pending", "needed_evidence": "航司现行时刻表（含中转约束）" },
+    { "slot_id": "route-tokyo", "origin_city": "东京", "origin_iata_working": "NRT", "destination": "塞班 (SPN)", "langs": ["ja", "en"], "status": "pending", "needed_evidence": "航司现行时刻表" },
+    { "slot_id": "route-seoul", "origin_city": "首尔", "origin_iata_working": "ICN", "destination": "塞班 (SPN)", "langs": ["ko", "en"], "status": "pending", "needed_evidence": "航司现行时刻表" },
+    { "slot_id": "route-manila", "origin_city": "马尼拉", "origin_iata_working": "MNL", "destination": "塞班 (SPN)", "langs": ["en"], "status": "pending", "needed_evidence": "航司现行时刻表" }
+  ],
+  "record_schema": {
+    "id": "string",
+    "origin_city": "string",
+    "origin_iata": "string",
+    "destination_city": "string",
+    "destination_iata": "string",
+    "airline": "string",
+    "flight_numbers": ["string"],
+    "direct": "boolean",
+    "via": ["string"],
+    "block_time_minutes": "integer",
+    "schedule_valid_from": "date",
+    "schedule_valid_to": "date",
+    "source_url": "string",
+    "last_verified": "date",
+    "status": "pending | verified | expired"
+  },
+  "timezone_facts": {
+    "saipan_utc_offset": null,
+    "status": "pending",
+    "note": "时差是时间敏感事实，须与官方/航司资料一并核对后填入。"
+  }
+}

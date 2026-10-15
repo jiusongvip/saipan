@@ -1,0 +1,66 @@
+---
+lang: en
+path: /en/pricing
+translation_key: pricing
+title: Treatment Costs | What is included and what changes it
+description: "How costs are built: price ranges, what is included, possible add-ons, non-medical costs, payment, cancellation and refund rules."
+template: pricing
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - price_ranges
+  - included_excluded
+  - add_ons
+  - non_medical
+  - payment
+  - refund_policy
+  - currency_validity
+primary_cta: request_price_guide
+secondary_cta: assess_program
+noindex: true
+hero:
+  eyebrow: Costs
+  lede: "Your total has three parts: the medical program, add-ons that may arise during the cycle, and non-medical costs on island. This page explains what each part covers, when a figure becomes final, and what a quotation should state."
+  trust_items: []
+  image: null
+---
+
+import FactSlot from '../../src/components/FactSlot.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>Published price ranges</h2>
+    <p>A range is useful only with its context, so every figure is published together with currency, the period it applies to and the date it was last checked.</p>
+    <FactSlot lang="en" slot="price_ranges" />
+
+    <h2>What is included and what is not</h2>
+    <p>Two patients on the same program can pay differently: medication dose, number of monitoring visits and whether add-on techniques are used all change the scope. A personal quotation lists them line by line.</p>
+    <FactSlot lang="en" slot="included_excluded" />
+
+    <h2>Possible add-on items</h2>
+    <p>Whether an add-on enters your cycle depends on the physician's assessment and your response that month. This section lists the items that can arise and how each is charged.</p>
+    <FactSlot lang="en" slot="add_ons" />
+
+    <h2>Accommodation, interpretation and transfers</h2>
+    <p>Non-medical costs are not part of the medical quotation but they shape the whole budget. This section explains how they are estimated and who arranges them.</p>
+    <FactSlot lang="en" slot="non_medical" />
+
+    <h2>Payment methods</h2>
+    <p>Accepted payment methods, installments and receipts affect how you plan funds, so it is worth confirming them before your dates are fixed.</p>
+    <FactSlot lang="en" slot="payment" />
+
+    <h2>Cancellation, rescheduling and refunds</h2>
+    <p>Cross-border care moves with visas, flight seats and cycle timing. This section covers notice periods, how fees are handled, and refund conditions.</p>
+    <FactSlot lang="en" slot="refund_policy" />
+
+    <h2>Currency, validity and last-verified date</h2>
+    <p>Amounts are meaningless without currency and a validity period; both are shown next to the figure and its check date.</p>
+    <FactSlot lang="en" slot="currency_validity" />
+
+    <p class="source-note">The final figure is issued after clinical assessment and lists what is included, the currency and how long the quotation stands.</p>
+  </div>
+</section>

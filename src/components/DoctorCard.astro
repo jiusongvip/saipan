@@ -1,0 +1,56 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+
+export interface DoctorRecord {
+  id: string;
+  name?: string | null;
+  license_state?: string | null;
+  license_number?: string | null;
+  license_verify_url?: string | null;
+  board_certifications?: string[];
+  education?: string[];
+  training?: string[];
+  society_memberships?: string[];
+  clinical_languages?: string[];
+  public_cycle_volume?: { value: number | null; source_id: string | null; year: number | null } | null;
+  photo?: { path: string | null; asset_license_source: string | null } | null;
+  last_verified?: string | null;
+  status: string;
+}
+
+export interface Props {
+  lang: LangCode;
+  doctor: DoctorRecord;
+}
+
+const { lang, doctor } = Astro.props;
+// 姓名或执照任一不可核验时整卡不渲染：绝不出现占位医生（开发文档 4.6）。
+const publishable =
+  doctor.status === 'verified' && Boolean(doctor.name) && Boolean(doctor.license_number) && Boolean(doctor.license_verify_url);
+const photo = doctor.photo?.path && doctor.photo?.asset_license_source ? doctor.photo.path : null;
+---
+
+{publishable ? (
+  <article class="card">
+    {photo && <img src={photo} alt={doctor.name ?? ''} loading="lazy" width="240" height="240" />}
+    <h3 class="card__title">{doctor.name}</h3>
+    <p class="card__body">
+      {doctor.license_state && <span>{doctor.license_state}</span>}
+      {' · '}
+      <a href={doctor.license_verify_url!} rel="noopener noreferrer">{doctor.license_number}</a>
+    </p>
+    {doctor.board_certifications?.length ? <p class="card__body">{doctor.board_certifications.join(' · ')}</p> : null}
+    {doctor.clinical_languages?.length ? <p class="card__meta">{doctor.clinical_languages.join(' / ')}</p> : null}
+    {doctor.public_cycle_volume?.value ? (
+      <p class="card__meta">
+        {doctor.public_cycle_volume.value} · {doctor.public_cycle_volume.year}
+      </p>
+    ) : null}
+  </article>
+) : !reviewChrome ? null : (
+  <article class="pending-slot">
+    <strong>doctor</strong>
+    <p>{t(lang, 'draft.module_hidden')}</p>
+  </article>
+)}

@@ -1,0 +1,35 @@
+---
+import { buildVisible, loadAllPages, pathToRoute, type PageData } from '../lib/content';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import LandingLayout from '../layouts/LandingLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = buildVisible(await loadAllPages());
+  return pages.map((page) => ({ params: { slug: pathToRoute(page.path) }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: PageData };
+
+const LANDING_TEMPLATES = new Set([
+  'home',
+  'why_destination',
+  'city',
+  'entry_path',
+  'program',
+  'pricing',
+  'success_data',
+  'hospital_lab',
+  'doctor',
+  'egg_donor_program',
+]);
+
+const isLanding = LANDING_TEMPLATES.has(page.template);
+const withForm = page.template !== 'contact_success';
+const Layout = isLanding ? LandingLayout : ContentLayout;
+const rendered = await page.render?.();
+const Content = rendered?.Content;
+---
+
+<Layout page={page} withForm={withForm}>
+  {Content ? <Content /> : null}
+</Layout>

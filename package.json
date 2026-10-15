@@ -1,0 +1,41 @@
+{
+  "name": "saipan-ivf",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Saipan Reproductive Center official site (saipanivf.org): multilingual static acquisition and booking site.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "build:preview": "node scripts/with-env.mjs INCLUDE_DRAFTS=1 astro build",
+    "build:demo": "node scripts/with-env.mjs INCLUDE_DRAFTS=1 REVIEW=0 astro build",
+    "preview": "astro preview",
+    "preview:serve": "node scripts/serve-dist.mjs",
+    "check": "astro check",
+    "typecheck": "tsc --noEmit",
+    "astro": "astro",
+    "validate": "pnpm run validate:content && pnpm run validate:policy && pnpm run validate:seo && pnpm run validate:claims",
+    "validate:content": "tsx scripts/validate-content.ts",
+    "validate:policy": "tsx scripts/validate-entry-policy.ts && tsx scripts/validate-data.ts",
+    "validate:seo": "tsx scripts/validate-seo.ts",
+    "validate:claims": "tsx scripts/check-prohibited-claims.ts",
+    "links": "tsx scripts/check-links.ts",
+    "guardrails": "tsx scripts/guardrails.ts",
+    "audit": "tsx scripts/audit-dist.ts",
+    "test": "tsx --test tests/unit/*.test.ts tests/integration/*.test.ts",
+    "ci": "pnpm run typecheck && pnpm run validate:content && pnpm run validate:policy && pnpm run validate:claims && pnpm run test && pnpm run build && pnpm run validate:seo && pnpm run links && pnpm run guardrails && pnpm run audit"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
+    "astro": "^5.18.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "yaml": "^2.9.1"
+  },
+  "packageManager": "pnpm@10.34.1"
+}

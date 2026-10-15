@@ -1,0 +1,86 @@
+---
+lang: zh-hant
+path: /zh-hant/entry-path
+translation_key: entry_path
+title: 入境路徑與停留安排
+description: 依所持護照說明前往塞班的入境計畫、電子授權、返程票要求與可行地域範圍，並逐項列出官方來源與核對日期。
+template: entry_path
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - permit_table
+  - authorization
+  - ticket_requirements
+  - region_access
+  - transit
+  - official_sources
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+nationality_slots:
+  - nationality-tw
+  - nationality-hk
+hero:
+  eyebrow: 出發前確認
+  lede: 塞班屬北馬里亞納群島，入境條件依所持護照而異。本頁按護照類別逐項說明許可類型、停留上限、電子授權與返程票要求。
+  trust_items: []
+  image: null
+---
+
+import EntryPolicyTable from '../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../src/components/FactGate.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+
+<FactGate need="entry" nationalitySlots={['nationality-tw', 'nationality-hk']}>
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>依護照類別的入境條件</h2>
+        <p>逐項回答：許可或計畫類型、最長停留、需要的電子授權、往返票與確認離境日、可行地域範圍（是否得前往美國本土）、中轉限制、其他可選計畫，以及官方來源與最後核對日期。</p>
+      </div>
+      <EntryPolicyTable lang="zh-hant" nationalitySlots={['nationality-tw', 'nationality-hk']} />
+      <p class="source-note">政策以美國官方主管機關現行頁面為準；本站每條記錄均標註來源與核對日期，並由法律顧問複核。</p>
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>您的條件怎麼確認</h2>
+      <p>入境適用哪一種計畫，取決於您持有的護照與實際出發日期，因此按個案查證後回覆，不在網站上以一套說法涵蓋所有人。</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>第一步：告知護照與出發期間</h3>
+        <p>透過諮詢表單或您選擇的管道，提供護照別、預計出發與返鄉日期，以及是否安排中轉。</p>
+      </li>
+      <li>
+        <h3>第二步：查對主管機關現行頁面</h3>
+        <p>每一項條件都從管轄該護照的官方頁面讀取，保留頁面名稱與當次查對日期，不採用代辦摘要。</p>
+      </li>
+      <li>
+        <h3>第三步：由法律顧問覆核措辭</h3>
+        <p>條件與限制在寫給您或刊登前，由具名顧問覆核用詞，並記錄覆核者與覆核日期。</p>
+      </li>
+      <li>
+        <h3>第四步：出發前再次查對</h3>
+        <p>規則在訂票之後仍可能調整，因此接近出發日期時會再次查對同一來源，並把差異告知您。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>中轉與行程銜接</h2>
+      <p>中轉點、間隔時間與行李、登機證的安排依各航線實際班次而定。確定出發日期後，客服會與您逐段確認銜接方式。</p>
+    </div>
+    <ReviewOnly>等待來源登記：docs/compliance/fact-register.csv 的中轉與航線列。</ReviewOnly>
+  </div>
+</section>

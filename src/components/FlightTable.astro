@@ -1,0 +1,73 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { pendingFlightRoutes, verifiedFlightRoutes } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  originCity?: string | null;
+}
+
+const { lang, originCity = null } = Astro.props;
+const routes = verifiedFlightRoutes() as Record<string, unknown>[];
+const pending = pendingFlightRoutes(originCity);
+
+function blockTime(minutes: unknown): string {
+  if (typeof minutes !== 'number') return t(lang, 'common.na');
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest === 0 ? `${hours}h` : `${hours}h ${rest}m`;
+}
+---
+
+{routes.length > 0 ? (
+  <div class="table-wrap">
+    <table>
+      <caption>{t(lang, 'table.flight.route')}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'table.flight.route')}</th>
+          <th scope="col">{t(lang, 'table.flight.airline')}</th>
+          <th scope="col">{t(lang, 'table.flight.numbers')}</th>
+          <th scope="col">{t(lang, 'table.flight.type')}</th>
+          <th scope="col">{t(lang, 'table.flight.block_time')}</th>
+          <th scope="col">{t(lang, 'table.flight.schedule')}</th>
+          <th scope="col">{t(lang, 'table.flight.source')}</th>
+          <th scope="col">{t(lang, 'table.flight.verified')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {routes.map((route) => (
+          <tr>
+            <th scope="row">{`${route.origin_city} → ${route.destination_city}`}</th>
+            <td>{String(route.airline ?? t(lang, 'common.na'))}</td>
+            <td>{(route.flight_numbers as string[] | undefined)?.join(' / ') ?? t(lang, 'common.na')}</td>
+            <td>{route.direct ? t(lang, 'table.flight.type') : (route.via as string[] | undefined)?.join(' · ')}</td>
+            <td>{blockTime(route.block_time_minutes)}</td>
+            <td>{`${route.schedule_valid_from ?? ''} – ${route.schedule_valid_to ?? ''}`}</td>
+            <td>
+              {route.source_url ? (
+                <a href={String(route.source_url)} rel="noopener noreferrer">{String(route.source_url).replace(/^https?:\/\//, '')}</a>
+              ) : (
+                <span>{t(lang, 'common.na')}</span>
+              )}
+            </td>
+            <td>{String(route.last_verified ?? t(lang, 'common.na'))}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+) : !reviewChrome ? null : (
+  <div class="pending-slot">
+    <strong>{t(lang, 'common.pending_fact')}</strong>
+    <ul>
+      {pending.map((route) => (
+        <li>
+          {route.origin_city} → SPN: {route.status}
+        </li>
+      ))}
+    </ul>
+    <p>{t(lang, 'draft.module_hidden')}</p>
+  </div>
+)}

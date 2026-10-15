@@ -1,0 +1,946 @@
+/* 组件层：只消费 tokens.css 的变量。 */
+
+/* ---------- 按钮与 CTA ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-target);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent; /* taste-skill-ignore: 透明占位描边，避免 hover/状态切换时按钮位移 */
+  border-radius: var(--radius-pill);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-strong);
+  color: #fff;
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-primary-strong);
+  border-color: var(--color-line-field);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  font-weight: 600;
+  color: var(--color-primary-strong);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  text-decoration: underline;
+}
+
+/* ---------- 页头 ---------- */
+/* 不透明纯色吸顶条：细线与磨砂玻璃都是禁用装饰，边界交给下方区块的色阶差。 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-surface);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: var(--header-height);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--text-sm);
+}
+
+.brand__pending {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.site-nav {
+  margin-left: auto;
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 当前页与悬停用底色药丸（色阶）代替下划线细线（tasteskill hairline 规则）。 */
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.site-nav__link:hover {
+  color: var(--color-primary-strong);
+  background: var(--color-surface-alt);
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--color-primary-strong);
+  background: var(--color-primary-soft);
+  font-weight: 700;
+}
+
+.nav-group {
+  position: relative;
+}
+
+.nav-group > summary {
+  list-style: none;
+}
+
+.nav-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 下拉菜单是真浮层：保留一圈描边作为边界，不用阴影、不用条目分隔线。 */
+.nav-group__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 260px;
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  display: grid;
+  gap: var(--space-1);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line); /* taste-skill-ignore: 浮层菜单边界 */
+  border-radius: var(--radius-md);
+}
+
+.nav-group__list .site-nav__link {
+  width: 100%;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  white-space: normal;
+}
+
+.nav-group__list .site-nav__link:hover {
+  border-bottom-color: transparent;
+}
+
+@media (max-width: 900px) {
+  .nav-group__list {
+    position: static;
+    border: 0;
+    padding-left: var(--space-4);
+  }
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* 移动端菜单：无 JS 也能展开，展开后键盘可达。 */
+.nav-toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  border: 1px solid var(--color-line-field); /* taste-skill-ignore: 菜单按钮控件描边（对比度 ≥3:1 无障碍要求） */
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  /* 窄屏下品牌名与工具区各占一行：英文品牌名 + 待核徽章比中文长，不换行会把整行顶出视口（文档 8.1 第 6 项）。 */
+  .site-header__inner {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    row-gap: var(--space-2);
+    padding-block: var(--space-2);
+  }
+
+  .brand {
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    min-width: 0;
+    font-size: var(--text-base);
+    white-space: normal;
+  }
+
+  /* 待核徽章与品牌名并排、放不下才另起一行：独占整行会把 sticky 头撑高，徽章底色拉满也不好看。 */
+  .brand__pending {
+    align-self: flex-start;
+    white-space: normal;
+  }
+
+  .header-tools {
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .nav-toggle-label {
+    display: inline-grid;
+  }
+
+  .site-nav {
+    position: absolute;
+    inset: 100% 0 auto;
+    margin-left: 0;
+    display: none;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md); /* taste-skill-ignore: 移动端展开面板是真浮层 */
+    padding: var(--space-4);
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+  }
+
+  .nav-toggle-input:checked ~ .site-nav {
+    display: block;
+  }
+}
+
+/* ---------- 语言切换器 ---------- */
+.lang-switcher {
+  position: relative;
+  font-size: var(--text-sm);
+}
+
+.lang-switcher__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-target);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-line-field); /* taste-skill-ignore: 表单控件描边（对比度 ≥3:1 无障碍要求） */
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.lang-switcher__list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 190px;
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line); /* taste-skill-ignore: 浮层菜单边界 */
+  border-radius: var(--radius-md);
+  z-index: 10;
+}
+
+.lang-switcher__summary:focus-visible ~ .lang-switcher__list,
+.lang-switcher:hover .lang-switcher__list {
+  display: block;
+}
+
+.lang-switcher__list [href] {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.lang-switcher__list [aria-current='true'] {
+  background: var(--color-primary-soft);
+  font-weight: 700;
+}
+
+/* ---------- 主体区块 ---------- */
+/* 首屏：整块暖色平涂（渐变是禁用装饰），与下方白色区块以色阶分界。 */
+.hero {
+  background: var(--color-surface-warm);
+  padding-block: var(--space-8);
+}
+
+.hero__grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+}
+
+@media (max-width: 860px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero__lede {
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+  max-width: 56ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+/* 首图：图片直接呈现，不加描边、外框线与阴影；无题注。 */
+.hero-figure {
+  margin-inline: auto;
+  max-width: 640px;
+}
+
+.hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.trust-row li {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.section {
+  padding-block: var(--space-8);
+}
+
+.section--alt {
+  background: var(--color-surface-alt);
+}
+
+.section__head {
+  max-width: 62ch;
+  margin-bottom: var(--space-6);
+}
+
+.grid-cards {
+  display: grid;
+  gap: var(--space-5);
+  /* min(100%, 260px)：窄栏（hub 在 container--narrow 内）里轨道下限不能宽于可用宽度，否则 320px 视口下卡片外溢。 */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+/* 根选择页的语言入口：卡片压在首图同一行的窄列里，两列排布以免左栏比首图高一倍。 */
+.hero__langs {
+  list-style: none;
+  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+/* 卡片靠填充色阶定义表面：白底区块上用 alt 灰，灰底区块与暖色首屏上用纯白。 */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-lg);
+}
+
+.section--alt .card,
+.hero__langs .card {
+  background: var(--color-surface);
+}
+
+.card__title {
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.card__body {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  flex: 1;
+}
+
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+/* 步骤流程 */
+.steps {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  padding: var(--space-4);
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-alt);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ---------- 提示与来源 ---------- */
+.banner {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  border: 1px solid var(--color-line-strong); /* taste-skill-ignore: 状态横幅需高可见边界（警示/信息/错误） */
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+.banner--info {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+  border-color: var(--color-primary);
+}
+
+.banner--error {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.banner--success {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.pending-slot {
+  padding: var(--space-4);
+  border: 1px dashed var(--color-line-strong); /* taste-skill-ignore: 待补事实占位槽，虚线即「未就绪」语义 */
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.source-note {
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+  border-left: 2px solid var(--color-line);
+  padding-left: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.valid-until {
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+  margin-top: var(--space-2);
+}
+
+/* 停留估算器：靠 alt 填充色阶定义，不加描边。 */
+.stay-estimator {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.stay-estimator__label {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.stay-estimator__select {
+  font: inherit;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line-strong); /* taste-skill-ignore: 表单控件描边（对比度 ≥3:1 无障碍要求） */
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.stay-estimator__result {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+/* 评估向导（对标优化轮 v3 第 1 项） */
+.wizard {
+  margin-bottom: var(--space-6);
+}
+
+.wizard__steps {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.wizard__step {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.wizard__step--active {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.wizard__step--done {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.wizard__panel {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wizard__panel legend {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.wizard__hint {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-4);
+}
+
+.wizard__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.wizard__result {
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+
+.wizard__result h3 {
+  margin-top: 0;
+}
+
+.wizard__note {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.wizard__concerns ul,
+.wizard__pages ul {
+  padding-left: var(--space-5);
+}
+
+.wizard__no-contact {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+  margin-top: var(--space-4);
+}
+
+/* 对照式信任模块（对标优化轮 v3 第 4 项） */
+.comparison-method {
+  margin-top: var(--space-5);
+  /* 用 padding 拉开与后续标题的距离（margin 会与 h2 的 margin-top 合并）：
+     表格尾行文字曾被渲染审计误判为标题眉标（kicker，阈值 72px）。 */
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.comparison-method__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.comparison-method__table th,
+.comparison-method__table td {
+  padding: var(--space-3);
+  border: 1px solid var(--color-line); /* taste-skill-ignore: 真实对照表格的网格线 */
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-method__table thead th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+}
+
+/* 案例阶段分组（对标优化轮 v3 第 5 项）：空阶段整项不输出 */
+.story-stages {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.story-stage h3 {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.story-stage ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.breadcrumbs {
+  padding-block: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-inline: var(--space-2);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- 表单 ---------- */
+/* 表单容器：白底卡片压在 section--alt 灰底上，色阶即边界，不加描边与阴影。 */
+.form {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+
+.form__row {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field__label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.field__hint {
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+.field__error {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: var(--space-3);
+  font: inherit;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-field); /* taste-skill-ignore: 表单控件描边（对比度 ≥3:1 无障碍要求） */
+  border-radius: var(--radius-md);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.checkbox {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--text-sm);
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px; /* taste-skill-ignore: 蜜罐字段视觉隐藏 */
+  height: 1px; /* taste-skill-ignore: 蜜罐字段视觉隐藏 */
+  overflow: hidden;
+}
+
+.form__notice {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+/* ---------- 页脚与浮动元素 ---------- */
+.site-footer {
+  margin-top: var(--space-8);
+  padding-block: var(--space-7);
+  background: var(--color-ink);
+  border-top: 3px solid var(--color-accent);
+  color: #dbe6ea;
+  font-size: var(--text-sm);
+}
+
+.site-footer h2,
+.site-footer h3 {
+  color: #fff;
+  font-size: var(--text-base);
+}
+
+.site-footer a {
+  color: #fff;
+}
+
+.footer__grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* 免责声明区：靠间距与字色区分，不用分隔线；行长限制与正文一致。 */
+.footer__disclaimer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  color: #b6c9d2;
+  font-size: var(--text-xs);
+}
+
+.footer__disclaimer p {
+  max-width: 65ch;
+}
+
+.floating-cta-group {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: var(--z-floating);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  pointer-events: none;
+  /* 隐藏态同时 visibility:hidden：纯透明仍会与滚动内容重叠（tasteskill covered-text 规则）。 */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.floating-cta-group[data-visible='true'] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+/* 浮动按钮自带实底与描边（主按钮蓝底、次按钮白底），不依赖投影与滚动内容分离。 */
+.floating-cta-group .btn--secondary {
+  background: var(--color-surface);
+}
+
+.floating-cta-channels {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (max-width: 700px) {
+  .floating-cta-group {
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+    align-items: stretch;
+  }
+}
+
+.consent {
+  position: fixed;
+  inset: auto var(--space-5) var(--space-5);
+  z-index: var(--z-consent);
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong); /* taste-skill-ignore: 同意弹层是真对话框，需要边界与投影 */
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); /* taste-skill-ignore: 同意弹层是真对话框 */
+  font-size: var(--text-sm);
+}
+
+.consent[hidden] {
+  display: none;
+}
+
+.consent__actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ---------- 排版微调（替代分散的内联样式，样式只集中在这三个文件） ---------- */
+.faq-list .card {
+  margin-bottom: var(--space-4);
+}
+
+.consent__title {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-2);
+}
+
+.consent__body {
+  margin: 0;
+}
+
+.draft-banner {
+  padding-top: var(--space-4);
+}
+
+.prose--padded {
+  padding-block: var(--space-6);
+}
+
+.source-note--spaced {
+  margin-top: var(--space-5);
+}
+
+.card-list-reset {
+  list-style: none;
+  padding: 0;
+}
+
+/* ---------- 入场动效层（tasteskill motion 规则） ----------
+   仅 transform/opacity；html[data-motion] 由 BaseLayout 的内联脚本在
+   prefers-reduced-motion 为 false 时才写入，无 JS / 减弱动效环境直接静态可见。 */
+html[data-motion] :where(
+    .hero__grid > *,
+    .section__head,
+    .grid-cards > *,
+    .steps > *,
+    .form,
+    .wizard,
+    .comparison-method,
+    .story-stage,
+    .prose > h2,
+    .footer__grid > *
+  ) {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html[data-motion] .is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* 控件反馈：按钮与链接的颜色/底色过渡（transform 只做按下反馈）。 */
+.btn {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}

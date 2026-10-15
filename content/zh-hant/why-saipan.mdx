@@ -1,0 +1,102 @@
+---
+lang: zh-hant
+path: /zh-hant/why-saipan
+translation_key: why_saipan
+title: 為何選擇塞班：航線、入境路徑與停留安排
+description: 塞班作為就醫地點的航線與飛行時間、不同護照的入境授權與停留安排，以及語言、翻譯、陪同與住宿等支援服務說明。
+template: why_destination
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - destination_facts
+  - flight_routes
+  - entry_paths
+  - stay_schedule
+  - support_services
+  - comparison
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+hero:
+  eyebrow: 北馬里亞納群島
+  lede: 出發前最需要確認的四件事：怎麼飛、要停留多久、以什麼身分入境、到院前後由誰協助。本頁逐項說明。
+  trust_items: []
+  image: null
+---
+
+import FlightTable from '../../src/components/FlightTable.astro';
+import EntryPolicyTable from '../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../src/components/FactGate.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+import ComparisonMethod from '../../src/components/ComparisonMethod.astro';
+
+<FactGate need="flights">
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>航線與實際飛行時間</h2>
+        <p>從台北、桃園、香港或上海出發的航班安排、直飛或中轉、實際飛行時間與適用日期，連同每筆資料的來源與最後核對日期。</p>
+      </div>
+      <FlightTable lang="zh-hant" />
+    </div>
+  </section>
+</FactGate>
+
+<FactGate need="entry">
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>入境授權比較</h2>
+        <p>不同護照或國籍適用的入境計畫、最長停留、電子授權與返程票要求各不相同，出發前應以所持護照逐項確認。</p>
+      </div>
+      <EntryPolicyTable lang="zh-hant" />
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>停留多久由什麼決定</h2>
+      <p>在塞班停留的天數與到院次數，取決於方案、週期當中的監測安排，以及是否分階段進行。醫療團隊會在評估後給出您的個別日程，本站不發布未經確認的統一天數。</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>先評估，再談行程</h3>
+        <p>以遠端方式了解您的情況，確認是否適合安排赴塞班的療程，以及需要分幾段進行。</p>
+      </li>
+      <li>
+        <h3>日程以到院節點為基準</h3>
+        <p>監測與手術安排決定哪几天必須在島上，其餘天數可依您的恢復與行程彈性調整。</p>
+      </li>
+      <li>
+        <h3>機票配合確認後的日程購買</h3>
+        <p>日程定稿後再訂票，可避免改期費用與入境條件對不上；返程票的安排依您所適用計畫一併確認。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>目的地與就醫支援</h2>
+      <p>時區與時差、英語與中文溝通、陪同與接送、翻譯預約、住宿建議與病歷隱私的處理方式，屬行程規劃的一部分，可在初診諮詢時一併提出，由客服與醫療團隊按您的日程安排。</p>
+    </div>
+    <ReviewOnly>等待來源登記：見 docs/compliance/fact-register.csv 的目的地與支援服務列。</ReviewOnly>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>與其他目的地的比較</h2>
+      <p>本站不做未經核對的數據比較。可核驗的條件只有三項：是否公開分年齡層的統計、是否說明統計口徑、是否標示樣本量與期間。三項缺一，就不作為比較依據。</p>
+    </div>
+    <ComparisonMethod lang="zh-hant" />
+  </div>
+</section>

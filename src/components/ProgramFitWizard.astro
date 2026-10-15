@@ -1,0 +1,341 @@
+---
+import { PROGRAM_VALUES, TIMELINE_VALUES } from '../lib/forms';
+import { buildVisiblePaths, loadAllPages } from '../lib/content';
+import { t } from '../lib/i18n';
+import type { LangCode } from '../lib/config';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+const pages = await loadAllPages();
+const visiblePaths = buildVisiblePaths(pages);
+
+// 建议内容（纯方法，基于方案类型；不含医疗/价格/入境事实）
+// 三语内置：zh-hant / zh-hans / en
+const SUGGESTIONS: Record<string, Record<string, { concerns: string[]; pages: string[] }>> = {
+  'zh-hant': {
+    ivf: {
+      concerns: [
+        '既往治療紀錄是否需要翻譯或附英文摘要',
+        '促排方案與用藥劑量依您的情況如何安排',
+        '取卵與受精方式（IVF 或 ICSI）如何選擇',
+        '培養天數與移植策略（Day 3 或 Day 5）',
+        '費用包含哪些項目、哪些是可能加項',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    egg_freezing: {
+      concerns: [
+        '既往治療紀錄是否需要翻譯',
+        '卵子數量與保存期限的預期',
+        '解凍時機與後續方案銜接',
+        '費用包含項目與續存費用',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_egg: {
+      concerns: [
+        '供者篩選標準與匹配流程',
+        '法律協議與權利義務',
+        '費用包含項目與可能加項',
+        '跨境醫療的文件要求',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_sperm: {
+      concerns: ['精子來源與法律程序', '法律協議與權利義務', '費用包含項目'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    surrogacy: {
+      concerns: ['代孕協議與流程', '法律管轄區域與文件要求', '費用包含項目與可能加項'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    lgbtq: {
+      concerns: ['伴侶雙方法律關係與文件', '方案流程與監測安排', '費用包含項目'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    recurrent_failure: {
+      concerns: [
+        '既往治療紀錄與失敗原因分析',
+        '是否需要額外檢查或評估',
+        '方案調整的可能性',
+        '費用包含項目',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    unsure: {
+      concerns: ['初步評估需要哪些信息', '建議先閱讀哪些頁面', '建議聯繫方式與提問清單'],
+      pages: ['/why-saipan', '/programs/ivf-icsi', '/pricing'],
+    },
+  },
+  'zh-hans': {
+    ivf: {
+      concerns: [
+        '既往治疗记录是否需要翻译或附英文摘要',
+        '促排方案与用药剂量依您的情况如何安排',
+        '取卵与受精方式（IVF 或 ICSI）如何选择',
+        '培养天数与移植策略（Day 3 或 Day 5）',
+        '费用包含哪些项目、哪些是可能加项',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    egg_freezing: {
+      concerns: ['既往治疗记录是否需要翻译', '卵子数量与保存期限的预期', '解冻时机与后续方案衔接', '费用包含项目与续存费用'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_egg: {
+      concerns: ['供者筛选标准与匹配流程', '法律协议与权利义务', '费用包含项目与可能加项', '跨境医疗的文件要求'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_sperm: {
+      concerns: ['精子来源与法律程序', '法律协议与权利义务', '费用包含项目'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    surrogacy: {
+      concerns: ['代孕协议与流程', '法律管辖区域与文件要求', '费用包含项目与可能加项'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    lgbtq: {
+      concerns: ['伴侣双方法律关系与文件', '方案流程与监测安排', '费用包含项目'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    recurrent_failure: {
+      concerns: ['既往治疗记录与失败原因分析', '是否需要额外检查或评估', '方案调整的可能性', '费用包含项目'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    unsure: {
+      concerns: ['初步评估需要哪些信息', '建议先阅读哪些页面', '建议联系方式与提问清单'],
+      pages: ['/why-saipan', '/programs/ivf-icsi', '/pricing'],
+    },
+  },
+  en: {
+    ivf: {
+      concerns: [
+        'Whether past treatment records need translation or an English summary',
+        'How stimulation protocol and medication dosage are arranged for your situation',
+        'How to choose between IVF and ICSI',
+        'Culture days and transfer strategy (Day 3 or Day 5)',
+        'What is included in the fee and what are possible add-ons',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    egg_freezing: {
+      concerns: [
+        'Whether past treatment records need translation',
+        'Expected egg count and storage duration',
+        'Thawing timing and connection to subsequent programs',
+        'What is included and the annual storage fee',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_egg: {
+      concerns: [
+        'Donor screening criteria and matching process',
+        'Legal agreement and rights/obligations',
+        'What is included in the fee and possible add-ons',
+        'Document requirements for cross-border care',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    donor_sperm: {
+      concerns: ['Sperm source and legal procedure', 'Legal agreement and rights/obligations', 'What is included in the fee'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    surrogacy: {
+      concerns: ['Surrogacy agreement and process', 'Legal jurisdiction and document requirements', 'What is included and possible add-ons'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    lgbtq: {
+      concerns: ["Partners' legal relationship and documents", 'Program process and monitoring arrangements', 'What is included in the fee'],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    recurrent_failure: {
+      concerns: [
+        'Past treatment records and failure cause analysis',
+        'Whether additional tests or evaluation are needed',
+        'Possibility of program adjustment',
+        'What is included in the fee',
+      ],
+      pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
+    },
+    unsure: {
+      concerns: ['What information is needed for initial evaluation', 'Which pages to read first', 'Suggested contact methods and question list'],
+      pages: ['/why-saipan', '/programs/ivf-icsi', '/pricing'],
+    },
+  },
+};
+
+const suggestions = SUGGESTIONS[lang] ?? SUGGESTIONS.en;
+const langPrefix = lang === 'zh-hant' ? '/zh-hant' : lang === 'zh-hans' ? '/zh-hans' : '/en';
+
+// 建议阅读页只保留本次构建真实渲染的落点：草稿页、该语言未建的页面不生成链接（防 404）。
+const wizardData = Object.fromEntries(
+  Object.entries(suggestions).map(([key, item]) => [
+    key,
+    {
+      concerns: item.concerns,
+      pages: item.pages
+        .map((p) => ({ href: `${langPrefix}${p}`, label: p }))
+        .filter((p) => visiblePaths.has(p.href)),
+    },
+  ]),
+);
+---
+
+<div class="wizard" id="wizard" data-program-wizard data-lang={lang} data-wizard-data={JSON.stringify(wizardData)}>
+  <!-- 步骤指示器 -->
+  <div class="wizard__steps" aria-hidden="true">
+    <span class="wizard__step wizard__step--active" data-wizard-step="1">1</span>
+    <span class="wizard__step" data-wizard-step="2">2</span>
+    <span class="wizard__step" data-wizard-step="3">3</span>
+  </div>
+
+  <!-- 步骤 1：意图（方案） -->
+  <fieldset class="wizard__panel" data-wizard-panel="1">
+    <legend>{t(lang, 'wizard.step1_title')}</legend>
+    <p class="wizard__hint">{t(lang, 'wizard.step1_hint')}</p>
+    <div class="field">
+      <label class="field__label" for="wizard-program">{t(lang, 'form.program')}</label>
+      <select class="select" id="wizard-program" required>
+        <option value="">{t(lang, 'wizard.select')}</option>
+        {PROGRAM_VALUES.map((value) => (
+          <option value={value}>{t(lang, `program.${value}`)}</option>
+        ))}
+      </select>
+    </div>
+    <button class="btn btn--primary" type="button" data-wizard-next>{t(lang, 'wizard.next')}</button>
+  </fieldset>
+
+  <!-- 步骤 2：条件（年龄/国家/既往治疗） -->
+  <fieldset class="wizard__panel" data-wizard-panel="2" hidden>
+    <legend>{t(lang, 'wizard.step2_title')}</legend>
+    <p class="wizard__hint">{t(lang, 'wizard.step2_hint')}</p>
+    <div class="field">
+      <label class="field__label" for="wizard-age">{t(lang, 'form.age')}</label>
+      <input class="input" id="wizard-age" type="number" min="18" max="75" inputmode="numeric" />
+    </div>
+    <div class="field">
+      <label class="field__label" for="wizard-country">{t(lang, 'form.country')}</label>
+      <input class="input" id="wizard-country" type="text" maxlength="80" />
+    </div>
+    <div class="field">
+      <label class="field__label" for="wizard-past-treatment">{t(lang, 'form.past_treatment')}</label>
+      <textarea class="textarea" id="wizard-past-treatment" maxlength="400"></textarea>
+    </div>
+    <div class="wizard__actions">
+      <button class="btn btn--secondary" type="button" data-wizard-prev>{t(lang, 'wizard.prev')}</button>
+      <button class="btn btn--primary" type="button" data-wizard-next>{t(lang, 'wizard.next')}</button>
+    </div>
+  </fieldset>
+
+  <!-- 步骤 3：时间 -->
+  <fieldset class="wizard__panel" data-wizard-panel="3" hidden>
+    <legend>{t(lang, 'wizard.step3_title')}</legend>
+    <p class="wizard__hint">{t(lang, 'wizard.step3_hint')}</p>
+    <div class="field">
+      <label class="field__label" for="wizard-timeline">{t(lang, 'form.timeline')}</label>
+      <select class="select" id="wizard-timeline" required>
+        <option value="">{t(lang, 'wizard.select')}</option>
+        {TIMELINE_VALUES.map((value) => (
+          <option value={value}>{t(lang, `timeline.${value}`)}</option>
+        ))}
+      </select>
+    </div>
+    <div class="wizard__actions">
+      <button class="btn btn--secondary" type="button" data-wizard-prev>{t(lang, 'wizard.prev')}</button>
+      <button class="btn btn--primary" type="button" data-wizard-finish>{t(lang, 'wizard.finish')}</button>
+    </div>
+  </fieldset>
+
+  <!-- 结果（不留电话即可看到） -->
+  <div class="wizard__result" data-wizard-result hidden>
+    <h3>{t(lang, 'wizard.result_title')}</h3>
+    <p class="wizard__note">{t(lang, 'wizard.result_note')}</p>
+    <div class="wizard__concerns">
+      <h4>{t(lang, 'wizard.concerns_title')}</h4>
+      <ul data-wizard-concerns></ul>
+    </div>
+    <div class="wizard__pages">
+      <h4>{t(lang, 'wizard.pages_title')}</h4>
+      <ul data-wizard-pages></ul>
+    </div>
+    <p class="wizard__no-contact">{t(lang, 'wizard.no_contact')}</p>
+    <button class="btn btn--primary" type="button" data-wizard-to-form>{t(lang, 'wizard.to_form')}</button>
+  </div>
+</div>
+
+<script>
+  (() => {
+  const container = document.querySelector<HTMLElement>('[data-program-wizard]');
+  if (!container) return;
+  const data = JSON.parse(container.dataset.wizardData ?? '{}');
+
+  const panels = container.querySelectorAll<HTMLElement>('[data-wizard-panel]');
+  const result = container.querySelector<HTMLElement>('[data-wizard-result]');
+  const concernsList = container.querySelector<HTMLElement>('[data-wizard-concerns]');
+  const pagesList = container.querySelector<HTMLElement>('[data-wizard-pages]');
+  const stepIndicators = container.querySelectorAll<HTMLElement>('[data-wizard-step]');
+
+  let currentStep = 1;
+
+  function showStep(step: number) {
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.wizardPanel !== String(step);
+    });
+    stepIndicators.forEach((indicator) => {
+      const s = Number(indicator.dataset.wizardStep);
+      indicator.classList.toggle('wizard__step--active', s === step);
+      indicator.classList.toggle('wizard__step--done', s < step);
+    });
+    currentStep = step;
+  }
+
+  function showResult() {
+    const programSelect = container.querySelector<HTMLSelectElement>('#wizard-program');
+    const program = programSelect?.value ?? 'unsure';
+    const item = data[program] ?? data.unsure;
+    if (!item) return;
+
+    if (concernsList) {
+      concernsList.innerHTML = item.concerns.map((c) => `<li>${c}</li>`).join('');
+    }
+    if (pagesList) {
+      pagesList.innerHTML = item.pages.map((p) => `<li><a href="${p.href}">${p.label}</a></li>`).join('');
+      pagesList.parentElement.hidden = item.pages.length === 0;
+    }
+
+    panels.forEach((panel) => {
+      panel.hidden = true;
+    });
+    if (result) result.hidden = false;
+    stepIndicators.forEach((indicator) => {
+      indicator.classList.add('wizard__step--done');
+    });
+  }
+
+  container.querySelectorAll<HTMLButtonElement>('[data-wizard-next]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (currentStep < 3) showStep(currentStep + 1);
+    });
+  });
+
+  container.querySelectorAll<HTMLButtonElement>('[data-wizard-prev]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (currentStep > 1) showStep(currentStep - 1);
+    });
+  });
+
+  const finishBtn = container.querySelector<HTMLButtonElement>('[data-wizard-finish]');
+  finishBtn?.addEventListener('click', () => {
+    showResult();
+  });
+
+  const toFormBtn = container.querySelector<HTMLButtonElement>('[data-wizard-to-form]');
+  toFormBtn?.addEventListener('click', () => {
+    const form = document.querySelector<HTMLElement>('#consult');
+    form?.scrollIntoView({ behavior: 'smooth' });
+  });
+  })();
+</script>

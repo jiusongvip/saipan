@@ -1,0 +1,27 @@
+---
+import type { LangCode } from '../lib/config';
+import { buildVisible, loadAllPages } from '../lib/content';
+import { programBySlug } from '../lib/facts';
+import ProgramCard from './ProgramCard.astro';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+const programPages = buildVisible(await loadAllPages()).filter(
+  (page) => page.lang === lang && page.template === 'program',
+);
+---
+
+<div class="grid-cards">
+  {programPages.map((page) => (
+    <ProgramCard
+      lang={lang}
+      program={page.program_slug ? (programBySlug(page.program_slug) ?? {}) : {}}
+      title={page.title}
+      description={page.description}
+      path={page.path}
+    />
+  ))}
+</div>

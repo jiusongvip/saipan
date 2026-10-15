@@ -1,0 +1,92 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { pendingEntryPolicySlots, verifiedEntryPolicies, type EntryPolicyRecord } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  nationalitySlots?: string[];
+}
+
+const { lang, nationalitySlots = [] } = Astro.props;
+const rows = verifiedEntryPolicies(nationalitySlots);
+const pendingSlots = pendingEntryPolicySlots(nationalitySlots);
+
+interface TicketRequirement {
+  required?: boolean | null;
+  refundable?: boolean | null;
+  transferable?: boolean | null;
+  confirmed_departure_date?: boolean | null;
+  notes?: string | null;
+}
+
+function ticketText(record: EntryPolicyRecord): string {
+  const ticket = (record.ticket_requirement ?? {}) as TicketRequirement;
+  const parts: string[] = [];
+  if (ticket.required !== null && ticket.required !== undefined) {
+    parts.push(ticket.required ? t(lang, 'common.yes') : t(lang, 'common.no'));
+  }
+  if (ticket.confirmed_departure_date !== null && ticket.confirmed_departure_date !== undefined) {
+    parts.push(`${t(lang, 'table.entry.ticket')}: ${ticket.confirmed_departure_date ? t(lang, 'common.yes') : t(lang, 'common.no')}`);
+  }
+  if (ticket.notes) parts.push(ticket.notes);
+  return parts.join(' · ');
+}
+---
+
+{rows.length > 0 ? (
+  <div class="table-wrap">
+    <table>
+      <caption>{t(lang, 'section.stay_entry')}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'table.entry.program_type')}</th>
+          <th scope="col">{t(lang, 'table.entry.max_stay')}</th>
+          <th scope="col">{t(lang, 'table.entry.authorization')}</th>
+          <th scope="col">{t(lang, 'table.entry.ticket')}</th>
+          <th scope="col">{t(lang, 'table.entry.region_access')}</th>
+          <th scope="col">{t(lang, 'table.entry.transit')}</th>
+          <th scope="col">{t(lang, 'table.entry.alternatives')}</th>
+          <th scope="col">{t(lang, 'table.entry.source')}</th>
+          <th scope="col">{t(lang, 'table.entry.verified')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((record) => (
+          <tr>
+            <th scope="row">{record.entry_program}</th>
+            <td>{record.maximum_stay_days ?? t(lang, 'common.na')}</td>
+            <td>{record.authorization}</td>
+            <td>{ticketText(record)}</td>
+            <td>{record.mainland_us_access ?? t(lang, 'common.na')}</td>
+            <td>{record.transit_constraints ?? t(lang, 'common.na')}</td>
+            <td>{record.alternative_programs ?? t(lang, 'common.na')}</td>
+            <td>
+              {(record.official_source ?? []).map((source) => {
+                const item = source as { name?: string; url?: string };
+                return item.url ? (
+                  <a href={item.url} rel="noopener noreferrer">{item.name ?? item.url}</a>
+                ) : (
+                  <span>{item.name ?? ''}</span>
+                );
+              })}
+            </td>
+            <td>{record.last_verified}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+) : !reviewChrome ? null : (
+  <div class="pending-slot">
+    <strong>{t(lang, 'common.pending_legal')}</strong>
+    <ul>
+      {pendingSlots.map((slot) => (
+        <li>
+          {slot.label_working}: {slot.status}
+        </li>
+      ))}
+    </ul>
+    <p>{t(lang, 'draft.module_hidden')}</p>
+  </div>
+)}

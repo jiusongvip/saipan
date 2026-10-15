@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "review_note": "开发文档 5.1。本文件是入境政策的唯一数据源：入境路径页、城市页与首页对比表只能读取此处，模板与 MDX 不得重复写停留天数、授权类别等字段。status 非 verified 的记录，生产页面必须整行不渲染（EntryPolicyTable 已实现该闸门）。",
+  "status_values": ["pending", "verified", "expired", "blocked"],
+  "records": [
+    {
+      "id": "nationality-cn",
+      "label": "中国大陆普通护照",
+      "status": "pending",
+      "entry_program": "CNMI EVS-TAP 电子旅行许可（仅限北马里亚纳群岛），或 B1/B2 非移民签证 + EVUS 登记",
+      "maximum_stay_days": 14,
+      "authorization": "出发前经 CBP G-CNMI ETA 系统取得 EVS-TAP 电子旅行授权；无核准记录时承运人拒绝登机",
+      "ticket_requirement": {
+        "required": true,
+        "confirmed_departure_date": true
+      },
+      "mainland_us_access": "不适用：EVS-TAP 仅准入 CNMI，不得用于关岛或美国本土，不得延期、不得转换身份",
+      "transit_constraints": "须经该计划指定承运人承运；具体航线与中转安排待航线事实登记",
+      "alternative_programs": "B1/B2（最长十年多次）+ EVUS 登记；实际停留期由入境口岸 CBP 官员裁定",
+      "official_source": [
+        {
+          "name": "8 CFR 212.1(r)（eCFR 现行文本）",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-212/section-212.1",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "CBP G-CNMI ETA 官方申请系统（含 PRC EVS-TAP 14 天分支）",
+          "url": "https://g-cnmi-eta.cbp.dhs.gov/",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "90 FR 658（2025-01-06）：EVS-TAP 实施，原对中国公民的假释政策终止",
+          "url": "https://www.federalregister.gov/documents/2025-01-06/2024-31326/implementation-of-the-commonwealth-of-the-northern-mariana-islands-cnmi-economic-vitality-and",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "89 FR 3299（2024-01-18）：引述 2019-10-02 CBP 公告，假释停留期自 2019-10-03 起缩短为 14 天",
+          "url": "https://www.federalregister.gov/documents/2024-01-18/2024-00645/guam-commonwealth-of-the-northern-mariana-islands-cnmi-visa-waiver-program-automation-and-electronic",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "CBP EVUS 常见问题（十年 B1/B2 赴关岛或美国境内目的地须登记）",
+          "url": "https://www.cbp.gov/travel/international-visitors/electronic-visa-update-system-evus/frequently-asked-questions",
+          "verified_on": "2026-10-14"
+        }
+      ],
+      "last_verified": "2026-10-14",
+      "review_owner": null,
+      "note": "证据已由开发侧从官方来源读取并登记，但按 ADR-003 与 5.1 的口径，法律结论须由署名的法律顾问复核后才转 verified。市面上「护照加往返机票即可入境、停留四十五天」的说法对应已终止的旧安排，不得作为结论展示。"
+    },
+    {
+      "id": "nationality-tw",
+      "label": "台灣護照",
+      "status": "pending",
+      "entry_program": "Visa Waiver Program（ESTA），或 Guam-CNMI Visa Waiver Program（G-CNMI ETA）",
+      "maximum_stay_days": 90,
+      "authorization": "ESTA 於出發前線上取得；Guam-CNMI VWP 一線須另申請 G-CNMI ETA",
+      "ticket_requirement": {
+        "required": true,
+        "confirmed_departure_date": false
+      },
+      "mainland_us_access": "VWP 適用美國全境，含關島與 CNMI",
+      "transit_constraints": "Guam-CNMI VWP 須自台灣出發、中途不得停留直飛關島或 CNMI（美國屬地境內中轉除外），並符合該計畫對設籍台灣人士的證件要求",
+      "alternative_programs": "Guam-CNMI VWP：最長 45 天",
+      "official_source": [
+        {
+          "name": "8 CFR 212.1(q)、217.2（eCFR 現行文本）",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-212/section-212.1",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "DHS：Visa Waiver Program 與 Guam-CNMI VWP 的適用範圍",
+          "url": "https://www.dhs.gov/visa-waiver-program-and-guam-cnmi-visa-waiver-program",
+          "verified_on": "2026-10-14"
+        },
+        {
+          "name": "DHS：Guam-CNMI Visa Waiver Program",
+          "url": "https://www.dhs.gov/guam-cnmi-visa-waiver-program",
+          "verified_on": "2026-10-14"
+        }
+      ],
+      "last_verified": "2026-10-14",
+      "review_owner": null,
+      "note": "Guam-CNMI VWP 一線的證件細節（設籍台灣之認定）待法律顧問逐條確認後才轉 verified。"
+    }
+  ],
+  "required_records": [
+    {
+      "slot_id": "nationality-tw",
+      "label_working": "台灣 / Taiwan",
+      "langs": ["zh-hant", "en"],
+      "related_city_pages": ["taipei"],
+      "status": "pending",
+      "needed_evidence": "官方主管機關現行頁面（可核驗 URL）",
+      "review_owner": null,
+      "note": "記錄未建立前，城市頁與入境頁不得顯示任何入境結論。"
+    },
+    {
+      "slot_id": "nationality-hk",
+      "label_working": "香港 / Hong Kong",
+      "langs": ["zh-hant", "zh-hans", "en"],
+      "related_city_pages": ["hong-kong"],
+      "status": "pending",
+      "needed_evidence": "官方主管機關現行頁面",
+      "review_owner": null
+    },
+    {
+      "slot_id": "nationality-cn",
+      "label_working": "中国大陆 / mainland China",
+      "langs": ["zh-hans", "en"],
+      "related_city_pages": ["shanghai"],
+      "status": "pending",
+      "needed_evidence": "官方现行页面 + 法律顾问书面意见（含 CNMI 与赴美国本土差异、中转约束）",
+      "review_owner": null,
+      "note": "简体中文《中国客人入境路径》页不可由繁中页转换。"
+    },
+    {
+      "slot_id": "nationality-jp",
+      "label_working": "日本 / Japan",
+      "langs": ["ja", "en"],
+      "related_city_pages": ["tokyo"],
+      "status": "pending",
+      "needed_evidence": "官方现行页面",
+      "review_owner": null
+    },
+    {
+      "slot_id": "nationality-kr",
+      "label_working": "韩国 / South Korea",
+      "langs": ["ko", "en"],
+      "related_city_pages": ["seoul"],
+      "status": "pending",
+      "needed_evidence": "官方现行页面",
+      "review_owner": null
+    },
+    {
+      "slot_id": "nationality-ph",
+      "label_working": "菲律宾 / Philippines",
+      "langs": ["en"],
+      "related_city_pages": ["manila"],
+      "status": "pending",
+      "needed_evidence": "官方现行页面",
+      "review_owner": null
+    }
+  ],
+  "fields_required_for_verified": [
+    "entry_program",
+    "maximum_stay_days",
+    "authorization",
+    "ticket_requirement.required",
+    "ticket_requirement.confirmed_departure_date",
+    "mainland_us_access",
+    "transit_constraints",
+    "alternative_programs",
+    "official_source",
+    "last_verified",
+    "review_owner"
+  ],
+  "review_cycle": {
+    "frequency": "monthly",
+    "scope": ["entry_path pages", "transit articles", "this file"],
+    "overdue_behaviour": "生成告警并将记录降级为非已核实，停止展示结论单元格",
+    "owner": null,
+    "owner_status": "pending"
+  }
+}

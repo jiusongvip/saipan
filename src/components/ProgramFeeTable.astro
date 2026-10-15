@@ -1,0 +1,124 @@
+---
+import { loadAllPages } from '../lib/content';
+import { programFeeRow } from '../lib/facts';
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+
+interface FeeRow {
+  title: string;
+  path: string;
+  price_range: string | null;
+  price_currency: string | null;
+  price_last_verified: string | null;
+  price_band_min: number | null;
+  price_band_max: number | null;
+}
+
+// 工具层（对标优化轮 4）：列出本语言全部方案；费用列只在院方书面确认且在复核周期内时显示数字，
+// 未确认的方案显示「未公布」，界面始终完整，数字随院方确认自动填入。
+const pages = await loadAllPages();
+const rows: FeeRow[] = pages
+  .filter((page) => page.lang === lang && page.template === 'program' && Boolean(page.program_slug))
+  .map((page) => {
+    const fee = programFeeRow(page.program_slug as string);
+    return {
+      title: page.title,
+      path: page.path,
+      price_range: fee?.price_range ?? null,
+      price_currency: fee?.price_currency ?? null,
+      price_last_verified: fee?.price_last_verified ?? null,
+      price_band_min: fee?.price_band_min ?? null,
+      price_band_max: fee?.price_band_max ?? null,
+    };
+  })
+  .filter((row) => row.title)
+  .sort((a, b) => a.path.localeCompare(b.path));
+
+// band 分组：边界值完全从数据推导（代码不写字面数字）
+const allBandValues: number[] = [];
+rows.forEach((row) => {
+  if (row.price_band_min !== null) allBandValues.push(row.price_band_min);
+  if (row.price_band_max !== null) allBandValues.push(row.price_band_max);
+});
+const uniqueBandValues = [...new Set(allBandValues)].sort((a, b) => a - b);
+const bands: { min: number; max: number }[] = [];
+for (let i = 0; i < uniqueBandValues.length - 1; i++) {
+  bands.push({ min: uniqueBandValues[i], max: uniqueBandValues[i + 1] });
+}
+---
+
+{rows.length > 0 ? (
+  <div class="fee-table" data-fee-table>
+    {bands.length > 0 && (
+      <div class="fee-band" data-fee-band>
+        <label class="fee-band__label" for="fee-band-select">{t(lang, 'tools.band_label')}</label>
+        <select class="select fee-band__select" id="fee-band-select">
+          <option value="">{t(lang, 'tools.band_all')}</option>
+          {bands.map((band) => (
+            <option value={`${band.min}-${band.max}`}>{band.min}–{band.max}万</option>
+          ))}
+        </select>
+      </div>
+    )}
+    <div class="table-wrap">
+      <table>
+        <caption>{t(lang, 'table.tools.caption')}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{t(lang, 'table.tools.program')}</th>
+            <th scope="col">{t(lang, 'table.tools.range')}</th>
+            <th scope="col">{t(lang, 'table.tools.currency')}</th>
+            <th scope="col">{t(lang, 'table.tools.verified')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              data-band-min={row.price_band_min ?? ''}
+              data-band-max={row.price_band_max ?? ''}
+            >
+              <th scope="row"><a href={row.path}>{row.title}</a></th>
+              <td>{row.price_range ?? t(lang, 'tools.fee_unpublished')}</td>
+              <td>{row.price_currency ?? t(lang, 'common.na')}</td>
+              <td>{row.price_last_verified ?? t(lang, 'common.na')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    (() => {
+    const container = document.querySelector<HTMLElement>('[data-fee-table]');
+    if (!container) return;
+    const bandSelect = container.querySelector<HTMLSelectElement>('[data-fee-band] select');
+    const bodyRows = container.querySelectorAll<HTMLElement>('tbody tr');
+    if (!bandSelect || bodyRows.length === 0) return;
+    bandSelect.addEventListener('change', () => {
+      const value = bandSelect.value;
+      bodyRows.forEach((row) => {
+        const min = row.dataset.bandMin;
+        const max = row.dataset.bandMax;
+        if (!value) {
+          row.hidden = false;
+          return;
+        }
+        const [bandMin, bandMax] = value.split('-').map(Number);
+        const rowMin = min === '' ? null : Number(min);
+        const rowMax = max === '' ? null : Number(max);
+        row.hidden = rowMin !== null && rowMax !== null && (rowMin > bandMax || rowMax < bandMin);
+      });
+    });
+    })();
+  </script>
+) : reviewChrome ? (
+  <p class="pending-slot">
+    <code>fee-comparison</code>: {t(lang, 'common.pending_fact')}
+  </p>
+) : null}

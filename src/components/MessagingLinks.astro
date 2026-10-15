@@ -1,0 +1,51 @@
+---
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { plannedChannelTypes, usableChannels } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  audience?: 'patient' | 'donor';
+  pageType: string;
+  pagePath: string;
+  title?: string;
+}
+
+const { lang, audience = 'patient', pageType, pagePath } = Astro.props;
+const title = Astro.props.title ?? t(lang, 'messaging.title');
+const channels = usableChannels(lang, audience);
+const planned = plannedChannelTypes(lang, audience);
+---
+
+{(reviewChrome || channels.length > 0) && (
+  <section class="messaging" id="messaging" aria-labelledby="messaging-title">
+    <h2 id="messaging-title">{title}</h2>
+    {channels.length > 0 ? (
+      <ul class="trust-row">
+        {channels.map((channel) => (
+          <li>
+            <a
+              href={channel.handle_or_url!}
+              rel="noopener"
+              data-channel-link={channel.channel_type}
+              data-lang={lang}
+              data-page-type={pageType}
+              data-page-path={pagePath}
+              data-channel={channel.channel_type}
+            >
+              {t(lang, `channel.${channel.channel_type}`)}
+            </a>
+            {channel.service_hours && <span>{channel.service_hours}</span>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="banner">{t(lang, 'messaging.none_ready')}</p>
+    )}
+    {reviewChrome && planned.length > 0 && (
+      <p class="source-note">
+        {planned.map((channel) => channel.channel_type).join(' / ')} · {t(lang, 'common.pending_fact')}
+      </p>
+    )}
+  </section>
+)}

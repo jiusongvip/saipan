@@ -1,0 +1,15 @@
+---
+import type { LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+
+export interface Props {
+  lang: LangCode;
+  validUntil: string | null;
+}
+
+const { lang, validUntil } = Astro.props;
+---
+
+{validUntil && (
+  <p class="valid-until">{t(lang, 'page.valid_until')} {validUntil}</p>
+)}

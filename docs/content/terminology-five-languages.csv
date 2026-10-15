@@ -1,0 +1,84 @@
+term_en,zh_hant,zh_hans,en,ja,ko,usage_rule,notes
+Saipan,塞班島,塞班岛,Saipan,,,正文与 title 使用通行地名；首次出现可用全称,ja/ko 待母语确认当地惯用写法（needs_native_review）
+Commonwealth of the Northern Mariana Islands (CNMI),北馬里亞納群島（CNMI）,北马里亚纳群岛（CNMI）,Commonwealth of the Northern Mariana Islands (CNMI),,,法律与入境页首次出现用全称并附缩写,属地地位的结论须由法律顾问核定后才可写；needs_native_review
+Saipan IVF Center,塞班生殖中心（工作名稱）,塞班生殖中心（工作名称）,Saipan IVF Center（working name）,,,站内统一写法,法定/注册名称与品牌名待院方书面确认（fact_id=inst-legal-entity-name）；needs_native_review
+clinic / practice,診所,诊所,clinic,,,机构页统一用診所/clinic，不与医院混用,是否可用医院/hospital取决于院方实际资质类别，待确认（fact_id=inst-legal-entity-name）；needs_native_review
+embryology laboratory,胚胎實驗室,胚胎实验室,embryology laboratory,,,不得简称医院实验室以避免暗示院际隶属,自建/外包情况待确认（fact_id=lab-location-model）；needs_native_review
+in-house laboratory,自建實驗室,自建实验室,in-house laboratory,,,仅在院方书面确认后使用,未确认前不得出现；needs_native_review
+outsourced testing,外包檢測,外包检测,outsourced testing,,,须同时说明执行方与资质编号,待确认（fact_id=pgt-performer-credential）；needs_native_review
+cold chain,低溫運送鏈,冷链运输,cold chain,,,描述运输责任时须指明责任方,待确认（fact_id=cold-chain-responsibility）；needs_native_review
+specimen shipping,檢體運送,标本运送,specimen shipping,,,与冷链条目配对使用,待确认（fact_id=cold-chain-responsibility）；needs_native_review
+quality control,品質管控,质控,quality control (QC),,,流程性描述，不得作为资质声明,细节待院方提供（fact_id=lab-quality-control）；needs_native_review
+license number,執照編號,执照编号,license number,,,仅展示可核验执照号并附核验链接,待院方提供（fact_id=doc-license-number）；needs_native_review
+state of licensure,執照州別,执照签发州,state of licensure,,,与执照编号成对出现,待院方提供（fact_id=doc-license-state）；needs_native_review
+board certification,專科認證,专科认证,board certification,,,认证机构名称须可核验,待院方提供（fact_id=doc-board-certification）；needs_native_review
+informed consent,知情同意,知情同意,informed consent,,,法律页与供者页统一措辞,协议文本待法律顾问提供（fact_id=legal-consent-agreements）；needs_native_review
+In vitro fertilization (IVF),體外受精（試管嬰兒）,体外受精（试管婴儿）,in vitro fertilization (IVF),,,首次全称加缩写；缩写全站统一 IVF,繁中惯用試管嬰兒、简中惯用试管婴儿；ja/ko needs_native_review
+Intracytoplasmic sperm injection (ICSI),卵胞漿內單精蟲注射,卵胞浆内单精子注射,intracytoplasmic sperm injection (ICSI),,,缩写 ICSI 全站统一；繁中亦常见單精蟲注射表述,ja/ko needs_native_review
+Preimplantation genetic testing (PGT),植入前基因檢測,植入前遗传学检测,preimplantation genetic testing (PGT),,,全站统一 PGT，不写 PGP；可筛查项目以院方资质为限,资质范围待确认（fact_id=pgt-performer-credential）；ja/ko needs_native_review
+PGT-A,PGT-A（染色體數目篩檢）,PGT-A（染色体数目筛查）,PGT-A (aneuploidy screening),,,使用现行命名 PGT-A，不用旧称 PGS,ja/ko needs_native_review
+PGT-M,PGT-M（單基因疾病檢測）,PGT-M（单基因疾病检测）,PGT-M (monogenic disease testing),,,与 PGT-A 分开列项,ja/ko needs_native_review
+genetic screening,基因篩檢,基因筛查,genetic screening,,,篩檢≠診斷；不得表述为确诊,ja/ko needs_native_review
+ovarian stimulation,卵巢刺激,卵巢刺激,ovarian stimulation,,,流程描述用词；不涉及用药剂量建议,ja/ko needs_native_review
+egg retrieval,取卵,取卵,egg retrieval,,,流程节点名称,ja/ko needs_native_review
+embryo transfer,胚胎移植,胚胎移植,embryo transfer,,,流程节点名称,ja/ko needs_native_review
+blastocyst,囊胚,囊胚,blastocyst,,,仅在院方说明培养能力时使用,ja/ko needs_native_review
+ovarian hyperstimulation syndrome (OHSS),卵巢過度刺激症候群,卵巢过度刺激综合征,ovarian hyperstimulation syndrome (OHSS),,,风险章节术语；繁用症候群、简用综合征,具体风险清单待院方审定（fact_id=prog-ivf-icsi-clinical）；ja/ko needs_native_review
+multiple pregnancy,多胎妊娠,多胎妊娠,multiple pregnancy,,,风险章节术语,ja/ko needs_native_review
+cycle cancellation,週期取消,周期取消,cycle cancellation,,,风险章节术语,ja/ko needs_native_review
+recurrent implantation failure (RIF),反覆著床失敗,反复着床失败,recurrent implantation failure (RIF),,,繁用反覆、简用反复,方案内容待院方提供（fact_id=prog-rif-clinical）；ja/ko needs_native_review
+recurrent pregnancy loss (RPL),反覆妊娠流失,反复妊娠丢失,recurrent pregnancy loss (RPL),,,与 RIF 分列，不合并口径,ja/ko needs_native_review
+fertility preservation,生育力保存,生育力保存,fertility preservation,,,冻卵/冻胚方案页统称,ja/ko needs_native_review
+egg freezing,凍卵,冻卵,egg freezing,,,繁用凍卵、简用冻卵,ja/ko needs_native_review
+embryo freezing,凍胚,冻胚,embryo freezing,,,与冻卵并列展示时保持同一层级,ja/ko needs_native_review
+donor egg,供卵,供卵,donor egg,,,受方方案页术语,不得写来源地区、库存数量或匹配率（fact_id=prog-donor-egg-stay）；needs_native_review
+donor sperm,供精,供精,donor sperm,,,受方方案页术语,不得写库存或供给链表述；needs_native_review
+egg donor program,卵子捐贈者計畫,卵子捐赠者计划,egg donor program,,,供者页专用；与供卵方案页分开,筛查与补偿依据待法律顾问确认（fact_id=donor-screening-process）；needs_native_review
+third-party reproduction,第三方輔助生殖,第三方辅助生殖,third-party reproduction,,,方案与法律页统一用此中性表述,"避免借腹""定制等营销或贬义措辞；口径待法律顾问确认；needs_native_review"
+surrogacy,代理孕,代孕,surrogacy,,,仅出现在法律页语境,不作卖点；表述须法律顾问书面批准（fact_id=legal-surrogacy-rules）；needs_native_review
+gestational carrier,妊娠承載者,妊娠载体,gestational carrier,,,法律与方案页统一术语,最终措辞待法律顾问与母语校对确认；needs_native_review
+LGBTQ+ family building,LGBTQ+ 成家,LGBTQ+ 建家,LGBTQ+ family building,,,方案页标题用词保持中性,适用边界待法律顾问确认（fact_id=prog-lgbtq-clinical）；needs_native_review
+single-person family building,單身生育,单身生育,single-person family building,,,繁用單身、简用单身,ja/ko needs_native_review
+remote consultation,遠距諮詢,远程咨询,remote consultation,,,繁台湾惯用遠距、简中惯用远程,医疗边界待确认（fact_id=prog-remote-clinical）；needs_native_review
+local follow-up,當地隨診,本地随访,local follow-up,,,强调由当地医疗机构承担随访责任,随访责任方待院方确认；needs_native_review
+translation service,翻譯服務,翻译服务,translation service,,,是否包含须依价格条目,待确认（fact_id=price-non-medical-included）；needs_native_review
+airport pickup,接送機,接送机,airport pickup,,,是否包含须依价格条目,待确认（fact_id=price-non-medical-included）；needs_native_review
+accommodation,住宿,住宿,accommodation,,,是否包含须依价格条目,待确认（fact_id=price-non-medical-included）；needs_native_review
+price range,費用區間,费用区间,price range,,,仅在院方书面批准后显示数字,待确认（fact_id=price-program-ranges）；needs_native_review
+personalized quote,個別報價,个性化报价,personalized quote,,,CTA 用语,与评估申请CTA 区分使用；needs_native_review
+inclusions and exclusions,包含／不包含項目,包含与不包含项目,inclusions and exclusions,,,价格页核心结构,待确认（fact_id=price-inclusions）；needs_native_review
+cancellation and refund policy,取消與退款政策,取消与退款政策,cancellation and refund policy,,,原文引用院方政策,待确认（fact_id=price-cancellation-refund）；needs_native_review
+clinical pregnancy rate,臨床妊娠率,临床妊娠率,clinical pregnancy rate,,,必须附定义与分母,待院方数据（fact_id=data-metric-definition）；needs_native_review
+live birth rate,活產率,活产率,live birth rate,,,必须附定义与分母,待院方数据（fact_id=data-metric-definition）；needs_native_review
+per cycle / per transfer,每次週期／每次移植,每个周期/每次移植,per cycle / per transfer,,,统计口径术语，二者不可混用,待院方数据（fact_id=data-denominator-method）；needs_native_review
+age strata,年齡分層,年龄分层,age strata,,,数据表必备列,待院方数据（fact_id=data-age-strata）；needs_native_review
+sample size,樣本數,样本量,sample size,,,繁用樣本數、简用样本量,待院方数据（fact_id=data-sample-size）；needs_native_review
+reporting year,統計年份,统计年份,reporting year,,,数据表必备列,待院方数据（fact_id=data-reporting-year）；needs_native_review
+last verified date,最後核對日期,最后核对日期,last verified,,,政策与数据页必备标注,由复核责任人填写（fact_id=entry-review-cycle）；needs_native_review
+business hours,營業時間,营业时间,business hours,,,页脚与机构页统一取自 site-config,待院方提供（fact_id=inst-business-hours）；needs_native_review
+consultation,諮詢,咨询,consultation,,,CTA 与表单文案统一,繁用諮詢、简用咨询；needs_native_review
+appointment,預約,预约,appointment,,,与 consultation 区分使用,needs_native_review
+patient story,患者分享,患者分享,patient story,,,统一不用成功案例表述,须书面授权（fact_id=story-written-consent）；needs_native_review
+anonymization,去識別化,匿名化,anonymization,,,繁台湾惯用去識別化、简中惯用匿名化,处理方式须经当事人确认（fact_id=story-anonymization-approval）；needs_native_review
+written authorization,書面授權,书面授权,written authorization,,,故事与影像使用前提,待取得（fact_id=story-written-consent）；needs_native_review
+non-medical advice disclaimer,非醫療建議聲明,非医疗建议声明,non-medical advice disclaimer,,,页脚固定声明,文案待法律顾问定稿（fact_id=legal-disclaimer-text）；needs_native_review
+not legal advice,非法律意見,非法律意见,not legal advice,,,法律/入境页固定声明,文案待法律顾问定稿（fact_id=legal-disclaimer-text）；needs_native_review
+privacy notice,個人資料聲明,个人信息声明,privacy notice,,,繁用個人資料、简用个人信息,待隐私/法律意见（fact_id=legal-privacy-retention）；needs_native_review
+visa waiver program,免簽證計畫,免签计划,visa waiver program,,,仅作数据字段枚举名出现，正文不自行解释条件,结论一律由已核验 entry-policy 渲染（fact_id=entry-alternative-programs）；needs_native_review
+G-CNMI VWP,G-CNMI VWP（免簽計畫名稱）,G-CNMI VWP（免签计划名称）,G-CNMI VWP,,,作为 entry_program 枚举值原样使用，不译写政策内容,适用国籍与条件须法律顾问核对官方来源（fact_id=entry-passport-tw）；needs_native_review
+Electronic System for Travel Authorization (ETA),電子旅遊授權（ETA）,电子旅行授权（ETA）,Electronic System for Travel Authorization (ETA),,,作为 authorization 字段值；不写申请结果承诺,待核验（fact_id=entry-electronic-authorization）；needs_native_review
+maximum length of stay,最長停留天數,最长停留天数,maximum length of stay,,,数据字段名；未核验时隐藏该单元格,禁止以视情况而定填充（fact_id=entry-passport-tw）；needs_native_review
+round-trip ticket,往返機票,往返机票,round-trip ticket,,,票据要求字段术语,待核验（fact_id=entry-ticket-requirements）；needs_native_review
+confirmed departure date,確認離境日期,确认离境日期,confirmed departure date,,,票据要求字段术语,待核验（fact_id=entry-ticket-requirements）；needs_native_review
+transit,中轉,中转,transit,,,中转约束章节术语,待核验（fact_id=entry-transit-constraints）；needs_native_review
+mainland United States,美國本土,美国本土,mainland United States,,,地域范围字段术语，不推断可自由行,待核验（fact_id=entry-us-mainland-access）；needs_native_review
+direct flight,直飛航班,直飞航班,direct flight,,,航线表字段；直飞与否须有时刻表来源,待核验（fact_id=flight-schedule-window）；needs_native_review
+flight duration,飛行時間,飞行时长,flight duration,,,使用实际飞行时长表述并附时刻表来源,待核验（fact_id=flight-taipei-saipan）；needs_native_review
+time difference,時差,时差,time difference,,,城市页日程章节术语,待登记来源（fact_id=timezone-city-saipan）；needs_native_review
+itinerary,行程,行程,itinerary,,,CTA request_itinerary 对应文案,不承诺具体航班；needs_native_review
+Taipei,臺北,台北,Taipei,,,繁中采用台湾官方写法臺北,needs_native_review
+Hong Kong,香港,香港,Hong Kong,,,简繁同形,needs_native_review
+Shanghai,上海,上海,Shanghai,,,简繁同形,needs_native_review
+Tokyo,東京,东京,Tokyo,,,繁東京/简东京,needs_native_review
+Seoul,首爾,首尔,Seoul,,,繁用首爾、简用首尔,needs_native_review
+Manila,馬尼拉,马尼拉,Manila,,,繁馬尼拉/简马尼拉,needs_native_review

@@ -1,0 +1,63 @@
+---
+lang: en
+path: /en/programs/ivf-icsi
+translation_key: program_ivf_icsi
+title: Standard IVF with ICSI Program
+description: Suitability, exclusions, process and monitoring nodes, stay arrangement, risks and fee range for standard IVF with intracytoplasmic sperm injection (ICSI).
+template: program
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+valid_until: null
+fact_sources: []
+required_sections:
+  - suitability
+  - exclusions
+  - process
+  - stay_duration
+  - risks
+  - price_range
+primary_cta: assess_program
+secondary_cta: request_price_guide
+noindex: true
+program_slug: ivf-icsi
+hero:
+  eyebrow: Program Overview
+  lede: "This page describes the program in six sections: suitability, conditions needing further assessment, process and monitoring nodes, stay duration, risks, and fee range. Whether it suits you is answered by the physician after the first consult evaluation."
+  trust_items: []
+  image: null
+---
+
+import FactSlot from '../../../src/components/FactSlot.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>Who This Program Suits</h2>
+    <p>This section explains under which conditions the medical team considers this program, and which test results and medical history factors are evaluated.</p>
+    <FactSlot lang="en" slot="suitability" />
+
+    <h2>Who May Not Suit or Needs Further Assessment</h2>
+    <p>Some situations require additional tests or an alternative program; this section lists conditions that are first referred for further evaluation.</p>
+    <FactSlot lang="en" slot="exclusions" />
+
+    <h2>Process and Monitoring Nodes</h2>
+    <p>From first consult evaluation, ovarian stimulation, egg retrieval and fertilization, to culture, transfer and pregnancy testing, the timing and number of clinic visits at each node are described in this section.</p>
+    <FactSlot lang="en" slot="process" />
+
+    <h2>Expected Stay Duration and Number of Trips to Saipan</h2>
+    <p>Some people complete the whole cycle in one trip; others need two trips; this section explains the factors affecting duration and common stay arrangements.</p>
+    <FactSlot lang="en" slot="stay_duration" />
+
+    <h2>Risks and Possible Complications</h2>
+    <p>This section lists the risks and types of complications explained in the consent form, and how the medical team handles them when they occur.</p>
+    <FactSlot lang="en" slot="risks" />
+
+    <h2>Fee Range and What Is Included</h2>
+    <p>Fees vary by medication dosage, whether additional techniques are needed, and culture duration; this section lists the range and what is included or not included.</p>
+    <FactSlot lang="en" slot="price_range" />
+
+    <p class="source-note">The clinical descriptions and figures on this page are published only after written confirmation by the medical team with source and verification date, and are discussed together with your personal situation.</p>
+  </div>
+</section>

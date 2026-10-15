@@ -1,0 +1,49 @@
+---
+lang: zh-hans
+path: /zh-hans/tools
+translation_key: tools
+title: 费用与停留天数对照工具
+description: 两项对照工具：方案费用区间对照表与停留天数试算。费用与停留天数由院方书面确认后才会更新，并注明核对日期；未确认前，对应栏目不会显示任何数字。
+template: tools
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+valid_until: null
+fact_sources: []
+required_sections:
+  - fee-comparison
+  - stay-estimator
+  - tool-disclaimer
+primary_cta: request_price_guide
+secondary_cta: assess_program
+noindex: true
+---
+
+import ProgramFeeTable from '../../src/components/ProgramFeeTable.astro';
+import StayEstimator from '../../src/components/StayEstimator.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>方案费用对照</h2>
+    <p>对照表列出各方案的公开费用区间、币别与最后核对日期。费用由院方书面确认后才会出现在表中；确认前，表格不会显示任何数字。</p>
+    <ProgramFeeTable lang="zh-hans" />
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container container--narrow prose">
+    <h2>停留天数试算</h2>
+    <p>选择意向方案，查看该方案的参考停留天数。停留天数同样由院方书面确认后才会更新。</p>
+    <StayEstimator lang="zh-hans" />
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>工具边界</h2>
+    <p>两项工具仅供初步对照：费用区间不等于个别报价，实际费用以院方依您的情况提供的书面报价为准；停留天数为一般参考，实际日程由医疗团队依您的疗程安排。工具输出不构成医疗建议，也不取代远程初诊评估。</p>
+    <p>需要个别费用说明，可直接提交咨询，客服会依您选择的管道与语言回复。</p>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import type { LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import SourceNote from './SourceNote.astro';
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+  source_label?: string | null;
+  source_url?: string | null;
+  last_verified?: string | null;
+}
+
+export interface Props {
+  lang: LangCode;
+  items: FaqItem[];
+  title?: string;
+  lede?: string;
+}
+
+const { lang, items, title = t(lang, 'section.faq'), lede = '' } = Astro.props;
+---
+
+<section class="section" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 id="faq-title">{title}</h2>
+      {lede && <p>{lede}</p>}
+    </div>
+    <div class="faq-list">
+      {items.map((item) => (
+        <details class="card">
+          <summary class="card__title">{item.question}</summary>
+          <p class="card__body">{item.answer}</p>
+          <SourceNote
+            lang={lang}
+            label={item.source_label ?? null}
+            url={item.source_url ?? null}
+            lastVerified={item.last_verified ?? null}
+          />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

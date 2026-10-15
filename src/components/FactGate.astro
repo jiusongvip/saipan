@@ -1,0 +1,17 @@
+---
+import { reviewChrome } from '../lib/config';
+import { verifiedEntryPolicies, verifiedFlightRoutes } from '../lib/facts';
+
+export interface Props {
+  /** 区块的内容完全来自事实记录：没有任何可发布记录时整块不出现（审阅外壳仍显示）。 */
+  need: 'flights' | 'entry';
+  /** need=entry 时限定国籍槽位。 */
+  nationalitySlots?: string[];
+}
+
+const { need, nationalitySlots = [] } = Astro.props;
+const ready =
+  need === 'flights' ? verifiedFlightRoutes().length > 0 : verifiedEntryPolicies(nationalitySlots).length > 0;
+---
+
+{reviewChrome || ready ? <slot /> : null}

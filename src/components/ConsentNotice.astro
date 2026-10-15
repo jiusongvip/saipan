@@ -1,0 +1,40 @@
+---
+import type { LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { ga4MeasurementId } from '../lib/config';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+// 未配置 GA4 时不需要征求同意：没有追踪就不打扰访客。
+---
+
+{ga4MeasurementId && (
+  <aside class="consent" data-consent hidden>
+    <h2 class="consent__title">{t(lang, 'consent.title')}</h2>
+    <p class="consent__body">{t(lang, 'consent.body')}</p>
+    <div class="consent__actions">
+      <button type="button" class="btn btn--primary" data-consent-choice="granted">{t(lang, 'consent.accept')}</button>
+      <button type="button" class="btn btn--secondary" data-consent-choice="denied">{t(lang, 'consent.decline')}</button>
+    </div>
+  </aside>
+)}
+
+<script>
+  import { consentState, setConsent } from '../lib/analytics';
+
+  const banner = document.querySelector<HTMLElement>('[data-consent]');
+  const state = consentState();
+  if (banner && state === 'unset') {
+    banner.hidden = false;
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent-choice]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const choice = button.dataset.consentChoice === 'granted' ? 'granted' : 'denied';
+        setConsent(choice);
+        banner.hidden = true;
+      });
+    });
+  }
+</script>

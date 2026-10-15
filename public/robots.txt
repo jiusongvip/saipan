@@ -1,0 +1,8 @@
+# 唯一主域 saipanivf.org（开发文档 7.2、7.3）。
+# 草稿与审核中的页面不会进入生产构建，因此无需 Disallow。
+# 上线后由 P2 在此追加旧域 saipan-ivf.com 的逐页 301（见 docs/seo/redirect-map.csv，映射待旧站 URL 导出）。
+
+User-agent: *
+Allow: /
+
+Sitemap: https://saipanivf.org/sitemap-index.xml

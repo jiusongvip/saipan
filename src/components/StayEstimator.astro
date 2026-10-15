@@ -1,0 +1,66 @@
+---
+import { loadAllPages } from '../lib/content';
+import { programStayOption } from '../lib/facts';
+import { reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+
+export interface Props {
+  lang: LangCode;
+}
+
+const { lang } = Astro.props;
+
+interface StayRow {
+  title: string;
+  path: string;
+  stay_days: string | null;
+}
+
+// 工具层（对标优化轮 4）：下拉列出本语言全部方案；停留天数只在院方书面确认且在复核周期内时显示，
+// 未确认的方案显示「尚未公布」，选择器始终可用，数据随院方确认自动填入。
+const pages = await loadAllPages();
+const options: StayRow[] = pages
+  .filter((page) => page.lang === lang && page.template === 'program' && Boolean(page.program_slug))
+  .map((page) => {
+    const stay = programStayOption(page.program_slug as string);
+    return {
+      title: page.title,
+      path: page.path,
+      stay_days: stay?.stay_days ?? null,
+    };
+  })
+  .filter((row) => row.title)
+  .sort((a, b) => a.path.localeCompare(b.path));
+---
+
+{options.length > 0 ? (
+  <div class="stay-estimator" data-stay-estimator data-stay-unpublished={t(lang, 'tools.stay_unpublished')}>
+    <label class="stay-estimator__label" for="stay-program-select">{t(lang, 'tools.stay_select')}</label>
+    <select id="stay-program-select" class="stay-estimator__select">
+      {options.map((option) => (
+        <option value={option.path} data-stay-days={option.stay_days ?? ''}>{option.title}</option>
+      ))}
+    </select>
+    <p class="stay-estimator__result">
+      <strong>{t(lang, 'tools.stay_result')}：</strong><span data-stay-result></span>
+    </p>
+  </div>
+  <script>
+    const container = document.querySelector<HTMLElement>('[data-stay-estimator]');
+    const select = container?.querySelector<HTMLSelectElement>('select');
+    const result = document.querySelector<HTMLElement>('[data-stay-result]');
+    if (container && select && result) {
+      const unpublished = container.dataset.stayUnpublished ?? '';
+      const update = () => {
+        const chosen = select.options[select.selectedIndex];
+        result.textContent = chosen?.dataset.stayDays || unpublished;
+      };
+      select.addEventListener('change', update);
+      update();
+    }
+  </script>
+) : reviewChrome ? (
+  <p class="pending-slot">
+    <code>stay-estimator</code>: {t(lang, 'common.pending_fact')}
+  </p>
+) : null}

@@ -1,0 +1,269 @@
+---
+import { contactApiAllowedHosts, contactApiUrl, isProductionBuild, reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { PROGRAM_VALUES, TIMELINE_VALUES, VISA_VALUES, resolveEndpoint } from '../lib/forms';
+import { buildVisible, loadAllPages } from '../lib/content';
+import { plannedChannelTypes, usableChannels } from '../lib/facts';
+
+export interface Props {
+  lang: LangCode;
+  pageType: string;
+  pagePath: string;
+  ctaLabel?: string;
+  variant?: 'consultation' | 'donor';
+  title?: string;
+}
+
+const { lang, pageType, pagePath, ctaLabel = '', variant = 'consultation' } = Astro.props;
+const title = Astro.props.title ?? t(lang, 'form.title');
+
+const pages = buildVisible(await loadAllPages());
+const successPath = pages.find((page) => page.lang === lang && page.translation_key === 'contact_success')?.path ?? null;
+
+const liveChannels = usableChannels(lang, variant === 'donor' ? 'donor' : 'patient');
+const channelOptions = (
+  liveChannels.length > 0
+    ? liveChannels.map((channel) => channel.channel_type)
+    : plannedChannelTypes(lang, variant === 'donor' ? 'donor' : 'patient').map((channel) => channel.channel_type)
+) as string[];
+const channelsConfirmed = liveChannels.length > 0;
+// 端点先过 https + host 白名单校验（6.2）：白名单为空（ADR-002 未确认）时拒绝一切接口。
+const endpoint = resolveEndpoint(contactApiUrl, contactApiAllowedHosts);
+const formDisabled = isProductionBuild && (!endpoint || channelOptions.length === 0);
+const formId = variant === 'donor' ? 'donor-form' : 'consult';
+---
+
+<section class="section section--alt" id={formId} aria-labelledby={`${formId}-title`}>
+  <div class="container container--narrow">
+    <div class="section__head">
+      <h2 id={`${formId}-title`}>{title}</h2>
+      <p>{t(lang, 'form.subtitle')}</p>
+    </div>
+
+    {formDisabled ? (
+      <p class="banner banner--info" role="status">{t(lang, 'form.no_api')}</p>
+    ) : (
+      <!-- method=post 是「JS 未接管」时的兜底：默认 GET 会把表单内容写进 URL、浏览历史与 Referer（文档 6.2） -->
+      <form
+        class="form"
+        id={`${formId}-element`}
+        method="post"
+        novalidate
+        data-endpoint={endpoint ?? ''}
+        data-lang={lang}
+        data-page-type={pageType}
+        data-page-path={pagePath}
+        data-cta-label={ctaLabel}
+        data-form-variant={variant}
+        data-success-path={successPath ?? ''}
+        data-error-required={t(lang, 'form.error_required')}
+        data-error-length={t(lang, 'form.error_length')}
+        data-error-network={t(lang, 'form.error_network')}
+        data-error-not-connected={t(lang, 'form.no_api')}
+        data-label-sending={t(lang, 'form.sending')}
+        data-label-success={t(lang, 'form.success_title')}
+        data-label-retry={t(lang, 'form.submit')}
+      >
+        <div class="hp-field" aria-hidden="true">
+          <label for={`${formId}-company`}>Company</label>
+          <input id={`${formId}-company`} name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={`${formId}-salutation`}>
+              {t(lang, 'form.name')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <input class="input" id={`${formId}-salutation`} name="salutation" type="text" required maxlength="60" autocomplete="name" placeholder={t(lang, 'form.name_ph')} />
+          </div>
+          <div class="field">
+            <label class="field__label" for={`${formId}-channel`}>
+              {t(lang, 'form.channel')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <select class="select" id={`${formId}-channel`} name="channel" required>
+              {channelOptions.map((value) => <option value={value}>{t(lang, `channel.${value}`)}</option>)}
+            </select>
+            {reviewChrome && !channelsConfirmed && <span class="field__hint">{t(lang, 'common.pending_fact')}</span>}
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={`${formId}-contact-account`}>
+              {t(lang, 'form.contact_account')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <input class="input" id={`${formId}-contact-account`} name="contact_account" type="text" required maxlength="160" />
+            <span class="field__hint">{t(lang, 'form.contact_account_ph')}</span>
+          </div>
+          <div class="field">
+            <label class="field__label" for={`${formId}-country`}>
+              {t(lang, 'form.country')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <input class="input" id={`${formId}-country`} name="country" type="text" required maxlength="80" autocomplete="country-name" />
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={`${formId}-age`}>
+              {t(lang, 'form.age')} <span class="field__hint">{t(lang, 'form.optional')}</span>
+            </label>
+            <input class="input" id={`${formId}-age`} name="age" type="number" min="18" max="75" inputmode="numeric" />
+            <span class="field__hint">{t(lang, 'form.age_hint')}</span>
+          </div>
+          <div class="field">
+            <label class="field__label" for={`${formId}-program`}>
+              {t(lang, 'form.program')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <select class="select" id={`${formId}-program`} name="program" required>
+              {PROGRAM_VALUES.map((value) => <option value={value}>{t(lang, `program.${value}`)}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {lang === 'zh-hans' && (
+          <div class="field">
+            <label class="field__label" for={`${formId}-us-visa`}>{t(lang, 'form.visa_status')}</label>
+            <select class="select" id={`${formId}-us-visa`} name="us_visa_status">
+              {VISA_VALUES.map((value) => <option value={value}>{t(lang, `visa.${value}`)}</option>)}
+            </select>
+          </div>
+        )}
+
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for={`${formId}-timeline`}>
+              {t(lang, 'form.timeline')} <span class="field__hint">{t(lang, 'form.required')}</span>
+            </label>
+            <select class="select" id={`${formId}-timeline`} name="timeline" required>
+              {TIMELINE_VALUES.map((value) => <option value={value}>{t(lang, `timeline.${value}`)}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label class="field__label" for={`${formId}-preferred-time`}>{t(lang, 'form.preferred_time')}</label>
+            <input class="input" id={`${formId}-preferred-time`} name="preferred_time" type="text" maxlength="60" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for={`${formId}-past-treatment`}>{t(lang, 'form.past_treatment')}</label>
+          <textarea class="textarea" id={`${formId}-past-treatment`} name="past_treatment" maxlength="400"></textarea>
+          <span class="field__hint">{t(lang, 'form.past_treatment_hint')}</span>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for={`${formId}-message`}>{t(lang, 'form.message')}</label>
+          <textarea class="textarea" id={`${formId}-message`} name="message" maxlength="1000"></textarea>
+          <span class="field__hint">{t(lang, 'form.message_hint')}</span>
+        </div>
+
+        <label class="checkbox" for={`${formId}-consent`}>
+          <input id={`${formId}-consent`} name="privacy_consent" type="checkbox" required />
+          <span>{t(lang, 'form.consent')}</span>
+        </label>
+
+        <p class="form__notice" data-form-status role="status" aria-live="polite"></p>
+
+        <button class="btn btn--primary btn--block" type="submit" data-form-submit>
+          <span data-form-submit-label>{t(lang, 'form.submit')}</span>
+        </button>
+      </form>
+    )}
+  </div>
+</section>
+
+<script>
+  import { track } from '../lib/analytics';
+  import { buildPayload } from '../lib/forms';
+  import { isBot, validate } from '../lib/validation';
+
+  const form = document.querySelector<HTMLFormElement>('form.form[data-form-variant]');
+
+  if (form) {
+    const lang = (form.dataset.lang ?? 'en') as 'zh-hant' | 'zh-hans' | 'en';
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const submitButton = form.querySelector<HTMLButtonElement>('[data-form-submit]')!;
+    const submitLabel = form.querySelector<HTMLElement>('[data-form-submit-label]')!;
+    const messages = {
+      required: form.dataset.errorRequired ?? 'Required fields are missing.',
+      length: form.dataset.errorLength ?? 'Entry too long.',
+      network: form.dataset.errorNetwork ?? 'Could not send.',
+      sending: form.dataset.labelSending ?? 'Sending...',
+      success: form.dataset.labelSuccess ?? 'Received.',
+      retry: form.dataset.labelRetry ?? 'Send again',
+      notConnected: form.dataset.errorNotConnected ?? 'We could not take your submission just now. Please try again later.',
+    };
+    const startedAt = performance.now();
+    let formStartSent = false;
+    let succeeded = false;
+
+    const collect = (): Record<string, string | boolean> => {
+      const data: Record<string, string | boolean> = {};
+      new FormData(form!).forEach((value, key) => {
+        if (key !== 'company') data[key] = String(value);
+      });
+      data.privacy_consent = form!.querySelector<HTMLInputElement>('[name=privacy_consent]')!.checked;
+      return data;
+    };
+
+    form.addEventListener('focusin', () => {
+      if (succeeded || formStartSent) return;
+      formStartSent = true;
+      track('form_start', { lang, page_type: form.dataset.pageType, page_path: form.dataset.pagePath });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const current = collect();
+      const errors = validate(current, { lang });
+      if (Object.keys(errors).length > 0) {
+        const codes = Object.values(errors);
+        status.textContent = codes.every((code) => code === 'form.error_length') ? messages.length : messages.required;
+        track('form_submit_error', { lang, page_type: form.dataset.pageType, page_path: form.dataset.pagePath, cta_id: 'validation' });
+        return;
+      }
+      if (isBot(form!.querySelector<HTMLInputElement>('[name=company]')?.value, performance.now() - startedAt)) {
+        status.textContent = messages.network;
+        return;
+      }
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        status.textContent = messages.notConnected;
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitLabel.textContent = messages.sending;
+      const payload = buildPayload(current, {
+        lang,
+        pageType: form.dataset.pageType ?? 'generic',
+        pagePath: form.dataset.pagePath ?? window.location.pathname,
+        ctaLabel: form.dataset.ctaLabel,
+        variant: (form.dataset.formVariant as 'consultation' | 'donor') ?? 'consultation',
+      });
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        succeeded = true;
+        track('form_submit_success', { lang, page_type: String(payload.page_type), page_path: String(payload.page_path) });
+        const successPath = form.dataset.successPath;
+        if (successPath) {
+          window.location.assign(successPath);
+          return;
+        }
+        form.hidden = true;
+        status.textContent = messages.success;
+      } catch {
+        track('form_submit_error', { lang, page_type: form.dataset.pageType, page_path: form.dataset.pagePath, cta_id: 'network' });
+        submitButton.disabled = false;
+        submitLabel.textContent = messages.retry;
+        status.textContent = messages.network;
+      }
+    });
+  }
+</script>

@@ -1,0 +1,93 @@
+---
+lang: en
+path: /en/entry-path
+translation_key: entry_path
+title: Getting to Saipan | Entry permission and stay length
+description: Entry permission, electronic authorization, stay length, return-ticket conditions and transit notes, with the official source and check date behind each row.
+template: entry_path
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - permit_table
+  - authorization
+  - ticket_requirements
+  - region_access
+  - transit
+  - official_sources
+primary_cta: request_itinerary
+secondary_cta: assess_program
+noindex: true
+nationality_slots:
+  - nationality-tw
+  - nationality-hk
+  - nationality-cn
+  - nationality-jp
+  - nationality-kr
+  - nationality-ph
+hero:
+  eyebrow: Entry and stay
+  lede: Saipan is part of the Northern Mariana Islands, and the permission you use depends on the passport you hold. This page answers the four questions that decide your itinerary.
+  trust_items: []
+  image: null
+---
+
+import EntryPolicyTable from '../../src/components/EntryPolicyTable.astro';
+import FactGate from '../../src/components/FactGate.astro';
+import ReviewOnly from '../../src/components/ReviewOnly.astro';
+
+<FactGate need="entry" nationalitySlots={['nationality-tw', 'nationality-hk', 'nationality-cn', 'nationality-jp', 'nationality-kr', 'nationality-ph']}>
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Entry conditions, question by question</h2>
+        <p>Whether you can enter directly, how long you may stay, whether a return ticket must be booked in advance, and whether you can then travel to the US mainland — each row carries the official source and the date it was last checked.</p>
+      </div>
+      <EntryPolicyTable
+        lang="en"
+        nationalitySlots={['nationality-tw', 'nationality-hk', 'nationality-cn', 'nationality-jp', 'nationality-kr', 'nationality-ph']}
+      />
+      <p class="source-note">Entry rules change. Official government pages remain authoritative; this page shows the source and check date for every row so you can confirm the current wording.</p>
+    </div>
+  </section>
+</FactGate>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>How your own conditions get settled</h2>
+      <p>Entry permission depends on the passport you hold and the dates you travel, so it is answered per case rather than as one blanket rule for all visitors.</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>1. You tell us the passport and the window</h3>
+        <p>Send the nationality on your passport and the dates you expect to be on island, in the inquiry form or the channel you chose.</p>
+      </li>
+      <li>
+        <h3>2. We answer from the government page that governs it</h3>
+        <p>Each condition is read from the official source for that passport, not from an agent's summary, and we keep the page name and the date we read it.</p>
+      </li>
+      <li>
+        <h3>3. A legal reviewer signs the wording</h3>
+        <p>Before a condition is written to you or published here, a named reviewer checks the wording and records when it was checked.</p>
+      </li>
+      <li>
+        <h3>4. The same source is read again before you fly</h3>
+        <p>Rules can change between booking and departure, so the source is checked again close to your travel date and anything that changed is sent to you.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>Transit and connections</h2>
+      <p>Whether you connect, where, and how long the gap is depends on the flights operating on your travel dates. Once dates are fixed, baggage and boarding-document arrangements are checked leg by leg.</p>
+    </div>
+    <ReviewOnly>Transit notes are generated from verified flight and entry records; see docs/compliance/fact-register.csv for the evidence still outstanding.</ReviewOnly>
+  </div>
+</section>

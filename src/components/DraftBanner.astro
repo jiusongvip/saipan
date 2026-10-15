@@ -1,0 +1,33 @@
+---
+import { enabledLanguages, reviewChrome, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import type { PageStatus } from '../lib/content';
+
+export interface Props {
+  status: PageStatus;
+  blockedReason?: string | null;
+  lang: LangCode;
+}
+
+const { status, blockedReason = null, lang } = Astro.props;
+
+const BANNER_KEY: Partial<Record<PageStatus, string>> = {
+  draft: 'draft.banner_draft',
+  review: 'draft.banner_review',
+  approved: 'draft.banner_approved',
+};
+
+const labelKey = BANNER_KEY[status];
+const availableLangs = enabledLanguages.filter((entry) => entry.enabled);
+---
+
+{reviewChrome && labelKey && (
+  <div class="container draft-banner">
+    <p class="banner" role="status">
+      <strong>{status.toUpperCase()}</strong>
+      <span>{t(lang, labelKey)}</span>
+      {blockedReason && <span>· {blockedReason}</span>}
+      <span>· {availableLangs.map((entry) => entry.native_label).join(' / ')}</span>
+    </p>
+  </div>
+)}

@@ -1,0 +1,66 @@
+---
+lang: zh-hant
+path: /zh-hant/pricing
+translation_key: pricing
+title: 費用區間與包含項目
+description: 方案費用的構成方式、包含與不包含項目、可能的附加項目、非醫療開支、支付方式、取消與改期規則，以及幣種與適用期間說明。
+template: pricing
+status: draft
+owner: content-team
+reviewed_by: []
+reviewed_at: null
+last_verified: null
+fact_sources: []
+required_sections:
+  - price_ranges
+  - included_excluded
+  - add_ons
+  - non_medical
+  - payment
+  - refund_policy
+  - currency_validity
+primary_cta: request_price_guide
+secondary_cta: assess_program
+noindex: true
+hero:
+  eyebrow: 費用構成
+  lede: 整體開支由三部分構成：醫療服務、週期中可能發生的附加項目，以及赴塞班的非醫療費用。本頁說明各部分包含什麼、何時才會確定，以及報價應具備哪些可核對資訊。
+  trust_items: []
+  image: null
+---
+
+import FactSlot from '../../src/components/FactSlot.astro';
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>公開價格區間</h2>
+    <p>區間數字會同時標示幣種、適用期間與最後核對日期，方便您比對來源與時效。</p>
+    <FactSlot lang="zh-hant" slot="price_ranges" />
+
+    <h2>包含與不包含</h2>
+    <p>同一方案的費用可能因週期反應而不同：是否需要附加技術、用藥劑量與監測次數，都會改變包含範圍。個人報價逐項列出。</p>
+    <FactSlot lang="zh-hant" slot="included_excluded" />
+
+    <h2>可能的附加項目</h2>
+    <p>附加項目是否進入本週期，取決於醫師評估與當次反應；本節列出可能發生的項目與各自的計費方式。</p>
+    <FactSlot lang="zh-hant" slot="add_ons" />
+
+    <h2>住宿、翻譯與接送</h2>
+    <p>非醫療開支不計入醫療報價，卻直接影響整體預算。本節說明這些開支的估算方式，以及由誰協助安排。</p>
+    <FactSlot lang="zh-hant" slot="non_medical" />
+
+    <h2>支付方式</h2>
+    <p>可接受的支付方式、分期安排與收據形式會影響資金規劃，建議在確認日程前先核對這些條件。</p>
+    <FactSlot lang="zh-hant" slot="payment" />
+
+    <h2>取消、改期與退款</h2>
+    <p>跨國就醫的改期常與簽證效期、機位與週期時間相連。本節說明通知期限、費用處理方式與退款條件。</p>
+    <FactSlot lang="zh-hant" slot="refund_policy" />
+
+    <h2>幣種、適用期間與最後核對日期</h2>
+    <p>每筆金額都隨幣種、適用期間與核對日期一併標示；三者缺一時不作為報價依據。</p>
+    <FactSlot lang="zh-hant" slot="currency_validity" />
+
+    <p class="source-note">最終費用由醫療團隊依評估結果逐項提出，並附包含範圍與有效期間。</p>
+  </div>
+</section>

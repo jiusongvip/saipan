@@ -1,0 +1,40 @@
+---
+import { enabledLanguages, type LangCode } from '../lib/config';
+import { t } from '../lib/i18n';
+import { buildVisible, groupByTranslationKey, languageHomeIfBuilt, loadAllPages } from '../lib/content';
+import { switcherTargets } from '../lib/seo';
+
+export interface Props {
+  lang: LangCode;
+  currentPath: string;
+  translationKey?: string | null;
+}
+
+const { lang, currentPath, translationKey = null } = Astro.props;
+const pages = buildVisible(await loadAllPages());
+const group = translationKey ? (groupByTranslationKey(pages).get(translationKey) ?? []) : [];
+// 只列本次构建里真实有页的启用语言：生产内容核准前一页都没有，切换器就不该留下断链。
+const targets = switcherTargets({ lang, path: currentPath }, group, enabledLanguages.map((entry) => entry.code), (code) =>
+  languageHomeIfBuilt(pages, code),
+);
+const available = enabledLanguages.filter((entry) => entry.code !== lang && targets.some((item) => item.lang === entry.code));
+---
+
+<details class="lang-switcher">
+  <summary class="lang-switcher__summary">
+    <span class="visually-hidden">{t(lang, 'common.language')}</span>
+    <span>{enabledLanguages.find((entry) => entry.code === lang)?.native_label ?? lang}</span>
+  </summary>
+  <ul class="lang-switcher__list">
+    {available.map((entry) => {
+      const target = targets.find((item) => item.lang === entry.code)!;
+      return (
+        <li>
+          <a href={target.path} hreflang={entry.hreflang} lang={entry.code}>
+            {entry.native_label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</details>
