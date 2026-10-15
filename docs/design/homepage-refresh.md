@@ -83,3 +83,9 @@ Validation: TypeScript and all 60 existing tests passed. Demo build produced 50 
 Added PricingPage to existing en/zh-hant pricing routes and the Simplified Chinese cost-breakdown guide. Shared editorial styling includes a consultation-image hero, four photographic budget categories, service-scope questions, included/separately-charged verification table and native FAQs. Added a browser-local consultation brief builder with need, travel-party and accommodation selections; changes immediately update the visible brief, with copy-to-clipboard and an honest fallback message. No quotation amount or unverified package inclusion is invented. Existing MDX detail stays available in disclosure, retaining metadata/publication/form gates.
 
 Preview now supports Home, Destination and Costs in all three languages. TypeScript, 60 existing tests, 50-page demo build, 1,443 links and generated-site audit passed. Browser visual and clipboard interaction QA remain unverified due to unavailable supported browser capability.
+
+## Repair offline preview navigation
+
+Root cause: the original preview embedded only nine selected page/language combinations and did not route absolute internal links from its srcdoc iframe. Replaced the bundler with all 50 generated HTML pages, gzip-compressed into one file, offline assets/scripts, internal-link routing, fragment scrolling with enclosing disclosure opening, a page selector, language switching and a back stack. Fixed cross-frame DOM detection by using closest capability rather than the parent window's Element constructor. Preview banner distinguishes page navigation from unconnected real contact submission.
+
+Verification: all 1,196 bundled internal page links and target fragments resolve. A Node DOM harness verified unpacking all 50 pages, an actual iframe click-handler transition to IVF, back navigation and a language switch to English. Browser visual/interaction QA remains unavailable.
