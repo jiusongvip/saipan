@@ -1,0 +1,44 @@
+---
+import type {LangCode} from '../lib/config';
+import {buildVisiblePaths,loadAllPages} from '../lib/content';
+const {lang}=Astro.props as {lang:LangCode};
+const en=lang==='en',tw=lang==='zh-hant';
+const built=buildVisiblePaths(await loadAllPages());
+const route=(...slugs:string[])=>slugs.map(s=>`/${lang}/${s}`).find(p=>built.has(p))??'#consult';
+const c=en?{
+ tools:'Plan before you fly.',quick:['Explore your budget','Check entry requirements','Prepare birth documents','Plan flights & stay'],notes:['Know what to include','Start with your passport','Know which questions to ask','Build around your appointments'],
+ life:'Care is only part of the journey.',lifeText:'Make room for comfortable stays, everyday meals and time to unwind.',gallery:['Rest well','Slow down','Eat well'],galleryText:['A quiet room, a little space of your own.','Between appointments, take a breath.','Ask about meals that fit your routine.'],demo:'Lifestyle inspiration · illustrative photos',
+ plan:'Your trip. Your checklist.',planText:'Choose your priorities and get a preparation list.',profile:'Your main focus',profiles:['Fertility treatment','Birth & family planning','Still exploring'],stay:'Accommodation preference',stays:['Practical & simple','Extra comfort','Travel with family'],button:'Build my checklist',result:'Your preparation list',next:'Discuss my plan',base:['Request an itemized medical quote','Check medication, tests and optional costs','Plan flights, accommodation and local transport'],treatment:'Confirm appointments and any pre-travel tests with your doctor.',birth:'Ask a qualified adviser about eligibility, registration and travel documents.',explore:'Start with an initial consultation and compare the available paths.',simple:'Confirm essentials: location, transport and cancellation terms.',comfort:'Compare room space, privacy and practical support.',family:'Confirm companion costs, room capacity and family needs.',
+ faq:'Questions worth asking.',questions:['What should my total budget include?','Can accommodation fit around treatment?','Which documents should I prepare?','Where can I find patient stories?'],answers:['Medical care, medication and tests; flights, rooms, meals and local transport. Ask for included items, exclusions and cancellation terms in writing.','Confirm treatment dates first, then ask about location, transport, accompanying family and changes to your stay.','Start with your passport and relevant medical records. Entry, birth registration and travel documents depend on your circumstances.','Ask the team for consented, verifiable patient accounts relevant to your needs. Stock photographs on this page are illustrations, not patient testimonials.'],read:'Read the guide'
+}:tw?{
+ tools:'出發之前 一鍵了解',quick:['費用怎麼算','入境怎麼走','寶寶證件','航班與停留'],notes:['先看構成 再做預算','從您的護照開始','身份與材料提前問清','行程圍繞就診安排'],
+ life:'來塞班 不只為了就診',lifeText:'住得舒心，吃得合適，讓每一天都從容一點。',gallery:['住得舒心','慢享海島','照顧日常'],galleryText:['安靜的房間，留給自己的一方空間。','就診之外，也有放鬆的時光。','餐食與生活需求，出發前一起問清。'],demo:'旅居靈感 · 場景配圖，非合作住宿實拍',
+ plan:'您的行程 您的準備清單',planText:'選兩項，先把要問的事整理好。',profile:'這次最想了解',profiles:['輔助生殖治療','生育與身份規劃','先了解，再決定'],stay:'住宿偏好',stays:['實用簡約','舒適私密','家人陪同'],button:'生成我的準備清單',result:'您的行前準備',next:'帶著清單去諮詢',base:['索取醫療項目分項報價','確認藥物、檢測與額外費用','計入機票、住宿與當地交通'],treatment:'向醫生確認就診節奏與出發前檢查。',birth:'向具備資格的專業人士確認國籍資格、出生登記與返程證件。',explore:'先做初步溝通，對比可選路徑。',simple:'問清住宿位置、交通與取消條件。',comfort:'對比房間空間、私密性與生活支持。',family:'確認陪同費用、入住人數與家人需求。',
+ faq:'您關心的 這裡先答',questions:['去一趟塞班，預算要算哪些？','住宿可以跟著治療時間安排嗎？','出發與寶寶出生，要準備什麼證件？','想看真實經歷，去哪裡了解？'],answers:['醫療、藥物與檢測，機票、住宿、餐食及交通都要計入。要求分項報價，寫清包含項、不含項與取消規則。','先確認診療日程，再問清住宿位置、交通、陪同家人與延期安排。','先整理護照與相關病歷。入境、出生登記與返程證件的要求，需依您的具體情況確認。','可向團隊索取已獲授權、可核驗的相關經歷。本頁配圖為場景示意，不作患者案例。'],read:'查看詳細指南'
+}:{
+ tools:'出发之前 一键了解',quick:['费用怎么算','入境怎么走','宝宝证件','航班与停留'],notes:['先看构成 再做预算','从您的护照开始','身份与材料提前问清','行程围绕就诊安排'],
+ life:'来塞班 不只为了就诊',lifeText:'住得舒心，吃得合适，让每一天都从容一点。',gallery:['住得舒心','慢享海岛','照顾日常'],galleryText:['安静的房间，留给自己的一方空间。','就诊之外，也有放松的时光。','餐食与生活需求，出发前一起问清。'],demo:'旅居灵感 · 场景配图，非合作住宿实拍',
+ plan:'您的行程 您的准备清单',planText:'选两项，先把要问的事整理好。',profile:'这次最想了解',profiles:['辅助生殖治疗','生育与身份规划','先了解，再决定'],stay:'住宿偏好',stays:['实用简约','舒适私密','家人陪同'],button:'生成我的准备清单',result:'您的行前准备',next:'带着清单去咨询',base:['索取医疗项目分项报价','确认药物、检测与额外费用','计入机票、住宿与当地交通'],treatment:'向医生确认就诊节奏与出发前检查。',birth:'向具备资格的专业人士确认国籍资格、出生登记与返程证件。',explore:'先做初步沟通，对比可选路径。',simple:'问清住宿位置、交通与取消条件。',comfort:'对比房间空间、私密性与生活支持。',family:'确认陪同费用、入住人数与家人需求。',
+ faq:'您关心的 这里先答',questions:['去一趟塞班，预算要算哪些？','住宿可以跟着治疗时间安排吗？','出发与宝宝出生，要准备什么证件？','想看真实经历，去哪里了解？'],answers:['医疗、药物与检测，机票、住宿、餐食及交通都要计入。要求分项报价，写清包含项、不含项与取消规则。','先确认诊疗日程，再问清住宿位置、交通、陪同家人与延期安排。','先整理护照与相关病历。入境、出生登记与返程证件的要求，需依您的具体情况确认。','可向团队索取已获授权、可核验的相关经历。本页配图为场景示意，不作患者案例。'],read:'查看详细指南'
+};
+const links=[route('pricing','articles/price-ranges-and-addon-items'),route('entry-path'),route('legal/parenthood-and-birth-registration','articles/us-born-baby-advantages'),route('articles/flights-to-saipan-routes','entry-path')];
+---
+<section class="hd-quick container"><p class="eh-kicker">THE ESSENTIALS</p><h2>{c.tools}</h2><div>{c.quick.map((text,i)=><a href={links[i]}><span>0{i+1}</span><h3>{text}</h3><p>{c.notes[i]}</p><b aria-hidden="true">↗</b></a>)}</div></section>
+<section class="hd-life"><div class="container"><p class="eh-kicker">LIFE BETWEEN APPOINTMENTS</p><h2>{c.life}</h2><p class="hd-lede">{c.lifeText}</p><div class="hd-life__gallery">{c.gallery.map((title,i)=><figure><img src={['/images/stay-room.jpg','/images/island-pool.jpg','/images/daily-meals.jpg'][i]} alt={title} width="1200" height="800" loading="lazy"/><figcaption><h3>{title}</h3><p>{c.galleryText[i]}</p></figcaption></figure>)}</div><p class="hd-note">{c.demo}</p></div></section>
+<section class="hd-planner container" data-trip-planner data-treatment={c.treatment} data-birth={c.birth} data-explore={c.explore} data-simple={c.simple} data-comfort={c.comfort} data-family={c.family}>
+<div><p class="eh-kicker">MAKE IT PERSONAL</p><h2>{c.plan}</h2><p class="hd-lede">{c.planText}</p><div class="hd-planner__fields"><label>{c.profile}<select data-trip-focus>{c.profiles.map((label,i)=><option value={i}>{label}</option>)}</select></label><label>{c.stay}<select data-trip-stay>{c.stays.map((label,i)=><option value={i}>{label}</option>)}</select></label></div><button type="button" class="eh-button eh-button--dark" data-trip-generate>{c.button}<span>↗</span></button></div><div class="hd-checklist" aria-live="polite"><p class="eh-kicker">YOUR CHECKLIST</p><h3>{c.result}</h3><ul>{c.base.map(text=><li>{text}</li>)}<li data-trip-focus-result>{c.treatment}</li><li data-trip-stay-result>{c.simple}</li></ul><a class="eh-link" href="#consult">{c.next}<span>↗</span></a></div>
+</section>
+<section class="hd-faq container"><div><p class="eh-kicker">GOOD QUESTIONS. CLEAR ANSWERS.</p><h2>{c.faq}</h2></div><div>{c.questions.map((q,i)=><details><summary>{q}</summary><p>{c.answers[i]}</p>{i<3&&<a class="eh-link" href={links[[0,3,2][i]]}>{c.read}<span>↗</span></a>}</details>)}</div></section>
+<script>
+ document.querySelectorAll<HTMLElement>('[data-trip-planner]').forEach(planner=>{
+ planner.querySelector('[data-trip-generate]')?.addEventListener('click',()=>{
+ const focus=Number(planner.querySelector<HTMLSelectElement>('[data-trip-focus]')?.value??0);
+ const stay=Number(planner.querySelector<HTMLSelectElement>('[data-trip-stay]')?.value??0);
+ const focusResult=planner.querySelector<HTMLElement>('[data-trip-focus-result]');
+ const stayResult=planner.querySelector<HTMLElement>('[data-trip-stay-result]');
+ if(focusResult)focusResult.textContent=[planner.dataset.treatment,planner.dataset.birth,planner.dataset.explore][focus]??'';
+ if(stayResult)stayResult.textContent=[planner.dataset.simple,planner.dataset.comfort,planner.dataset.family][stay]??'';
+ planner.querySelector<HTMLElement>('.hd-checklist')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'nearest'});
+ });
+ });
+</script>

@@ -50,3 +50,14 @@ Replaced the thin right-side entry with an immediately visible consultation card
 ## Concise promotional copy
 
 Shortened the Chinese headlines to four direct themes: 海岛度假 / 安心求子; 专业医疗 / 温暖相伴; 塞班出生 / 美国公民？; 飞向塞班 / 好孕启程. Citizenship remains phrased as a visitor question, with qualification in the accompanying caption. Updated related section headings and consultation invitation to more direct marketing language, with Traditional Chinese and English counterparts. No success guarantee or unconditional nationality promise added.
+
+## Reference-inspired discovery modules
+
+Reviewed https://globalbaby8.com/ for content organization. Added four quick links for budgets, entry, birth documents and flights; a staggered lifestyle gallery; a local, no-data-collection preparation checklist with treatment/birth/exploration and accommodation preferences; and native FAQ disclosures linked to existing detailed guides. Replaced the older three-link resource section to limit repetition. All three homepage languages supported. Stock photographs are explicitly labeled illustrative; no property affiliation, prices, patient cases or current eligibility assertions are invented.
+
+Additional illustrative image sources:
+- stay-room.jpg: https://images.unsplash.com/photo-1611892440504-42a792e24d32
+- island-pool.jpg: https://images.unsplash.com/photo-1540541338287-41700207dee6
+- daily-meals.jpg: https://images.unsplash.com/photo-1498837167922-ddd27525d352
+
+Verification: TypeScript, 50-page build, 1,013 internal links and generated-site audit passed. Browser visual/interaction QA remains unavailable.
