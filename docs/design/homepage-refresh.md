@@ -65,3 +65,7 @@ Verification: TypeScript, 50-page build, 1,013 internal links and generated-site
 ## Six primary navigation groups
 
 Grouped visible content into Why Saipan, Programs, Medical care, Costs & services, Travel guide and Birth & documents. Article links have short localized labels; hidden/unbuilt pages stay excluded. Birth/document navigation falls back to the localized homepage FAQ anchor if no dedicated guide exists. Corrected the misleading Simplified Chinese labels, localized online consultation CTA, added dropdown indicators, single-open menus, outside-click/Escape dismissal and responsive wrapping. TypeScript, 60 existing tests, demo build and link audit passed before final fallback adjustment; final build/link check also passed. GitHub branch creation continues to fail with integration 403.
+
+## Four-second hero
+
+Changed automatic advancement to 4,000 ms. Pointer hover no longer stops rotation, so a cursor resting on the hero does not make autoplay appear broken. Explicit pause, keyboard focus, reduced-motion, hidden-tab and offscreen handling remain unchanged.

@@ -76,11 +76,11 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
   const status=hero.querySelector<HTMLElement>('[data-hero-status]');
   const pauseButton=hero.querySelector<HTMLButtonElement>('[data-hero-pause]');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let active=0, paused=reduced.matches, hovered=false, visible=true;
+  let active=0, paused=reduced.matches, visible=true;
   let timer:ReturnType<typeof setInterval>|undefined;
   function syncTimer(){
    clearInterval(timer);
-   if(!paused&&!hovered&&visible&&!document.hidden&&!hero.contains(document.activeElement))timer=setInterval(()=>show(active+1,false),6500);
+   if(!paused&&visible&&!document.hidden&&!hero.contains(document.activeElement))timer=setInterval(()=>show(active+1,false),4000);
   }
   function show(index:number,manual=true){
    active=(index+images.length)%images.length;
@@ -96,8 +96,6 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
   tabs.forEach((tab,i)=>tab.addEventListener('click',()=>show(i)));
   hero.querySelector('[data-hero-prev]')?.addEventListener('click',()=>show(active-1));
   hero.querySelector('[data-hero-next]')?.addEventListener('click',()=>show(active+1));
-  hero.addEventListener('mouseenter',()=>{hovered=true;syncTimer()});
-  hero.addEventListener('mouseleave',()=>{hovered=false;syncTimer()});
   hero.addEventListener('focusin',syncTimer);
   hero.addEventListener('focusout',()=>setTimeout(syncTimer,0));
   document.addEventListener('visibilitychange',syncTimer);
