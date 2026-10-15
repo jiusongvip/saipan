@@ -24,10 +24,10 @@ const alternates=(['zh-hans','zh-hant','en'] as const).filter(l=>built.has(`/${l
 alternates.push({hreflang:'x-default',href:canonicalUrl('/')});
 
 const heroSlides = [
- {src:'/images/saipan-lagoon-aerial.jpg', label:en?'Island & care':hant?'海島與醫療':'海岛与医疗', text:en?'Thoughtful care, with space to breathe in Saipan.':hant?'把就醫與休養，一起安排在塞班。':'把就医与休养，一起安排在塞班。', alt:copy.imageAlt[4]},
- {src:'/images/couple-editorial.jpg', label:en?'Personal care':hant?'溫暖的專業':'温暖的专业', text:en?'A conversation that starts with listening.':hant?'先傾聽您的期待，再一起看清選擇。':'先倾听您的期待，再一起看清选择。', alt:copy.imageAlt[1]},
- {src:'/images/american-flag.jpg', label:en?'Birth & documents':hant?'出生與證件':'出生与证件', text:en?'Understand birth registration, documentation and applicable rules.':hant?'了解出生登記、證件流程與適用政策。':'了解出生登记、证件流程与适用政策。', alt:en?'An American flag in the breeze':hant?'迎風飄揚的美國國旗':'迎风飘扬的美国国旗'},
- {src:'/images/flight-wing.jpg', label:en?'Your journey':hant?'出行與航班':'出行与航班', text:en?'Explore flight routes and plan your visit.':hant?'了解航線與轉機，讓出發更從容。':'了解航线与转机，让出发更从容。', alt:en?'Airplane wing above the clouds':hant?'雲層上方的飛機機翼':'云层上方的飞机机翼'},
+ {src:'/images/saipan-lagoon-aerial.jpg', title:en?'Care and rest,\nin one island journey.':hant?'就醫與休養，\n在塞班相遇。':'就医与休养，\n在塞班相遇。', label:en?'Island & care':hant?'海島與醫療':'海岛与医疗', text:en?'Plan your medical visit alongside time to rest in Saipan’s island setting.':hant?'結合就診安排與海島休養，讓治療之外的時光也被妥善照顧。':'结合就诊安排与海岛休养，让治疗之外的时光也被妥善照顾。', alt:copy.imageAlt[4]},
+ {src:'/images/couple-editorial.jpg', title:en?'Expert care starts\nwith listening.':hant?'專業的照顧，\n從傾聽開始。':'专业的照顾，\n从倾听开始。', label:en?'Personal care':hant?'溫暖的專業':'温暖的专业', text:en?'One-to-one communication to understand your options, costs and preparation.':hant?'一對一溝通，說清評估、方案與費用，讓每個問題都有回應。':'一对一沟通，说清评估、方案与费用，让每个问题都有回应。', alt:copy.imageAlt[1]},
+ {src:'/images/american-flag.jpg', title:en?'Birth in Saipan.\nKnow the next steps.':hant?'在塞班迎接新生，\n先看清身份與證件。':'在塞班迎接新生，\n先看清身份与证件。', label:en?'Birth & documents':hant?'出生與證件':'出生与证件', text:en?'Explore U.S. citizenship rules, birth registration and travel documents before making plans.':hant?'提前了解美國國籍適用規則、出生登記與返程證件，具體資格依現行政策及個案確認。':'提前了解美国国籍适用规则、出生登记与返程证件，具体资格依现行政策及个案确认。', alt:en?'An American flag in the breeze':hant?'迎風飄揚的美國國旗':'迎风飘扬的美国国旗'},
+ {src:'/images/flight-wing.jpg', title:en?'A clearer route\nto your next step.':hant?'航線先看清，\n出發更從容。':'航线先看清，\n出发更从容。', label:en?'Your journey':hant?'出行與航班':'出行与航班', text:en?'Compare direct and connecting routes, then coordinate arrival with your appointment.':hant?'直飛或轉機怎麼選？先了解可用航線，再銜接就診與停留安排。':'直飞或转机怎么选？先了解可用航线，再衔接就诊与停留安排。', alt:en?'Airplane wing above the clouds':hant?'雲層上方的飛機機翼':'云层上方的飞机机翼'},
 ];
 
 const metaTitle = page?.title ?? '塞班辅助生殖｜为新的可能，留一点空间';
@@ -39,12 +39,12 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
  {heroSlides.map((slide,i)=><img class:list={['eh-hero__image',{'is-active':i===0}]} src={slide.src} alt={slide.alt} width={i===1?1400:1600} height="933" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} data-hero-image aria-hidden={i!==0?'true':undefined} />)}
  </div>
  <div class="eh-hero__shade"></div>
- <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1>{copy.title}</h1><p class="eh-hero__sub" data-hero-caption>{heroSlides[0].text}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
+ <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1 data-hero-title>{heroSlides[0].title}</h1><p class="eh-hero__sub" data-hero-caption>{heroSlides[0].text}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
  <div class="container eh-hero__controls">
   <div class="eh-hero__tabs" aria-label={en?'Choose a photograph':hant?'切換主視覺':'切换主视觉'}>
-   {heroSlides.map((slide,i)=><button type="button" class:list={['eh-hero__tab',{'is-active':i===0}]} aria-pressed={i===0} data-hero-tab data-caption={slide.text}><small>0{i+1}</small><span>{slide.label}</span></button>)}
+   {heroSlides.map((slide,i)=><button type="button" class:list={['eh-hero__tab',{'is-active':i===0}]} aria-pressed={i===0} data-hero-tab data-caption={slide.text} data-title={slide.title}><small>0{i+1}</small><span>{slide.label}</span></button>)}
   </div>
-  <div class="eh-hero__arrows"><button type="button" data-hero-prev aria-label={en?'Previous image':hant?'上一張圖片':'上一张图片'}>←</button><button type="button" data-hero-next aria-label={en?'Next image':hant?'下一張圖片':'下一张图片'}>→</button></div>
+  <div class="eh-hero__arrows"><button type="button" data-hero-pause aria-label={en?'Pause automatic slideshow':hant?'暫停自動輪播':'暂停自动轮播'} aria-pressed="false" data-pause-label={en?'Pause automatic slideshow':hant?'暫停自動輪播':'暂停自动轮播'} data-play-label={en?'Resume automatic slideshow':hant?'繼續自動輪播':'继续自动轮播'}>Ⅱ</button><button type="button" data-hero-prev aria-label={en?'Previous image':hant?'上一張圖片':'上一张图片'}>←</button><button type="button" data-hero-next aria-label={en?'Next image':hant?'下一張圖片':'下一张图片'}>→</button></div>
  </div>
  <span class="visually-hidden" data-hero-status aria-live="polite" aria-atomic="true"></span>
 </section>
@@ -66,21 +66,41 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
   const images=Array.from(hero.querySelectorAll<HTMLImageElement>('[data-hero-image]'));
   const tabs=Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-hero-tab]'));
   const caption=hero.querySelector<HTMLElement>('[data-hero-caption]');
+  const title=hero.querySelector<HTMLElement>('[data-hero-title]');
   const status=hero.querySelector<HTMLElement>('[data-hero-status]');
-  let active=0;
-  function show(index:number){
+  const pauseButton=hero.querySelector<HTMLButtonElement>('[data-hero-pause]');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let active=0, paused=reduced.matches, hovered=false, visible=true;
+  let timer:ReturnType<typeof setInterval>|undefined;
+  function syncTimer(){
+   clearInterval(timer);
+   if(!paused&&!hovered&&visible&&!document.hidden&&!hero.contains(document.activeElement))timer=setInterval(()=>show(active+1,false),6500);
+  }
+  function show(index:number,manual=true){
    active=(index+images.length)%images.length;
-   images.forEach((img,i)=>{img.classList.toggle('is-active',i===active); if(i===active){img.removeAttribute('aria-hidden');img.loading='eager'}else img.setAttribute('aria-hidden','true')});
+   images.forEach((img,i)=>{img.classList.toggle('is-active',i===active);if(i===active){img.removeAttribute('aria-hidden');img.loading='eager'}else img.setAttribute('aria-hidden','true')});
    tabs.forEach((tab,i)=>{tab.classList.toggle('is-active',i===active);tab.setAttribute('aria-pressed',String(i===active))});
    if(caption)caption.textContent=tabs[active].dataset.caption??'';
-   if(status)status.textContent=`${active+1} / ${images.length} · ${tabs[active].textContent}`;
+   if(title)title.textContent=tabs[active].dataset.title??'';
+   if(manual&&status)status.textContent=`${active+1} / ${images.length} · ${tabs[active].textContent}`;
+   syncTimer();
   }
+  function syncPause(){if(pauseButton){pauseButton.textContent=paused?'▶':'Ⅱ';pauseButton.setAttribute('aria-pressed',String(paused));pauseButton.setAttribute('aria-label',(paused?pauseButton.dataset.playLabel:pauseButton.dataset.pauseLabel)??'')}syncTimer()}
+  pauseButton?.addEventListener('click',()=>{paused=!paused;syncPause()});
   tabs.forEach((tab,i)=>tab.addEventListener('click',()=>show(i)));
   hero.querySelector('[data-hero-prev]')?.addEventListener('click',()=>show(active-1));
   hero.querySelector('[data-hero-next]')?.addEventListener('click',()=>show(active+1));
+  hero.addEventListener('mouseenter',()=>{hovered=true;syncTimer()});
+  hero.addEventListener('mouseleave',()=>{hovered=false;syncTimer()});
+  hero.addEventListener('focusin',syncTimer);
+  hero.addEventListener('focusout',()=>setTimeout(syncTimer,0));
+  document.addEventListener('visibilitychange',syncTimer);
+  reduced.addEventListener('change',()=>{paused=reduced.matches;syncPause()});
+  if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncTimer()},{threshold:.15}).observe(hero);
   hero.addEventListener('keydown',(event)=>{if(!(event.target instanceof Element)||!event.target.closest('button'))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();show(active+(event.key==='ArrowRight'?1:-1));tabs[active].focus()}});
   let touchStart:number|null=null;
   hero.addEventListener('touchstart',(event)=>{touchStart=event.touches[0]?.clientX??null},{passive:true});
   hero.addEventListener('touchend',(event)=>{if(touchStart===null)return;const delta=(event.changedTouches[0]?.clientX??touchStart)-touchStart;if(Math.abs(delta)>55)show(active+(delta<0?1:-1));touchStart=null},{passive:true});
+  syncPause();
  });
 </script>

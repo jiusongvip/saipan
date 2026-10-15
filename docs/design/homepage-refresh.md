@@ -34,3 +34,7 @@ Additional downloaded illustrative photos:
 - flight-wing.jpg: https://images.unsplash.com/photo-1436491865332-7a61a109cc05
 
 TypeScript, 50-page demo build, 969 links and generated-site audit passed. Browser interaction QA remains unavailable.
+
+## Automatic hero and explicit explanations
+
+Hero now advances every 6.5 seconds and synchronizes each image with its own localized headline and short description. Copy explicitly covers island rest alongside medical visits, one-to-one communication, nationality rules and birth documents, and flight/appointment planning. No nationality or route availability guarantee is added. Pause/resume control, hover/focus suspension, offscreen/tab-hidden suspension and reduced-motion handling are included. Manual navigation and swiping remain available.
