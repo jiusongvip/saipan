@@ -1,642 +1,82 @@
-/* 根首页专用样式层：只被 src/pages/index.astro 引入，内页不受影响。
-   口径例外：本页配色可偏离 tokens.css 的藏蓝主色，改用马尔代夫蓝（深礁蓝→潟湖青），
-   首屏右栏放一张塞班航拍实景；内页与共享组件仍走 tokens.css（docs/design/design-system.md 5.1、5.2）。 */
-
-/* 首页专用海色：tokens.css 由设计轮维护，本轮不往里加值，先集中在本层定义。
-   本文件只在根首页被打包，因此这些变量不会出现在内页产物里。
-   可读性边界：--mh-sea-deep / --mh-sea-mid 是白字的安全底（白字对其对比度分别约 12.5:1、6.1:1），
-   --mh-lagoon 与 --mh-lagoon-light 只做无人值守的装饰色块，不承载文字。 */
-:root {
-  --mh-ink: #06384b;
-  --mh-sea-deep: #06384b;
-  --mh-sea-mid: #0b6b81;
-  --mh-shell: #e7f6f8;
-  --mh-lagoon: #17a2bd;
-  --mh-lagoon-light: #8fe6f0;
-  /* 标题显示字：对标 springfertility.com 的 Butler 大衬线（那是商业字体、且 design-system 6 的「字体采购」仍未决），
-     这里不下载任何字体，只用系统自带的中文衬线栈；缺字库时按 var(--font-serif) 继续退到 Georgia/serif。 */
-  --mh-display: 'Source Han Serif SC', 'Noto Serif SC', 'Songti SC', 'SimSun', var(--font-serif);
-}
-
-/* ---------- 首屏 ---------- */
-.mhero {
-  position: relative;
-  overflow: hidden;
-  padding-block: var(--space-8) calc(var(--space-8) + 2rem);
-  background: linear-gradient(135deg, var(--mh-sea-deep) 0%, #0a5a75 52%, var(--mh-sea-mid) 100%);
-  color: #fff;
-}
-
-/* 装饰性潟湖光斑：纯装饰，其上不放任何文字，因此不参与对比度判定。 */
-.mhero__glow {
-  position: absolute;
-  inset: auto -10% -45% auto;
-  width: 60vw;
-  max-width: 720px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(143, 230, 240, 0.40), rgba(11, 107, 129, 0) 68%);
-  pointer-events: none;
-}
-
-.mhero__grid {
-  position: relative;
-  display: grid;
-  gap: var(--space-7);
-  align-items: center;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-}
-
-@media (max-width: 900px) {
-  .mhero__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.mhero__copy {
-  max-width: 62ch;
-}
-
-.mhero__eyebrow {
-  margin: 0 0 var(--space-4);
-  color: var(--color-accent-soft);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.mhero h1 {
-  margin: 0;
-  color: #fff;
-  /* 对标 Spring 的显示字处理：大号、细字重、紧行高，靠字号而不是加粗做层级。
-     上限 3rem 是按首屏左栏实测宽度（约 551px）反推的：h1 两个短句各 9 与 11 个汉字，
-     超过 50px 第二句就会折行，把 `<br>` 想要的两段节奏破坏掉。 */
-  font-family: var(--mh-display);
-  font-size: min(var(--text-hero), 3rem);
-  font-weight: 400;
-  line-height: 1.16;
-  letter-spacing: 0.01em;
-}
-
-.mhero__sub {
-  margin: var(--space-4) 0 0;
-  font-size: var(--text-xl);
-  font-weight: 700;
-}
-
-.mhero__lede {
-  margin: var(--space-4) 0 0;
-  max-width: 58ch;
-  font-size: var(--text-lg);
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.mhero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-/* 按钮字距：Spring 用「全大写 + 2.5px 字距」做胶囊 CTA 的辨识度；中文没有大小写，
-   等价做法是放宽字距 + 保持 700 字重，因此这里加字距而不是转 text-transform。 */
-.mhero .btn,
-section .btn {
-  letter-spacing: 0.14em;
-}
-
-.btn--light {
-  background: #fff;
-  color: var(--mh-ink);
-}
-
-/* 首页的主按钮（含咨询表单的提交键）跟着转成潟湖青。
-   选择器多带一层 .btn，压过在本层之后加载的 components.css `.btn--primary`；白字对其约 6.1:1。 */
-.btn.btn--primary {
-  background: var(--mh-sea-mid);
-}
-
-.btn.btn--primary:hover {
-  background: var(--mh-sea-deep);
-}
-
-.btn--light:hover {
-  background: var(--mh-shell);
-  color: var(--mh-ink);
-}
-
-.btn--outline {
-  background: transparent;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.72);
-}
-
-.btn--outline:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: #fff;
-  color: #fff;
-}
-
-.mhero__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin: var(--space-6) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mhero__chips li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.1);
-  font-size: var(--text-sm);
-  font-weight: 600;
-}
-
-.mhero__chips .mi {
-  width: 18px;
-  height: 18px;
-  flex: none;
-}
-
-/* 首屏右栏：塞班航拍实景 + 手写体标语。
-   对标 Spring 的照片处理——**无边框、无圆角、无滤镜、不套卡片**，让照片以整块版面直接压在渐变上；
-   标语落在照片下方的首屏渐变上（该处最浅为 --mh-sea-mid，白字 6.1:1）。 */
-.mhero__panel {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.mhero__photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 640 / 358;
-  object-fit: cover;
-  border: 0;
-  border-radius: 0;
-  box-shadow: 0 18px 42px rgba(4, 34, 47, 0.32);
-}
-
-.mhero__script {
-  position: relative;
-  margin: 0;
-  font-family: var(--font-serif);
-  text-align: right;
-}
-
-.mhero__script span {
-  display: block;
-  font-size: var(--text-3xl);
-  font-style: italic;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.mhero__script em {
-  display: block;
-  font-size: var(--text-base);
-  font-weight: 400;
-  opacity: 0.92;
-}
-
-/* ---------- 图标通用 ---------- */
-.mi {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-/* ---------- 信任条 ---------- */
-.mtrust {
-  padding-block: var(--space-7);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-line);
-}
-
-.mtrust__grid {
-  display: grid;
-  gap: var(--space-6) var(--space-5);
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-}
-
-.mtrust__item {
-  text-align: center;
-}
-
-.mtrust__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  margin-bottom: var(--space-3);
-  border-radius: var(--radius-pill);
-  background: var(--mh-shell);
-  color: var(--mh-ink);
-}
-
-.mtrust__icon .mi {
-  width: 26px;
-  height: 26px;
-}
-
-.mtrust__title {
-  margin: 0;
-  font-size: var(--text-base);
-  font-weight: 700;
-  color: var(--color-ink);
-}
-
-.mtrust__note {
-  margin: var(--space-1) 0 0;
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-/* ---------- 区块标题行 ---------- */
-.mhead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.mhead > div {
-  max-width: 62ch;
-}
-
-.mhead--inline {
-  margin-bottom: 0;
-}
-
-.mhead__kicker {
-  margin: 0 0 var(--space-2);
-  color: var(--color-accent);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.mhead h2 {
-  margin: 0;
-  font-family: var(--mh-display);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-}
-
-.mhead__lede {
-  margin: var(--space-3) 0 0;
-  color: var(--color-ink-muted);
-}
-
-.mlink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--mh-ink);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: 2px solid var(--mh-shell);
-  padding-bottom: 2px;
-}
-
-.mlink:hover {
-  border-bottom-color: var(--mh-sea-mid);
-  text-decoration: none;
-}
-
-.mlink--tight {
-  font-size: var(--text-sm);
-}
-
-/* 根首页的交替区块底色跟着转成浅潟湖青。本层只在根首页打包，因此这条只影响首页，
-   内页的 .section--alt 仍是 tokens 的冷灰。深字对其对比度：--color-ink-muted 约 6.8:1。 */
-.section--alt {
-  background: var(--mh-shell);
-}
-
-/* ---------- 卡片网格 ---------- */
-.mgrid {
-  display: grid;
-  gap: var(--space-5);
-  margin: 0 0 var(--space-6);
-  padding: 0;
-  list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-}
-
-.mgrid--why {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-}
-
-.mgrid--beyond {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-}
-
-.mgrid--news {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-}
-
-.mcard {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-5);
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.section--alt .mcard {
-  background: var(--color-surface);
-}
-
-.mcard h3 {
-  margin: 0;
-  font-size: var(--text-lg);
-  line-height: var(--leading-tight);
-}
-
-.mcard h3 a {
-  color: var(--color-ink);
-  text-decoration: none;
-}
-
-.mcard h3 a:hover {
-  color: var(--mh-ink);
-  text-decoration: underline;
-}
-
-.mcard p {
-  margin: 0;
-  flex: 1;
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-.mcard__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-md);
-  background: var(--mh-shell);
-  color: var(--mh-ink);
-}
-
-/* 人群卡：用色带代替照片，色带上放图标。 */
-.mcard__band {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 96px;
-  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-2);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: linear-gradient(135deg, var(--mh-sea-deep), var(--mh-sea-mid));
-  color: #fff;
-}
-
-.mcard__band .mi {
-  width: 40px;
-  height: 40px;
-}
-
-/* 资讯卡缩略：同样用色带 + 分类标签，不放照片。 */
-.mcard--news {
-  padding-top: var(--space-4);
-}
-
-.mcard__thumb {
-  position: relative;
-  display: block;
-  height: 92px;
-  margin: calc(var(--space-4) * -1) calc(var(--space-5) * -1) 0;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: linear-gradient(150deg, var(--mh-sea-mid), var(--mh-lagoon));
-}
-
-.mcard__tag {
-  position: absolute;
-  left: var(--space-4);
-  bottom: var(--space-3);
-  padding: 3px var(--space-3);
-  border-radius: var(--radius-pill);
-  background: #fff;
-  color: var(--mh-ink);
-  font-size: var(--text-xs);
-  font-weight: 700;
-}
-
-/* ---------- 医疗服务分栏 ---------- */
-.msplit {
-  display: grid;
-  gap: var(--space-7);
-  align-items: center;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-}
-
-@media (max-width: 900px) {
-  .msplit {
-    grid-template-columns: 1fr;
-  }
-}
-
-.msplit__visual {
-  display: grid;
-  place-content: center;
-  gap: var(--space-4);
-  min-height: 320px;
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(150deg, var(--mh-sea-deep) 0%, #0a5a75 55%, var(--mh-sea-mid) 100%);
-  color: #fff;
-  text-align: center;
-}
-
-.msplit__bigicon .mi {
-  width: 76px;
-  height: 76px;
-  margin-inline: auto;
-}
-
-.msplit__caption {
-  margin: 0;
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.mpoints {
-  display: grid;
-  gap: var(--space-4);
-  margin: var(--space-6) 0;
-  padding: 0;
-  list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-}
-
-.mpoints li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.mpoints__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-pill);
-  background: var(--mh-shell);
-  color: var(--mh-ink);
-}
-
-.mpoints__text {
-  display: grid;
-}
-
-.mpoints__text strong {
-  font-size: var(--text-base);
-  color: var(--color-ink);
-}
-
-.mpoints__text small {
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-/* ---------- Beyond the Clinic ---------- */
-.mline {
-  display: flex;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  background: var(--color-surface-alt);
-  border-radius: var(--radius-lg);
-}
-
-.mline__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  color: var(--mh-ink);
-}
-
-.mline h3 {
-  margin: 0 0 var(--space-1);
-  font-size: var(--text-base);
-}
-
-.mline p {
-  margin: 0;
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-.maudience__foot {
-  margin: 0;
-  color: var(--color-ink-muted);
-}
-
-/* ---------- 预约与安心承诺 ---------- */
-.mreassure {
-  padding-block: var(--space-7) var(--space-6);
-  background: var(--color-surface-warm);
-}
-
-.mreassure__grid {
-  display: grid;
-  gap: var(--space-6);
-  align-items: center;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-}
-
-@media (max-width: 900px) {
-  .mreassure__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.mreassure__list {
-  display: grid;
-  gap: var(--space-4);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mreassure__list li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.mreassure__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-pill);
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
-
-.mreassure__list span:last-child {
-  display: grid;
-}
-
-.mreassure__list strong {
-  color: var(--color-ink);
-}
-
-.mreassure__list small {
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-.mreassure__note {
-  margin: var(--space-6) 0 0;
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-
-/* ---------- 动效降级 ---------- */
-@media (prefers-reduced-motion: no-preference) {
-  .mcard,
-  .mline,
-  .mreassure__list li {
-    transition: box-shadow 160ms ease, transform 160ms ease;
-  }
-
-  .mcard:hover,
-  .mreassure__list li:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-}
+/* Editorial homepage: warm paper, lagoon ink and blush; shared content stays intact. */
+body[data-page-type="home"] {
+ --mh-ink:#173f42; --mh-muted:#526866; --mh-paper:#fbf9f4; --mh-blush:#eedfd8;
+ --color-ink:var(--mh-ink); --color-ink-muted:var(--mh-muted); --color-primary:#245d60;
+ --color-primary-strong:#173f42; --color-primary-soft:#edf2ed; --color-accent:#79523d;
+ --color-surface-alt:#f1f3ed; --color-line:#dce2d9; --container:1280px;
+ --mh-display:'Noto Serif SC','Songti SC','SimSun',Georgia,serif;
+ background:var(--mh-paper);
+}
+body[data-page-type="home"] .site-header {background:var(--mh-paper);border-bottom:1px solid #173f4214}
+body[data-page-type="home"] .site-header__inner {min-height:88px}
+body[data-page-type="home"] .brand {letter-spacing:-.03em}
+body[data-page-type="home"] .section {padding-block:88px}
+body[data-page-type="home"] .btn {letter-spacing:.04em;font-size:14px;padding:15px 25px;transition:background .2s,transform .2s}
+body[data-page-type="home"] .btn:hover {transform:translateY(-2px)}
+.mhero {position:relative;overflow:hidden;background:var(--mh-paper);padding:48px 0 64px}
+.mhero__glow {display:none}
+.mhero__grid {display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.mhero__copy {padding:16px 0}
+.mhero__eyebrow,.mhead__kicker {margin:0 0 24px;font-size:12px;letter-spacing:.17em;font-weight:600;text-transform:uppercase;color:var(--mh-muted)}
+.mhero h1 {font-family:var(--mh-display);font-size:clamp(36px,4.5vw,64px);line-height:1.3;letter-spacing:-.045em;font-weight:400;color:var(--mh-ink);margin:0}
+.mhero__sub {font-size:17px;margin:24px 0 14px;letter-spacing:.06em;font-weight:500}
+.mhero__lede {max-width:440px;font-size:15px;line-height:1.95;color:var(--mh-muted);margin:0}
+.mhero__actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.mhero .btn--light {background:var(--mh-ink);color:white}
+.mhero .btn--outline {background:transparent;border-color:#6a8380;color:var(--mh-ink)}
+.mhero__chips {list-style:none;padding:22px 0 0;margin:24px 0 0;border-top:1px solid var(--color-line);display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12px;color:var(--mh-muted)}
+.mhero__chips li {display:flex;gap:8px;align-items:center}
+.mi {display:block;width:24px;height:24px;flex:none}
+.mhero__chips .mi {width:17px;height:17px}
+.mhero__panel {position:relative;padding-bottom:24px}
+.mhero__photo {width:100%;height:540px;object-fit:cover;object-position:42% center;border-radius:48% 48% 8px 8px}
+.mhero__script {position:absolute;bottom:0;right:-12px;margin:0;background:var(--mh-blush);padding:22px 30px;transform:rotate(-4deg);color:var(--mh-ink)}
+.mhero__script span {font-family:Georgia,serif;font-size:30px;font-style:italic;display:block}
+.mhero__script em {display:block;font-size:12px;letter-spacing:.1em;font-style:normal;margin-top:6px}
+.mtrust {background:#edf1eb;padding:26px 0}
+.mtrust__grid {display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.mtrust__item {text-align:center;border-right:1px solid #173f4220;padding:8px}.mtrust__item:last-child{border:0}
+.mtrust__icon {display:inline-block;color:var(--mh-ink);margin-bottom:8px}
+.mtrust__title {font-size:13px;margin:0 0 5px;font-weight:600}.mtrust__note {font-size:11px;line-height:1.6;color:var(--mh-muted);margin:0}
+.mhead {display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px}
+.mhead>div {max-width:670px}.mhead__kicker{margin-bottom:16px}
+.mhead h2,.mmedical h2,.misland h2,.mquestions h2 {font-family:var(--mh-display);font-weight:400;font-size:clamp(26px,2.8vw,40px);line-height:1.4;letter-spacing:-.025em;white-space:pre-line}
+.mhead__lede {font-size:14px;line-height:1.9;color:var(--mh-muted);margin:16px 0 0;max-width:600px}
+.mlink {display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:var(--mh-ink);text-decoration:none;border-bottom:1px solid #8fa39c;font-weight:500;align-self:flex-start}
+.mlink::after {content:'↗';margin-left:16px}.mlink:hover {color:#79523d;border-color:currentColor}
+.mgrid {list-style:none;margin:0;padding:0;display:grid;gap:24px}
+.mgrid--why {grid-template-columns:repeat(5,1fr);gap:0}
+.mcard {display:flex;flex-direction:column;gap:16px;min-width:0}
+.mgrid--why .mcard {padding:12px 22px 16px;border-left:1px solid var(--color-line)}
+.mgrid--why .mcard:first-child {padding-left:0;border:0}
+.mcard h3 {font-size:17px;font-weight:500;line-height:1.5;margin:0}.mcard h3 a{color:inherit;text-decoration:none}
+.mcard p {font-size:13px;line-height:1.9;color:var(--mh-muted);margin:0;flex:1}
+.mcard__icon {color:var(--mh-ink);margin-bottom:12px}.mcard__icon .mi{width:30px;height:30px}
+.section--alt {background:#f0f2ec}
+.msplit {display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.msplit__visual {margin:0;position:relative;overflow:hidden;border-radius:8px 8px 100px 8px}
+.msplit__visual img {width:100%;height:490px;object-fit:cover}
+.msplit__visual figcaption {position:absolute;bottom:0;padding:40px 28px 24px;color:white;width:100%;background:linear-gradient(transparent,#122e35e6);font-family:var(--mh-display);font-size:23px}
+.msplit__visual small {display:block;font-family:var(--font-sans);font-size:11px;margin-top:8px}
+.mpoints {padding:0;margin:28px 0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.mpoints li{display:flex;gap:12px;align-items:center}.mpoints__icon{color:var(--mh-ink)}
+.mpoints__text{display:grid;gap:3px}.mpoints__text strong{font-size:14px;font-weight:500}.mpoints__text small{font-size:12px;color:var(--mh-muted)}
+.mgrid--beyond {grid-template-columns:repeat(3,1fr);margin-bottom:30px;gap:30px 40px}
+.mline{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--color-line)}.mline h3{font-size:16px;font-weight:500}.mline p{font-size:13px;color:var(--mh-muted);line-height:1.8;margin:0}.mline__icon{margin-top:3px}
+.maudience {background:var(--mh-blush)}.mgrid--aud{grid-template-columns:repeat(4,1fr);gap:18px}
+.mcard--photo{padding:28px;background:#fbf9f4;border-radius:4px}.mcard__band{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#e6ece4;margin-bottom:12px}
+.mcard--photo:nth-child(even) .mcard__band{background:#eedfd8}.maudience__foot{font-size:13px;margin:26px 0 0;color:var(--mh-muted)}
+.mgrid--news {grid-template-columns:repeat(3,1fr)}
+.mcard__thumb{position:relative;display:block;height:220px;background:url('/images/saipan-lagoon-aerial.jpg') center/cover;border-radius:4px;overflow:hidden}
+.mcard--news:nth-child(2) .mcard__thumb{background-image:url('/images/care-consultation.jpg')}.mcard--news:nth-child(3) .mcard__thumb{background-image:url('/images/laboratory-care.jpg')}
+.mcard__tag{position:absolute;bottom:16px;left:16px;background:var(--mh-paper);padding:5px 12px;font-size:11px;border-radius:20px}
+.misland {background:#e8eee8}.misland__grid{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:64px}
+.misland__image{position:relative}.misland img{width:100%;height:380px;object-fit:cover;border-radius:4px}.misland__image>span{position:absolute;bottom:18px;left:20px;color:white;font-size:12px;letter-spacing:.15em;text-shadow:0 1px 4px #000}
+.misland p:not(.mhead__kicker),.mquestions p{font-size:14px;color:var(--mh-muted);line-height:1.9}
+.mjourney {background:var(--mh-ink);color:#fbf9f4}.mjourney h2,.mjourney h3{color:inherit}.mjourney .mhead__kicker{color:#cbd9d0}.mjourney .btn{color:white;border-color:#9aafaa}
+.mjourney__steps{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}.mjourney__steps li{border-top:1px solid #ffffff50;padding-top:24px}.mjourney__steps span{font-size:11px;letter-spacing:.15em;color:#ceded3}.mjourney__steps h3{font-size:19px;font-weight:400;margin:22px 0 12px}.mjourney__steps p{font-size:13px;line-height:1.9;color:#ceded3;margin:0}
+.mquestions__grid{display:grid;grid-template-columns:1fr 1.3fr;gap:72px}.mquestions details{border-bottom:1px solid #c9d2ca;padding:20px 0}.mquestions summary{display:flex;justify-content:space-between;cursor:pointer;font-size:16px;list-style:none;gap:24px}.mquestions summary::after{content:'+';font-size:22px}.mquestions details[open] summary::after{content:'−'}.mquestions details p{margin:16px 0 0}
+.mreassure{padding:64px 0;background:var(--mh-blush)}.mreassure__grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}.mreassure__list{list-style:none;padding:0;margin:0;display:grid;gap:20px}.mreassure__list li{display:flex;gap:16px}.mreassure__list li>span:last-child{display:grid}.mreassure__list strong{font-size:14px;font-weight:500}.mreassure__list small,.mreassure__note{font-size:12px;color:var(--mh-muted)}.mreassure__note{margin-top:32px;margin-bottom:0}.mhead--inline{margin:0}
+@media(max-width:1100px){.mhero__grid{gap:30px}.mhero__photo{height:490px}.mgrid--why{grid-template-columns:repeat(3,1fr);gap:30px}.mgrid--why .mcard{padding:0 16px}.mgrid--aud{grid-template-columns:repeat(2,1fr)}.msplit{gap:40px}}
+@media(max-width:900px){body[data-page-type="home"] .site-header__inner{min-height:72px}.mhero__grid{grid-template-columns:1fr 1fr;gap:24px}.mhero__chips{grid-template-columns:1fr}.mhero__photo{height:500px}.mhero h1{font-size:40px}.mtrust__grid{grid-template-columns:repeat(3,1fr);row-gap:24px}.mtrust__item:nth-child(3){border:0}.mgrid--beyond{grid-template-columns:1fr 1fr}.msplit,.misland__grid{gap:32px}.mquestions__grid{gap:32px}.mjourney__steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){body[data-page-type="home"] .section{padding-block:52px}.mhero{padding:24px 0 42px}.mhero__grid{grid-template-columns:1fr;gap:26px}.mhero h1{font-size:42px}.mhero__eyebrow{font-size:10px;margin-bottom:20px}.mhero__sub{font-size:15px}.mhero__lede{font-size:14px}.mhero__chips{grid-template-columns:1fr 1fr;font-size:10px;gap:12px 8px}.mhero__chips .mi{width:14px;height:14px}.mhero__photo{height:340px;border-radius:44% 44% 4px 4px}.mhero__script{right:4px;padding:16px 22px}.mhero__script span{font-size:25px}.mhead{display:block;margin-bottom:28px}.mhead>.mlink,.mhead>.btn{margin-top:20px}.mtrust__grid{gap:12px}.mtrust__note{font-size:10px}.mtrust__title{font-size:12px}.mgrid--why{grid-template-columns:1fr;gap:0}.mgrid--why .mcard,.mgrid--why .mcard:first-child{position:relative;border:0;border-top:1px solid var(--color-line);padding:24px 0 24px 50px;gap:8px}.mcard__icon{position:absolute;left:0;top:26px}.mgrid--beyond,.mgrid--aud,.msplit,.mgrid--news,.misland__grid,.mquestions__grid,.mreassure__grid{grid-template-columns:1fr;gap:28px}.msplit__visual img{height:330px}.mpoints{gap:18px 12px}.mpoints__text strong{font-size:12px}.mpoints__text small{font-size:11px}.mcard--photo{padding:24px;display:grid;grid-template-columns:44px 1fr;column-gap:16px}.mcard__band{grid-row:1/4;width:44px;height:44px}.mcard--photo .mlink{justify-self:start}.misland img{height:270px}.mjourney__steps{gap:24px 20px;margin-top:30px}.mjourney__steps h3{font-size:16px}.mjourney__steps p{font-size:12px}.mjourney__steps span{font-size:10px}.mquestions summary{font-size:14px}.mreassure{padding:44px 0}}

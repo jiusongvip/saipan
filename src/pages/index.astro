@@ -4,8 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { canonicalUrl } from '../lib/seo';
 import { buildVisiblePaths, loadAllPages, visibleArticles } from '../lib/content';
-import { heroImage, siteConfig } from '../lib/config';
-import { t } from '../lib/i18n';
+import { siteConfig } from '../lib/config';
+
 
 // 根路径直接渲染简体中文营销首页（用户 2026-10-14 拍板）；其余语言仍在各自 /<lang> 首页。
 // 首图用用户提供的塞班潟湖航拍实景（同一素材与 heroImage 配置，题注按拍板不渲染）；
@@ -148,9 +148,9 @@ const guidesPath = articlesPath;
     <div class="container mhero__grid">
       <div class="mhero__copy">
         <p class="mhero__eyebrow">SAIPAN IVF · 北马里亚纳群岛</p>
-        <h1>遵循严谨医学标准，<br />提供透明辅助生殖方案。</h1>
-        <p class="mhero__sub">塞班 IVF，您的安心之选。</p>
-        <p class="mhero__lede">免签或线上授权就能出发，台北直飞约三四个小时。方案怎么选、能停留多久、要花多少、孩子出生后的证件怎么办——我们把这四件事逐项拆开写清楚，让您在订机票之前就能判断。</p>
+        <h1>让新的可能，<br />在这里开始。</h1>
+        <p class="mhero__sub">塞班辅助生殖 · 为每一种家庭的期待</p>
+        <p class="mhero__lede">从了解治疗方案，到安排一次跨境就医。让医疗、费用与行程都清晰可见，让每一步选择更从容。</p>
         <div class="mhero__actions">
           <a class="btn btn--light" href="#consult">预约初步咨询</a>
           {whySaipanPath && <a class="btn btn--outline" href={whySaipanPath}>了解塞班 IVF</a>}
@@ -167,17 +167,16 @@ const guidesPath = articlesPath;
       <div class="mhero__panel">
         <img
           class="mhero__photo"
-          src={heroImage.src}
-          alt={t(LANG, 'hero.image_alt')}
-          width={heroImage.width}
-          height={heroImage.height}
+          src="/images/couple-editorial.jpg"
+          alt="明亮空间中的一对一沟通，咨询场景示意"
+          width="1400"
+          height="933"
           loading="eager"
           decoding="async"
         />
         <p class="mhero__script" aria-hidden="true">
-          <span>Saipan</span>
-          <em>More than a destination.</em>
-          <em>A new beginning.</em>
+          <span>A little closer.</span>
+          <em>离心中的未来，再近一点。</em>
         </p>
       </div>
     </div>
@@ -200,7 +199,7 @@ const guidesPath = articlesPath;
       <div class="mhead">
         <div>
           <p class="mhead__kicker">Why Saipan</p>
-          <h2>为什么把塞班放进您的辅助生殖选择里</h2>
+          <h2>一座岛屿，多一份选择。</h2>
           <p class="mhead__lede">从医疗资源、出行安排到法律政策，五个维度逐项评估这座岛的实际条件与限制。</p>
         </div>
         {whySaipanPath && <a class="mlink" href={whySaipanPath}>看看塞班与其他目的地的差别</a>}
@@ -220,13 +219,11 @@ const guidesPath = articlesPath;
 
   <section class="section section--alt mmedical">
     <div class="container msplit">
-      <div class="msplit__visual" aria-hidden="true">
-        <span class="msplit__bigicon" set:html={icons.flask} />
-        <p class="msplit__caption">Trusted Medical Care</p>
-      </div>
+      <figure class="msplit__visual"><img src="/images/laboratory-care.jpg" alt="实验室研究场景示意" width="1000" height="667" loading="lazy" /><figcaption>严谨，是关怀的另一种表达。<small>医疗场景示意 · 非合作机构实拍</small></figcaption></figure>
       <div>
         <p class="mhead__kicker">Trusted Medical Care</p>
-        <h2>为什么可以信任这里的医疗服务</h2>
+        <h2>以专业为基础，
+以您为中心。</h2>
         <p class="mhead__lede">我们与正规医疗机构合作，把每一项资质、每一份数据都留在可以要求出示的位置——您不需要凭我们的说法做决定。</p>
         <ul class="mpoints">
           {medicalPoints.map((point) => (
@@ -249,7 +246,7 @@ const guidesPath = articlesPath;
       <div class="mhead">
         <div>
           <p class="mhead__kicker">Beyond the Clinic</p>
-          <h2>不止于预约，帮您看清整个跨境就医过程</h2>
+          <h2>照顾治疗，也照顾途中的您。</h2>
           <p class="mhead__lede">从医疗资源到行程安排，我们提供全流程的专业支持，让跨境就医更简单，也更安心。</p>
         </div>
       </div>
@@ -273,7 +270,7 @@ const guidesPath = articlesPath;
       <div class="mhead">
         <div>
           <p class="mhead__kicker">Who We Help</p>
-          <h2>为不同情况的您，提供针对性的方案</h2>
+          <h2>您的故事，值得被认真倾听。</h2>
           <p class="mhead__lede">每个家庭的情况都不一样。先说清您现在的处境，我们再给出对应要问的问题与要准备的材料。</p>
         </div>
       </div>
@@ -318,6 +315,29 @@ const guidesPath = articlesPath;
       </ul>
     </div>
   </section>
+
+
+  <section class="misland section">
+    <div class="container misland__grid">
+      <div class="misland__image"><img src="/images/saipan-lagoon-aerial.jpg" alt="塞班海岸与碧蓝潟湖航拍" width="1280" height="716" loading="lazy" /><span>15°11′ N · 145°45′ E</span></div>
+      <div><p class="mhead__kicker">A place to breathe</p><h2>在海与天空之间，<br />给自己一点空间。</h2><p>跨境就医不只有诊疗日程。出行前的准备、两次就诊之间的休息，以及有人回应的安心感，同样值得被安排好。</p><a class="mlink" href="#journey">了解您的就医旅程 ↗</a></div>
+    </div>
+  </section>
+  <section class="section mjourney" id="journey">
+    <div class="container"><div class="mhead"><div><p class="mhead__kicker">Your journey, made clear</p><h2>不必一次想清所有事。<br />我们一步一步来。</h2></div><a class="btn btn--secondary" href="#consult">从一次沟通开始 ↗</a></div>
+    <ol class="mjourney__steps">
+      <li><span>01 / CONNECT</span><h3>先聊聊您的期待</h3><p>说明目前的情况、希望了解的问题，以及偏好的沟通语言。</p></li>
+      <li><span>02 / UNDERSTAND</span><h3>看清方案与费用</h3><p>整理既往资料，向医疗机构确认评估方式、报价范围与可选路径。</p></li>
+      <li><span>03 / PREPARE</span><h3>把行程安排妥当</h3><p>核对入境条件、停留期限、就诊时间和需要携带的材料。</p></li>
+      <li><span>04 / CONTINUE</span><h3>让下一步有回应</h3><p>确认就诊联络、病历交接和返程后的后续沟通安排。</p></li>
+    </ol></div>
+  </section>
+  <section class="section mquestions"><div class="container mquestions__grid"><div><p class="mhead__kicker">A little clarity</p><h2>开始之前，<br />您可能想知道。</h2><p>先把问题问明白，再作决定。</p></div><div>
+  <details><summary>还没决定要做 IVF，也可以咨询吗？</summary><p>可以。初步沟通可先了解评估流程、资料准备与费用构成；具体诊疗选择由执业医生结合您的情况判断。</p></details>
+  <details><summary>如何了解完整的费用构成？</summary><p>咨询时可要求分项说明医疗、药物、检测、住宿交通及其他可能费用，并确认不包含项目、付款节点与取消条件。</p></details>
+  <details><summary>需要在塞班停留多久？</summary><p>治疗日程与个人情况有关。应先向医疗机构确认就诊计划，再根据护照与入境路径核实允许停留的期限。</p></details>
+  <details><summary>第一次沟通需要准备什么？</summary><p>先列出您的问题；如已有检查与治疗经历，可整理病历目录。请通过确认安全的渠道提供医疗资料。</p></details>
+  </div></div></section>
 
   <section class="mreassure">
     <div class="container mreassure__grid">
