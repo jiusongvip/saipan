@@ -43,7 +43,7 @@
 | /en/programs/ivf-icsi | 22603 B | 6493 B | 5 | 1 | 0 B | 6 | 1 | 无 |
 | /en/tools | 14464 B | 4774 B | 4 | 1 | 0 B | 7 | 0 | 无 |
 | /en/why-saipan | 22627 B | 6539 B | 5 | 1 | 0 B | 6 | 1 | 无 |
-| / | 35492 B | 9425 B | 6 | 2 | 0 B | 4 | 1 | 无 |
+| / | 37827 B | 10531 B | 8 | 2 | 0 B | 4 | 3 | 无 |
 | /zh-hans/articles/amh-low-ovarian-reserve | 16045 B | 6537 B | 4 | 1 | 0 B | 5 | 0 | 无 |
 | /zh-hans/articles/documents-before-first-visit | 13704 B | 5117 B | 4 | 1 | 0 B | 5 | 0 | 无 |
 | /zh-hans/articles/entry-policy-change-what-to-check | 16424 B | 6604 B | 4 | 1 | 0 B | 5 | 0 | 无 |
@@ -90,9 +90,11 @@
 
 | 资源 | 字节 |
 |---|---|
+| /images/couple-editorial.jpg | 145707 B |
+| /images/laboratory-care.jpg | 144088 B |
 | /images/saipan-lagoon-aerial.jpg | 26763 B |
 | /_astro/_slug_.BiqyE-1M.css | 17874 B |
-| /_astro/index.DhIhzX5P.css | 9209 B |
+| /_astro/index.B9FXKDzX.css | 10804 B |
 | /_astro/ContactForm.astro_astro_type_script_index_0_lang.BxxlsuRS.js | 5106 B |
 | /_astro/BaseLayout.astro_astro_type_script_index_0_lang.B3ON7J0h.js | 982 B |
 | /_astro/ConsentNotice.astro_astro_type_script_index_0_lang.Cqo2LTDW.js | 299 B |
