@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from './ContactForm.astro';
+import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
+import { canonicalUrl } from '../lib/seo';
+import type { LangCode } from '../lib/config';
+import '../styles/editorial-home.css';
+interface Props { lang: LangCode; page?: PageData | null }
+const {lang, page=null}=Astro.props;
+const en=lang==='en'; const hant=lang==='zh-hant';
+const copy=en ? {
+ title:'Room for a new beginning.', sub:'Fertility care. A clearer path. Your own pace.', consult:'Let’s talk', discover:'Explore your options', intro:'Your future. Your way.', introText:'A personal decision deserves thoughtful care—and space to breathe.', options:['Understand your options','Prepare for your visit','Plan with confidence'], descriptions:['Treatment & assessment','Travel & time on island','Costs & practical guidance'], care:'Science with a human touch.', careText:'Understand the people, processes and questions behind your care.', careLink:'Explore medical care', island:'A different setting.\nThe same focus: you.', islandText:'Discover Saipan, with room to pause between the important moments.', islandLink:'Discover Saipan', journey:'One step at a time.', steps:['Share your story','Explore a care plan','Prepare your journey','Stay connected'], start:'It starts with a conversation.', startText:'Bring your questions. We’ll help you understand the next step.', label:'SAIPAN · FERTILITY & FAMILY', note:'Illustrative photography', careNote:'Illustrative medical setting', nav:['Personal care','Clear information','Thoughtful support'], resources:'Before you begin', links:['Treatment options','Costs & planning','Travel essentials'], imageAlt:['A family sharing a moment outdoors','A conversation in a bright room','Green fern foliage','A laboratory setting','Saipan coast and lagoon']
+} : hant ? {
+ title:'為新的可能，\n留一點空間。', sub:'塞班輔助生殖 · 按您的步調，走向下一步', consult:'從一次溝通開始', discover:'探索您的選擇', intro:'每一種期待，\n都值得被認真對待。', introText:'讓複雜的選擇清楚一點，讓重要的決定從容一點。', options:['找到適合的方向','把旅程安排妥當','先看清，再決定'], descriptions:['治療方案與初步評估','入境、停留與就診準備','費用構成與實用指南'], care:'專業有據，\n關懷有溫度。', careText:'了解醫療資源、實驗室流程，以及就診前值得問的問題。', careLink:'了解醫療服務', island:'換一個環境，\n把目光放回自己。', islandText:'在塞班的海與天空之間，為就診之外的時光留白。', islandLink:'認識塞班', journey:'下一步，不必獨自想清楚。', steps:['聊聊您的期待','了解方案與費用','準備行程與資料','保持後續聯絡'], start:'一段對話，\n就是開始。', startText:'帶著問題來，先了解，再選擇。', label:'SAIPAN · FERTILITY & FAMILY', note:'人物情境示意', careNote:'醫療情境示意 · 非院方實拍', nav:['個人化關懷','清晰的資訊','有回應的支持'], resources:'出發之前，先了解', links:['治療與評估','費用與規劃','入境與出行'], imageAlt:['家人在戶外相伴的溫暖時刻','明亮空間中的一對一溝通','綠色蕨類植物特寫','醫療實驗室情境','塞班海岸與潟湖航拍']
+} : {
+ title:'为新的可能，\n留一点空间。', sub:'塞班辅助生殖 · 按您的步调，走向下一步', consult:'从一次沟通开始', discover:'探索您的选择', intro:'每一种期待，\n都值得被认真对待。', introText:'让复杂的选择清楚一点，让重要的决定从容一点。', options:['找到适合的方向','把旅程安排妥当','先看清，再决定'], descriptions:['治疗方案与初步评估','入境、停留与就诊准备','费用构成与实用指南'], care:'专业有据，\n关怀有温度。', careText:'了解医疗资源、实验室流程，以及就诊前值得问的问题。', careLink:'了解医疗服务', island:'换一个环境，\n把目光放回自己。', islandText:'在塞班的海与天空之间，为就诊之外的时光留白。', islandLink:'认识塞班', journey:'下一步，不必独自想清楚。', steps:['聊聊您的期待','了解方案与费用','准备行程与资料','保持后续联络'], start:'一段对话，\n就是开始。', startText:'带着问题来，先了解，再选择。', label:'SAIPAN · FERTILITY & FAMILY', note:'人物场景示意', careNote:'医疗场景示意 · 非院方实拍', nav:['个性化关怀','清晰的信息','有回应的支持'], resources:'出发之前，先了解', links:['治疗与评估','费用与规划','入境与出行'], imageAlt:['家人在户外相伴的温暖时刻','明亮空间中的一对一沟通','绿色蕨类植物特写','医疗实验室场景','塞班海岸与潟湖航拍']
+};
+const built=buildVisiblePaths(await loadAllPages());
+const target=(...paths:string[])=>paths.map(p=>`/${lang}/${p}`).find(p=>built.has(p)) ?? '#consult';
+const paths=[target('programs/ivf-icsi','articles'),target('entry-path','articles'),target('pricing','articles')];
+const medical=target('hospital-lab','articles/lab-own-or-outsourced','programs/ivf-icsi');
+const island=target('why-saipan','entry-path');
+const alternates=(['zh-hans','zh-hant','en'] as const).filter(l=>built.has(`/${l}`)||built.has(`/${l}/`)).map(l=>({hreflang:l==='zh-hans'?'zh-Hans':l==='zh-hant'?'zh-Hant':'en',href:canonicalUrl(l==='zh-hans' && !page ? '/' : `/${l}`)}));
+alternates.push({hreflang:'x-default',href:canonicalUrl('/')});
+const metaTitle = page?.title ?? '塞班辅助生殖｜为新的可能，留一点空间';
+const metaDescription = page?.description ?? '在塞班探索辅助生殖的更多可能，了解治疗评估、医疗资源、费用构成与跨境出行安排，从一次清晰的沟通开始。';
+---
+<BaseLayout lang={lang} title={metaTitle} description={metaDescription} canonical={canonicalUrl(page?.path??'/')} alternates={alternates} noindex={page?.noindex??false} pageType="home" page={page} hasForm={true} ogImage="/images/family-moment.jpg">
+<section class="eh-hero">
+ <img class="eh-hero__image" src="/images/family-moment.jpg" alt={copy.imageAlt[0]} width="1400" height="933" fetchpriority="high" />
+ <div class="eh-hero__shade"></div>
+ <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1>{copy.title}</h1><p class="eh-hero__sub">{copy.sub}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
+ <div class="container eh-hero__bottom"><span>01 — A NEW BEGINNING</span><span>{copy.note} · SAIPAN IVF</span></div>
+</section>
+<div class="eh-values"><div class="container">{copy.nav.map((text,i)=><span><small>0{i+1}</small>{text}</span>)}</div></div>
+<section class="eh-intro container"><p class="eh-kicker">MADE PERSONAL</p><h2>{copy.intro}</h2><p>{copy.introText}</p></section>
+<section class="container eh-portals" aria-label={copy.discover}>
+ {copy.options.map((title,i)=><a class={`eh-portal eh-portal--${i}`} href={paths[i]}><img src={['/images/couple-editorial.jpg','/images/saipan-lagoon-aerial.jpg','/images/quiet-botanical.jpg'][i]} alt={copy.imageAlt[[1,4,2][i]]} width="1000" height="667" loading="lazy"/><div><small>0{i+1} / {copy.descriptions[i]}</small><h3>{title}<span>↗</span></h3></div></a>)}
+</section>
+<section class="container eh-care"><div class="eh-care__photos"><img src="/images/care-consultation.jpg" alt={copy.imageAlt[1]} width="1000" height="667" loading="lazy"/><figure><img src="/images/laboratory-care.jpg" alt={copy.imageAlt[3]} width="1000" height="667" loading="lazy"/><figcaption>{copy.careNote}</figcaption></figure><span class="eh-orbit" aria-hidden="true">CARE<br/>WITH YOU<br/>IN MIND</span></div><div class="eh-care__copy"><p class="eh-kicker">THE SCIENCE. THE HUMAN.</p><h2>{copy.care}</h2><p>{copy.careText}</p><a class="eh-link" href={medical}>{copy.careLink}<span>↗</span></a></div></section>
+<section class="eh-island"><img src="/images/saipan-lagoon-aerial.jpg" alt={copy.imageAlt[4]} width="1280" height="716" loading="lazy"/><div class="container"><div class="eh-island__card"><p class="eh-kicker">15°11′ N · 145°45′ E</p><h2>{copy.island}</h2><p>{copy.islandText}</p><a class="eh-link" href={island}>{copy.islandLink}<span>↗</span></a></div></div><span class="eh-island__word" aria-hidden="true">Saipan</span></section>
+<section class="container eh-journey"><div><p class="eh-kicker">YOUR PACE. YOUR PATH.</p><h2>{copy.journey}</h2></div><ol>{copy.steps.map((step,i)=><li><span>0{i+1}</span><h3>{step}</h3></li>)}</ol></section>
+<section class="eh-resources"><div class="container"><p class="eh-kicker">A LITTLE CLARITY</p><h2>{copy.resources}</h2><div>{copy.links.map((title,i)=><a href={paths[[0,2,1][i]]}><span>0{i+1}</span>{title}<span>↗</span></a>)}</div></div></section>
+<section class="eh-start container"><p class="eh-kicker">LET’S BEGIN</p><h2>{copy.start}</h2><p>{copy.startText}</p><a class="eh-button eh-button--dark" href="#consult">{copy.consult}<span>↗</span></a></section>
+<ContactForm lang={lang} pageType="home" pagePath={page?.path??'/'} ctaLabel={copy.consult}/>
+</BaseLayout>

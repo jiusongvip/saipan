@@ -1,5 +1,6 @@
 ---
 import { buildVisible, loadAllPages, pathToRoute, type PageData } from '../lib/content';
+import EditorialHome from '../components/EditorialHome.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
 import LandingLayout from '../layouts/LandingLayout.astro';
 
@@ -30,6 +31,6 @@ const rendered = await page.render?.();
 const Content = rendered?.Content;
 ---
 
-<Layout page={page} withForm={withForm}>
+{page.template === 'home' ? <EditorialHome lang={page.lang} page={page} /> : <Layout page={page} withForm={withForm}>
   {Content ? <Content /> : null}
-</Layout>
+</Layout>}
