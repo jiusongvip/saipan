@@ -1,0 +1,198 @@
+---
+import MarketingImage from '../components/marketing/MarketingImage.astro';
+import { getDestinationCopy } from '../data/marketing/destination';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import {
+  loadAllPages,
+  buildVisiblePaths,
+  groupByTranslationKey,
+  type PageData,
+} from '../lib/content';
+import { enabledLanguages } from '../lib/config';
+import { hreflangAlternates, pageMeta } from '../lib/seo';
+import '../styles/editorial-home.css';
+import '../styles/destination.css';
+const { page } = Astro.props as { page: PageData };
+const lang = page.lang,
+  en = lang === 'en',
+  tw = lang === 'zh-hant';
+const pages = await loadAllPages(),
+  built = buildVisiblePaths(pages);
+const route = (...slugs: string[]) =>
+  slugs.map((s) => `/${lang}/${s}`).find((p) => built.has(p)) ?? '#consult';
+const alternates = hreflangAlternates(
+  page,
+  groupByTranslationKey(pages).get(page.translation_key) ?? [page],
+  enabledLanguages,
+);
+const meta = pageMeta({ page, alternates });
+const c = getDestinationCopy(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  alternates={alternates}
+  noindex={page.noindex}
+  page={page}
+  pageType="destination"
+  hasForm={true}
+  ogImage="/images/saipan-lagoon-aerial.jpg"
+>
+  <section class="dp-hero">
+    <MarketingImage
+      src="/images/saipan-lagoon-aerial.jpg"
+      alt={en ? 'Saipan lagoon and coastline' : tw ? '塞班海岸與潟湖' : '塞班海岸与潟湖'}
+      width="1280"
+      height="716"
+      fetchpriority="high"
+    />
+    <div class="dp-hero__shade"></div>
+    <div class="container">
+      <p class="eh-kicker">WHY SAIPAN · NORTHERN MARIANA ISLANDS</p>
+      <h1>{c.title}</h1>
+      <p>{c.lead}</p>
+      <a class="eh-button" href="#consult">
+        {c.consult}
+        <span>↗</span>
+      </a>
+    </div>
+    <span class="dp-coordinate">15°11′ N · 145°45′ E</span>
+  </section>
+  <div class="container dp-breadcrumb">
+    <Breadcrumbs lang={lang} page={page} />
+  </div>
+  <section class="container dp-intro">
+    <p class="eh-kicker">A PLACE FOR NEW POSSIBILITIES</p>
+    <h2>{c.intro}</h2>
+    <p>{c.introText}</p>
+    <div class="dp-advantages">
+      {c.advantages.map((title, i) => (
+        <article>
+          <span>0{i + 1}</span>
+          <h3>{title}</h3>
+          <p>{c.advText[i]}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="container dp-travel">
+    <div class="dp-travel__photos">
+      <MarketingImage
+        src="/images/flight-wing.jpg"
+        alt={en ? 'Airplane wing above clouds' : tw ? '雲層之上的機翼' : '云层之上的机翼'}
+        width="1600"
+        height="1063"
+        loading="lazy"
+      />
+      <MarketingImage
+        src="/images/couple-editorial.jpg"
+        alt={
+          en
+            ? 'Personal consultation illustration'
+            : tw
+              ? '一對一溝通場景示意'
+              : '一对一沟通场景示意'
+        }
+        width="1400"
+        height="933"
+        loading="lazy"
+      />
+    </div>
+    <div>
+      <p class="eh-kicker">YOUR JOURNEY, MADE SIMPLE</p>
+      <h2>{c.travel}</h2>
+      <p>{c.travelText}</p>
+      <a class="eh-link" href={route('entry-path')}>
+        {c.travelLink}
+        <span>↗</span>
+      </a>
+    </div>
+  </section>
+  <section class="dp-compare">
+    <div class="container">
+      <p class="eh-kicker">CHOOSE WHAT FITS YOU</p>
+      <h2>{c.comparison}</h2>
+      <p>{c.comparisonText}</p>
+      <div class="dp-table">
+        <table>
+          <caption class="visually-hidden">{c.comparison}</caption>
+          <thead>
+            <tr>
+              {c.cols.map((t) => (
+                <th scope="col">{t}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {c.rows.map((row) => (
+              <tr>
+                {row.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <a class="eh-link" href={route('articles/ivf-abroad-decision-checklist', 'tools')}>
+        {en ? 'Build your decision checklist' : tw ? '整理您的決策清單' : '整理您的决策清单'}
+        <span>↗</span>
+      </a>
+    </div>
+  </section>
+  <section class="container dp-life">
+    <p class="eh-kicker">BETWEEN THE IMPORTANT MOMENTS</p>
+    <h2>{c.life}</h2>
+    <p>{c.lifeText}</p>
+    <div>
+      {c.gallery.map((title, i) => (
+        <figure>
+          <MarketingImage
+            src={
+              ['/images/island-pool.jpg', '/images/stay-room.jpg', '/images/family-moment.jpg'][i]
+            }
+            alt={title}
+            width="1200"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>{title}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <small>{c.note}</small>
+  </section>
+  <section class="container dp-steps">
+    <p class="eh-kicker">FROM IDEA TO ISLAND</p>
+    <h2>{c.stepsTitle}</h2>
+    <ol>
+      {c.steps.map((text, i) => (
+        <li>
+          <span>0{i + 1}</span>
+          <h3>{text}</h3>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <div class="container dp-source">
+    <details>
+      <summary>{c.guide}</summary>
+      <slot />
+    </details>
+  </div>
+  <section class="dp-finish">
+    <div class="container">
+      <p class="eh-kicker">LET’S PLAN YOUR VISIT</p>
+      <h2>{c.finish}</h2>
+      <p>{c.finishText}</p>
+      <a class="eh-button eh-button--dark" href="#consult">
+        {c.consult}
+        <span>↗</span>
+      </a>
+    </div>
+  </section>
+  <ContactForm lang={lang} pageType="destination" pagePath={page.path} ctaLabel={c.consult} />
+</BaseLayout>

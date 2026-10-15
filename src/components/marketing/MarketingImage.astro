@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
+import { marketingImages } from '../../data/marketing/images';
+
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'width' | 'height' | 'alt'> & {
+  src: string;
+  alt: string;
+  width: number | string;
+  height: number | string;
+};
+const { src, width, height, ...attributes } = Astro.props;
+const image = marketingImages[src];
+if (!image) throw new Error(`Unregistered marketing image: ${src}`);
+---
+
+<Image
+  {...attributes}
+  src={image}
+  width={Number(width)}
+  height={Number(height)}
+  format="webp"
+  quality={80}
+  widths={[480, 960, 1440]}
+  sizes={attributes.sizes ?? '(max-width: 600px) 100vw, (max-width: 900px) 70vw, 60vw'}
+/>

@@ -82,11 +82,21 @@ const SUGGESTIONS: Record<string, Record<string, { concerns: string[]; pages: st
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     egg_freezing: {
-      concerns: ['既往治疗记录是否需要翻译', '卵子数量与保存期限的预期', '解冻时机与后续方案衔接', '费用包含项目与续存费用'],
+      concerns: [
+        '既往治疗记录是否需要翻译',
+        '卵子数量与保存期限的预期',
+        '解冻时机与后续方案衔接',
+        '费用包含项目与续存费用',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     donor_egg: {
-      concerns: ['供者筛选标准与匹配流程', '法律协议与权利义务', '费用包含项目与可能加项', '跨境医疗的文件要求'],
+      concerns: [
+        '供者筛选标准与匹配流程',
+        '法律协议与权利义务',
+        '费用包含项目与可能加项',
+        '跨境医疗的文件要求',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     donor_sperm: {
@@ -102,7 +112,12 @@ const SUGGESTIONS: Record<string, Record<string, { concerns: string[]; pages: st
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     recurrent_failure: {
-      concerns: ['既往治疗记录与失败原因分析', '是否需要额外检查或评估', '方案调整的可能性', '费用包含项目'],
+      concerns: [
+        '既往治疗记录与失败原因分析',
+        '是否需要额外检查或评估',
+        '方案调整的可能性',
+        '费用包含项目',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     unsure: {
@@ -140,15 +155,27 @@ const SUGGESTIONS: Record<string, Record<string, { concerns: string[]; pages: st
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     donor_sperm: {
-      concerns: ['Sperm source and legal procedure', 'Legal agreement and rights/obligations', 'What is included in the fee'],
+      concerns: [
+        'Sperm source and legal procedure',
+        'Legal agreement and rights/obligations',
+        'What is included in the fee',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     surrogacy: {
-      concerns: ['Surrogacy agreement and process', 'Legal jurisdiction and document requirements', 'What is included and possible add-ons'],
+      concerns: [
+        'Surrogacy agreement and process',
+        'Legal jurisdiction and document requirements',
+        'What is included and possible add-ons',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     lgbtq: {
-      concerns: ["Partners' legal relationship and documents", 'Program process and monitoring arrangements', 'What is included in the fee'],
+      concerns: [
+        "Partners' legal relationship and documents",
+        'Program process and monitoring arrangements',
+        'What is included in the fee',
+      ],
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     recurrent_failure: {
@@ -161,7 +188,11 @@ const SUGGESTIONS: Record<string, Record<string, { concerns: string[]; pages: st
       pages: ['/programs/ivf-icsi', '/pricing', '/faq'],
     },
     unsure: {
-      concerns: ['What information is needed for initial evaluation', 'Which pages to read first', 'Suggested contact methods and question list'],
+      concerns: [
+        'What information is needed for initial evaluation',
+        'Which pages to read first',
+        'Suggested contact methods and question list',
+      ],
       pages: ['/why-saipan', '/programs/ivf-icsi', '/pricing'],
     },
   },
@@ -184,12 +215,24 @@ const wizardData = Object.fromEntries(
 );
 ---
 
-<div class="wizard" id="wizard" data-program-wizard data-lang={lang} data-wizard-data={JSON.stringify(wizardData)}>
+<div
+  class="wizard"
+  id="wizard"
+  data-program-wizard
+  data-lang={lang}
+  data-wizard-data={JSON.stringify(wizardData)}
+>
   <!-- 步骤指示器 -->
   <div class="wizard__steps" aria-hidden="true">
-    <span class="wizard__step wizard__step--active" data-wizard-step="1">1</span>
-    <span class="wizard__step" data-wizard-step="2">2</span>
-    <span class="wizard__step" data-wizard-step="3">3</span>
+    <span class="wizard__step wizard__step--active" data-wizard-step="1">
+      1
+    </span>
+    <span class="wizard__step" data-wizard-step="2">
+      2
+    </span>
+    <span class="wizard__step" data-wizard-step="3">
+      3
+    </span>
   </div>
 
   <!-- 步骤 1：意图（方案） -->
@@ -197,7 +240,9 @@ const wizardData = Object.fromEntries(
     <legend>{t(lang, 'wizard.step1_title')}</legend>
     <p class="wizard__hint">{t(lang, 'wizard.step1_hint')}</p>
     <div class="field">
-      <label class="field__label" for="wizard-program">{t(lang, 'form.program')}</label>
+      <label class="field__label" for="wizard-program">
+        {t(lang, 'form.program')}
+      </label>
       <select class="select" id="wizard-program" required>
         <option value="">{t(lang, 'wizard.select')}</option>
         {PROGRAM_VALUES.map((value) => (
@@ -205,7 +250,9 @@ const wizardData = Object.fromEntries(
         ))}
       </select>
     </div>
-    <button class="btn btn--primary" type="button" data-wizard-next>{t(lang, 'wizard.next')}</button>
+    <button class="btn btn--primary" type="button" data-wizard-next>
+      {t(lang, 'wizard.next')}
+    </button>
   </fieldset>
 
   <!-- 步骤 2：条件（年龄/国家/既往治疗） -->
@@ -213,20 +260,30 @@ const wizardData = Object.fromEntries(
     <legend>{t(lang, 'wizard.step2_title')}</legend>
     <p class="wizard__hint">{t(lang, 'wizard.step2_hint')}</p>
     <div class="field">
-      <label class="field__label" for="wizard-age">{t(lang, 'form.age')}</label>
+      <label class="field__label" for="wizard-age">
+        {t(lang, 'form.age')}
+      </label>
       <input class="input" id="wizard-age" type="number" min="18" max="75" inputmode="numeric" />
     </div>
     <div class="field">
-      <label class="field__label" for="wizard-country">{t(lang, 'form.country')}</label>
+      <label class="field__label" for="wizard-country">
+        {t(lang, 'form.country')}
+      </label>
       <input class="input" id="wizard-country" type="text" maxlength="80" />
     </div>
     <div class="field">
-      <label class="field__label" for="wizard-past-treatment">{t(lang, 'form.past_treatment')}</label>
+      <label class="field__label" for="wizard-past-treatment">
+        {t(lang, 'form.past_treatment')}
+      </label>
       <textarea class="textarea" id="wizard-past-treatment" maxlength="400"></textarea>
     </div>
     <div class="wizard__actions">
-      <button class="btn btn--secondary" type="button" data-wizard-prev>{t(lang, 'wizard.prev')}</button>
-      <button class="btn btn--primary" type="button" data-wizard-next>{t(lang, 'wizard.next')}</button>
+      <button class="btn btn--secondary" type="button" data-wizard-prev>
+        {t(lang, 'wizard.prev')}
+      </button>
+      <button class="btn btn--primary" type="button" data-wizard-next>
+        {t(lang, 'wizard.next')}
+      </button>
     </div>
   </fieldset>
 
@@ -235,7 +292,9 @@ const wizardData = Object.fromEntries(
     <legend>{t(lang, 'wizard.step3_title')}</legend>
     <p class="wizard__hint">{t(lang, 'wizard.step3_hint')}</p>
     <div class="field">
-      <label class="field__label" for="wizard-timeline">{t(lang, 'form.timeline')}</label>
+      <label class="field__label" for="wizard-timeline">
+        {t(lang, 'form.timeline')}
+      </label>
       <select class="select" id="wizard-timeline" required>
         <option value="">{t(lang, 'wizard.select')}</option>
         {TIMELINE_VALUES.map((value) => (
@@ -244,8 +303,12 @@ const wizardData = Object.fromEntries(
       </select>
     </div>
     <div class="wizard__actions">
-      <button class="btn btn--secondary" type="button" data-wizard-prev>{t(lang, 'wizard.prev')}</button>
-      <button class="btn btn--primary" type="button" data-wizard-finish>{t(lang, 'wizard.finish')}</button>
+      <button class="btn btn--secondary" type="button" data-wizard-prev>
+        {t(lang, 'wizard.prev')}
+      </button>
+      <button class="btn btn--primary" type="button" data-wizard-finish>
+        {t(lang, 'wizard.finish')}
+      </button>
     </div>
   </fieldset>
 
@@ -262,80 +325,88 @@ const wizardData = Object.fromEntries(
       <ul data-wizard-pages></ul>
     </div>
     <p class="wizard__no-contact">{t(lang, 'wizard.no_contact')}</p>
-    <button class="btn btn--primary" type="button" data-wizard-to-form>{t(lang, 'wizard.to_form')}</button>
+    <button class="btn btn--primary" type="button" data-wizard-to-form>
+      {t(lang, 'wizard.to_form')}
+    </button>
   </div>
 </div>
 
 <script>
   (() => {
-  const container = document.querySelector<HTMLElement>('[data-program-wizard]');
-  if (!container) return;
-  const data = JSON.parse(container.dataset.wizardData ?? '{}');
+    const container = document.querySelector<HTMLElement>('[data-program-wizard]');
+    if (!container) return;
+    const data = JSON.parse(container.dataset.wizardData ?? '{}') as Record<
+      string,
+      { concerns: string[]; pages: { href: string; label: string }[] }
+    >;
 
-  const panels = container.querySelectorAll<HTMLElement>('[data-wizard-panel]');
-  const result = container.querySelector<HTMLElement>('[data-wizard-result]');
-  const concernsList = container.querySelector<HTMLElement>('[data-wizard-concerns]');
-  const pagesList = container.querySelector<HTMLElement>('[data-wizard-pages]');
-  const stepIndicators = container.querySelectorAll<HTMLElement>('[data-wizard-step]');
+    const panels = container.querySelectorAll<HTMLElement>('[data-wizard-panel]');
+    const result = container.querySelector<HTMLElement>('[data-wizard-result]');
+    const concernsList = container.querySelector<HTMLElement>('[data-wizard-concerns]');
+    const pagesList = container.querySelector<HTMLElement>('[data-wizard-pages]');
+    const stepIndicators = container.querySelectorAll<HTMLElement>('[data-wizard-step]');
 
-  let currentStep = 1;
+    let currentStep = 1;
 
-  function showStep(step: number) {
-    panels.forEach((panel) => {
-      panel.hidden = panel.dataset.wizardPanel !== String(step);
-    });
-    stepIndicators.forEach((indicator) => {
-      const s = Number(indicator.dataset.wizardStep);
-      indicator.classList.toggle('wizard__step--active', s === step);
-      indicator.classList.toggle('wizard__step--done', s < step);
-    });
-    currentStep = step;
-  }
-
-  function showResult() {
-    const programSelect = container.querySelector<HTMLSelectElement>('#wizard-program');
-    const program = programSelect?.value ?? 'unsure';
-    const item = data[program] ?? data.unsure;
-    if (!item) return;
-
-    if (concernsList) {
-      concernsList.innerHTML = item.concerns.map((c) => `<li>${c}</li>`).join('');
-    }
-    if (pagesList) {
-      pagesList.innerHTML = item.pages.map((p) => `<li><a href="${p.href}">${p.label}</a></li>`).join('');
-      pagesList.parentElement.hidden = item.pages.length === 0;
+    function showStep(step: number) {
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.wizardPanel !== String(step);
+      });
+      stepIndicators.forEach((indicator) => {
+        const s = Number(indicator.dataset.wizardStep);
+        indicator.classList.toggle('wizard__step--active', s === step);
+        indicator.classList.toggle('wizard__step--done', s < step);
+      });
+      currentStep = step;
     }
 
-    panels.forEach((panel) => {
-      panel.hidden = true;
-    });
-    if (result) result.hidden = false;
-    stepIndicators.forEach((indicator) => {
-      indicator.classList.add('wizard__step--done');
-    });
-  }
+    function showResult() {
+      if (!container) return;
+      const programSelect = container.querySelector<HTMLSelectElement>('#wizard-program');
+      const program = programSelect?.value ?? 'unsure';
+      const item = data[program] ?? data.unsure;
+      if (!item) return;
 
-  container.querySelectorAll<HTMLButtonElement>('[data-wizard-next]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (currentStep < 3) showStep(currentStep + 1);
+      if (concernsList) {
+        concernsList.innerHTML = item.concerns.map((c) => `<li>${c}</li>`).join('');
+      }
+      if (pagesList) {
+        pagesList.innerHTML = item.pages
+          .map((p) => `<li><a href="${p.href}">${p.label}</a></li>`)
+          .join('');
+        if (pagesList.parentElement) pagesList.parentElement.hidden = item.pages.length === 0;
+      }
+
+      panels.forEach((panel) => {
+        panel.hidden = true;
+      });
+      if (result) result.hidden = false;
+      stepIndicators.forEach((indicator) => {
+        indicator.classList.add('wizard__step--done');
+      });
+    }
+
+    container.querySelectorAll<HTMLButtonElement>('[data-wizard-next]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (currentStep < 3) showStep(currentStep + 1);
+      });
     });
-  });
 
-  container.querySelectorAll<HTMLButtonElement>('[data-wizard-prev]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (currentStep > 1) showStep(currentStep - 1);
+    container.querySelectorAll<HTMLButtonElement>('[data-wizard-prev]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (currentStep > 1) showStep(currentStep - 1);
+      });
     });
-  });
 
-  const finishBtn = container.querySelector<HTMLButtonElement>('[data-wizard-finish]');
-  finishBtn?.addEventListener('click', () => {
-    showResult();
-  });
+    const finishBtn = container.querySelector<HTMLButtonElement>('[data-wizard-finish]');
+    finishBtn?.addEventListener('click', () => {
+      showResult();
+    });
 
-  const toFormBtn = container.querySelector<HTMLButtonElement>('[data-wizard-to-form]');
-  toFormBtn?.addEventListener('click', () => {
-    const form = document.querySelector<HTMLElement>('#consult');
-    form?.scrollIntoView({ behavior: 'smooth' });
-  });
+    const toFormBtn = container.querySelector<HTMLButtonElement>('[data-wizard-to-form]');
+    toFormBtn?.addEventListener('click', () => {
+      const form = document.querySelector<HTMLElement>('#consult');
+      form?.scrollIntoView({ behavior: 'smooth' });
+    });
   })();
 </script>

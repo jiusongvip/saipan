@@ -1,0 +1,185 @@
+---
+import MarketingImage from '../components/marketing/MarketingImage.astro';
+import { getHomeCopy } from '../data/marketing/home';
+import HeroCarousel from '../components/marketing/HeroCarousel.astro';
+import ConsultationPanel from '../components/marketing/ConsultationPanel.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import HomeDiscovery from '../components/HomeDiscovery.astro';
+import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
+import { canonicalUrl } from '../lib/seo';
+import type { LangCode } from '../lib/config';
+import '../styles/editorial-home.css';
+interface Props {
+  lang: LangCode;
+  page?: PageData | null;
+}
+const { lang, page = null } = Astro.props;
+const copy = getHomeCopy(lang);
+const built = buildVisiblePaths(await loadAllPages());
+const target = (...paths: string[]) =>
+  paths.map((p) => `/${lang}/${p}`).find((p) => built.has(p)) ?? '#consult';
+const paths = [
+  target('programs/ivf-icsi', 'articles'),
+  target('entry-path', 'articles'),
+  target('pricing', 'articles'),
+];
+const medical = target('hospital-lab', 'articles/lab-own-or-outsourced', 'programs/ivf-icsi');
+const island = target('why-saipan', 'entry-path');
+const alternates = (['zh-hans', 'zh-hant', 'en'] as const)
+  .filter((l) => built.has(`/${l}`) || built.has(`/${l}/`))
+  .map((l) => ({
+    hreflang: l === 'zh-hans' ? 'zh-Hans' : l === 'zh-hant' ? 'zh-Hant' : 'en',
+    href: canonicalUrl(l === 'zh-hans' && !page ? '/' : `/${l}`),
+  }));
+alternates.push({ hreflang: 'x-default', href: canonicalUrl('/') });
+
+const metaTitle = page?.title ?? '塞班辅助生殖｜为新的可能，留一点空间';
+const metaDescription =
+  page?.description ??
+  '在塞班探索辅助生殖的更多可能，了解治疗评估、医疗资源、费用构成与跨境出行安排，从一次清晰的沟通开始。';
+---
+
+<BaseLayout
+  lang={lang}
+  title={metaTitle}
+  description={metaDescription}
+  canonical={canonicalUrl(page?.path ?? '/')}
+  alternates={alternates}
+  noindex={page?.noindex ?? false}
+  pageType="home"
+  page={page}
+  hasForm={true}
+  ogImage="/images/saipan-lagoon-aerial.jpg"
+>
+  <HeroCarousel lang={lang} />
+  <ConsultationPanel lang={lang} />
+  <div class="eh-values">
+    <div class="container">
+      {copy.nav.map((text, i) => (
+        <span>
+          <small>0{i + 1}</small>
+          {text}
+        </span>
+      ))}
+    </div>
+  </div>
+  <section class="eh-intro container">
+    <p class="eh-kicker">MADE PERSONAL</p>
+    <h2>{copy.intro}</h2>
+    <p>{copy.introText}</p>
+  </section>
+  <section class="container eh-portals" aria-label={copy.discover}>
+    {copy.options.map((title, i) => (
+      <a class={`eh-portal eh-portal--${i}`} href={paths[i]}>
+        <MarketingImage
+          src={
+            [
+              '/images/couple-editorial.jpg',
+              '/images/saipan-lagoon-aerial.jpg',
+              '/images/quiet-botanical.jpg',
+            ][i]
+          }
+          alt={copy.imageAlt[[1, 4, 2][i]]}
+          width="1000"
+          height="667"
+          loading="lazy"
+        />
+        <div>
+          <small>
+            0{i + 1} / {copy.descriptions[i]}
+          </small>
+          <h3>
+            {title}
+            <span>↗</span>
+          </h3>
+        </div>
+      </a>
+    ))}
+  </section>
+  <section class="container eh-care" id="medical-care">
+    <div class="eh-care__photos">
+      <MarketingImage
+        src="/images/care-consultation.jpg"
+        alt={copy.imageAlt[1]}
+        width="1000"
+        height="667"
+        loading="lazy"
+      />
+      <figure>
+        <MarketingImage
+          src="/images/laboratory-care.jpg"
+          alt={copy.imageAlt[3]}
+          width="1000"
+          height="667"
+          loading="lazy"
+        />
+        <figcaption>{copy.careNote}</figcaption>
+      </figure>
+      <span class="eh-orbit" aria-hidden="true">
+        CARE
+        <br />
+        WITH YOU
+        <br />
+        IN MIND
+      </span>
+    </div>
+    <div class="eh-care__copy">
+      <p class="eh-kicker">THE SCIENCE. THE HUMAN.</p>
+      <h2>{copy.care}</h2>
+      <p>{copy.careText}</p>
+      <a class="eh-link" href={medical}>
+        {copy.careLink}
+        <span>↗</span>
+      </a>
+    </div>
+  </section>
+  <section class="eh-island">
+    <MarketingImage
+      src="/images/saipan-lagoon-aerial.jpg"
+      alt={copy.imageAlt[4]}
+      width="1280"
+      height="716"
+      loading="lazy"
+    />
+    <div class="container">
+      <div class="eh-island__card">
+        <p class="eh-kicker">15°11′ N · 145°45′ E</p>
+        <h2>{copy.island}</h2>
+        <p>{copy.islandText}</p>
+        <a class="eh-link" href={island}>
+          {copy.islandLink}
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+    <span class="eh-island__word" aria-hidden="true">
+      Saipan
+    </span>
+  </section>
+  <section class="container eh-journey">
+    <div>
+      <p class="eh-kicker">YOUR PACE. YOUR PATH.</p>
+      <h2>{copy.journey}</h2>
+    </div>
+    <ol>
+      {copy.steps.map((step, i) => (
+        <li>
+          <span>0{i + 1}</span>
+          <h3>{step}</h3>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <HomeDiscovery lang={lang} />
+  <section class="eh-start container">
+    <p class="eh-kicker">LET’S BEGIN</p>
+    <h2>{copy.start}</h2>
+    <p>{copy.startText}</p>
+    <a class="eh-button eh-button--dark" href="#consult">
+      {copy.consult}
+      <span>↗</span>
+    </a>
+  </section>
+  <ContactForm lang={lang} pageType="home" pagePath={page?.path ?? '/'} ctaLabel={copy.consult} />
+</BaseLayout>

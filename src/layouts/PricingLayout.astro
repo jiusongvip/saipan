@@ -1,0 +1,159 @@
+---
+import MarketingImage from '../components/marketing/MarketingImage.astro';
+import { getPricingCopy } from '../data/marketing/pricing';
+import QuoteBrief from '../components/marketing/QuoteBrief.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { loadAllPages, groupByTranslationKey, type PageData } from '../lib/content';
+import { enabledLanguages } from '../lib/config';
+import { hreflangAlternates, pageMeta } from '../lib/seo';
+import '../styles/editorial-home.css';
+import '../styles/destination.css';
+import '../styles/pricing-page.css';
+const { page } = Astro.props as { page: PageData };
+const lang = page.lang,
+  en = lang === 'en',
+  tw = lang === 'zh-hant';
+const pages = await loadAllPages();
+const alternates = hreflangAlternates(
+  page,
+  groupByTranslationKey(pages).get(page.translation_key) ?? [page],
+  enabledLanguages,
+);
+const meta = pageMeta({ page, alternates });
+const c = getPricingCopy(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  alternates={alternates}
+  noindex={page.noindex}
+  page={page}
+  pageType="pricing"
+  hasForm={true}
+  ogImage="/images/couple-editorial.jpg"
+>
+  <section class="pp-hero">
+    <div class="container">
+      <div>
+        <p class="eh-kicker">COSTS & SERVICES · SAIPAN IVF</p>
+        <h1>{c.title}</h1>
+        <p>{c.lead}</p>
+        <a class="eh-button eh-button--dark" href="#quote-planner">
+          {c.cta}
+          <span>↗</span>
+        </a>
+      </div>
+      <MarketingImage
+        src="/images/couple-editorial.jpg"
+        alt={
+          en ? 'Consultation scene illustration' : tw ? '一對一溝通場景示意' : '一对一沟通场景示意'
+        }
+        width="1400"
+        height="933"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+  <div class="container dp-breadcrumb">
+    <Breadcrumbs lang={lang} page={page} />
+  </div>
+  <section class="container pp-costs">
+    <p class="eh-kicker">THE WHOLE PICTURE</p>
+    <h2>{c.intro}</h2>
+    <p class="pp-lede">{c.introText}</p>
+    <div>
+      {c.groups.map((title, i) => (
+        <article>
+          <MarketingImage
+            src={
+              [
+                '/images/laboratory-care.jpg',
+                '/images/care-consultation.jpg',
+                '/images/stay-room.jpg',
+                '/images/flight-wing.jpg',
+              ][i]
+            }
+            alt={title}
+            width="1000"
+            height="667"
+            loading="lazy"
+          />
+          <span>0{i + 1}</span>
+          <h3>{title}</h3>
+          <p>{c.notes[i]}</p>
+        </article>
+      ))}
+    </div>
+    <small>{c.noPrice}</small>
+  </section>
+  <section class="pp-services">
+    <div class="container">
+      <div>
+        <p class="eh-kicker">CARE BEYOND THE CLINIC</p>
+        <h2>{c.service}</h2>
+        <p class="pp-lede">{c.serviceText}</p>
+      </div>
+      <div>
+        {c.services.map((title, i) => (
+          <article>
+            <span>0{i + 1}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{c.serviceNotes[i]}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="container pp-inclusions">
+    <p class="eh-kicker">ASK BEFORE YOU COMMIT</p>
+    <h2>{c.tableTitle}</h2>
+    <p class="pp-lede">{c.tableText}</p>
+    <div class="dp-table">
+      <table>
+        <caption class="visually-hidden">{c.tableTitle}</caption>
+        <thead>
+          <tr>
+            {c.cols.map((text) => (
+              <th scope="col">{text}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {c.rows.map((row) => (
+            <tr>
+              {row.map((text, i) => (i === 0 ? <th scope="row">{text}</th> : <td>{text}</td>))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <QuoteBrief lang={lang} />
+  <section class="container pp-faq">
+    <p class="eh-kicker">CLARITY FIRST</p>
+    <h2>{c.faq}</h2>
+    <div>
+      {c.qs.map((q, i) => (
+        <details>
+          <summary>{q}</summary>
+          <p>{c.as[i]}</p>
+        </details>
+      ))}
+    </div>
+    <small>{c.note}</small>
+  </section>
+  <div class="container dp-source">
+    <details>
+      <summary>{c.details}</summary>
+      <slot />
+    </details>
+  </div>
+  <ContactForm lang={lang} pageType="pricing" pagePath={page.path} ctaLabel={c.cta} />
+</BaseLayout>

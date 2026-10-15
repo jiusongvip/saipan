@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Saipan Reproductive Center official site (saipanivf.org): multilingual static acquisition and booking site.",
+  "description": "Multilingual Saipan IVF website built with Astro components, TypeScript and MDX.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -11,7 +11,7 @@
     "build:preview": "node scripts/with-env.mjs INCLUDE_DRAFTS=1 astro build",
     "build:demo": "node scripts/with-env.mjs INCLUDE_DRAFTS=1 REVIEW=0 astro build",
     "preview": "astro preview",
-    "preview:serve": "node scripts/serve-dist.mjs",
+    "preview:serve": "astro preview",
     "check": "astro check",
     "typecheck": "tsc --noEmit",
     "astro": "astro",
@@ -23,16 +23,21 @@
     "links": "tsx scripts/check-links.ts",
     "guardrails": "tsx scripts/guardrails.ts",
     "audit": "tsx scripts/audit-dist.ts",
-    "test": "tsx --test tests/unit/*.test.ts tests/integration/*.test.ts",
-    "ci": "pnpm run typecheck && pnpm run validate:content && pnpm run validate:policy && pnpm run validate:claims && pnpm run test && pnpm run build && pnpm run validate:seo && pnpm run links && pnpm run guardrails && pnpm run audit"
+    "test": "node --import tsx --test tests/unit/*.test.ts tests/integration/*.test.ts",
+    "ci": "pnpm run typecheck && pnpm run validate:content && pnpm run validate:policy && pnpm run validate:claims && pnpm run test && pnpm run build && pnpm run validate:seo && pnpm run links && pnpm run guardrails && pnpm run audit",
+    "dev:demo": "node scripts/with-env.mjs INCLUDE_DRAFTS=1 REVIEW=0 astro dev",
+    "format": "prettier --write src"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
-    "astro": "^5.18.2"
+    "astro": "^5.18.2",
+    "sharp": "0.34.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@types/node": "^24.0.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0",
     "yaml": "^2.9.1"

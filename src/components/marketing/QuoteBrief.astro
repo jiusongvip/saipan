@@ -1,0 +1,69 @@
+---
+import type { LangCode } from '../../lib/config';
+import { getPricingCopy } from '../../data/marketing/pricing';
+interface Props {
+  lang: LangCode;
+}
+const { lang } = Astro.props;
+const c = getPricingCopy(lang);
+---
+
+<section class="pp-planner" id="quote-planner" data-quote-planner>
+  <div class="container">
+    <div>
+      <p class="eh-kicker">YOUR PERSONAL BRIEF</p>
+      <h2>{c.planner}</h2>
+      <p class="pp-lede">{c.plannerText}</p>
+      <div class="pp-fields">
+        {[
+          { label: c.need, options: c.needs },
+          { label: c.people, options: c.parties },
+          { label: c.room, options: c.rooms },
+        ].map((field, i) => (
+          <label>
+            {field.label}
+            <select data-quote-select data-result-label={[c.focus, c.companions, c.stay][i]}>
+              {field.options.map((text) => (
+                <option>{text}</option>
+              ))}
+            </select>
+          </label>
+        ))}
+      </div>
+      <button type="button" class="eh-button eh-button--dark" data-quote-generate>
+        {c.generate}
+        <span>↗</span>
+      </button>
+    </div>
+    <div class="pp-brief">
+      <p class="eh-kicker">READY TO DISCUSS</p>
+      <h3>{c.result}</h3>
+      <div data-quote-result aria-live="polite">
+        {[c.focus, c.companions, c.stay].map((text, i) => (
+          <p>
+            <strong>{text}</strong>
+            <span data-quote-value>{[c.needs[0], c.parties[0], c.rooms[0]][i]}</span>
+          </p>
+        ))}
+      </div>
+      <ul>
+        {c.questions.map((text) => (
+          <li>{text}</li>
+        ))}
+      </ul>
+      <div class="pp-brief__actions">
+        <button type="button" data-quote-copy data-copied={c.copied} data-failed={c.copyFail}>
+          {c.copy}
+        </button>
+        <a class="eh-link" href="#consult">
+          {c.contact}
+          <span>↗</span>
+        </a>
+      </div>
+      <p data-quote-status role="status"></p>
+    </div>
+  </div>
+</section>
+<script>
+  import '../../scripts/quote-brief';
+</script>

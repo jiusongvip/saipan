@@ -1,38 +1,35 @@
 ---
 import { buildVisible, loadAllPages, pathToRoute, type PageData } from '../lib/content';
-import PricingPage from '../components/PricingPage.astro';
-import DestinationPage from '../components/DestinationPage.astro';
-import EditorialHome from '../components/EditorialHome.astro';
+import { pageView } from '../lib/page-view';
+import HomeLayout from '../layouts/HomeLayout.astro';
+import DestinationLayout from '../layouts/DestinationLayout.astro';
+import PricingLayout from '../layouts/PricingLayout.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
 import LandingLayout from '../layouts/LandingLayout.astro';
 
 export async function getStaticPaths() {
-  const pages = buildVisible(await loadAllPages());
-  return pages.map((page) => ({ params: { slug: pathToRoute(page.path) }, props: { page } }));
+  return buildVisible(await loadAllPages()).map((page) => ({
+    params: { slug: pathToRoute(page.path) },
+    props: { page },
+  }));
 }
 
-const { page } = Astro.props as { page: PageData };
-
-const LANDING_TEMPLATES = new Set([
-  'home',
-  'why_destination',
-  'city',
-  'entry_path',
-  'program',
-  'pricing',
-  'success_data',
-  'hospital_lab',
-  'doctor',
-  'egg_donor_program',
-]);
-
-const isLanding = LANDING_TEMPLATES.has(page.template);
-const withForm = page.template !== 'contact_success';
-const Layout = isLanding ? LandingLayout : ContentLayout;
-const rendered = await page.render?.();
+interface Props {
+  page: PageData;
+}
+const { page } = Astro.props;
+const view = pageView(page);
+const Layout = {
+  home: HomeLayout,
+  destination: DestinationLayout,
+  pricing: PricingLayout,
+  landing: LandingLayout,
+  content: ContentLayout,
+}[view];
+const rendered = view === 'home' ? null : await page.render?.();
 const Content = rendered?.Content;
 ---
 
-{page.template === 'home' ? <EditorialHome lang={page.lang} page={page} /> : (page.translation_key === 'why_saipan' || (page.lang === 'zh-hans' && page.translation_key === 'article_saipan_vs_us_mainland')) ? <DestinationPage page={page}>{Content ? <Content /> : null}</DestinationPage> : (page.translation_key === 'pricing' || (page.lang === 'zh-hans' && page.translation_key === 'article_price_ranges_and_addon_items')) ? <PricingPage page={page}>{Content ? <Content /> : null}</PricingPage> : <Layout page={page} withForm={withForm}>
-  {Content ? <Content /> : null}
-</Layout>}
+<Layout page={page} lang={page.lang} withForm={page.template !== 'contact_success'}>
+  {Content && <Content />}
+</Layout>

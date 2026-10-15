@@ -37,70 +37,77 @@
 |---|---|---|---|---|---|---|---|---|
 | /404 | 7371 B | 2675 B | 3 | 1 | 0 B | 4 | 0 | 无 |
 | /en/contact-success | 7934 B | 2837 B | 5 | 3 | 0 B | 4 | 0 | 无 |
-| /en/entry-path | 23839 B | 6722 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /en | 28272 B | 8563 B | 19 | 3 | 0 B | 9 | 13 | 无 |
-| /en/pricing | 21309 B | 6985 B | 11 | 3 | 0 B | 7 | 5 | 无 |
-| /en/programs/ivf-icsi | 23993 B | 6737 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /en/tools | 15869 B | 5030 B | 6 | 3 | 0 B | 8 | 0 | 无 |
-| /en/why-saipan | 18555 B | 6156 B | 12 | 3 | 0 B | 6 | 6 | 无 |
-| / | 28049 B | 9374 B | 18 | 2 | 0 B | 8 | 13 | 无 |
-| /zh-hans/articles/amh-low-ovarian-reserve | 18296 B | 7052 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/documents-before-first-visit | 15975 B | 5633 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/entry-policy-change-what-to-check | 18675 B | 7142 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/flights-to-saipan-routes | 18168 B | 6951 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/how-to-read-success-statistics | 16853 B | 6149 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles | 23998 B | 7552 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/ivf-abroad-decision-checklist | 16312 B | 5984 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/lab-own-or-outsourced | 16974 B | 6191 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/price-ranges-and-addon-items | 24528 B | 9163 B | 11 | 3 | 0 B | 7 | 5 | 无 |
-| /zh-hans/articles/saipan-vs-us-mainland | 22757 B | 8850 B | 12 | 3 | 0 B | 6 | 6 | 无 |
-| /zh-hans/articles/stay-itinerary-planning | 16269 B | 5945 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/translation-and-support-arrangements | 16167 B | 5785 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hans/articles/us-born-baby-advantages | 18186 B | 6947 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /en/entry-path | 23761 B | 6598 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /en | 31859 B | 9062 B | 19 | 3 | 0 B | 9 | 13 | 无 |
+| /en/pricing | 22724 B | 7172 B | 11 | 3 | 0 B | 7 | 5 | 无 |
+| /en/programs/ivf-icsi | 23915 B | 6612 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /en/tools | 15731 B | 4890 B | 6 | 3 | 0 B | 8 | 0 | 无 |
+| /en/why-saipan | 20141 B | 6395 B | 12 | 3 | 0 B | 6 | 6 | 无 |
+| / | 31638 B | 9919 B | 18 | 2 | 0 B | 8 | 13 | 无 |
+| /zh-hans/articles/amh-low-ovarian-reserve | 18160 B | 6951 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/documents-before-first-visit | 15839 B | 5533 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/entry-policy-change-what-to-check | 18539 B | 7042 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/flights-to-saipan-routes | 18032 B | 6854 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/how-to-read-success-statistics | 16717 B | 6047 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles | 23862 B | 7452 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/ivf-abroad-decision-checklist | 16176 B | 5884 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/lab-own-or-outsourced | 16838 B | 6089 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/price-ranges-and-addon-items | 25945 B | 9422 B | 11 | 3 | 0 B | 7 | 5 | 无 |
+| /zh-hans/articles/saipan-vs-us-mainland | 24345 B | 9167 B | 12 | 3 | 0 B | 6 | 6 | 无 |
+| /zh-hans/articles/stay-itinerary-planning | 16133 B | 5845 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/translation-and-support-arrangements | 16031 B | 5680 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hans/articles/us-born-baby-advantages | 18050 B | 6845 B | 6 | 3 | 0 B | 6 | 0 | 无 |
 | /zh-hans/contact-success | 8367 B | 3257 B | 5 | 3 | 0 B | 4 | 0 | 无 |
-| /zh-hans/entry-path | 23078 B | 7316 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /zh-hans | 28721 B | 9607 B | 19 | 3 | 0 B | 9 | 13 | 无 |
-| /zh-hans/programs/ivf-icsi | 23162 B | 7183 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /zh-hans/tools | 16414 B | 5550 B | 6 | 3 | 0 B | 8 | 0 | 无 |
-| /zh-hant/articles/amh-low-ovarian-reserve | 18623 B | 7049 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/documents-before-first-visit | 16463 B | 5719 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/entry-policy-change-what-to-check | 19059 B | 7242 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/flights-to-saipan-routes | 18689 B | 7123 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/how-to-read-success-statistics | 17329 B | 6237 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles | 24486 B | 7623 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/ivf-abroad-decision-checklist | 16928 B | 6107 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/lab-own-or-outsourced | 17402 B | 6267 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/price-ranges-and-addon-items | 18729 B | 6944 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/saipan-vs-us-mainland | 19031 B | 7155 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/stay-itinerary-planning | 16840 B | 6053 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/translation-and-support-arrangements | 16637 B | 5843 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/articles/us-born-baby-advantages | 18661 B | 7105 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/cities/taipei | 24482 B | 7479 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /zh-hans/entry-path | 23002 B | 7223 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /zh-hans | 32310 B | 10158 B | 19 | 3 | 0 B | 9 | 13 | 无 |
+| /zh-hans/programs/ivf-icsi | 23086 B | 7096 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /zh-hans/tools | 16278 B | 5443 B | 6 | 3 | 0 B | 8 | 0 | 无 |
+| /zh-hant/articles/amh-low-ovarian-reserve | 18485 B | 6942 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/documents-before-first-visit | 16325 B | 5610 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/entry-policy-change-what-to-check | 18921 B | 7135 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/flights-to-saipan-routes | 18551 B | 7013 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/how-to-read-success-statistics | 17191 B | 6131 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles | 24348 B | 7514 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/ivf-abroad-decision-checklist | 16790 B | 5996 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/lab-own-or-outsourced | 17264 B | 6159 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/price-ranges-and-addon-items | 18591 B | 6840 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/saipan-vs-us-mainland | 18893 B | 7047 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/stay-itinerary-planning | 16702 B | 5944 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/translation-and-support-arrangements | 16499 B | 5735 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/articles/us-born-baby-advantages | 18523 B | 6996 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/cities/taipei | 24404 B | 7381 B | 7 | 3 | 0 B | 7 | 1 | 无 |
 | /zh-hant/contact-success | 8787 B | 3343 B | 5 | 3 | 0 B | 4 | 0 | 无 |
-| /zh-hant/entry-path | 24508 B | 7435 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /zh-hant/faq | 15743 B | 5388 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant | 28816 B | 9658 B | 19 | 3 | 0 B | 9 | 13 | 无 |
-| /zh-hant/legal/privacy-and-data-protection | 15517 B | 5323 B | 6 | 3 | 0 B | 6 | 0 | 无 |
-| /zh-hant/pricing | 21624 B | 7748 B | 11 | 3 | 0 B | 7 | 5 | 无 |
-| /zh-hant/programs/ivf-icsi | 24598 B | 7302 B | 7 | 3 | 0 B | 7 | 1 | 无 |
-| /zh-hant/tools | 16942 B | 5661 B | 6 | 3 | 0 B | 8 | 0 | 无 |
-| /zh-hant/why-saipan | 20456 B | 7558 B | 12 | 3 | 0 B | 6 | 6 | 无 |
+| /zh-hant/entry-path | 24430 B | 7335 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /zh-hant/faq | 15605 B | 5282 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant | 32403 B | 10205 B | 19 | 3 | 0 B | 9 | 13 | 无 |
+| /zh-hant/legal/privacy-and-data-protection | 15379 B | 5214 B | 6 | 3 | 0 B | 6 | 0 | 无 |
+| /zh-hant/pricing | 23039 B | 7988 B | 11 | 3 | 0 B | 7 | 5 | 无 |
+| /zh-hant/programs/ivf-icsi | 24520 B | 7203 B | 7 | 3 | 0 B | 7 | 1 | 无 |
+| /zh-hant/tools | 16804 B | 5549 B | 6 | 3 | 0 B | 8 | 0 | 无 |
+| /zh-hant/why-saipan | 22042 B | 7832 B | 12 | 3 | 0 B | 6 | 6 | 无 |
 
 ### 本地资源体积
 
 | 资源 | 字节 |
 |---|---|
-| /images/american-flag.jpg | 494262 B |
-| /images/quiet-botanical.jpg | 399736 B |
-| /images/daily-meals.jpg | 269934 B |
-| /images/family-moment.jpg | 263491 B |
-| /images/island-pool.jpg | 252530 B |
-| /images/stay-room.jpg | 200424 B |
-| /images/flight-wing.jpg | 172240 B |
-| /images/couple-editorial.jpg | 145707 B |
-| /images/laboratory-care.jpg | 144088 B |
-| /images/care-consultation.jpg | 82019 B |
+| /_astro/american-flag.Bt3XNTC8_Z2sbM74.webp | 301512 B |
+| /_astro/quiet-botanical.B46i-_cq_18gRwE.webp | 221470 B |
+| /_astro/daily-meals.D5FJZIdz_Z12nSfd.webp | 206272 B |
+| /_astro/island-pool.Di-T_Adp_2oNPq9.webp | 151810 B |
+| /_astro/family-moment.B_ZoW8J5_Z2wsoQz.webp | 94374 B |
+| /_astro/stay-room.DkDJbHG5_ZXOBbK.webp | 91102 B |
+| /_astro/saipan-lagoon-aerial.BtGVuRZ5_2bJdJO.webp | 72398 B |
+| /_astro/laboratory-care.C3-g2iet_1j3RW0.webp | 72272 B |
+| /_astro/stay-room.DkDJbHG5_ZpH9wN.webp | 66430 B |
+| /_astro/saipan-lagoon-aerial.BtGVuRZ5_Z25Qp4b.webp | 54486 B |
+| /_astro/couple-editorial.CQp1pqN8_16rKHo.webp | 52904 B |
+| /_astro/flight-wing.C0W1SxLN_ZRjupH.webp | 48224 B |
+| /_astro/flight-wing.C0W1SxLN_E97gT.webp | 48224 B |
+| /_astro/saipan-lagoon-aerial.BtGVuRZ5_RXp7S.webp | 43258 B |
+| /_astro/couple-editorial.CQp1pqN8_2bCX2d.webp | 34280 B |
+| /_astro/care-consultation.BHRctu1B_hbNWI.webp | 33422 B |
 | /images/saipan-lagoon-aerial.jpg | 26763 B |
+| /_astro/flight-wing.C0W1SxLN_9MR9v.webp | 25082 B |
 | /_astro/_slug_.BKg5Jhpx.css | 20635 B |
 | /_astro/_slug_.BQxXWklN.css | 19277 B |
 | /_astro/_slug_.nQHQYRnD.css | 10944 B |

@@ -36,7 +36,7 @@ export interface PageData {
     image: string | null;
   } | null;
   /** MDX 正文渲染函数；由 layout 调用。 */
-  render?: () => Promise<unknown>;
+  render?: () => ReturnType<typeof render>;
 }
 
 /** 生产构建中语言未启用（日/韩）时，其内容一律不参与路由与索引。 */

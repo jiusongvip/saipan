@@ -272,7 +272,7 @@
 
 ## 当前本地预览状态（供用户查看）
 
-- 本地服务器：`node scripts/serve-dist.mjs`，端口 **4322**（上一轮会话的进程仍在运行，按请求实时读盘）。
+- 本地服务器：已改为 Astro 原生预览：`pnpm run build:demo && pnpm run preview`；开发用 `pnpm run dev:demo`。
 - 浏览器已打开 5 个标签页：`/`（语言选择）、`/zh-hant`（首页）、`/zh-hant/pricing`（费用+表单）、`/zh-hant/articles`（科普 hub，7 张卡片）、`/zh-hant/articles/entry-policy-change-what-to-check`（新草稿文章）。
 - `dist/` 当前为**演示构建**（`INCLUDE_DRAFTS=1 REVIEW=0`）：33 页、无审阅外壳，**仅供本地查看，禁止指向生产域名**。
 - 切换构建形态：预览（带 DRAFT 横幅与待核槽位）用 `pnpm run build:preview`；生产（当前 0 页上线）用 `pnpm run build`。
