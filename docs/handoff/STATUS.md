@@ -3,7 +3,7 @@
 - 更新时间：2026-10-14（本机时间，第四轮）
 - 当前阶段：**对标优化轮**（用户指令「七项可吸取的优点 134567 都可以做 2 不做……有了框架里面的文字可以随时补充修改……作为一个可以直接上线的版本来做……你也可以先写一两份来凑数」→ 实施批准的第 1/3/4/5/6/7 项框架层优化；第 2 项 methodology 页明确不做）
 - 阶段状态：**READY_FOR_REVIEW**。CI 顺序全链路实测全绿：typecheck 0 error → 内容/政策/数据/话术校验 0 error（数据校验 2 warning 为 ja/ko 未启用，属设计内）→ **58/58 测试** → 生产构建 2 页 → validate:seo 0/0 → links 0/0 → audit 0/0；预览/演示构建 42 页 650 链 0 错、演示外壳标记 0 命中。
-- 当前分支与 commit：**无法填写 —— 本工作区仍不是 git 仓库**（阻塞项 1 继续生效）。本轮未 init、未 commit、未建分支。
+- 当前分支与 commit：**`main` @ `b759624`**。**阻塞项 1（不是 git 仓库）已解除** —— 2026-10-15 10:28 本机时间，用户指令「你先把这个项目的代码上传到 https://github.com/jiusongvip/saipan」→ `git init -b main` + 初始提交 189 个文件 + 推送成功；远端 `refs/heads/main` 与本地 HEAD 同哈希，递归 tree 比对 189/189 无差集。仓库 **`jiusongvip/saipan` 为 public**（`private: false`）。`.gitignore` 本次新增 `.opencode/`、`.agents/`、`.qoder/`（agent 工具目录不入库），`dist/`、`node_modules/`、`.astro/`、`.env` 原已在列，故**仓库内是纯源码 + 文档，无构建产物、无密钥**（`.env.example` 保留）。提交身份用命令行内联 `-c user.name/-c user.email` 指定为 `NEC01 <spwo@qq.com>`，**未改动任何 git 配置文件**（本机全局 `user.name` 现为坏值 `NEC01\nec01`，含字面 `\n`，需用户自行修）。
 
 ## 最新执行状态（第九轮 · 根首页图标换 Lucide，2026-10-15 09:34 本机时间）
 
