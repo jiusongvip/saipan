@@ -46,3 +46,7 @@ Removed the hero consultation button. Added a persistent right-side online consu
 ## Expanded consultation invitation
 
 Replaced the thin right-side entry with an immediately visible consultation card: branded header, welcoming message, three topic links and a primary contact action. Starts expanded, supports minimizing and reopening, and collapses when a link takes the visitor to the existing contact area. All three language homepages have localized copy. No live-agent presence or unconnected message submission is simulated.
+
+## Concise promotional copy
+
+Shortened the Chinese headlines to four direct themes: 海岛度假 / 安心求子; 专业医疗 / 温暖相伴; 塞班出生 / 美国公民？; 飞向塞班 / 好孕启程. Citizenship remains phrased as a visitor question, with qualification in the accompanying caption. Updated related section headings and consultation invitation to more direct marketing language, with Traditional Chinese and English counterparts. No success guarantee or unconditional nationality promise added.
