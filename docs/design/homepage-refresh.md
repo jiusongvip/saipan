@@ -38,3 +38,7 @@ TypeScript, 50-page demo build, 969 links and generated-site audit passed. Brows
 ## Automatic hero and explicit explanations
 
 Hero now advances every 6.5 seconds and synchronizes each image with its own localized headline and short description. Copy explicitly covers island rest alongside medical visits, one-to-one communication, nationality rules and birth documents, and flight/appointment planning. No nationality or route availability guarantee is added. Pause/resume control, hover/focus suspension, offscreen/tab-hidden suspension and reduced-motion handling are included. Manual navigation and swiping remain available.
+
+## Consultation entry
+
+Removed the hero consultation button. Added a persistent right-side online consultation link with localized simple copy, targeting the existing #consult section. On mobile it sits at the lower right. Its label and href remain directly editable in EditorialHome.

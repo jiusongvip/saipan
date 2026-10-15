@@ -39,7 +39,7 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
  {heroSlides.map((slide,i)=><img class:list={['eh-hero__image',{'is-active':i===0}]} src={slide.src} alt={slide.alt} width={i===1?1400:1600} height="933" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} data-hero-image aria-hidden={i!==0?'true':undefined} />)}
  </div>
  <div class="eh-hero__shade"></div>
- <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1 data-hero-title>{heroSlides[0].title}</h1><p class="eh-hero__sub" data-hero-caption>{heroSlides[0].text}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
+ <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1 data-hero-title>{heroSlides[0].title}</h1><p class="eh-hero__sub" data-hero-caption>{heroSlides[0].text}</p></div>
  <div class="container eh-hero__controls">
   <div class="eh-hero__tabs" aria-label={en?'Choose a photograph':hant?'切換主視覺':'切换主视觉'}>
    {heroSlides.map((slide,i)=><button type="button" class:list={['eh-hero__tab',{'is-active':i===0}]} aria-pressed={i===0} data-hero-tab data-caption={slide.text} data-title={slide.title}><small>0{i+1}</small><span>{slide.label}</span></button>)}
@@ -48,6 +48,7 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
  </div>
  <span class="visually-hidden" data-hero-status aria-live="polite" aria-atomic="true"></span>
 </section>
+<a class="eh-consult-entry" href="#consult" aria-label={en?'Online consultation':hant?'線上諮詢':'在线咨询'}><span aria-hidden="true">↗</span><span>{en?'Online consultation':hant?'線上諮詢':'在线咨询'}</span></a>
 <div class="eh-values"><div class="container">{copy.nav.map((text,i)=><span><small>0{i+1}</small>{text}</span>)}</div></div>
 <section class="eh-intro container"><p class="eh-kicker">MADE PERSONAL</p><h2>{copy.intro}</h2><p>{copy.introText}</p></section>
 <section class="container eh-portals" aria-label={copy.discover}>
