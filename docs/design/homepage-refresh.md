@@ -42,3 +42,7 @@ Hero now advances every 6.5 seconds and synchronizes each image with its own loc
 ## Consultation entry
 
 Removed the hero consultation button. Added a persistent right-side online consultation link with localized simple copy, targeting the existing #consult section. On mobile it sits at the lower right. Its label and href remain directly editable in EditorialHome.
+
+## Expanded consultation invitation
+
+Replaced the thin right-side entry with an immediately visible consultation card: branded header, welcoming message, three topic links and a primary contact action. Starts expanded, supports minimizing and reopening, and collapses when a link takes the visitor to the existing contact area. All three language homepages have localized copy. No live-agent presence or unconnected message submission is simulated.

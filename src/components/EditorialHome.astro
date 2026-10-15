@@ -48,7 +48,11 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
  </div>
  <span class="visually-hidden" data-hero-status aria-live="polite" aria-atomic="true"></span>
 </section>
-<a class="eh-consult-entry" href="#consult" aria-label={en?'Online consultation':hant?'線上諮詢':'在线咨询'}><span aria-hidden="true">↗</span><span>{en?'Online consultation':hant?'線上諮詢':'在线咨询'}</span></a>
+<aside class="eh-chat" data-consult-panel aria-label={en?'Online consultation':hant?'線上諮詢':'在线咨询'}>
+ <div class="eh-chat__header"><span class="eh-chat__avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></span><div><strong>{en?'Let’s talk about your plans':hant?'塞班 IVF · 線上諮詢':'塞班 IVF · 在线咨询'}</strong><small>{en?'A clearer next step starts here':hant?'先了解，再安心決定':'先了解，再安心决定'}</small></div><button type="button" data-consult-close aria-label={en?'Minimize consultation':hant?'收起諮詢窗口':'收起咨询窗口'}>−</button></div>
+ <div class="eh-chat__body"><p class="eh-chat__hello">{en?'Hello, welcome 👋':hant?'您好，歡迎諮詢 👋':'您好，欢迎咨询 👋'}</p><p class="eh-chat__bubble">{en?'Thinking about fertility care in Saipan? What would you like to know first?':hant?'想了解塞班輔助生殖？治療方案、費用和出行安排，我們陪您一步步看清楚。':'想了解塞班辅助生殖？治疗方案、费用和出行安排，我们陪您一步步看清楚。'}</p><span class="eh-chat__prompt">{en?'Where would you like to start?':hant?'您想先了解哪方面？':'您想先了解哪方面？'}</span><div class="eh-chat__topics">{(en?['Treatment options','Costs & budget','Travel planning']:hant?['治療方案','費用預算','出行安排']:['治疗方案','费用预算','出行安排']).map(text=><a href="#consult">{text}<span>↗</span></a>)}</div><a class="eh-chat__cta" href="#consult">{en?'Tell us what you need':hant?'聊聊您的需求':'聊聊您的需求'}<span>→</span></a></div>
+</aside>
+<button type="button" class="eh-chat-launcher" data-consult-open hidden aria-expanded="false">{en?'Online consultation':hant?'線上諮詢':'在线咨询'}<span aria-hidden="true">↗</span></button>
 <div class="eh-values"><div class="container">{copy.nav.map((text,i)=><span><small>0{i+1}</small>{text}</span>)}</div></div>
 <section class="eh-intro container"><p class="eh-kicker">MADE PERSONAL</p><h2>{copy.intro}</h2><p>{copy.introText}</p></section>
 <section class="container eh-portals" aria-label={copy.discover}>
@@ -104,4 +108,12 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
   hero.addEventListener('touchend',(event)=>{if(touchStart===null)return;const delta=(event.changedTouches[0]?.clientX??touchStart)-touchStart;if(Math.abs(delta)>55)show(active+(delta<0?1:-1));touchStart=null},{passive:true});
   syncPause();
  });
+</script>
+
+<script>
+ const panel=document.querySelector<HTMLElement>('[data-consult-panel]');
+ const launcher=document.querySelector<HTMLButtonElement>('[data-consult-open]');
+ document.querySelector('[data-consult-close]')?.addEventListener('click',()=>{if(panel&&launcher){panel.hidden=true;launcher.hidden=false;launcher.setAttribute('aria-expanded','false');launcher.focus()}});
+ launcher?.addEventListener('click',()=>{if(panel){panel.hidden=false;launcher.hidden=true;launcher.setAttribute('aria-expanded','true');panel.querySelector<HTMLButtonElement>('[data-consult-close]')?.focus()}});
+ panel?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{if(launcher){panel.hidden=true;launcher.hidden=false;launcher.setAttribute('aria-expanded','false')}}));
 </script>
