@@ -61,3 +61,7 @@ Additional illustrative image sources:
 - daily-meals.jpg: https://images.unsplash.com/photo-1498837167922-ddd27525d352
 
 Verification: TypeScript, 50-page build, 1,013 internal links and generated-site audit passed. Browser visual/interaction QA remains unavailable.
+
+## Six primary navigation groups
+
+Grouped visible content into Why Saipan, Programs, Medical care, Costs & services, Travel guide and Birth & documents. Article links have short localized labels; hidden/unbuilt pages stay excluded. Birth/document navigation falls back to the localized homepage FAQ anchor if no dedicated guide exists. Corrected the misleading Simplified Chinese labels, localized online consultation CTA, added dropdown indicators, single-open menus, outside-click/Escape dismissal and responsive wrapping. TypeScript, 60 existing tests, demo build and link audit passed before final fallback adjustment; final build/link check also passed. GitHub branch creation continues to fail with integration 403.

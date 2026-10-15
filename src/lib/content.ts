@@ -122,21 +122,37 @@ const NAV_SPEC: {
   labelKey: string;
   translationKeys: string[];
   groupTemplate?: string;
-  /** 入口页存在、但该语言本次构建没有这类内容页时不输出导航项（科普 hub 无文章时不留空入口）。 */
   requiresTemplate?: string;
   priority: number;
 }[] = [
-  { labelKey: 'nav.programs', translationKeys: [], groupTemplate: 'program', priority: 10 },
-  { labelKey: 'nav.why_saipan', translationKeys: ['why_saipan'], priority: 20 },
-  { labelKey: 'nav.entry_path', translationKeys: ['entry_path'], priority: 30 },
-  { labelKey: 'nav.pricing', translationKeys: ['pricing'], priority: 40 },
-  { labelKey: 'nav.hospital', translationKeys: ['hospital_lab'], priority: 50 },
-  { labelKey: 'nav.success_data', translationKeys: ['success_data'], priority: 60 },
-  { labelKey: 'nav.articles', translationKeys: ['articles'], requiresTemplate: 'article', priority: 65 },
-  { labelKey: 'nav.patient_stories', translationKeys: ['patient_stories'], requiresTemplate: 'patient_story', priority: 68 },
-  { labelKey: 'nav.faq', translationKeys: ['faq'], priority: 70 },
-  { labelKey: 'nav.tools', translationKeys: ['tools'], priority: 75 },
+  { labelKey: 'nav.why_saipan', translationKeys: ['why_saipan', 'article_saipan_vs_us_mainland'], priority: 10 },
+  { labelKey: 'nav.programs', translationKeys: [], groupTemplate: 'program', priority: 20 },
+  { labelKey: 'nav.hospital', translationKeys: ['hospital_lab', 'success_data', 'article_lab_own_or_outsourced', 'article_how_to_read_success_statistics'], priority: 30 },
+  { labelKey: 'nav.pricing', translationKeys: ['pricing', 'article_price_ranges_and_addon_items', 'article_translation_and_support_arrangements'], priority: 40 },
+  { labelKey: 'nav.travel', translationKeys: ['entry_path', 'article_flights_to_saipan_routes', 'article_stay_itinerary_planning', 'article_documents_before_first_visit', 'tools', 'articles', 'faq'], priority: 50 },
+  { labelKey: 'nav.birth_documents', translationKeys: ['legal_parenthood_and_birth_registration', 'article_us_born_baby_advantages'], priority: 60 },
 ];
+
+const NAV_CHILD_LABELS: Record<string, [string, string, string]> = {
+  why_saipan: ['塞班优势', '塞班優勢', 'Why Saipan'],
+  article_saipan_vs_us_mainland: ['塞班与美国本土', '塞班與美國本土', 'Saipan vs. mainland U.S.'],
+  hospital_lab: ['医院与实验室', '醫院與實驗室', 'Clinic & laboratory'],
+  success_data: ['临床数据', '臨床數據', 'Clinical outcomes'],
+  article_lab_own_or_outsourced: ['实验室怎么选', '實驗室怎麼選', 'Choosing a laboratory'],
+  article_how_to_read_success_statistics: ['成功率怎么看', '成功率怎麼看', 'Understanding success rates'],
+  pricing: ['费用与服务', '費用與服務', 'Costs & services'],
+  article_price_ranges_and_addon_items: ['费用构成', '費用構成', 'Budget breakdown'],
+  article_translation_and_support_arrangements: ['语言与陪同', '語言與陪同', 'Language & support'],
+  entry_path: ['入境与签证', '入境與簽證', 'Entry & visas'],
+  article_flights_to_saipan_routes: ['航班与转机', '航班與轉機', 'Flights & connections'],
+  article_stay_itinerary_planning: ['住宿与停留', '住宿與停留', 'Accommodation & stay'],
+  article_documents_before_first_visit: ['就诊材料', '就診材料', 'Before your appointment'],
+  tools: ['行前工具', '行前工具', 'Planning tools'],
+  articles: ['实用指南', '實用指南', 'Guides'],
+  faq: ['常见问题', '常見問題', 'FAQ'],
+  article_us_born_baby_advantages: ['宝宝身份与证件', '寶寶身份與證件', 'Birth & citizenship guide'],
+  legal_parenthood_and_birth_registration: ['亲权与出生登记', '親權與出生登記', 'Parenthood & registration'],
+};
 
 export interface NavItem {
   labelKey: string;
@@ -145,33 +161,20 @@ export interface NavItem {
 }
 
 export function navItemsForLang(pages: PageData[], lang: string): NavItem[] {
-  const visible = buildVisible(pages);
-  const items: NavItem[] = [];
-  for (const spec of NAV_SPEC) {
-    if (spec.groupTemplate) {
-      const children = visible
-        .filter((page) => page.lang === lang && page.template === spec.groupTemplate)
-        .sort((a, b) => a.path.localeCompare(b.path))
-        .map((page) => ({ label: page.title, path: page.path }));
-      if (children.length > 0) items.push({ labelKey: spec.labelKey, path: children[0].path, children });
-      continue;
+  const visible = buildVisible(pages).filter(page => page.lang === lang);
+  const localeIndex = lang === 'en' ? 2 : lang === 'zh-hant' ? 1 : 0;
+  return [...NAV_SPEC].sort((a,b) => a.priority-b.priority).flatMap(spec => {
+    const matches = spec.groupTemplate
+      ? visible.filter(page => page.template === spec.groupTemplate).sort((a,b)=>a.path.localeCompare(b.path))
+      : spec.translationKeys.flatMap(key => visible.filter(page => page.translation_key === key));
+    const children = matches
+      .filter(page => page.translation_key !== 'articles' || visible.some(p => p.template === 'article'))
+      .map(page => ({label: NAV_CHILD_LABELS[page.translation_key]?.[localeIndex] ?? page.title, path:page.path}));
+    if (!children.length && spec.labelKey === 'nav.birth_documents') {
+      const home = visible.find(page => page.template === 'home');
+      if (home) children.push({label: ['宝宝身份与证件', '寶寶身份與證件', 'Birth & document questions'][localeIndex], path: `${home.path}#birth-documents`});
     }
-    const match = visible
-      .filter((page) => page.lang === lang && spec.translationKeys.includes(page.translation_key))
-      .sort((a, b) => b.status.localeCompare(a.status))[0];
-    if (!match) continue;
-    if (
-      spec.requiresTemplate &&
-      !visible.some((page) => page.lang === lang && page.template === spec.requiresTemplate)
-    ) {
-      continue;
-    }
-    items.push({ labelKey: spec.labelKey, path: match.path });
-  }
-  return items.sort((a, b) => {
-    const pa = NAV_SPEC.find((s) => s.labelKey === a.labelKey)?.priority ?? 999;
-    const pb = NAV_SPEC.find((s) => s.labelKey === b.labelKey)?.priority ?? 999;
-    return pa - pb;
+    return children.length ? [{labelKey:spec.labelKey,path:children[0].path,children}] : [];
   });
 }
 

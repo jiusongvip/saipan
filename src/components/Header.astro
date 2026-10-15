@@ -76,10 +76,18 @@ const homeHref = builtHome ?? '/';
         pageType="header"
         pagePath={currentPath}
         variant="secondary"
-        label={t(lang, 'cta.book_consult')}
+        label={lang === 'en' ? 'Online consultation' : lang === 'zh-hant' ? '線上諮詢' : '在线咨询'}
         homePath={builtHome}
         hasForm={hasForm}
       />
     </div>
   </div>
 </header>
+
+<script>
+ document.querySelectorAll<HTMLDetailsElement>('.nav-group').forEach(group=>{
+ group.addEventListener('toggle',()=>{if(group.open)document.querySelectorAll<HTMLDetailsElement>('.nav-group').forEach(other=>{if(other!==group)other.open=false})});
+ group.addEventListener('keydown',(event)=>{if(event.key==='Escape'){group.open=false;group.querySelector<HTMLElement>('summary')?.focus()}});
+ });
+ document.addEventListener('click',(event)=>{if(event.target instanceof Element&&!event.target.closest('.nav-group'))document.querySelectorAll<HTMLDetailsElement>('.nav-group[open]').forEach(group=>{group.open=false})});
+</script>
