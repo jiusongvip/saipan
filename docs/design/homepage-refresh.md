@@ -69,3 +69,11 @@ Grouped visible content into Why Saipan, Programs, Medical care, Costs & service
 ## Four-second hero
 
 Changed automatic advancement to 4,000 ms. Pointer hover no longer stops rotation, so a cursor resting on the hero does not make autoplay appear broken. Explicit pause, keyboard focus, reduced-motion, hidden-tab and offscreen handling remain unchanged.
+
+## Destination page redesign
+
+Added DestinationPage to the existing English/Traditional Chinese why-saipan pages and Simplified Chinese destination-comparison guide (no new unapproved publication route). Shared editorial direction: full-width island hero, three concise advantages, flight/consultation photo overlap, a non-numeric destination comparison checklist, lifestyle gallery and four planning stages. Original MDX details remain available in a disclosure; metadata, publication gates and form behavior are retained. No prices, route availability, clinical superiority or nationality guarantees invented.
+
+Narrow-screen consultation card occupies document flow rather than covering the hero. Navigation now highlights the parent group of the current page and uses clearer full-width accordion summaries on mobile. Added a reusable local preview bundler for homepage/destination and language selection.
+
+Validation: TypeScript and all 60 existing tests passed. Demo build produced 50 pages; 1,433 links and generated-site audit passed. Supported browser QA is unavailable, so visual/interaction rendering remains unverified.

@@ -953,3 +953,6 @@ html[data-motion] .is-revealed {
 .site-nav__list>li:last-child .nav-group__list{left:auto;right:0}
 @media(min-width:901px) and (max-width:1200px){.site-header__inner{gap:var(--space-3);flex-wrap:wrap;padding-block:var(--space-3)}.site-nav{order:3;flex-basis:100%;margin-left:0}.site-nav__list{justify-content:center}.header-tools{margin-left:auto}}
 @media(max-width:900px){.site-nav__list>li:last-child .nav-group__list{left:auto;right:auto}.nav-group__list{min-width:0;max-height:none}.site-nav{max-height:75vh;overflow-y:auto}}
+.nav-group__list .site-nav__link[aria-current='page']{font-weight:700;background:var(--color-primary-soft)}
+.nav-group:has([aria-current='page'])>summary{color:var(--color-primary-strong);background:var(--color-primary-soft)}
+@media(max-width:900px){.site-nav .nav-group>summary{justify-content:space-between;width:100%;border-radius:var(--radius-sm)}.site-nav .nav-group[open]{background:var(--color-surface-alt);border-radius:var(--radius-md)}.site-nav .nav-group__list{padding:var(--space-2) var(--space-3)}.site-nav .nav-group__list .site-nav__link{font-size:var(--text-sm);font-weight:400;padding-block:var(--space-2)}}
