@@ -170,9 +170,12 @@ export function navItemsForLang(pages: PageData[], lang: string): NavItem[] {
     const children = matches
       .filter(page => page.translation_key !== 'articles' || visible.some(p => p.template === 'article'))
       .map(page => ({label: NAV_CHILD_LABELS[page.translation_key]?.[localeIndex] ?? page.title, path:page.path}));
-    if (!children.length && spec.labelKey === 'nav.birth_documents') {
+    if (!children.length && (spec.labelKey === 'nav.birth_documents' || spec.labelKey === 'nav.hospital')) {
       const home = visible.find(page => page.template === 'home');
-      if (home) children.push({label: ['宝宝身份与证件', '寶寶身份與證件', 'Birth & document questions'][localeIndex], path: `${home.path}#birth-documents`});
+      if (home) {
+        const medical = spec.labelKey === 'nav.hospital';
+        children.push({label: medical ? ['了解医疗服务', '了解醫療服務', 'Explore medical care'][localeIndex] : ['宝宝身份与证件', '寶寶身份與證件', 'Birth & document questions'][localeIndex], path: `${home.path}#${medical ? 'medical-care' : 'birth-documents'}`});
+      }
     }
     return children.length ? [{labelKey:spec.labelKey,path:children[0].path,children}] : [];
   });
