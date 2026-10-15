@@ -24,3 +24,13 @@ Additional illustrative Unsplash sources:
 - quiet-botanical.jpg: https://images.unsplash.com/photo-1497250681960-ef046c08a56e
 
 Verification: TypeScript, 60 existing tests, 50-page demo build, 957 internal links and generated-site audit passed. Browser rendering remains unverified because the supported browser QA capability is unavailable.
+
+## Four-theme hero
+
+Hero images: existing Saipan lagoon aerial, one-to-one consultation, American flag, airplane wing. Manual theme tabs, previous/next buttons, keyboard arrow support and touch swipe; reduced-motion preference removes transitions. All active homepage languages use localized theme captions. Flag slide refers to birth registration and applicable documentation rather than promising nationality.
+
+Additional downloaded illustrative photos:
+- american-flag.jpg: https://images.unsplash.com/photo-1508433957232-3107f5fd5995
+- flight-wing.jpg: https://images.unsplash.com/photo-1436491865332-7a61a109cc05
+
+TypeScript, 50-page demo build, 969 links and generated-site audit passed. Browser interaction QA remains unavailable.

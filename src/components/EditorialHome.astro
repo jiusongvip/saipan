@@ -22,15 +22,31 @@ const medical=target('hospital-lab','articles/lab-own-or-outsourced','programs/i
 const island=target('why-saipan','entry-path');
 const alternates=(['zh-hans','zh-hant','en'] as const).filter(l=>built.has(`/${l}`)||built.has(`/${l}/`)).map(l=>({hreflang:l==='zh-hans'?'zh-Hans':l==='zh-hant'?'zh-Hant':'en',href:canonicalUrl(l==='zh-hans' && !page ? '/' : `/${l}`)}));
 alternates.push({hreflang:'x-default',href:canonicalUrl('/')});
+
+const heroSlides = [
+ {src:'/images/saipan-lagoon-aerial.jpg', label:en?'Island & care':hant?'海島與醫療':'海岛与医疗', text:en?'Thoughtful care, with space to breathe in Saipan.':hant?'把就醫與休養，一起安排在塞班。':'把就医与休养，一起安排在塞班。', alt:copy.imageAlt[4]},
+ {src:'/images/couple-editorial.jpg', label:en?'Personal care':hant?'溫暖的專業':'温暖的专业', text:en?'A conversation that starts with listening.':hant?'先傾聽您的期待，再一起看清選擇。':'先倾听您的期待，再一起看清选择。', alt:copy.imageAlt[1]},
+ {src:'/images/american-flag.jpg', label:en?'Birth & documents':hant?'出生與證件':'出生与证件', text:en?'Understand birth registration, documentation and applicable rules.':hant?'了解出生登記、證件流程與適用政策。':'了解出生登记、证件流程与适用政策。', alt:en?'An American flag in the breeze':hant?'迎風飄揚的美國國旗':'迎风飘扬的美国国旗'},
+ {src:'/images/flight-wing.jpg', label:en?'Your journey':hant?'出行與航班':'出行与航班', text:en?'Explore flight routes and plan your visit.':hant?'了解航線與轉機，讓出發更從容。':'了解航线与转机，让出发更从容。', alt:en?'Airplane wing above the clouds':hant?'雲層上方的飛機機翼':'云层上方的飞机机翼'},
+];
+
 const metaTitle = page?.title ?? '塞班辅助生殖｜为新的可能，留一点空间';
 const metaDescription = page?.description ?? '在塞班探索辅助生殖的更多可能，了解治疗评估、医疗资源、费用构成与跨境出行安排，从一次清晰的沟通开始。';
 ---
-<BaseLayout lang={lang} title={metaTitle} description={metaDescription} canonical={canonicalUrl(page?.path??'/')} alternates={alternates} noindex={page?.noindex??false} pageType="home" page={page} hasForm={true} ogImage="/images/family-moment.jpg">
-<section class="eh-hero">
- <img class="eh-hero__image" src="/images/family-moment.jpg" alt={copy.imageAlt[0]} width="1400" height="933" fetchpriority="high" />
+<BaseLayout lang={lang} title={metaTitle} description={metaDescription} canonical={canonicalUrl(page?.path??'/')} alternates={alternates} noindex={page?.noindex??false} pageType="home" page={page} hasForm={true} ogImage="/images/saipan-lagoon-aerial.jpg">
+<section class="eh-hero" data-hero-carousel aria-roledescription={en?'carousel':'轮播'} aria-label={en?'Discover Saipan IVF':hant?'探索塞班 IVF':'探索塞班 IVF'}>
+ <div class="eh-hero__slides">
+ {heroSlides.map((slide,i)=><img class:list={['eh-hero__image',{'is-active':i===0}]} src={slide.src} alt={slide.alt} width={i===1?1400:1600} height="933" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} data-hero-image aria-hidden={i!==0?'true':undefined} />)}
+ </div>
  <div class="eh-hero__shade"></div>
- <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1>{copy.title}</h1><p class="eh-hero__sub">{copy.sub}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
- <div class="container eh-hero__bottom"><span>01 — A NEW BEGINNING</span><span>{copy.note} · SAIPAN IVF</span></div>
+ <div class="container eh-hero__content"><p class="eh-kicker">{copy.label}</p><h1>{copy.title}</h1><p class="eh-hero__sub" data-hero-caption>{heroSlides[0].text}</p><a class="eh-button" href="#consult">{copy.consult}<span>↗</span></a></div>
+ <div class="container eh-hero__controls">
+  <div class="eh-hero__tabs" aria-label={en?'Choose a photograph':hant?'切換主視覺':'切换主视觉'}>
+   {heroSlides.map((slide,i)=><button type="button" class:list={['eh-hero__tab',{'is-active':i===0}]} aria-pressed={i===0} data-hero-tab data-caption={slide.text}><small>0{i+1}</small><span>{slide.label}</span></button>)}
+  </div>
+  <div class="eh-hero__arrows"><button type="button" data-hero-prev aria-label={en?'Previous image':hant?'上一張圖片':'上一张图片'}>←</button><button type="button" data-hero-next aria-label={en?'Next image':hant?'下一張圖片':'下一张图片'}>→</button></div>
+ </div>
+ <span class="visually-hidden" data-hero-status aria-live="polite" aria-atomic="true"></span>
 </section>
 <div class="eh-values"><div class="container">{copy.nav.map((text,i)=><span><small>0{i+1}</small>{text}</span>)}</div></div>
 <section class="eh-intro container"><p class="eh-kicker">MADE PERSONAL</p><h2>{copy.intro}</h2><p>{copy.introText}</p></section>
@@ -44,3 +60,27 @@ const metaDescription = page?.description ?? '在塞班探索辅助生殖的更�
 <section class="eh-start container"><p class="eh-kicker">LET’S BEGIN</p><h2>{copy.start}</h2><p>{copy.startText}</p><a class="eh-button eh-button--dark" href="#consult">{copy.consult}<span>↗</span></a></section>
 <ContactForm lang={lang} pageType="home" pagePath={page?.path??'/'} ctaLabel={copy.consult}/>
 </BaseLayout>
+
+<script>
+ document.querySelectorAll<HTMLElement>('[data-hero-carousel]').forEach((hero)=>{
+  const images=Array.from(hero.querySelectorAll<HTMLImageElement>('[data-hero-image]'));
+  const tabs=Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-hero-tab]'));
+  const caption=hero.querySelector<HTMLElement>('[data-hero-caption]');
+  const status=hero.querySelector<HTMLElement>('[data-hero-status]');
+  let active=0;
+  function show(index:number){
+   active=(index+images.length)%images.length;
+   images.forEach((img,i)=>{img.classList.toggle('is-active',i===active); if(i===active){img.removeAttribute('aria-hidden');img.loading='eager'}else img.setAttribute('aria-hidden','true')});
+   tabs.forEach((tab,i)=>{tab.classList.toggle('is-active',i===active);tab.setAttribute('aria-pressed',String(i===active))});
+   if(caption)caption.textContent=tabs[active].dataset.caption??'';
+   if(status)status.textContent=`${active+1} / ${images.length} · ${tabs[active].textContent}`;
+  }
+  tabs.forEach((tab,i)=>tab.addEventListener('click',()=>show(i)));
+  hero.querySelector('[data-hero-prev]')?.addEventListener('click',()=>show(active-1));
+  hero.querySelector('[data-hero-next]')?.addEventListener('click',()=>show(active+1));
+  hero.addEventListener('keydown',(event)=>{if(!(event.target instanceof Element)||!event.target.closest('button'))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();show(active+(event.key==='ArrowRight'?1:-1));tabs[active].focus()}});
+  let touchStart:number|null=null;
+  hero.addEventListener('touchstart',(event)=>{touchStart=event.touches[0]?.clientX??null},{passive:true});
+  hero.addEventListener('touchend',(event)=>{if(touchStart===null)return;const delta=(event.changedTouches[0]?.clientX??touchStart)-touchStart;if(Math.abs(delta)>55)show(active+(delta<0?1:-1));touchStart=null},{passive:true});
+ });
+</script>
