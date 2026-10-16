@@ -366,52 +366,52 @@ body[data-page-type='home'] .hp-section {
   }
 }
 /* Equal image and information rows keep the longer homepage easy to scan. */
-body[data-page-type='home'] .hd-life__gallery {
+body[data-page-type='home'] main .hd-life__gallery {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
 }
-body[data-page-type='home'] .hd-life figure:nth-child(2),
-body[data-page-type='home'] .hd-life figure:nth-child(3) {
+body[data-page-type='home'] main .hd-life figure:nth-child(2),
+body[data-page-type='home'] main .hd-life figure:nth-child(3) {
   margin-top: 0;
 }
-body[data-page-type='home'] .hd-quick > div {
+body[data-page-type='home'] main .hd-quick > div {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: auto;
   gap: 18px;
 }
-body[data-page-type='home'] .hd-quick__item:first-child,
-body[data-page-type='home'] .hd-quick__item:nth-child(2),
-body[data-page-type='home'] .hd-quick__item:nth-child(4) {
+body[data-page-type='home'] main .hd-quick__item:first-child,
+body[data-page-type='home'] main .hd-quick__item:nth-child(2),
+body[data-page-type='home'] main .hd-quick__item:nth-child(4) {
   grid-column: auto;
   grid-row: auto;
 }
-body[data-page-type='home'] .hd-quick__item:first-child h3 {
+body[data-page-type='home'] main .hd-quick__item:first-child h3 {
   font-size: 21px;
 }
-body[data-page-type='home'] .hd-quick__item {
+body[data-page-type='home'] main .hd-quick__item {
   min-height: 190px;
   padding: 26px;
 }
-body[data-page-type='home'] .eh-care {
+body[data-page-type='home'] main .eh-care {
   padding-top: 50px;
 }
 @media (max-width: 900px) {
-  body[data-page-type='home'] .hd-quick > div {
+  body[data-page-type='home'] main .hd-quick > div {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 600px) {
-  body[data-page-type='home'] .hd-life__gallery {
+  body[data-page-type='home'] main .hd-life__gallery {
     grid-template-columns: 1fr;
   }
-  body[data-page-type='home'] .hd-life figure:first-child {
+  body[data-page-type='home'] main .hd-life figure:first-child {
     grid-column: auto;
   }
-  body[data-page-type='home'] .hd-life figure img,
-  body[data-page-type='home'] .hd-life figure:first-child img {
+  body[data-page-type='home'] main .hd-life figure img,
+  body[data-page-type='home'] main .hd-life figure:first-child img {
     height: 240px;
   }
-  body[data-page-type='home'] .hd-quick__item {
+  body[data-page-type='home'] main .hd-quick__item {
     padding: 20px;
     min-height: 160px;
   }
