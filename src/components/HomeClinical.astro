@@ -1,0 +1,159 @@
+---
+import MarketingImage from './marketing/MarketingImage.astro';
+import type { LangCode } from '../lib/config';
+import '../styles/home-clinical.css';
+const { lang } = Astro.props as { lang: LangCode };
+const t = (zh: string, en: string, tw = zh) => (lang === 'en' ? en : lang === 'zh-hant' ? tw : zh);
+const roles = [
+  [
+    t('诊疗评估', 'Clinical assessment', '診療評估'),
+    t('向接诊医生确认', 'Questions for your clinician', '向接診醫生確認'),
+    t(
+      '已有检查是否需要补充？有哪些可讨论的方案？每一步有哪些限制与注意事项？',
+      'Which records need updating? Which options can be discussed, and what limitations should you understand?',
+      '已有檢查是否需要補充？有哪些可討論的方案？每一步有哪些限制與注意事項？',
+    ),
+  ],
+  [
+    t('实验室沟通', 'Laboratory questions', '實驗室溝通'),
+    t('把流程与责任问清楚', 'Understand the process', '把流程與責任問清楚'),
+    t(
+      '检测由谁完成？样本如何识别与保存？哪些环节需要书面授权？',
+      'Who performs testing? How are samples identified and stored? Which steps require written consent?',
+      '檢測由誰完成？樣本如何識別與保存？哪些環節需要書面授權？',
+    ),
+  ],
+  [
+    t('协调与随访', 'Coordination & follow-up', '協調與隨訪'),
+    t('知道下一步找谁', 'Know who to contact', '知道下一步找誰'),
+    t(
+      '预约调整、费用明细和返程后的问题分别联系谁？提前记下联系人与沟通方式。',
+      'Who handles scheduling changes, itemized costs and questions after travel? Keep the relevant contact details.',
+      '預約調整、費用明細和返程後的問題分別聯絡誰？提前記下聯絡人與溝通方式。',
+    ),
+  ],
+];
+const steps = [
+  [
+    t('咨询前', 'Before', '諮詢前'),
+    t('带着问题来', 'Bring your questions', '帶著問題來'),
+    t(
+      '整理已有检查、希望了解的项目和大致出行时间。无需在公开表单上传病历。',
+      'Gather existing records, your questions and a tentative travel window. Do not upload medical files through a public form.',
+      '整理已有檢查、希望了解的項目和大致出行時間。無需在公開表單上傳病歷。',
+    ),
+  ],
+  [
+    t('沟通时', 'During', '溝通時'),
+    t('把选择聊清楚', 'Discuss your choices', '把選擇聊清楚'),
+    t(
+      '围绕个人目标，讨论可选路径、费用包含项、预计安排以及需要进一步评估的问题。',
+      'Discuss your goals, possible paths, included costs, practical arrangements and questions requiring further assessment.',
+      '圍繞個人目標，討論可選路徑、費用包含項、預計安排以及需要進一步評估的問題。',
+    ),
+  ],
+  [
+    t('沟通后', 'After', '溝通後'),
+    t('拿到准备方向', 'Leave with next steps', '拿到準備方向'),
+    t(
+      '整理一份后续待办：补充哪些资料、需要谁确认、何时再次沟通。确认后再安排下一步。',
+      'Make a follow-up list: records to gather, people to contact and questions to revisit before committing to a next step.',
+      '整理一份後續待辦：補充哪些資料、需要誰確認、何時再次溝通。確認後再安排下一步。',
+    ),
+  ],
+];
+---
+
+<section class="hc-care container" id="medical-care">
+  <div class="hc-heading">
+    <h2>{t('把医疗问题，认真讲清楚', 'Understand your care', '把醫療問題，認真講清楚')}</h2>
+    <p>
+      {t(
+        '从接诊沟通到实验室，再到行程协调，先明确每个环节需要了解什么。',
+        'Start with clear questions about clinical care, laboratory processes and practical coordination.',
+        '從接診溝通到實驗室，再到行程協調，先明確每個環節需要了解什麼。',
+      )}
+    </p>
+  </div>
+  <div class="hc-media">
+    <figure>
+      <MarketingImage
+        src="/images/medical-consultation.jpg"
+        alt={t(
+          '明亮诊室中的医生与就诊者沟通情境',
+          'Illustrative clinician and visitor consultation',
+          '明亮診室中的醫生與就診者溝通情境',
+        )}
+        width="1400"
+        height="933"
+        loading="eager"
+      />
+      <figcaption>
+        {t('从面对面的沟通开始', 'Start with a conversation', '從面對面的溝通開始')}
+      </figcaption>
+    </figure>
+    <figure>
+      <MarketingImage
+        src="/images/laboratory-care.jpg"
+        alt={t('实验室工作情境示意', 'Illustrative laboratory setting', '實驗室工作情境示意')}
+        width="1000"
+        height="667"
+        loading="eager"
+      />
+      <figcaption>
+        {t(
+          '了解实验室流程与样本管理',
+          'Ask about laboratory processes',
+          '了解實驗室流程與樣本管理',
+        )}
+      </figcaption>
+    </figure>
+  </div>
+  <p class="hc-note">
+    {t(
+      '参赛服务模型 · 摄影为情境素材，不代表院方场地、医生或患者。',
+      'Competition service model · Illustrative photography, not clinic, staff or patient documentation.',
+      '參賽服務模型 · 攝影為情境素材，不代表院方場地、醫生或患者。',
+    )}
+  </p>
+  <div class="hc-roles">
+    {roles.map(([title, sub, body]) => (
+      <article>
+        <h3>{title}</h3>
+        <p class="hc-role-sub">{sub}</p>
+        <p>{body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+<section class="hc-visit" id="first-consultation">
+  <div class="container hc-visit-grid">
+    <div>
+      <h2>
+        {t('第一次咨询，\n从这些开始', 'Your first\nconversation', '第一次諮詢，\n從這些開始')}
+      </h2>
+      <p>
+        {t(
+          '不需要先想好全部答案。把您的目标和疑问带来，先了解，再决定。',
+          'You do not need every answer in advance. Start with your priorities and questions.',
+          '不需要先想好全部答案。把您的目標和疑問帶來，先了解，再決定。',
+        )}
+      </p>
+      <a href="#consult" class="eh-button eh-button--dark">
+        {t('了解初次咨询', 'Explore a consultation', '了解初次諮詢')}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <ol>
+      {steps.map(([when, title, body]) => (
+        <li>
+          <span>{when}</span>
+          <div>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

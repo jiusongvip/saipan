@@ -1,0 +1,233 @@
+.hc-care {
+  padding-block: 74px 88px;
+}
+.hc-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 36px;
+}
+.hc-heading h2,
+.hc-visit h2 {
+  font-size: clamp(28px, 2.8vw, 40px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+  margin: 0;
+  text-wrap: balance;
+}
+.hc-heading > p,
+.hc-visit-grid > div > p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--eh-ink);
+  max-width: 46ch;
+  margin: 0;
+}
+.hc-media {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.hc-media figure {
+  margin: 0;
+  min-width: 0;
+}
+.hc-media img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+.hc-media figure:nth-child(2) img {
+  height: 350px;
+}
+.hc-media figcaption {
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 16px;
+}
+.hc-note {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--eh-muted);
+  margin: 18px 0 34px;
+}
+.hc-roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+.hc-roles article {
+  min-width: 0;
+}
+.hc-roles h3 {
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0 0 14px;
+}
+.hc-roles p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--eh-ink);
+  margin: 0;
+}
+.hc-roles .hc-role-sub {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.hc-visit {
+  background: var(--taste-field);
+  padding-block: 76px;
+}
+.hc-visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+}
+.hc-visit h2 {
+  white-space: pre-line;
+}
+.hc-visit-grid > div > p {
+  margin: 24px 0 28px;
+  max-width: 34ch;
+}
+.hc-visit ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 28px;
+}
+.hc-visit li {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  gap: 22px;
+}
+.hc-visit li > span {
+  font-size: 16px;
+  color: var(--taste-accent);
+  padding-top: 3px;
+}
+.hc-visit li h3 {
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.hc-visit li p {
+  font-size: 16px;
+  line-height: 1.85;
+  margin: 0;
+  max-width: 48ch;
+}
+@media (max-width: 760px) {
+  .hc-care {
+    padding-block: 44px 56px;
+  }
+  .hc-heading,
+  .hc-visit-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .hc-heading {
+    margin-bottom: 26px;
+  }
+  .hc-media {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hc-media img,
+  .hc-media figure:nth-child(2) img {
+    height: 260px;
+  }
+  .hc-heading > p {
+    font-size: 16px;
+  }
+  .hc-roles {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hc-visit {
+    padding-block: 52px;
+  }
+  .hc-visit-grid {
+    gap: 38px;
+  }
+  .hc-visit li {
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+  }
+  .hc-visit li h3 {
+    font-size: 22px;
+  }
+}
+.hp-fee-details {
+  margin: 28px 0;
+  background: var(--taste-white);
+  padding: 24px;
+}
+.hp-fee-details h3 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.hp-fee-details > p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--eh-muted);
+}
+.hp-fee-details table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.hp-fee-details :is(th, td) {
+  padding: 12px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+.hp-fee-details thead {
+  background: var(--taste-field);
+}
+.hp-fee-details th {
+  font-weight: 500;
+}
+.hp-fee-details tbody tr:nth-child(even) {
+  background: var(--eh-paper);
+}
+.hp-fee-details td:nth-child(2) {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+body[data-page-type='home'] .eh-values a {
+  font-size: 15px;
+  color: var(--eh-ink);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+body[data-page-type='home'] .eh-values a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+@media (max-width: 600px) {
+  .hp-fee-details {
+    padding: 20px 14px;
+  }
+  .hp-fee-details table {
+    font-size: 13px;
+  }
+  .hp-fee-details :is(th, td) {
+    padding: 12px 5px;
+  }
+  .hp-fee-details td:nth-child(2) {
+    white-space: normal;
+  }
+}

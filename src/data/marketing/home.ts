@@ -5,12 +5,13 @@ export function getHomeCopy(lang: LangCode) {
     hant = lang === 'zh-hant';
   return en
     ? {
-        title: 'Room for a new beginning.',
+        title: 'Fertility care.\nYour next step.',
         sub: 'Fertility care. A clearer path. Your own pace.',
-        consult: 'Let’s talk',
+        consult: 'Explore a consultation',
         discover: 'Explore your options',
         intro: 'Your future. Your way.',
-        introText: 'A personal decision deserves thoughtful care, and space to breathe.',
+        introText:
+          'Explore care options, itemized costs and the practical steps for a visit to Saipan.',
         options: ['Understand your options', 'Prepare for your visit', 'Plan with confidence'],
         descriptions: [
           'Treatment & assessment',
@@ -21,7 +22,8 @@ export function getHomeCopy(lang: LangCode) {
         careText: 'Understand the people, processes and questions behind your care.',
         careLink: 'Explore medical care',
         island: 'A different setting.\nThe same focus: you.',
-        islandText: 'At 15°11′ N, 145°45′ E, Saipan leaves room to pause between the important moments.',
+        islandText:
+          'At 15°11′ N, 145°45′ E, Saipan leaves room to pause between the important moments.',
         islandLink: 'Discover Saipan',
         journey: 'One step at a time.',
         steps: [
@@ -34,7 +36,7 @@ export function getHomeCopy(lang: LangCode) {
         startText: 'Bring your questions. We’ll help you understand the next step.',
         note: 'Illustrative photography',
         careNote: 'Illustrative medical setting',
-        nav: ['Personal care', 'Clear information', 'Thoughtful support'],
+        nav: ['Medical questions', 'Itemized costs', 'First consultation'],
         resources: 'Before you begin',
         links: ['Treatment options', 'Costs & planning', 'Travel essentials'],
         imageAlt: [
@@ -47,12 +49,12 @@ export function getHomeCopy(lang: LangCode) {
       }
     : hant
       ? {
-          title: '塞班 IVF\n讓期待，更近一步。',
+          title: '塞班輔助生殖\n從了解方案開始',
           sub: '塞班輔助生殖 · 按您的步調，走向下一步',
-          consult: '從一次溝通開始',
+          consult: '了解初次諮詢',
           discover: '探索您的選擇',
           intro: '您的期待\n我們認真以待',
-          introText: '讓複雜的選擇清楚一點，讓重要的決定從容一點。',
+          introText: '了解診療選擇、費用構成與赴島準備，先把您關心的問題問清楚。',
           options: ['專屬生育方案', '安心赴塞班', '費用清楚 心裡有數'],
           descriptions: ['治療方案與初步評估', '入境、停留與就診準備', '費用構成與實用指南'],
           care: '專業為底氣\n關懷有溫度',
@@ -67,7 +69,7 @@ export function getHomeCopy(lang: LangCode) {
           startText: '帶著問題來，先了解，再選擇。',
           note: '人物情境示意',
           careNote: '醫療情境示意 · 非院方實拍',
-          nav: ['個人化關懷', '清晰的資訊', '有回應的支持'],
+          nav: ['診療選擇', '費用明細', '初次諮詢'],
           resources: '出發之前，先了解',
           links: ['治療與評估', '費用與規劃', '入境與出行'],
           imageAlt: [
@@ -79,12 +81,12 @@ export function getHomeCopy(lang: LangCode) {
           ],
         }
       : {
-          title: '塞班 IVF\n让期待，更近一步。',
+          title: '塞班辅助生殖\n从了解方案开始',
           sub: '塞班辅助生殖 · 按您的步调，走向下一步',
-          consult: '从一次沟通开始',
+          consult: '了解初次咨询',
           discover: '探索您的选择',
           intro: '您的期待\n我们认真以待',
-          introText: '让复杂的选择清楚一点，让重要的决定从容一点。',
+          introText: '了解诊疗选择、费用构成与赴岛准备，先把您关心的问题问清楚。',
           options: ['专属生育方案', '安心赴塞班', '费用清楚 心里有数'],
           descriptions: ['治疗方案与初步评估', '入境、停留与就诊准备', '费用构成与实用指南'],
           care: '专业为底气\n关怀有温度',
@@ -99,7 +101,7 @@ export function getHomeCopy(lang: LangCode) {
           startText: '带着问题来，先了解，再选择。',
           note: '人物场景示意',
           careNote: '医疗场景示意 · 非院方实拍',
-          nav: ['个性化关怀', '清晰的信息', '有回应的支持'],
+          nav: ['诊疗选择', '费用明细', '初次咨询'],
           resources: '出发之前，先了解',
           links: ['治疗与评估', '费用与规划', '入境与出行'],
           imageAlt: [
@@ -118,22 +120,26 @@ export function getHeroSlides(lang: LangCode) {
   const copy = getHomeCopy(lang);
   return [
     {
-      src: '/images/saipan-lagoon-aerial.jpg',
+      src: '/images/medical-consultation.jpg',
       title: en
         ? 'Island escape.\nA new beginning.'
         : hant
           ? '海島度假\n安心求子'
           : '海岛度假\n安心求子',
-      label: en ? 'Island & care' : hant ? '海島與醫療' : '海岛与医疗',
+      label: en ? 'Consultation' : hant ? '診前溝通' : '诊前沟通',
       text: en
-        ? 'Plan your medical visit alongside time to rest in Saipan’s island setting.'
+        ? 'Begin with a conversation about your priorities. Illustrative consultation photography.'
         : hant
-          ? '把輔助生殖之旅，放進碧海藍天裡。'
-          : '把辅助生殖之旅，放进碧海蓝天里。',
-      alt: copy.imageAlt[4],
+          ? '先聊需求，再了解下一步。醫患溝通情境示意，非院方實拍。'
+          : '先聊需求，再了解下一步。医患沟通情境示意，非院方实拍。',
+      alt: en
+        ? 'Illustrative clinician and visitor consultation'
+        : hant
+          ? '醫患溝通情境示意'
+          : '医患沟通情境示意',
     },
     {
-      src: '/images/couple-editorial.jpg',
+      src: '/images/laboratory-care.jpg',
       title: en
         ? 'Expert care.\nA personal touch.'
         : hant
@@ -148,18 +154,18 @@ export function getHeroSlides(lang: LangCode) {
       alt: copy.imageAlt[1],
     },
     {
-      src: '/images/american-flag.jpg',
+      src: '/images/saipan-lagoon-aerial.jpg',
       title: en
         ? 'Born in Saipan.\nA U.S. citizen?'
         : hant
           ? '塞班出生\n美國公民？'
           : '塞班出生\n美国公民？',
-      label: en ? 'Birth & documents' : hant ? '出生與證件' : '出生与证件',
+      label: en ? 'Saipan setting' : hant ? '塞班環境' : '塞班环境',
       text: en
-        ? 'Explore U.S. citizenship rules, birth registration and travel documents before making plans.'
+        ? 'Plan accommodation, transport and time between appointments before your visit.'
         : hant
-          ? '孩子的身份規劃，從這裡了解。國籍資格依現行法律與個案認定。'
-          : '孩子的身份规划，从这里了解。国籍资格依现行法律与个案认定。',
+          ? '就診之外的住宿、交通與休息，也可以提前安排。'
+          : '就诊之外的住宿、交通与休息，也可以提前安排。',
       alt: en
         ? 'An American flag in the breeze'
         : hant

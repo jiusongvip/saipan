@@ -1,0 +1,423 @@
+/* Readable planning rows, a working budget and a chronological travel list. */
+body[data-page-type='home'] .hp-section {
+  padding-block: 88px;
+}
+.hp-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 40px;
+}
+.hp-heading h2,
+.hp-budget h2 {
+  font-size: clamp(28px, 2.7vw, 40px);
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  margin: 0;
+  color: var(--eh-ink);
+  text-wrap: balance;
+}
+.hp-heading > p,
+.hp-description {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--eh-ink);
+  margin: 0;
+  max-width: 44ch;
+}
+.hp-plans {
+  display: grid;
+  gap: 12px;
+}
+.hp-plan {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.2fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 30px 32px;
+  background: var(--taste-field);
+  min-width: 0;
+}
+.hp-plan:nth-child(2) {
+  background: var(--taste-field-deep);
+}
+.hp-plan h3 {
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0 0 12px;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.hp-plan__fit {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--eh-muted);
+  margin: 0;
+}
+.hp-plan > p,
+.hp-roadmap li > p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--eh-ink);
+  margin: 0;
+}
+.hp-plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.hp-plan li {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.hp-plan__footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--eh-ink);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--taste-accent);
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+.hp-plan__footer a:hover {
+  transform: translateX(3px);
+}
+.hp-budget {
+  padding-block: 88px;
+  background: var(--taste-field);
+}
+.hp-budget__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.hp-description {
+  margin: 22px 0;
+}
+.hp-demo {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--eh-muted);
+  margin: 20px 0 28px;
+  max-width: 52ch;
+}
+.hp-costs {
+  display: grid;
+  gap: 10px;
+}
+.hp-costs > div {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 18px;
+  background: var(--eh-paper);
+}
+.hp-costs strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+}
+.hp-costs small {
+  display: block;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--eh-muted);
+  margin-top: 6px;
+}
+.hp-costs b {
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.hp-calculator {
+  padding: 36px;
+  background: var(--taste-white);
+  min-width: 0;
+}
+.hp-calculator__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.hp-calculator h3 {
+  font-size: 25px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0;
+  text-wrap: balance;
+}
+.hp-calculator__head > span {
+  font-size: 13px;
+  color: var(--eh-muted);
+}
+.hp-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 18px;
+}
+.hp-fields label {
+  display: grid;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--eh-ink);
+  min-width: 0;
+}
+/* taste-skill-ignore real numeric form fields need visible boundaries */
+.hp-fields input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 10px 12px;
+  border: 1px solid var(--taste-control);
+  border-radius: 0;
+  background: var(--eh-paper);
+  color: var(--eh-ink);
+  font: inherit;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  box-sizing: border-box;
+}
+.hp-fields input:focus-visible {
+  outline: 2px solid var(--taste-accent);
+  outline-offset: 3px;
+}
+.hp-total {
+  display: grid;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--taste-field);
+}
+.hp-total > span {
+  font-size: 14px;
+  color: var(--eh-ink);
+}
+.hp-total output {
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--taste-accent);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.hp-total small,
+.hp-calculator__note {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--eh-muted);
+}
+.hp-calculator__note {
+  margin: 20px 0;
+}
+.hp-roadmap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hp-roadmap li {
+  padding: 26px 22px;
+  background: var(--taste-field);
+  min-width: 0;
+}
+.hp-roadmap h3 {
+  font-size: 25px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0 0 22px;
+  color: var(--taste-accent);
+}
+.hp-roadmap li .hp-stage-title {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.hp-documents {
+  margin-top: 32px;
+  padding: 30px 32px;
+  background: var(--taste-field-deep);
+}
+.hp-documents h3 {
+  font-size: 21px;
+  font-weight: 500;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+.hp-documents > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+.hp-documents span {
+  font-size: 16px;
+  line-height: 1.8;
+}
+body[data-page-type='home'] main .hd-life__gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+body[data-page-type='home'] main .hd-life figure:nth-child(2),
+body[data-page-type='home'] main .hd-life figure:nth-child(3) {
+  margin-top: 0;
+}
+body[data-page-type='home'] main .hd-quick > div {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto;
+  gap: 18px;
+}
+body[data-page-type='home'] main .hd-quick__item:first-child,
+body[data-page-type='home'] main .hd-quick__item:nth-child(2),
+body[data-page-type='home'] main .hd-quick__item:nth-child(4) {
+  grid-column: auto;
+  grid-row: auto;
+}
+body[data-page-type='home'] main .hd-quick__item:first-child h3 {
+  font-size: 21px;
+}
+body[data-page-type='home'] main .hd-quick__item {
+  min-height: 190px;
+  padding: 26px;
+}
+@media (max-width: 1100px) {
+  .hp-plan {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 22px 32px;
+  }
+  .hp-plan__intro {
+    grid-row: span 2;
+  }
+  .hp-plan > p {
+    grid-column: 2;
+  }
+  .hp-plan ul {
+    grid-column: 2;
+  }
+  .hp-plan__footer {
+    grid-column: 1/3;
+  }
+  .hp-budget__grid {
+    gap: 36px;
+  }
+  .hp-roadmap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 900px) {
+  body[data-page-type='home'] main .hd-quick > div {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 760px) {
+  body[data-page-type='home'] .hp-section,
+  .hp-budget {
+    padding-block: 56px;
+  }
+  .hp-heading,
+  .hp-budget__grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .hp-heading {
+    margin-bottom: 30px;
+  }
+  .hp-plan {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 24px;
+  }
+  .hp-plan__intro {
+    grid-row: auto;
+  }
+  .hp-plan > p,
+  .hp-plan ul,
+  .hp-plan__footer {
+    grid-column: auto;
+  }
+  .hp-plan__footer a {
+    font-size: 15px;
+  }
+  .hp-calculator {
+    padding: 26px;
+  }
+  .hp-fields {
+    gap: 20px 14px;
+  }
+  .hp-fields input {
+    font-size: 17px;
+  }
+  .hp-roadmap {
+    gap: 16px;
+  }
+  .hp-roadmap li {
+    padding: 24px 20px;
+  }
+  .hp-roadmap h3 {
+    font-size: 23px;
+  }
+  .hp-documents {
+    padding: 26px;
+  }
+  .hp-documents > div {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .hp-total {
+    padding: 20px;
+  }
+}
+@media (max-width: 600px) {
+  body[data-page-type='home'] main .hd-life__gallery {
+    grid-template-columns: 1fr;
+  }
+  body[data-page-type='home'] main .hd-life figure:first-child {
+    grid-column: auto;
+  }
+  body[data-page-type='home'] main .hd-life figure img,
+  body[data-page-type='home'] main .hd-life figure:first-child img {
+    height: 240px;
+  }
+  body[data-page-type='home'] main .hd-quick__item {
+    padding: 22px;
+    min-height: 160px;
+  }
+}
+@media (max-width: 420px) {
+  .hp-roadmap {
+    grid-template-columns: 1fr;
+  }
+  .hp-roadmap h3 {
+    margin-bottom: 16px;
+  }
+  .hp-documents > div {
+    grid-template-columns: 1fr;
+  }
+  .hp-fields {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hp-plan__footer a {
+    transition: none;
+  }
+  .hp-plan__footer a:hover {
+    transform: none;
+  }
+}
