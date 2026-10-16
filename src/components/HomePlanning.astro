@@ -135,14 +135,7 @@ const budgetRows = [
 <section class="hp-section container" id="explore">
   <div class="hp-heading">
     <div>
-      <p class="hp-eyebrow">01 / {text('选择方向', 'YOUR PRIORITIES', '選擇方向')}</p>
-      <h2>
-        {text(
-          '不同阶段，都有清晰的起点。',
-          'A clear starting point for every stage.',
-          '不同階段，都有清晰的起點。',
-        )}
-      </h2>
+      <h2>{text('从您的阶段开始', 'Start where you are', '從您的階段開始')}</h2>
     </div>
     <p>
       {text(
@@ -155,8 +148,10 @@ const budgetRows = [
   <div class="hp-plans">
     {plans.map((p) => (
       <article class="hp-plan">
-        <span class="hp-label">{p.tag}</span>
-        <h3>{p.title}</h3>
+        <div class="hp-plan__intro">
+          <h3>{p.title}</h3>
+          <p class="hp-plan__fit">{p.next}</p>
+        </div>
         <p>{p.description}</p>
         <ul>
           {p.items.map((item) => (
@@ -164,9 +159,8 @@ const budgetRows = [
           ))}
         </ul>
         <div class="hp-plan__footer">
-          <small>{p.next}</small>
           <a href="#consult" aria-label={`${p.title} · ${text('咨询', 'Discuss', '諮詢')}`}>
-            ↗
+            {text('了解详情', 'Discuss options', '了解詳情')}
           </a>
         </div>
       </article>
@@ -176,8 +170,7 @@ const budgetRows = [
 <section class="hp-budget" id="sample-budget">
   <div class="container hp-budget__grid">
     <div>
-      <p class="hp-eyebrow">02 / {text('预算规划', 'BUDGET PLANNING', '預算規劃')}</p>
-      <h2>{text('每一笔，都看得清楚。', 'See where your budget goes.', '每一筆，都看得清楚。')}</h2>
+      <h2>{text('把预算摊开来看', 'See your budget clearly', '把預算攤開來看')}</h2>
       <p class="hp-description">
         {text(
           '用一个可调整的示例，理解医疗与旅行支出如何共同组成预算。',
@@ -204,7 +197,13 @@ const budgetRows = [
         ))}
       </div>
     </div>
-    <div class="hp-calculator" data-demo-budget role="group" aria-labelledby="demo-budget-title">
+    <div
+      class="hp-calculator"
+      data-ui
+      data-demo-budget
+      role="group"
+      aria-labelledby="demo-budget-title"
+    >
       <div class="hp-calculator__head">
         <h3 id="demo-budget-title">{text('我的预算草稿', 'My budget sketch', '我的預算草稿')}</h3>
         <span>USD · {text('演示', 'DEMO')}</span>
@@ -263,14 +262,7 @@ const budgetRows = [
 <section class="hp-section container" id="visit-roadmap">
   <div class="hp-heading">
     <div>
-      <p class="hp-eyebrow">03 / {text('行程全貌', 'VISIT ROADMAP')}</p>
-      <h2>
-        {text(
-          '从准备到返程，心里有数。',
-          'Know what to prepare, at every step.',
-          '從準備到返程，心裡有數。',
-        )}
-      </h2>
+      <h2>{text('从出发到返程', 'Before, during and after', '從出發到返程')}</h2>
     </div>
     <p>
       {text(
@@ -280,16 +272,15 @@ const budgetRows = [
       )}
     </p>
   </div>
-  <div class="hp-roadmap">
-    {stages.map(([when, title, description], i) => (
-      <article>
-        <span class="hp-stage">0{i + 1}</span>
-        <p class="hp-eyebrow">{when}</p>
-        <h3>{title}</h3>
+  <ol class="hp-roadmap">
+    {stages.map(([when, title, description]) => (
+      <li>
+        <h3>{when}</h3>
+        <p class="hp-stage-title">{title}</p>
         <p>{description}</p>
-      </article>
+      </li>
     ))}
-  </div>
+  </ol>
   <div class="hp-documents">
     <h3>
       {text(
@@ -304,11 +295,8 @@ const budgetRows = [
         text('已有病历与检查', 'Existing medical records', '已有病歷與檢查'),
         text('分项报价与条款', 'Itemized quotes & terms', '分項報價與條款'),
         text('预约与住宿确认', 'Appointment & stay confirmations', '預約與住宿確認'),
-      ].map((item, i) => (
-        <span>
-          <b>0{i + 1}</b>
-          {item}
-        </span>
+      ].map((item) => (
+        <span>{item}</span>
       ))}
     </div>
   </div>

@@ -1,115 +1,98 @@
+/* Readable planning rows, a working budget and a chronological travel list. */
 body[data-page-type='home'] .hp-section {
-  padding-block: 76px;
+  padding-block: 88px;
 }
 .hp-heading {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: end;
-  margin-bottom: 32px;
-}
-.hp-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: #557362;
-  margin: 0 0 16px;
+  margin-bottom: 40px;
 }
 .hp-heading h2,
 .hp-budget h2 {
-  font-size: clamp(27px, 2.6vw, 37px);
-  line-height: 1.45;
+  font-size: clamp(28px, 2.7vw, 40px);
+  line-height: 1.4;
   font-weight: 500;
   letter-spacing: -0.035em;
   margin: 0;
-  color: #243c36;
+  color: var(--eh-ink);
+  text-wrap: balance;
 }
 .hp-heading > p,
 .hp-description {
   font-size: 16px;
   line-height: 1.85;
-  color: #5c6d66;
+  color: var(--eh-ink);
   margin: 0;
-  max-width: 42ch;
+  max-width: 44ch;
 }
 .hp-plans {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 12px;
 }
 .hp-plan {
-  display: flex;
-  flex-direction: column;
-  padding: 28px;
-  background: #fff;
-  border: 1px solid #dfe8df;
-  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.2fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 30px 32px;
+  background: var(--taste-field);
   min-width: 0;
 }
-.hp-label {
-  font-size: 12px;
-  background: #edf3eb;
-  color: #365a45;
-  border-radius: 999px;
-  padding: 6px 10px;
-  align-self: flex-start;
+.hp-plan:nth-child(2) {
+  background: var(--taste-field-deep);
 }
 .hp-plan h3 {
   font-size: 23px;
-  line-height: 1.5;
+  line-height: 1.4;
   font-weight: 500;
-  margin: 22px 0 14px;
+  margin: 0 0 12px;
   letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.hp-plan__fit {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--eh-muted);
+  margin: 0;
 }
 .hp-plan > p,
-.hp-roadmap article > p:last-child {
-  font-size: 14px;
-  line-height: 1.9;
-  color: #5c6d66;
+.hp-roadmap li > p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--eh-ink);
   margin: 0;
 }
 .hp-plan ul {
   list-style: none;
-  padding: 20px 0;
-  margin: 0 0 20px;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
 }
 .hp-plan li {
-  font-size: 14px;
-  line-height: 1.8;
-  padding: 9px 0;
-  border-bottom: 1px solid #edf1ec;
-}
-.hp-plan li:before {
-  content: '✓';
-  color: #427359;
-  margin-right: 10px;
-}
-.hp-plan__footer {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: space-between;
-  margin-top: auto;
-}
-.hp-plan__footer small {
-  font-size: 12px;
-  line-height: 1.6;
-  color: #5c6d66;
+  font-size: 15px;
+  line-height: 1.7;
 }
 .hp-plan__footer a {
-  display: grid;
-  place-items: center;
-  min-width: 44px;
-  height: 44px;
-  background: #edf3eb;
-  color: #2d6455;
-  border-radius: 50%;
-  font-size: 22px;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--eh-ink);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--taste-accent);
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+.hp-plan__footer a:hover {
+  transform: translateX(3px);
 }
 .hp-budget {
-  padding-block: 76px;
-  background: #f0f4ee;
+  padding-block: 88px;
+  background: var(--taste-field);
 }
 .hp-budget__grid {
   display: grid;
@@ -121,44 +104,45 @@ body[data-page-type='home'] .hp-section {
   margin: 22px 0;
 }
 .hp-demo {
-  font-size: 12px;
-  line-height: 1.8;
-  color: #53675b;
-  border-left: 2px solid #72917c;
-  padding-left: 14px;
-  margin: 20px 0 26px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--eh-muted);
+  margin: 20px 0 28px;
+  max-width: 52ch;
+}
+.hp-costs {
+  display: grid;
+  gap: 10px;
 }
 .hp-costs > div {
   display: flex;
   align-items: start;
   justify-content: space-between;
   gap: 20px;
-  padding: 17px 0;
-  border-bottom: 1px solid #dce5d9;
+  padding: 17px 18px;
+  background: var(--eh-paper);
 }
 .hp-costs strong {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
 }
 .hp-costs small {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
-  color: #5c6d66;
-  margin-top: 5px;
+  color: var(--eh-muted);
+  margin-top: 6px;
 }
 .hp-costs b {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 .hp-calculator {
-  padding: 32px;
-  background: #fff;
-  border: 1px solid #dfe8df;
-  border-radius: 22px;
+  padding: 36px;
+  background: var(--taste-white);
   min-width: 0;
 }
 .hp-calculator__head {
@@ -166,111 +150,116 @@ body[data-page-type='home'] .hp-section {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 .hp-calculator h3 {
-  font-size: 23px;
-  line-height: 1.5;
+  font-size: 25px;
+  line-height: 1.4;
   font-weight: 500;
   margin: 0;
+  text-wrap: balance;
 }
 .hp-calculator__head > span {
-  font-size: 11px;
-  color: #557362;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  color: var(--eh-muted);
 }
 .hp-fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 16px;
+  gap: 22px 18px;
 }
 .hp-fields label {
   display: grid;
-  gap: 9px;
-  font-size: 13px;
-  color: #53675b;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--eh-ink);
   min-width: 0;
 }
+/* taste-skill-ignore real numeric form fields need visible boundaries */
 .hp-fields input {
   display: block;
   width: 100%;
   min-width: 0;
-  min-height: 48px;
+  min-height: 50px;
   padding: 10px 12px;
-  border: 1px solid #a1b5a5;
-  border-radius: 9px;
-  background: #fafbf9;
-  color: #243c36;
+  border: 1px solid var(--taste-control);
+  border-radius: 0;
+  background: var(--eh-paper);
+  color: var(--eh-ink);
   font: inherit;
-  font-size: 17px;
+  font-size: 18px;
   font-variant-numeric: tabular-nums;
   box-sizing: border-box;
 }
+.hp-fields input:focus-visible {
+  outline: 2px solid var(--taste-accent);
+  outline-offset: 3px;
+}
 .hp-total {
   display: grid;
-  gap: 7px;
-  border-top: 1px solid #e0e7df;
-  margin-top: 28px;
-  padding-top: 25px;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--taste-field);
 }
 .hp-total > span {
-  font-size: 13px;
-  color: #5c6d66;
+  font-size: 14px;
+  color: var(--eh-ink);
 }
 .hp-total output {
-  font-size: 46px;
-  line-height: 1.2;
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 1.15;
   font-weight: 500;
   letter-spacing: -0.04em;
-  color: #2d6455;
+  color: var(--taste-accent);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
 }
 .hp-total small,
 .hp-calculator__note {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.8;
-  color: #5c6d66;
+  color: var(--eh-muted);
 }
 .hp-calculator__note {
-  margin: 16px 0;
+  margin: 20px 0;
 }
 .hp-roadmap {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.hp-roadmap article {
-  border-top: 1px solid #cfdccf;
-  padding-top: 22px;
-}
-.hp-stage {
-  display: block;
-  font-size: 32px;
-  font-weight: 400;
-  color: #6a8976;
-  margin-bottom: 22px;
-  font-variant-numeric: tabular-nums;
-}
-.hp-roadmap .hp-eyebrow {
-  margin-bottom: 10px;
+.hp-roadmap li {
+  padding: 26px 22px;
+  background: var(--taste-field);
+  min-width: 0;
 }
 .hp-roadmap h3 {
-  font-size: 19px;
-  line-height: 1.6;
-  font-weight: 500;
-  margin: 0 0 14px;
-}
-.hp-documents {
-  margin-top: 40px;
-  padding: 28px 30px;
-  background: #f0f4ee;
-  border-radius: 16px;
-}
-.hp-documents h3 {
-  font-size: 18px;
+  font-size: 25px;
+  line-height: 1.4;
   font-weight: 500;
   margin: 0 0 22px;
+  color: var(--taste-accent);
+}
+.hp-roadmap li .hp-stage-title {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.hp-documents {
+  margin-top: 32px;
+  padding: 30px 32px;
+  background: var(--taste-field-deep);
+}
+.hp-documents h3 {
+  font-size: 21px;
+  font-weight: 500;
+  margin: 0 0 24px;
+  text-wrap: balance;
 }
 .hp-documents > div {
   display: grid;
@@ -278,94 +267,9 @@ body[data-page-type='home'] .hp-section {
   gap: 22px;
 }
 .hp-documents span {
-  display: flex;
-  gap: 12px;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.8;
 }
-.hp-documents b {
-  font-size: 12px;
-  font-weight: 400;
-  color: #557362;
-}
-@media (max-width: 1000px) {
-  .hp-budget__grid {
-    gap: 32px;
-  }
-  .hp-plan {
-    padding: 22px;
-  }
-  .hp-heading {
-    gap: 32px;
-  }
-  .hp-roadmap {
-    grid-template-columns: 1fr 1fr;
-  }
-  .hp-documents > div {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 760px) {
-  body[data-page-type='home'] .hp-section,
-  .hp-budget {
-    padding-block: 50px;
-  }
-  .hp-heading,
-  .hp-budget__grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-  .hp-heading {
-    margin-bottom: 26px;
-  }
-  .hp-plans {
-    grid-template-columns: 1fr;
-  }
-  .hp-plan {
-    padding: 25px;
-  }
-  .hp-plan ul {
-    padding-top: 12px;
-  }
-  .hp-calculator {
-    padding: 24px;
-  }
-  .hp-fields {
-    gap: 18px 12px;
-  }
-  .hp-fields input {
-    font-size: 16px;
-  }
-  .hp-roadmap {
-    gap: 28px 20px;
-  }
-  .hp-stage {
-    font-size: 27px;
-    margin-bottom: 18px;
-  }
-  .hp-documents {
-    padding: 25px;
-  }
-  .hp-documents > div {
-    gap: 18px;
-  }
-  .hp-total output {
-    font-size: 40px;
-  }
-}
-@media (max-width: 380px) {
-  .hp-roadmap,
-  .hp-documents > div {
-    grid-template-columns: 1fr;
-  }
-  .hp-calculator {
-    padding: 20px;
-  }
-  .hp-fields {
-    grid-template-columns: 1fr;
-  }
-}
-/* Equal image and information rows keep the longer homepage easy to scan. */
 body[data-page-type='home'] main .hd-life__gallery {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
@@ -392,12 +296,91 @@ body[data-page-type='home'] main .hd-quick__item {
   min-height: 190px;
   padding: 26px;
 }
-body[data-page-type='home'] main .eh-care {
-  padding-top: 50px;
+@media (max-width: 1100px) {
+  .hp-plan {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 22px 32px;
+  }
+  .hp-plan__intro {
+    grid-row: span 2;
+  }
+  .hp-plan > p {
+    grid-column: 2;
+  }
+  .hp-plan ul {
+    grid-column: 2;
+  }
+  .hp-plan__footer {
+    grid-column: 1/3;
+  }
+  .hp-budget__grid {
+    gap: 36px;
+  }
+  .hp-roadmap {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media (max-width: 900px) {
   body[data-page-type='home'] main .hd-quick > div {
     grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 760px) {
+  body[data-page-type='home'] .hp-section,
+  .hp-budget {
+    padding-block: 56px;
+  }
+  .hp-heading,
+  .hp-budget__grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .hp-heading {
+    margin-bottom: 30px;
+  }
+  .hp-plan {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 24px;
+  }
+  .hp-plan__intro {
+    grid-row: auto;
+  }
+  .hp-plan > p,
+  .hp-plan ul,
+  .hp-plan__footer {
+    grid-column: auto;
+  }
+  .hp-plan__footer a {
+    font-size: 15px;
+  }
+  .hp-calculator {
+    padding: 26px;
+  }
+  .hp-fields {
+    gap: 20px 14px;
+  }
+  .hp-fields input {
+    font-size: 17px;
+  }
+  .hp-roadmap {
+    gap: 16px;
+  }
+  .hp-roadmap li {
+    padding: 24px 20px;
+  }
+  .hp-roadmap h3 {
+    font-size: 23px;
+  }
+  .hp-documents {
+    padding: 26px;
+  }
+  .hp-documents > div {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .hp-total {
+    padding: 20px;
   }
 }
 @media (max-width: 600px) {
@@ -412,7 +395,29 @@ body[data-page-type='home'] main .eh-care {
     height: 240px;
   }
   body[data-page-type='home'] main .hd-quick__item {
-    padding: 20px;
+    padding: 22px;
     min-height: 160px;
+  }
+}
+@media (max-width: 420px) {
+  .hp-roadmap {
+    grid-template-columns: 1fr;
+  }
+  .hp-roadmap h3 {
+    margin-bottom: 16px;
+  }
+  .hp-documents > div {
+    grid-template-columns: 1fr;
+  }
+  .hp-fields {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hp-plan__footer a {
+    transition: none;
+  }
+  .hp-plan__footer a:hover {
+    transform: none;
   }
 }
