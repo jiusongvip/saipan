@@ -49,7 +49,7 @@ if (!existsSync(dist)) {
   };
 
   // ── 检查 ①：pending-slot 与横幅计数 ──────────────────────────────
-  // 必须匹配 class 列表里的整词：ContactForm 的 class="banner banner--info" 用精确串 class="banner" 匹配不到。
+  // 仅禁止审核横幅；生产环境的 banner--info 是表单不可用提示，不应阻止发布。
   let pendingCount = 0;
   let bannerCount = 0;
   const pendingFiles: string[] = [];
@@ -58,7 +58,10 @@ if (!existsSync(dist)) {
     const html = readFileSync(file, 'utf8');
     const rel = relOf(file);
     const p = (html.match(/class="[^"]*\bpending-slot\b[^"]*"/g) ?? []).length;
-    const b = (html.match(/class="[^"]*\bbanner\b[^"]*"/g) ?? []).length;
+    const b = (html.match(/class="[^"]*"/g) ?? []).filter((attr) => {
+      const classes = attr.slice(7, -1).split(/\\s+/);
+      return classes.includes('banner') && !classes.includes('banner--info');
+    }).length;
     if (p > 0) {
       pendingCount += p;
       pendingFiles.push(`${rel}×${p}`);
