@@ -59,7 +59,7 @@ if (!existsSync(dist)) {
     const rel = relOf(file);
     const p = (html.match(/class="[^"]*\bpending-slot\b[^"]*"/g) ?? []).length;
     const b = (html.match(/class="[^"]*"/g) ?? []).filter((attr) => {
-      const classes = attr.slice(7, -1).split(/\\s+/);
+      const classes = attr.slice(7, -1).split(/\s+/);
       return classes.includes('banner') && !classes.includes('banner--info');
     }).length;
     if (p > 0) {
