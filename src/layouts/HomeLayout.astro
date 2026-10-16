@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
 import HomeDiscovery from '../components/HomeDiscovery.astro';
 import HomePlanning from '../components/HomePlanning.astro';
+import HomeClinical from '../components/HomeClinical.astro';
 import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
 import { canonicalUrl } from '../lib/seo';
 import type { LangCode } from '../lib/config';
@@ -21,7 +22,6 @@ const copy = getHomeCopy(lang);
 const built = buildVisiblePaths(await loadAllPages());
 const target = (...paths: string[]) =>
   paths.map((p) => `/${lang}/${p}`).find((p) => built.has(p)) ?? '#consult';
-const medical = target('hospital-lab', 'articles/lab-own-or-outsourced', 'programs/ivf-icsi');
 const island = target('why-saipan', 'entry-path');
 const alternates = (['zh-hans', 'zh-hant', 'en'] as const)
   .filter((l) => built.has(`/${l}`) || built.has(`/${l}/`))
@@ -54,42 +54,19 @@ const metaDescription =
   <div class="eh-values">
     <div class="container">
       {copy.nav.map((text, i) => (
-        <span data-reveal style={`--rd:${i}`}>
+        <a
+          href={['#medical-care', '#sample-budget', '#first-consultation'][i]}
+          data-reveal
+          style={`--rd:${i}`}
+        >
           {text}
-        </span>
+        </a>
       ))}
     </div>
   </div>
-  <HomePlanning lang={lang} />
-  <section class="container eh-care" id="medical-care">
-    <div class="eh-care__photos" data-reveal>
-      <MarketingImage
-        src="/images/care-consultation.jpg"
-        alt={copy.imageAlt[1]}
-        width="1000"
-        height="667"
-        loading="lazy"
-      />
-      <figure>
-        <MarketingImage
-          src="/images/laboratory-care.jpg"
-          alt={copy.imageAlt[3]}
-          width="1000"
-          height="667"
-          loading="lazy"
-        />
-        <figcaption>{copy.careNote}</figcaption>
-      </figure>
-    </div>
-    <div class="eh-care__copy" data-reveal style={`--rd:1`}>
-      <h2>{copy.care}</h2>
-      <p>{copy.careText}</p>
-      <a class="eh-link" href={medical}>
-        {copy.careLink}
-        <span>↗</span>
-      </a>
-    </div>
-  </section>
+  <HomePlanning lang={lang} part="goals" />
+  <HomeClinical lang={lang} />
+  <HomePlanning lang={lang} part="details" />
   <section class="eh-island">
     <MarketingImage
       src="/images/saipan-lagoon-aerial.jpg"

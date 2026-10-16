@@ -89,3 +89,9 @@ Preview now supports Home, Destination and Costs in all three languages. TypeScr
 Root cause: the original preview embedded only nine selected page/language combinations and did not route absolute internal links from its srcdoc iframe. Replaced the bundler with all 50 generated HTML pages, gzip-compressed into one file, offline assets/scripts, internal-link routing, fragment scrolling with enclosing disclosure opening, a page selector, language switching and a back stack. Fixed cross-frame DOM detection by using closest capability rather than the parent window's Element constructor. Preview banner distinguishes page navigation from unconnected real contact submission.
 
 Verification: all 1,196 bundled internal page links and target fragments resolve. A Node DOM harness verified unpacking all 50 pages, an actual iframe click-handler transition to IVF, back navigation and a language switch to English. Browser visual/interaction QA remains unavailable.
+
+## Spring-inspired clinical-first pass
+- New consultation photograph: cottonbro studio, Pexels, https://www.pexels.com/photo/woman-in-white-suit-with-stethoscope-talking-to-a-person-7579823/ (free Pexels license; illustrative scene, not Saipan clinic staff).
+- Moved clinical process and first consultation ahead of budget and island lifestyle.
+- Service model describes questions to verify, not invented clinician names, credentials or clinical outcomes.
+- Fictional itemized medical example totals $12,000; medications and genetics/storage remain explicitly excluded.

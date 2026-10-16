@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+import consultation from '../../assets/marketing/medical-consultation.jpg';
 import image0 from '../../assets/marketing/american-flag.jpg';
 import image1 from '../../assets/marketing/care-consultation.jpg';
 import image2 from '../../assets/marketing/couple-editorial.jpg';
@@ -13,6 +14,7 @@ import image10 from '../../assets/marketing/saipan-marianas-sts103.jpg';
 import image11 from '../../assets/marketing/stay-room.jpg';
 
 export const marketingImages: Record<string, ImageMetadata> = {
+  '/images/medical-consultation.jpg': consultation,
   '/images/american-flag.jpg': image0,
   '/images/care-consultation.jpg': image1,
   '/images/couple-editorial.jpg': image2,
