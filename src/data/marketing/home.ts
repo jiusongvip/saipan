@@ -156,10 +156,10 @@ export function getHeroSlides(lang: LangCode) {
     {
       src: '/images/saipan-lagoon-aerial.jpg',
       title: en
-        ? 'Born in Saipan.\nA U.S. citizen?'
+        ? 'Born in Saipan.\nA U.S. citizen'
         : hant
-          ? '塞班出生\n美國公民？'
-          : '塞班出生\n美国公民？',
+          ? '塞班出生\n美國公民'
+          : '塞班出生\n美国公民',
       label: en ? 'Saipan setting' : hant ? '塞班環境' : '塞班环境',
       text: en
         ? 'Plan accommodation, transport and time between appointments before your visit.'
