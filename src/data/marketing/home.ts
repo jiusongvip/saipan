@@ -10,7 +10,7 @@ export function getHomeCopy(lang: LangCode) {
         consult: 'Let’s talk',
         discover: 'Explore your options',
         intro: 'Your future. Your way.',
-        introText: 'A personal decision deserves thoughtful care—and space to breathe.',
+        introText: 'A personal decision deserves thoughtful care, and space to breathe.',
         options: ['Understand your options', 'Prepare for your visit', 'Plan with confidence'],
         descriptions: [
           'Treatment & assessment',
@@ -21,7 +21,7 @@ export function getHomeCopy(lang: LangCode) {
         careText: 'Understand the people, processes and questions behind your care.',
         careLink: 'Explore medical care',
         island: 'A different setting.\nThe same focus: you.',
-        islandText: 'Discover Saipan, with room to pause between the important moments.',
+        islandText: 'At 15°11′ N, 145°45′ E, Saipan leaves room to pause between the important moments.',
         islandLink: 'Discover Saipan',
         journey: 'One step at a time.',
         steps: [
@@ -32,7 +32,6 @@ export function getHomeCopy(lang: LangCode) {
         ],
         start: 'It starts with a conversation.',
         startText: 'Bring your questions. We’ll help you understand the next step.',
-        label: 'SAIPAN · FERTILITY & FAMILY',
         note: 'Illustrative photography',
         careNote: 'Illustrative medical setting',
         nav: ['Personal care', 'Clear information', 'Thoughtful support'],
@@ -60,13 +59,12 @@ export function getHomeCopy(lang: LangCode) {
           careText: '了解醫療資源、實驗室流程，以及就診前值得問的問題。',
           careLink: '了解醫療服務',
           island: '面朝大海\n靜候新生',
-          islandText: '在塞班的海與天空之間，為就診之外的時光留白。',
+          islandText: '北緯15°11′、東經145°45′的海與天空之間，為就診之外的時光留白。',
           islandLink: '認識塞班',
           journey: '從諮詢到出發 步步清晰',
           steps: ['聊聊您的期待', '了解方案與費用', '準備行程與資料', '保持後續聯絡'],
           start: '您的好孕計劃\n現在開始',
           startText: '帶著問題來，先了解，再選擇。',
-          label: 'SAIPAN · FERTILITY & FAMILY',
           note: '人物情境示意',
           careNote: '醫療情境示意 · 非院方實拍',
           nav: ['個人化關懷', '清晰的資訊', '有回應的支持'],
@@ -93,13 +91,12 @@ export function getHomeCopy(lang: LangCode) {
           careText: '了解医疗资源、实验室流程，以及就诊前值得问的问题。',
           careLink: '了解医疗服务',
           island: '面朝大海\n静候新生',
-          islandText: '在塞班的海与天空之间，为就诊之外的时光留白。',
+          islandText: '北纬15°11′、东经145°45′的海与天空之间，为就诊之外的时光留白。',
           islandLink: '认识塞班',
           journey: '从咨询到出发 步步清晰',
           steps: ['聊聊您的期待', '了解方案与费用', '准备行程与资料', '保持后续联络'],
           start: '您的好孕计划\n现在开始',
           startText: '带着问题来，先了解，再选择。',
-          label: 'SAIPAN · FERTILITY & FAMILY',
           note: '人物场景示意',
           careNote: '医疗场景示意 · 非院方实拍',
           nav: ['个性化关怀', '清晰的信息', '有回应的支持'],
@@ -180,8 +177,8 @@ export function getHeroSlides(lang: LangCode) {
       text: en
         ? 'Compare direct and connecting routes, then coordinate arrival with your appointment.'
         : hant
-          ? '直飛、中轉、接續就診——出發前，安排明白。'
-          : '直飞、中转、接续就诊——出发前，安排明白。',
+          ? '直飛、中轉、接續就診，出發前安排明白。'
+          : '直飞、中转、接续就诊，出发前安排明白。',
       alt: en
         ? 'Airplane wing above the clouds'
         : hant

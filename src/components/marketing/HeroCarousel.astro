@@ -7,8 +7,7 @@ interface Props {
 const { lang } = Astro.props;
 const en = lang === 'en',
   hant = lang === 'zh-hant';
-import { getHomeCopy, getHeroSlides } from '../../data/marketing/home';
-const copy = getHomeCopy(lang);
+import { getHeroSlides } from '../../data/marketing/home';
 const heroSlides = getHeroSlides(lang);
 ---
 
@@ -35,7 +34,6 @@ const heroSlides = getHeroSlides(lang);
   </div>
   <div class="eh-hero__shade"></div>
   <div class="container eh-hero__content">
-    <p class="eh-kicker">{copy.label}</p>
     <h1 data-hero-title>{heroSlides[0].title}</h1>
     <p class="eh-hero__sub" data-hero-caption>
       {heroSlides[0].text}
@@ -55,7 +53,6 @@ const heroSlides = getHeroSlides(lang);
           data-caption={slide.text}
           data-title={slide.title}
         >
-          <small>0{i + 1}</small>
           <span>{slide.label}</span>
         </button>
       ))}

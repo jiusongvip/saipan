@@ -54,24 +54,23 @@ const metaDescription =
 >
   <HeroCarousel lang={lang} />
   <ConsultationPanel lang={lang} />
+  <script is:inline>
+    document.documentElement.classList.add('js-reveal');
+  </script>
   <div class="eh-values">
     <div class="container">
       {copy.nav.map((text, i) => (
-        <span>
-          <small>0{i + 1}</small>
-          {text}
-        </span>
+        <span data-reveal style={`--rd:${i}`}>{text}</span>
       ))}
     </div>
   </div>
   <section class="eh-intro container">
-    <p class="eh-kicker">MADE PERSONAL</p>
-    <h2>{copy.intro}</h2>
-    <p>{copy.introText}</p>
+    <h2 data-reveal>{copy.intro}</h2>
+    <p data-reveal style={`--rd:1`}>{copy.introText}</p>
   </section>
   <section class="container eh-portals" aria-label={copy.discover}>
     {copy.options.map((title, i) => (
-      <a class={`eh-portal eh-portal--${i}`} href={paths[i]}>
+      <a class={`eh-portal eh-portal--${i}`} href={paths[i]} data-reveal style={`--rd:${i}`}>
         <MarketingImage
           src={
             [
@@ -86,19 +85,15 @@ const metaDescription =
           loading="lazy"
         />
         <div>
-          <small>
-            0{i + 1} / {copy.descriptions[i]}
-          </small>
-          <h3>
-            {title}
-            <span>↗</span>
-          </h3>
+          <small>{copy.descriptions[i]}</small>
+          <h3>{title}</h3>
+          <span class="eh-portal__mark" aria-hidden="true">↗</span>
         </div>
       </a>
     ))}
   </section>
   <section class="container eh-care" id="medical-care">
-    <div class="eh-care__photos">
+    <div class="eh-care__photos" data-reveal>
       <MarketingImage
         src="/images/care-consultation.jpg"
         alt={copy.imageAlt[1]}
@@ -116,16 +111,8 @@ const metaDescription =
         />
         <figcaption>{copy.careNote}</figcaption>
       </figure>
-      <span class="eh-orbit" aria-hidden="true">
-        CARE
-        <br />
-        WITH YOU
-        <br />
-        IN MIND
-      </span>
     </div>
-    <div class="eh-care__copy">
-      <p class="eh-kicker">THE SCIENCE. THE HUMAN.</p>
+    <div class="eh-care__copy" data-reveal style={`--rd:1`}>
       <h2>{copy.care}</h2>
       <p>{copy.careText}</p>
       <a class="eh-link" href={medical}>
@@ -143,8 +130,7 @@ const metaDescription =
       loading="lazy"
     />
     <div class="container">
-      <div class="eh-island__card">
-        <p class="eh-kicker">15°11′ N · 145°45′ E</p>
+      <div class="eh-island__card" data-reveal>
         <h2>{copy.island}</h2>
         <p>{copy.islandText}</p>
         <a class="eh-link" href={island}>
@@ -159,13 +145,11 @@ const metaDescription =
   </section>
   <section class="container eh-journey">
     <div>
-      <p class="eh-kicker">YOUR PACE. YOUR PATH.</p>
-      <h2>{copy.journey}</h2>
+      <h2 data-reveal>{copy.journey}</h2>
     </div>
     <ol>
       {copy.steps.map((step, i) => (
-        <li>
-          <span>0{i + 1}</span>
+        <li data-reveal style={`--rd:${i + 1}`}>
           <h3>{step}</h3>
         </li>
       ))}
@@ -173,13 +157,15 @@ const metaDescription =
   </section>
   <HomeDiscovery lang={lang} />
   <section class="eh-start container">
-    <p class="eh-kicker">LET’S BEGIN</p>
-    <h2>{copy.start}</h2>
-    <p>{copy.startText}</p>
-    <a class="eh-button eh-button--dark" href="#consult">
+    <h2 data-reveal>{copy.start}</h2>
+    <p data-reveal style={`--rd:1`}>{copy.startText}</p>
+    <a class="eh-button eh-button--dark" href="#consult" data-reveal style={`--rd:2`}>
       {copy.consult}
       <span>↗</span>
     </a>
   </section>
   <ContactForm lang={lang} pageType="home" pagePath={page?.path ?? '/'} ctaLabel={copy.consult} />
 </BaseLayout>
+<script>
+  import '../scripts/reveal';
+</script>

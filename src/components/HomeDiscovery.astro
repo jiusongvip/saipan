@@ -17,12 +17,10 @@ const links = [
 ---
 
 <section class="hd-quick container">
-  <p class="eh-kicker">THE ESSENTIALS</p>
-  <h2>{c.tools}</h2>
+  <h2 data-reveal>{c.tools}</h2>
   <div>
     {c.quick.map((text, i) => (
-      <a href={links[i]}>
-        <span>0{i + 1}</span>
+      <a href={links[i]} data-reveal style={`--rd:${i}`}>
         <h3>{text}</h3>
         <p>{c.notes[i]}</p>
         <b aria-hidden="true">↗</b>
@@ -32,12 +30,11 @@ const links = [
 </section>
 <section class="hd-life">
   <div class="container">
-    <p class="eh-kicker">LIFE BETWEEN APPOINTMENTS</p>
-    <h2>{c.life}</h2>
-    <p class="hd-lede">{c.lifeText}</p>
+    <h2 data-reveal>{c.life}</h2>
+    <p class="hd-lede" data-reveal style={`--rd:1`}>{c.lifeText}</p>
     <div class="hd-life__gallery">
       {c.gallery.map((title, i) => (
-        <figure>
+        <figure data-reveal style={`--rd:${i + 2}`}>
           <MarketingImage
             src={['/images/stay-room.jpg', '/images/island-pool.jpg', '/images/daily-meals.jpg'][i]}
             alt={title}
@@ -65,8 +62,7 @@ const links = [
   data-comfort={c.comfort}
   data-family={c.family}
 >
-  <div>
-    <p class="eh-kicker">MAKE IT PERSONAL</p>
+  <div data-reveal>
     <h2>{c.plan}</h2>
     <p class="hd-lede">{c.planText}</p>
     <div class="hd-planner__fields">
@@ -92,8 +88,7 @@ const links = [
       <span>↗</span>
     </button>
   </div>
-  <div class="hd-checklist" aria-live="polite">
-    <p class="eh-kicker">YOUR CHECKLIST</p>
+  <div class="hd-checklist" aria-live="polite" data-reveal style={`--rd:1`}>
     <h3>{c.result}</h3>
     <ul>
       {c.base.map((text) => (
@@ -109,11 +104,10 @@ const links = [
   </div>
 </section>
 <section class="hd-faq container">
-  <div>
-    <p class="eh-kicker">GOOD QUESTIONS. CLEAR ANSWERS.</p>
+  <div data-reveal>
     <h2>{c.faq}</h2>
   </div>
-  <div>
+  <div data-reveal style={`--rd:1`}>
     {c.questions.map((q, i) => (
       <details id={i === 2 ? 'birth-documents' : undefined}>
         <summary>{q}</summary>
