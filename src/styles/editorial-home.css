@@ -130,3 +130,55 @@ body[data-page-type=home] .eh-journey li:before{content:"0" counter(journey);fon
 body[data-page-type=home] .hd-faq details{border-bottom:1px solid #d5ddd3}
 body[data-page-type=home] .hd-faq summary{font-weight:550}
 @media(max-width:600px){body[data-page-type=home] .eh-hero h1{font-size:clamp(34px,9vw,44px)}body[data-page-type=home] .eh-hero__sub{font-size:15px}body[data-page-type=home] .eh-portals{gap:12px}body[data-page-type=home] .eh-journey li{gap:12px}}
+
+/* V4 — premium editorial direction, inspired by Astro modular landing systems.
+   Restrained jade, porcelain, bronze and large photographic compositions. */
+body[data-page-type=home]{--eh-ink:#18382f;--eh-paper:#f7f5ef;--eh-muted:#627169;--color-accent:#a6784e;background:#f7f5ef}
+body[data-page-type=home] .site-header{background:#f7f5efed;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+body[data-page-type=home] .eh-hero{min-height:740px;height:calc(100svh - 82px);max-height:980px;background:#16352f}
+body[data-page-type=home] .eh-hero__shade{background:linear-gradient(90deg,#081d1bdc 0%,#092621b0 37%,#0b28204a 70%,#102a281c 100%),linear-gradient(0deg,#061b19b0,transparent 35%)}
+body[data-page-type=home] .eh-hero__content{padding-block:84px 42px}
+body[data-page-type=home] .eh-hero h1{font-size:clamp(56px,6.8vw,104px);font-weight:400;line-height:1.16;letter-spacing:-.055em;max-width:880px}
+body[data-page-type=home] .eh-hero__sub{margin-top:28px;max-width:520px;color:#f0f2eb;font-size:clamp(17px,1.6vw,21px);line-height:1.85}
+body[data-page-type=home] .eh-hero__tabs{max-width:920px;gap:0;border-top:1px solid #ffffff70}
+body[data-page-type=home] .eh-hero__tab{background:transparent;border-top:3px solid transparent;min-height:66px;opacity:.75;font-size:13px;letter-spacing:.045em}
+body[data-page-type=home] .eh-hero__tab.is-active{background:#ffffff20;color:white;border-top-color:#e8d3a7;opacity:1}
+body[data-page-type=home] .eh-hero__tab:hover{background:#ffffff20}
+body[data-page-type=home] .eh-values{background:#173b33;color:#e9f0e9;padding:30px 0}
+body[data-page-type=home] .eh-values span{color:#f0f2e9;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+body[data-page-type=home] .eh-values span+span:before{content:"✦";margin-right:32px;color:#c8a779;font-size:11px}
+body[data-page-type=home] .eh-intro{padding-top:140px;padding-bottom:72px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end;max-width:1320px}
+body[data-page-type=home] .eh-intro h2{font-size:clamp(40px,4.6vw,68px);line-height:1.28;max-width:14ch}
+body[data-page-type=home] .eh-intro>p:last-child{font-size:clamp(17px,1.45vw,21px);line-height:1.9;margin:0 0 10px;max-width:31ch;color:#627169}
+body[data-page-type=home] .eh-portals{grid-template-columns:1.2fr 1fr 1fr;gap:18px;padding-bottom:110px}
+body[data-page-type=home] .eh-portal--1,body[data-page-type=home] .eh-portal--2{margin-top:0}
+body[data-page-type=home] .eh-portal img{height:510px}
+body[data-page-type=home] .eh-portal:first-child img{height:590px}
+body[data-page-type=home] .eh-portal>div{bottom:36px;left:30px;right:30px}
+body[data-page-type=home] .eh-portal h3{font-size:clamp(21px,2vw,30px);line-height:1.4}
+body[data-page-type=home] .eh-portal small{font-size:13px;letter-spacing:.08em}
+body[data-page-type=home] .eh-care{grid-template-columns:1.05fr 1fr;gap:clamp(40px,7vw,120px);padding-block:60px 170px}
+body[data-page-type=home] .eh-care__photos>img{height:540px;border-radius:260px 260px 0 0}
+body[data-page-type=home] .eh-care figure img{height:260px}
+body[data-page-type=home] .eh-care h2{font-size:clamp(38px,4vw,58px);line-height:1.32}
+body[data-page-type=home] .eh-island{min-height:760px}
+body[data-page-type=home] .eh-island__card{width:510px;padding:64px 56px;box-shadow:0 28px 75px #092e2422}
+body[data-page-type=home] .eh-island__card h2{font-size:clamp(35px,3.7vw,52px)}
+body[data-page-type=home] .eh-island__word{font-size:clamp(100px,18vw,260px);opacity:.82}
+body[data-page-type=home] .eh-journey{padding-block:145px}
+body[data-page-type=home] .eh-journey h2{font-size:clamp(38px,4vw,56px)}
+body[data-page-type=home] .eh-journey ol{margin-top:55px;padding:48px 40px;background:#e8ece4;gap:36px}
+body[data-page-type=home] .eh-journey li{padding-right:12px}
+body[data-page-type=home] .eh-journey h3{font-size:20px;line-height:1.5}
+body[data-page-type=home] .hd-quick,body[data-page-type=home] .hd-planner,body[data-page-type=home] .hd-faq{padding-block:95px}
+body[data-page-type=home] .hd-life{padding-block:105px;background:#eae5dc}
+body[data-page-type=home] .hd-quick__item{background:#e8ece4;min-height:190px}
+body[data-page-type=home] .hd-quick__item:first-child{background:#183b32;color:white}
+body[data-page-type=home] .hd-quick__item:first-child :is(h3,p,a){color:white}
+body[data-page-type=home] .hd-quick__item h3{font-family:var(--eh-serif);font-size:24px}
+body[data-page-type=home] .hd-quick__item:first-child h3{font-size:34px}
+body[data-page-type=home] .hd-checklist{background:#e8ece4;padding:50px}
+body[data-page-type=home] .eh-start{padding-block:145px}
+body[data-page-type=home] .eh-start h2{font-size:clamp(38px,4vw,60px)}
+@media(max-width:900px){body[data-page-type=home] .eh-hero{min-height:680px;height:760px}body[data-page-type=home] .eh-hero h1{font-size:clamp(48px,7vw,72px)}body[data-page-type=home] .eh-intro{gap:30px;padding-top:90px}body[data-page-type=home] .eh-portals{gap:12px}body[data-page-type=home] .eh-portal img,body[data-page-type=home] .eh-portal:first-child img{height:390px}body[data-page-type=home] .eh-care{gap:35px;padding-bottom:95px}body[data-page-type=home] .eh-care__photos>img{height:410px}body[data-page-type=home] .eh-island{min-height:650px}body[data-page-type=home] .eh-island__card{width:420px;padding:38px}body[data-page-type=home] .eh-journey{padding-block:90px}}
+@media(max-width:600px){body[data-page-type=home] .eh-hero{min-height:690px;height:auto}body[data-page-type=home] .eh-hero__content{padding-block:75px 24px}body[data-page-type=home] .eh-hero h1{font-size:clamp(42px,10vw,58px);line-height:1.2}body[data-page-type=home] .eh-hero__sub{font-size:16px;line-height:1.7;margin-top:18px}body[data-page-type=home] .eh-hero__tabs{grid-template-columns:repeat(2,1fr)}body[data-page-type=home] .eh-hero__tab{min-height:48px;padding:9px 5px}body[data-page-type=home] .eh-values{padding:20px 0}body[data-page-type=home] .eh-values span{font-size:11px;letter-spacing:.05em}body[data-page-type=home] .eh-values span+span:before{margin-right:12px}body[data-page-type=home] .eh-intro{display:block;padding-top:75px;padding-bottom:35px}body[data-page-type=home] .eh-intro h2{font-size:36px}body[data-page-type=home] .eh-intro>p:last-child{margin-top:20px;font-size:16px}body[data-page-type=home] .eh-portals{grid-template-columns:1fr 1fr;padding-bottom:50px}body[data-page-type=home] .eh-portal:first-child{grid-column:1/3}body[data-page-type=home] .eh-portal img{height:280px}body[data-page-type=home] .eh-portal:first-child img{height:390px}body[data-page-type=home] .eh-portal>div{bottom:20px;left:16px;right:16px}body[data-page-type=home] .eh-portal h3{font-size:19px}body[data-page-type=home] .eh-care{padding-block:35px 85px}body[data-page-type=home] .eh-care__photos>img{height:350px}body[data-page-type=home] .eh-care h2{font-size:34px}body[data-page-type=home] .eh-island{min-height:680px}body[data-page-type=home] .eh-island__card{padding:28px;width:100%}body[data-page-type=home] .eh-island__card h2{font-size:34px}body[data-page-type=home] .eh-journey{padding-block:70px}body[data-page-type=home] .eh-journey ol{padding:28px 20px;gap:25px}body[data-page-type=home] .hd-quick,body[data-page-type=home] .hd-planner,body[data-page-type=home] .hd-faq{padding-block:55px}body[data-page-type=home] .hd-life{padding-block:65px}body[data-page-type=home] .hd-quick__item{padding:20px 16px;min-height:130px}body[data-page-type=home] .hd-quick__item:first-child h3{font-size:25px}body[data-page-type=home] .hd-quick__item h3{font-size:19px}body[data-page-type=home] .hd-checklist{padding:26px}body[data-page-type=home] .eh-start{padding-block:85px}}
