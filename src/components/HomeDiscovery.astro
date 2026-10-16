@@ -6,7 +6,7 @@ import { buildVisiblePaths, loadAllPages } from '../lib/content';
 const { lang } = Astro.props as { lang: LangCode };
 const built = buildVisiblePaths(await loadAllPages());
 const route = (...slugs: string[]) =>
-  slugs.map((s) => `/${lang}/${s}`).find((p) => built.has(p)) ?? '#consult';
+  slugs.map((s) => `/${lang}/${s}`).find((p) => built.has(p)) ?? null;
 const c = getDiscoveryCopy(lang);
 const links = [
   route('pricing', 'articles/price-ranges-and-addon-items'),
@@ -20,11 +20,11 @@ const links = [
   <h2 data-reveal>{c.tools}</h2>
   <div>
     {c.quick.map((text, i) => (
-      <a href={links[i]} data-reveal style={`--rd:${i}`}>
+      <div class="hd-quick__item" data-reveal style={`--rd:${i}`}>
         <h3>{text}</h3>
         <p>{c.notes[i]}</p>
-        <b aria-hidden="true">↗</b>
-      </a>
+        {links[i] && <a href={links[i]} class="hd-quick__link" aria-label={`${text} — ${c.notes[i]}`}>↗</a>}
+      </div>
     ))}
   </div>
 </section>
@@ -112,7 +112,7 @@ const links = [
       <details id={i === 2 ? 'birth-documents' : undefined}>
         <summary>{q}</summary>
         <p>{c.answers[i]}</p>
-        {i < 3 && (
+        {i < 3 && links[[0, 3, 2][i]] && (
           <a class="eh-link" href={links[[0, 3, 2][i]]}>
             {c.read}
             <span>↗</span>
