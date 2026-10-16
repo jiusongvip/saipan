@@ -41,9 +41,10 @@ jobs:
           (pnpm exec astro preview --host 127.0.0.1 --port 4321 > /tmp/saipan-preview.log 2>&1 &)
           for i in $(seq 1 40); do curl -fsS http://127.0.0.1:4321/ >/dev/null && break; sleep 2; done
           mkdir -p screenshots
-          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "1440,900" --full-page http://127.0.0.1:4321/ screenshots/desktop.png
-          npx --yes playwright@1.56.1 screenshot --browser chromium --device "iPhone 13" --full-page http://127.0.0.1:4321/ screenshots/mobile.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "1440,900" --wait-for-timeout 1500 http://127.0.0.1:4321/ screenshots/desktop.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "390,844" --wait-for-timeout 1500 --full-page http://127.0.0.1:4321/ screenshots/mobile.png
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: actual-homepage-screenshots
           path: screenshots/
