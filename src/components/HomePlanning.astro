@@ -1,0 +1,336 @@
+---
+import type { LangCode } from '../lib/config';
+import '../styles/home-planning.css';
+const { lang } = Astro.props as { lang: LangCode };
+const en = lang === 'en';
+const hant = lang === 'zh-hant';
+const text = (zh: string, english: string, traditional = zh) =>
+  en ? english : hant ? traditional : zh;
+const plans = [
+  {
+    title: text('先了解，再决定', 'Explore your options', '先了解，再決定'),
+    tag: text('初步探索', 'Getting started'),
+    description: text(
+      '从已有资料与个人目标出发，把下一步需要确认的问题整理清楚。',
+      'Organize your records, priorities and questions before choosing a next step.',
+    ),
+    items: [
+      text('个人需求沟通', 'Discuss personal priorities'),
+      text('已有检查资料整理', 'Organize existing records'),
+      text('方案与费用问题清单', 'Prepare questions about options and costs'),
+    ],
+    next: text(
+      '适合：第一次了解辅助生殖',
+      'For: people exploring fertility care',
+      '適合：第一次了解輔助生殖',
+    ),
+  },
+  {
+    title: text('围绕诊疗，做好准备', 'Prepare for your care', '圍繞診療，做好準備'),
+    tag: text('就诊筹备', 'Care preparation', '就診籌備'),
+    description: text(
+      '把评估、预算和行程串起来，先问清每一项，再安排出发。',
+      'Bring assessment, budgeting and travel preparation into one clear checklist.',
+    ),
+    items: [
+      text('向医生确认评估安排', 'Confirm assessment with a clinician'),
+      text('分项预算与不包含项目', 'Review itemized costs and exclusions'),
+      text('就诊日期与旅行安排衔接', 'Coordinate appointment and travel dates'),
+    ],
+    next: text(
+      '适合：已有明确就诊意向',
+      'For: people preparing for a visit',
+      '適合：已有明確就診意向',
+    ),
+  },
+  {
+    title: text('让陪同，也更从容', 'Plan for your companion', '讓陪同，也更從容'),
+    tag: text('旅居支持', 'Travel & daily life'),
+    description: text(
+      '把住宿、交通和日常需求提前列好，让陪同家人也有清晰的准备方向。',
+      'Plan accommodation, transport and everyday needs for you and your companion.',
+    ),
+    items: [
+      text('房型与陪同人数确认', 'Check room and companion needs'),
+      text('接送、餐食与生活清单', 'List transport and meal preferences'),
+      text('延期与取消条款核对', 'Review changes and cancellation terms'),
+    ],
+    next: text(
+      '适合：计划与伴侣或家人同行',
+      'For: people travelling with family',
+      '適合：計劃與伴侶或家人同行',
+    ),
+  },
+];
+const stages = [
+  [
+    text('出发前', 'Before travel', '出發前'),
+    text('整理资料，确认安排', 'Records & preparation', '整理資料，確認安排'),
+    text(
+      '准备已有病历和问题清单，确认接诊信息、报价范围与可调整的行程。',
+      'Organize your records and questions, confirm appointments and review quote exclusions.',
+    ),
+  ],
+  [
+    text('抵达后', 'On arrival', '抵達後'),
+    text('安顿生活，完成沟通', 'Settle in & discuss', '安頓生活，完成溝通'),
+    text(
+      '核对住宿和交通安排，按预约与专业人员沟通后续计划。',
+      'Check accommodation and transport, then attend your scheduled consultation.',
+    ),
+  ],
+  [
+    text('在岛期间', 'During your stay', '在島期間'),
+    text('围绕预约，灵活安排', 'Follow appointments', '圍繞預約，靈活安排'),
+    text(
+      '预留休息与时间调整空间；实际诊疗安排由接诊医生根据个人情况确定。',
+      'Leave room for rest and schedule changes. Your clinician determines actual care arrangements.',
+    ),
+  ],
+  [
+    text('返程前后', 'Before & after return', '返程前後'),
+    text('带齐记录，保持联系', 'Records & follow-up', '帶齊記錄，保持聯絡'),
+    text(
+      '整理诊疗记录、费用单据和后续问题，确认需要由谁接续沟通。',
+      'Collect care records and receipts, and confirm who to contact for follow-up questions.',
+    ),
+  ],
+];
+const budgetRows = [
+  [
+    text('医疗项目预留', 'Medical placeholder', '醫療項目預留'),
+    '$12,000',
+    text(
+      '仅用于演示；不对应实际治疗套餐',
+      'Demo only; not an actual treatment package',
+      '僅用於演示；不對應實際治療套餐',
+    ),
+  ],
+  [
+    text('往返交通预留', 'Travel placeholder', '往返交通預留'),
+    '$1,200',
+    text(
+      '演示按单人往返计算，不代表实时票价',
+      'One traveller, illustrative return fare',
+      '演示按單人往返計算，不代表實時票價',
+    ),
+  ],
+  [
+    text('住宿', 'Accommodation'),
+    '$120 / ' + text('晚', 'night'),
+    text('演示单价，可在下方调整', 'Adjust the illustrative rate below', '演示單價，可在下方調整'),
+  ],
+  [
+    text('餐食与当地交通', 'Meals & local transport', '餐食與當地交通'),
+    '$60 / ' + text('天', 'day'),
+    text(
+      '演示日常开支，可在下方调整',
+      'Adjust the illustrative daily allowance',
+      '演示日常開支，可在下方調整',
+    ),
+  ],
+];
+---
+
+<section class="hp-section container" id="explore">
+  <div class="hp-heading">
+    <div>
+      <p class="hp-eyebrow">01 / {text('选择方向', 'YOUR PRIORITIES', '選擇方向')}</p>
+      <h2>
+        {text(
+          '不同阶段，都有清晰的起点。',
+          'A clear starting point for every stage.',
+          '不同階段，都有清晰的起點。',
+        )}
+      </h2>
+    </div>
+    <p>
+      {text(
+        '先找到您当前最需要的信息，再一步步了解细节。',
+        'Find the information you need now, then explore the details at your own pace.',
+        '先找到您當前最需要的資訊，再一步步了解細節。',
+      )}
+    </p>
+  </div>
+  <div class="hp-plans">
+    {plans.map((p) => (
+      <article class="hp-plan">
+        <span class="hp-label">{p.tag}</span>
+        <h3>{p.title}</h3>
+        <p>{p.description}</p>
+        <ul>
+          {p.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <div class="hp-plan__footer">
+          <small>{p.next}</small>
+          <a href="#consult" aria-label={`${p.title} · ${text('咨询', 'Discuss', '諮詢')}`}>
+            ↗
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+<section class="hp-budget" id="sample-budget">
+  <div class="container hp-budget__grid">
+    <div>
+      <p class="hp-eyebrow">02 / {text('预算规划', 'BUDGET PLANNING', '預算規劃')}</p>
+      <h2>{text('每一笔，都看得清楚。', 'See where your budget goes.', '每一筆，都看得清楚。')}</h2>
+      <p class="hp-description">
+        {text(
+          '用一个可调整的示例，理解医疗与旅行支出如何共同组成预算。',
+          'Use an adjustable example to see how medical and travel allowances add up.',
+          '用一個可調整的示例，理解醫療與旅行支出如何共同組成預算。',
+        )}
+      </p>
+      <p class="hp-demo">
+        {text(
+          '参赛演示 · 以下金额均为虚构示例，不是报价、市场均价或诊疗建议。药物、检查及其他项目需另行核对。',
+          'Competition demo · All amounts are fictional examples, not quotes, market averages or care advice. Medication, tests and other costs require separate confirmation.',
+          '參賽演示 · 以下金額均為虛構示例，不是報價、市場均價或診療建議。藥物、檢查及其他項目需另行核對。',
+        )}
+      </p>
+      <div class="hp-costs">
+        {budgetRows.map(([label, value, note]) => (
+          <div>
+            <span>
+              <strong>{label}</strong>
+              <small>{note}</small>
+            </span>
+            <b>{value}</b>
+          </div>
+        ))}
+      </div>
+    </div>
+    <form class="hp-calculator" data-demo-budget onsubmit="return false">
+      <div class="hp-calculator__head">
+        <h3>{text('我的预算草稿', 'My budget sketch', '我的預算草稿')}</h3>
+        <span>USD · {text('演示', 'DEMO')}</span>
+      </div>
+      <div class="hp-fields">
+        <label>
+          {text('医疗项目预留（美元）', 'Medical allowance (USD)', '醫療項目預留（美元）')}
+          <input data-medical type="number" min="0" max="100000" step="100" value="12000" />
+        </label>
+        <label>
+          {text('往返交通（美元）', 'Return travel (USD)')}
+          <input data-travel type="number" min="0" max="50000" step="100" value="1200" />
+        </label>
+        <label>
+          {text('住宿晚数', 'Accommodation nights', '住宿晚數')}
+          <input data-nights type="number" min="1" max="180" value="14" />
+        </label>
+        <label>
+          {text('每晚住宿（美元）', 'Room / night (USD)')}
+          <input data-room type="number" min="0" max="5000" step="10" value="120" />
+        </label>
+        <label>
+          {text('旅行天数', 'Travel days', '旅行天數')}
+          <input data-days type="number" min="1" max="181" value="15" />
+        </label>
+        <label>
+          {text('每日生活（美元）', 'Daily expenses (USD)')}
+          <input data-daily type="number" min="0" max="5000" step="10" value="60" />
+        </label>
+      </div>
+      <div class="hp-total" aria-live="polite">
+        <span>{text('示例合计', 'Illustrative total', '示例合計')}</span>
+        <output data-budget-total>$15,780</output>
+        <small>
+          {text(
+            '演示金额 · 非完整报价',
+            'Demo amount · Not a complete quote',
+            '演示金額 · 非完整報價',
+          )}
+        </small>
+      </div>
+      <p class="hp-calculator__note">
+        {text(
+          '14晚 / 15天只是预算演示，不代表治疗所需停留时间。',
+          '14 nights / 15 days is a budgeting example, not a treatment timeline.',
+          '14晚 / 15天只是預算演示，不代表治療所需停留時間。',
+        )}
+      </p>
+      <a class="eh-link" href="#consult">
+        {text('带着预算草稿去沟通', 'Discuss my budget sketch', '帶著預算草稿去溝通')}{' '}
+        <span>↗</span>
+      </a>
+    </form>
+  </div>
+</section>
+<section class="hp-section container" id="visit-roadmap">
+  <div class="hp-heading">
+    <div>
+      <p class="hp-eyebrow">03 / {text('行程全貌', 'VISIT ROADMAP')}</p>
+      <h2>
+        {text(
+          '从准备到返程，心里有数。',
+          'Know what to prepare, at every step.',
+          '從準備到返程，心裡有數。',
+        )}
+      </h2>
+    </div>
+    <p>
+      {text(
+        '这是一份出行准备框架，具体日期与诊疗安排需个别确认。',
+        'A travel preparation framework. Actual dates and care arrangements require individual confirmation.',
+        '這是一份出行準備框架，具體日期與診療安排需個別確認。',
+      )}
+    </p>
+  </div>
+  <div class="hp-roadmap">
+    {stages.map(([when, title, description], i) => (
+      <article>
+        <span class="hp-stage">0{i + 1}</span>
+        <p class="hp-eyebrow">{when}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </article>
+    ))}
+  </div>
+  <div class="hp-documents">
+    <h3>
+      {text(
+        '出发前，先整理这四类资料',
+        'Four things to organize before travel',
+        '出發前，先整理這四類資料',
+      )}
+    </h3>
+    <div>
+      {[
+        text('身份与旅行资料', 'Identity & travel records', '身份與旅行資料'),
+        text('已有病历与检查', 'Existing medical records', '已有病歷與檢查'),
+        text('分项报价与条款', 'Itemized quotes & terms', '分項報價與條款'),
+        text('预约与住宿确认', 'Appointment & stay confirmations', '預約與住宿確認'),
+      ].map((item, i) => (
+        <span>
+          <b>0{i + 1}</b>
+          {item}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-demo-budget]').forEach((form) => {
+    const value = (selector: string) => {
+      const field = form.querySelector<HTMLInputElement>(selector)!;
+      return Math.min(Number(field.max), Math.max(Number(field.min), Number(field.value) || 0));
+    };
+    const calculate = () => {
+      const total =
+        value('[data-medical]') +
+        value('[data-travel]') +
+        value('[data-nights]') * value('[data-room]') +
+        value('[data-days]') * value('[data-daily]');
+      form.querySelector<HTMLOutputElement>('[data-budget-total]')!.value = new Intl.NumberFormat(
+        'en-US',
+        { style: 'currency', currency: 'USD', maximumFractionDigits: 0 },
+      ).format(total);
+    };
+    form.addEventListener('input', calculate);
+    calculate();
+  });
+</script>
