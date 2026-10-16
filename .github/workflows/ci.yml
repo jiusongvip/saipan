@@ -36,21 +36,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build:demo
       - run: npx --yes playwright@1.56.1 install --with-deps chromium
-      - name: Taste browser inspection
-        continue-on-error: true
-        run: |
-          git clone --depth 1 https://github.com/Leonxlnx/taste-skill.git /tmp/saipan-taste-skill
-          git -C /tmp/saipan-taste-skill fetch --depth 1 origin f624f37a8c650b9cc550253104925efe4c8de246
-          git -C /tmp/saipan-taste-skill checkout f624f37a8c650b9cc550253104925efe4c8de246
-          export CHROME_PATH="$(find /home/runner/.cache/ms-playwright -path '*/chrome-linux/chrome' -type f | head -1)"
-          cd dist
-          node /tmp/saipan-taste-skill/skills/taste-skill/scripts/inspect.mjs index.html --out ../screenshots/taste
       - name: Render actual website screenshots
         run: |
           (pnpm exec astro preview --host 127.0.0.1 --port 4321 > /tmp/saipan-preview.log 2>&1 &)
           for i in $(seq 1 40); do curl -fsS http://127.0.0.1:4321/ >/dev/null && break; sleep 2; done
           mkdir -p screenshots
           npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "1440,900" --full-page --wait-for-timeout 1500 http://127.0.0.1:4321/ screenshots/desktop.png
+          npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "768,1024" --full-page --wait-for-timeout 1500 http://127.0.0.1:4321/ screenshots/tablet.png
           npx --yes playwright@1.56.1 screenshot --browser chromium --viewport-size "390,844" --full-page --wait-for-timeout 1500 http://127.0.0.1:4321/ screenshots/mobile.png
       - uses: actions/upload-artifact@v4
         if: always()

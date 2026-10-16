@@ -29,7 +29,22 @@ Idea: the Saipan visit becomes a readable preparation itinerary, with island pho
 Taste source lint on the four principal edited presentation files: initial 20 FAIL / 3 WARN; final 0 FAIL / 0 WARN.
 Astro check: zero errors, two existing unused-parameter hints.
 Demo build: 50 pages; 1,441 internal links; build and generated-page audit pass.
-Local Taste browser inspector cannot run because this execution environment has no Chrome/Edge/Chromium. The existing GitHub screenshot job now runs the pinned Taste inspector at desktop, tablet and mobile widths and retains its findings and images as artifacts. No browser score is claimed in this document before that report is inspected.
+Local Taste browser inspector cannot run because this execution environment has no Chrome/Edge/Chromium. The pinned inspector also failed to launch its Chrome process on GitHub, while the existing Playwright screenshot path worked. Screenshots provide the fallback allowed by the skill; no claim of a passing browser meter is made. The screenshot job retains desktop, tablet and mobile images.
 
 ## Demonstration limitations
 The budget defaults and example length of stay are fictional display inputs, not prices or clinical timelines. Existing illustrative clinic, room and lifestyle images must be replaced with verified organization assets before a real clinic launch. The existing contact backend and organization facts still require project-owner configuration.
+
+## Screenshot critique
+ROUND 1
+Seen in one second: Saipan lagoon and fertility-visit introduction.
+Idea: a Saipan visit organized as an itinerary with an adjustable budget.
+Live thing: the budget calculator.
+Layout words by section: hero=split / options=reading rows / budget=calculator / journey=ordered sequence / care=photographs / lifestyle=gallery / questions=disclosure list / contact=form.
+Scores: design 7.0 · usability 8.0 · creativity 6.0 · content 7.5 → overall 7.15 (self-assessment, not an external jury score).
+Caps applied: creativity capped at 6 because the concept remains transferable to another visit-planning service.
+Top three findings from actual desktop and mobile images:
+1. The inherited dark footer breaks the light visual system; corrected to the same pale-green field.
+2. Some below-fold images are absent in the CLI full-page capture because lazy images have not been scrolled into view; source images exist, and first-screen photos render. This capture limit is not claimed as a missing on-page asset.
+3. Mobile navigation uses two rows, but the service, supporting text and consultation action remain visible before scrolling. Kept the working language control and menu rather than removing navigation functionality.
+
+The direction is a restrained polish of the existing page, not a claim of award-level originality. No new external photographs or video were introduced.
