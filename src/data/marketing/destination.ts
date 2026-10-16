@@ -8,7 +8,7 @@ export function getDestinationCopy(lang: LangCode) {
         title: 'A different setting.\nA new possibility.',
         lead: 'Discover Saipan for your fertility journey.',
         consult: 'Plan my visit',
-        intro: 'Why put Saipan on your shortlist?',
+        intro: 'Discover the advantages of Saipan',
         introText: 'Bring your care plan, travel and time to rest into one clear picture.',
         advantages: ['An island setting', 'A plan around you', 'Clarity before travel'],
         advText: [
@@ -20,7 +20,7 @@ export function getDestinationCopy(lang: LangCode) {
         travelText:
           'Flights, appointments and days on island should work together. Check your route and entry conditions before booking.',
         travelLink: 'Explore travel requirements',
-        comparison: 'Saipan or the U.S. mainland?',
+        comparison: 'Saipan and the U.S. mainland',
         comparisonText: 'Compare the details that matter to your family.',
         cols: ['What to compare', 'Saipan', 'U.S. mainland'],
         rows: [
@@ -77,8 +77,8 @@ export function getDestinationCopy(lang: LangCode) {
           travelText:
             '先確認診療日程，再核對航線、入境條件與停留安排。每一段旅程，都圍繞您的實際需要。',
           travelLink: '了解入境與出行',
-          comparison: '塞班 還是美國本土？',
-          comparisonText: '目的地怎麼選？先把這四件事放在一起看。',
+          comparison: '塞班與美國本土比較',
+          comparisonText: '從旅途、醫療、預算與入境四方面比較。',
           cols: ['比較重點', '塞班', '美國本土'],
           rows: [
             ['旅途安排', '比較可用航線、轉機與島內交通。', '比較目的城市、航線與到院交通。'],
@@ -120,8 +120,8 @@ export function getDestinationCopy(lang: LangCode) {
           travelText:
             '先确认诊疗日程，再核对航线、入境条件与停留安排。每一段旅程，都围绕您的实际需要。',
           travelLink: '了解入境与出行',
-          comparison: '塞班 还是美国本土？',
-          comparisonText: '目的地怎么选？先把这四件事放在一起看。',
+          comparison: '塞班与美国本土对比',
+          comparisonText: '从旅途、医疗、预算与入境四方面比较。',
           cols: ['比较重点', '塞班', '美国本土'],
           rows: [
             ['旅途安排', '比较可用航线、转机与岛内交通。', '比较目的城市、航线与到院交通。'],

@@ -31,7 +31,7 @@ export function getPricingCopy(lang: LangCode) {
           'Interpreting arrangements and communication.',
           'Accommodation preferences and local transport.',
         ],
-        tableTitle: 'Included? Ask for it in writing.',
+        tableTitle: 'Confirm what your quote includes.',
         tableText: 'This is a quotation checklist, not an all-inclusive package.',
         cols: ['Cost category', 'Ask whether included', 'Ask whether charged separately'],
         rows: [
