@@ -7,8 +7,9 @@ interface Props {
 const { lang } = Astro.props;
 const en = lang === 'en',
   hant = lang === 'zh-hant';
-import { getHeroSlides } from '../../data/marketing/home';
+import { getHomeCopy, getHeroSlides } from '../../data/marketing/home';
 const heroSlides = getHeroSlides(lang);
+const copy = getHomeCopy(lang);
 ---
 
 <section
@@ -17,71 +18,89 @@ const heroSlides = getHeroSlides(lang);
   aria-roledescription={en ? 'carousel' : '轮播'}
   aria-label={en ? 'Discover Saipan IVF' : hant ? '探索塞班 IVF' : '探索塞班 IVF'}
 >
-  <div class="eh-hero__slides">
-    {heroSlides.map((slide, i) => (
-      <MarketingImage
-        class:list={['eh-hero__image', { 'is-active': i === 0 }]}
-        src={slide.src}
-        alt={slide.alt}
-        width={i === 1 ? 1400 : 1600}
-        height="933"
-        loading={i === 0 ? 'eager' : 'lazy'}
-        fetchpriority={i === 0 ? 'high' : 'auto'}
-        data-hero-image
-        aria-hidden={i !== 0 ? 'true' : undefined}
-      />
-    ))}
-  </div>
-  <div class="eh-hero__shade"></div>
   <div class="container eh-hero__content">
-    <h1 data-hero-title>{heroSlides[0].title}</h1>
-    <p class="eh-hero__sub" data-hero-caption>
-      {heroSlides[0].text}
-    </p>
+    <p class="eh-kicker">SAIPAN · FERTILITY & CARE</p>
+    <h1>{copy.title}</h1>
+    <p class="eh-hero__sub">{copy.introText}</p>
+    <div class="eh-hero__actions">
+      <a class="eh-button eh-button--dark" href="#consult">
+        {copy.consult}
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a class="eh-hero__explore" href="#explore">
+        {copy.discover}
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <p class="eh-hero__note">{copy.sub}</p>
   </div>
-  <div class="container eh-hero__controls">
-    <div
-      class="eh-hero__tabs"
-      aria-label={en ? 'Choose a photograph' : hant ? '切換主視覺' : '切换主视觉'}
-    >
+  <div class="eh-hero__visual">
+    <div class="eh-hero__slides">
       {heroSlides.map((slide, i) => (
-        <button
-          type="button"
-          class:list={['eh-hero__tab', { 'is-active': i === 0 }]}
-          aria-pressed={i === 0}
-          data-hero-tab
-          data-caption={slide.text}
-          data-title={slide.title}
-        >
-          <span>{slide.label}</span>
-        </button>
+        <MarketingImage
+          class:list={['eh-hero__image', { 'is-active': i === 0 }]}
+          src={slide.src}
+          alt={slide.alt}
+          width={i === 1 ? 1400 : 1600}
+          height="933"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+          data-hero-image
+          aria-hidden={i !== 0 ? 'true' : undefined}
+        />
       ))}
     </div>
-    <div class="eh-hero__arrows">
-      <button
-        type="button"
-        data-hero-pause
-        aria-label={en ? 'Pause automatic slideshow' : hant ? '暫停自動輪播' : '暂停自动轮播'}
-        aria-pressed="false"
-        data-pause-label={en ? 'Pause automatic slideshow' : hant ? '暫停自動輪播' : '暂停自动轮播'}
-        data-play-label={en ? 'Resume automatic slideshow' : hant ? '繼續自動輪播' : '继续自动轮播'}
+    <p class="eh-hero__caption" data-hero-caption>
+      {heroSlides[0].text}
+    </p>
+    <div class="container eh-hero__controls">
+      <div
+        class="eh-hero__tabs"
+        aria-label={en ? 'Choose a photograph' : hant ? '切換主視覺' : '切换主视觉'}
       >
-        Ⅱ
-      </button>
-      <button
-        type="button"
-        data-hero-prev
-        aria-label={en ? 'Previous image' : hant ? '上一張圖片' : '上一张图片'}
-      >
-        ←
-      </button>
-      <button
-        type="button"
-        data-hero-next
-        aria-label={en ? 'Next image' : hant ? '下一張圖片' : '下一张图片'}
-      >
-        →
-      </button>
+        {heroSlides.map((slide, i) => (
+          <button
+            type="button"
+            class:list={['eh-hero__tab', { 'is-active': i === 0 }]}
+            aria-pressed={i === 0}
+            data-hero-tab
+            data-caption={slide.text}
+            data-title={slide.title}
+          >
+            <span>{slide.label}</span>
+          </button>
+        ))}
+      </div>
+      <div class="eh-hero__arrows">
+        <button
+          type="button"
+          data-hero-pause
+          aria-label={en ? 'Pause automatic slideshow' : hant ? '暫停自動輪播' : '暂停自动轮播'}
+          aria-pressed="false"
+          data-pause-label={
+            en ? 'Pause automatic slideshow' : hant ? '暫停自動輪播' : '暂停自动轮播'
+          }
+          data-play-label={
+            en ? 'Resume automatic slideshow' : hant ? '繼續自動輪播' : '继续自动轮播'
+          }
+        >
+          Ⅱ
+        </button>
+        <button
+          type="button"
+          data-hero-prev
+          aria-label={en ? 'Previous image' : hant ? '上一張圖片' : '上一张图片'}
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          data-hero-next
+          aria-label={en ? 'Next image' : hant ? '下一張圖片' : '下一张图片'}
+        >
+          →
+        </button>
+      </div>
     </div>
   </div>
   <span class="visually-hidden" data-hero-status aria-live="polite" aria-atomic="true"></span>

@@ -10,6 +10,7 @@ import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
 import { canonicalUrl } from '../lib/seo';
 import type { LangCode } from '../lib/config';
 import '../styles/editorial-home.css';
+import '../styles/light-home.css';
 interface Props {
   lang: LangCode;
   page?: PageData | null;
@@ -64,7 +65,7 @@ const metaDescription =
       ))}
     </div>
   </div>
-  <section class="eh-intro container">
+  <section class="eh-intro container" id="explore">
     <h2 data-reveal>{copy.intro}</h2>
     <p data-reveal style={`--rd:1`}>{copy.introText}</p>
   </section>

@@ -8,7 +8,7 @@ const { lang } = Astro.props;
 const c = getConsultationCopy(lang);
 ---
 
-<aside class="eh-chat" data-consult-panel aria-label={c.label}>
+<aside class="eh-chat" id="consult-panel" data-consult-panel hidden aria-label={c.label}>
   <div class="eh-chat__header">
     <span class="eh-chat__avatar" aria-hidden="true">
       <svg
@@ -48,7 +48,15 @@ const c = getConsultationCopy(lang);
     </a>
   </div>
 </aside>
-<button type="button" class="eh-chat-launcher" data-consult-open hidden aria-expanded="false" aria-label={c.label} title={c.label}>
+<button
+  type="button"
+  class="eh-chat-launcher"
+  data-consult-open
+  aria-controls="consult-panel"
+  aria-expanded="false"
+  aria-label={c.label}
+  title={c.label}
+>
   <svg
     width="22"
     height="22"
