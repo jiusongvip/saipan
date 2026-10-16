@@ -45,12 +45,12 @@ export const isProductionBuild: boolean = !includeDrafts;
 
 /**
  * 审阅外壳开关：DRAFT 横幅、逐槽位待核标注、未启用语言说明都属于审阅工具，不是成品文案。
- * 默认随预览构建出现；REVIEW=0 的演示构建只渲染成品内容。生产构建恒为 false。
+ * 默认关闭，预览与演示均只渲染成品内容；仅 REVIEW=1 显式开启审阅工具。生产构建恒为 false。
  */
 export const reviewChrome: boolean =
   includeDrafts &&
-  (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.REVIEW !==
-    '0';
+  (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env?.REVIEW ===
+    '1';
 
 export type PublishStatus = 'draft' | 'review' | 'approved' | 'published' | 'retired';
 
