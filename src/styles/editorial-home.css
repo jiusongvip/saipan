@@ -97,3 +97,18 @@ body[data-page-type=home] .eh-portal{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   body[data-page-type=home] .eh-portal img{transition:none}
 }
+
+/* V2: clear first-screen action and honest navigation when editorial pages are unpublished. */
+body[data-page-type=home] .eh-hero__cta{display:inline-flex;align-items:center;gap:24px;width:max-content;max-width:100%;margin-top:22px;padding:13px 20px;background:#fffdf9;color:#193e35;text-decoration:none;font-size:15px;font-weight:600;min-height:48px}
+body[data-page-type=home] .eh-hero__cta:hover{background:#e7eee5;color:#193e35}
+body[data-page-type=home] .eh-hero__cta:focus-visible{outline:3px solid white;outline-offset:5px}
+body[data-page-type=home] .eh-portal__action{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:inherit;text-decoration:none;font-size:25px}
+body[data-page-type=home] .eh-portal__action:focus-visible{outline:3px solid #fff;outline-offset:3px}
+body[data-page-type=home] .hd-quick__item{position:relative;display:flex;flex-direction:column;min-height:150px;padding:28px 24px;background:#eef1e8;color:var(--eh-ink)}
+body[data-page-type=home] .hd-quick__item:first-child{grid-row:span 2}
+body[data-page-type=home] .hd-quick__item:nth-child(2),body[data-page-type=home] .hd-quick__item:nth-child(4){grid-column:2/4}
+body[data-page-type=home] .hd-quick__item h3{font-size:20px;font-weight:400;margin:0 0 10px}
+body[data-page-type=home] .hd-quick__item:first-child h3{font-size:28px}
+body[data-page-type=home] .hd-quick__item p{font-size:14px;color:var(--eh-muted);margin:0;line-height:1.7}
+body[data-page-type=home] .hd-quick__link{align-self:flex-end;margin-top:auto;display:grid;place-items:center;width:44px;height:44px;color:var(--eh-ink);font-size:22px;text-decoration:none}
+@media(max-width:600px){body[data-page-type=home] .hd-quick__item{min-height:0;padding:23px 18px}body[data-page-type=home] .hd-quick__item:first-child{grid-row:auto;grid-column:1/3}body[data-page-type=home] .hd-quick__item:nth-child(2){grid-column:auto}body[data-page-type=home] .hd-quick__item:nth-child(4){grid-column:1/3}body[data-page-type=home] .eh-hero__cta{margin-top:16px}}
