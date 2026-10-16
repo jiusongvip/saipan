@@ -1,0 +1,34 @@
+/* Editorial decision atlas: distinct information architecture, not another set of photo cards. */
+.atlas{padding:104px 0 100px;background:#173d37;color:#fff}
+.atlas__head{display:grid;grid-template-columns:1.4fr .65fr;align-items:end;gap:48px;margin-bottom:44px}
+.atlas__eyebrow{display:block;font:600 11px/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#a9bcad;margin-bottom:22px}
+.atlas h2,.atlas-stages h2,.atlas-photo h2{font-family:var(--eh-serif);font-size:clamp(31px,3.6vw,52px);font-weight:400;letter-spacing:-.055em;line-height:1.35;margin:0}
+.atlas__head>p{color:#d1dfd6;line-height:1.9;font-size:16px;margin:0;max-width:360px}
+.atlas__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #ffffff50;border-bottom:1px solid #ffffff50}
+.atlas__tile{display:flex;flex-direction:column;justify-content:space-between;gap:65px;padding:26px 24px 28px;min-height:314px;border-right:1px solid #ffffff32;color:white;text-decoration:none;transition:background .2s}
+.atlas__tile:first-child{border-left:1px solid #ffffff32}
+.atlas__tile:hover{background:#ffffff12;color:white}
+.atlas__number{font:500 11px/1 system-ui,sans-serif;letter-spacing:.18em;color:#aec9b8}
+.atlas__tile-body{position:relative;padding-bottom:32px}
+.atlas__tile h3{color:white;font-size:clamp(18px,1.6vw,25px);font-weight:500;line-height:1.45;margin:0 0 13px}
+.atlas__tile p{font-size:14px;color:#cbdad0;line-height:1.9;margin:0}
+.atlas__arrow{position:absolute;bottom:-8px;right:0;font-size:24px}
+.atlas-stages{display:grid;grid-template-columns:.8fr 1.2fr;gap:9%;padding-block:118px 128px}
+.atlas-stages__heading>p{font-size:15px;line-height:1.9;color:var(--eh-muted);max-width:350px;margin:22px 0 0}
+.atlas-stages .atlas__eyebrow{color:#59766a}
+.atlas-stages__list{padding:0;margin:0;list-style:none;border-top:1px solid #c8d2c9}
+.atlas-stages__list li{display:grid;grid-template-columns:132px 1fr;gap:23px;border-bottom:1px solid #c8d2c9;padding:26px 0}
+.atlas-stages__list li>span{font:600 11px/1.5 system-ui,sans-serif;letter-spacing:.08em;color:#668075;padding-top:8px}
+.atlas-stages__list h3{font-size:22px;font-weight:500;margin:0 0 8px}
+.atlas-stages__list p{line-height:1.85;font-size:15px;color:var(--eh-muted);margin:0}
+.atlas-photo{display:grid;grid-template-columns:1.25fr 1fr;min-height:520px;background:#e2e7df}
+.atlas-photo__visual{position:relative;min-height:520px;background:#405e63;overflow:hidden}
+.atlas-photo__visual img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center}
+.atlas-photo__visual>span{position:absolute;bottom:25px;left:30px;color:white;font-size:11px;font-weight:600;letter-spacing:.17em;text-shadow:0 1px 9px #000}
+.atlas-photo__editorial{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:8% min(8vw,110px)}
+.atlas-photo__editorial .atlas__eyebrow{color:#5c796d}
+.atlas-photo__editorial p{max-width:430px;font-size:16px;line-height:1.95;margin:25px 0 30px;color:#3c5650}
+.atlas-photo__editorial a{color:#183f38;text-decoration:none;padding-bottom:10px;border-bottom:1px solid #739386;font-size:15px}
+.atlas-photo__editorial a span{margin-left:55px;font-size:20px}
+@media(max-width:950px){.atlas__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.atlas__tile{min-height:255px;border-bottom:1px solid #ffffff32}.atlas-stages{gap:5%}.atlas-stages__list li{grid-template-columns:100px 1fr}.atlas-photo__editorial{padding:55px 35px}}
+@media(max-width:650px){.atlas{padding:65px 0 70px}.atlas__head,.atlas-stages,.atlas-photo{grid-template-columns:1fr;gap:24px}.atlas__head{margin-bottom:28px}.atlas__grid{grid-template-columns:1fr 1fr}.atlas__tile{padding:20px 15px;min-height:265px;gap:30px}.atlas__tile h3{font-size:19px}.atlas__tile p{font-size:13px}.atlas-stages{padding-block:75px}.atlas-stages__list li{grid-template-columns:90px 1fr;gap:12px}.atlas-stages__list h3{font-size:19px}.atlas-photo__visual{min-height:290px}.atlas-photo__editorial{padding:55px 24px 65px}.atlas-photo{min-height:0}}

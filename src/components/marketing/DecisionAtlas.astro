@@ -1,0 +1,110 @@
+---
+import type { LangCode } from '../../lib/config';
+import { buildVisiblePaths, loadAllPages } from '../../lib/content';
+const { lang } = Astro.props as { lang: LangCode };
+const built = buildVisiblePaths(await loadAllPages());
+const route = (...slugs: string[]) => slugs.map((s) => `/${lang}/${s}`).find((p) => built.has(p)) ?? '#consult';
+const en = lang === 'en';
+const traditional = lang === 'zh-hant';
+const titles = en
+  ? ['Medical assessment', 'Costs & inclusions', 'Entry & documents', 'Flights & island stay']
+  : traditional
+    ? ['醫療評估與方案', '費用與增項', '入境與證件', '航班與島上生活']
+    : ['医疗评估与方案', '费用与增项', '入境与证件', '航班与岛上生活'];
+const detail = en
+  ? [
+      'What to prepare for an initial consultation, and how IVF and ICSI differ.',
+      'Separate clinical fees, testing, medication, travel and optional services.',
+      'Check eligibility and current official entry rules before booking anything.',
+      'Consider transfers, appointment timing, accommodation and support.',
+    ]
+  : traditional
+    ? [
+        '初診前要準備哪些檢查？IVF、ICSI 有何不同？先釐清醫療問題。',
+        '把檢查、藥物、實驗室、旅行和可選服務分開確認。',
+        '提前核實適用的入境資格、證件及政策更新，不以宣傳代替審核。',
+        '比較中轉航線、停留時間、住宿和就診安排。',
+      ]
+    : [
+        '初诊前要准备哪些检查？IVF、ICSI 有何不同？先厘清医疗问题。',
+        '把检查、药物、实验室、旅行和可选服务分开确认。',
+        '提前核实适用的入境资格、证件及政策更新，不以宣传代替审核。',
+        '比较中转航线、停留时间、住宿和就诊安排。',
+      ];
+const hrefs = [
+  route('programs/ivf-icsi', 'articles/ivf-abroad-decision-checklist'),
+  route('pricing', 'articles/price-ranges-and-addon-items'),
+  route('entry-path', 'articles/entry-policy-change-what-to-check'),
+  route('articles/flights-to-saipan-routes', 'entry-path'),
+];
+const stages = en
+  ? [
+      ['01 / Before the call', 'Collect your records', 'Prepare relevant past tests and treatment history. Confirm which additional tests the clinical team actually needs.'],
+      ['02 / Medical review', 'Discuss suitable pathways', 'Review treatment possibilities, uncertainties, medication, laboratory steps and the need for follow-up.'],
+      ['03 / Cost & travel', 'Create a realistic plan', 'Request itemized estimates and coordinate entry requirements, flights and accommodation around clinical dates.'],
+      ['04 / During and after', 'Know who follows up', 'Confirm point-of-contact, contingency plans, documentation and ongoing care after departure.'],
+    ]
+  : traditional
+    ? [
+        ['01 / 諮詢前', '整理病歷與檢查', '收集既往治療記錄、檢查報告、用藥情況；由醫療人員判斷哪些結果需要更新。'],
+        ['02 / 醫療評估', '確認適合自己的方案', '逐項溝通 IVF、ICSI、用藥、實驗室流程、限制與後續追蹤。'],
+        ['03 / 費用與行程', '把預算和出行排明白', '索取細分報價，並在確認就診節點後安排入境、航班及住宿。'],
+        ['04 / 就診與回程', '提前建立後續聯絡', '確認緊急處置、檢查結果交接、回程後隨訪及溝通窗口。'],
+      ]
+    : [
+        ['01 / 咨询前', '整理病历与检查', '收集既往治疗记录、检查报告、用药情况；由医疗人员判断哪些结果需要更新。'],
+        ['02 / 医疗评估', '确认适合自己的方案', '逐项沟通 IVF、ICSI、用药、实验室流程、限制与后续追踪。'],
+        ['03 / 费用与行程', '把预算和出行排明白', '索取细分报价，并在确认就诊节点后安排入境、航班及住宿。'],
+        ['04 / 就诊与回程', '提前建立后续联系', '确认紧急处置、检查结果交接、回程后随访及沟通窗口。'],
+      ];
+---
+<section class="atlas" aria-labelledby="atlas-title">
+  <div class="container">
+    <div class="atlas__head">
+      <div>
+        <span class="atlas__eyebrow">{en ? 'THE PRACTICAL GUIDE' : 'THE PRACTICAL GUIDE · 实用指南'}</span>
+        <h2 id="atlas-title">{en ? 'The four questions to answer first.' : traditional ? '重要的決定，先弄清這四件事。' : '重要的决定，先弄清这四件事。'}</h2>
+      </div>
+      <p>{en ? 'Not just an island photograph: the information you actually need before deciding.' : traditional ? '不只看風景。從醫療、費用到出行，把資訊拆成真正能使用的步驟。' : '不只看风景。从医疗、费用到出行，把信息拆成真正能使用的步骤。'}</p>
+    </div>
+    <div class="atlas__grid">
+      {titles.map((title, i) => (
+        <a class="atlas__tile" href={hrefs[i]}>
+          <span class="atlas__number">0{i + 1} / 04</span>
+          <div class="atlas__tile-body">
+            <h3>{title}</h3>
+            <p>{detail[i]}</p>
+            <span class="atlas__arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<section class="atlas-stages container" aria-labelledby="atlas-stages-title">
+  <div class="atlas-stages__heading">
+    <span class="atlas__eyebrow">{en ? 'A CLEARER PROCESS' : 'A CLEARER PROCESS · 四阶段路径'}</span>
+    <h2 id="atlas-stages-title">{en ? 'From the first question to the next step.' : traditional ? '每一步，有事可做。' : '每一步，有事可做。'}</h2>
+    <p>{en ? 'A practical overview, not a promise of a particular medical outcome.' : traditional ? '這是一般準備流程，實際治療安排須由醫療專業人員結合個人情況確定。' : '这是一般准备流程，实际治疗安排须由医疗专业人员结合个人情况确定。'}</p>
+  </div>
+  <ol class="atlas-stages__list">
+    {stages.map((step) => (
+      <li>
+        <span>{step[0]}</span>
+        <div><h3>{step[1]}</h3><p>{step[2]}</p></div>
+      </li>
+    ))}
+  </ol>
+</section>
+<section class="atlas-photo" aria-label={en ? 'Island travel feature' : '塞班岛屿专题'}>
+  <div class="atlas-photo__visual">
+    <img src="/images/saipan-marianas-sts103.jpg" width="1600" height="900" loading="lazy" alt={en ? 'Saipan and surrounding islands seen from above' : '塞班岛与周边海域的高空影像'} />
+    <span>{en ? 'NORTHERN MARIANA ISLANDS' : 'SAIPAN · NORTHERN MARIANA ISLANDS'}</span>
+  </div>
+  <div class="atlas-photo__editorial">
+    <span class="atlas__eyebrow">SAIPAN / AN ISLAND GUIDE</span>
+    <h2>{en ? 'A place to visit. A plan to make.' : traditional ? '一座島嶼，兩份行前清單。' : '一座岛屿，两份行前清单。'}</h2>
+    <p>{en ? 'A medical visit and an island stay have different requirements. Prepare both thoughtfully—and verify flights and entry rules close to departure.' : traditional ? '就診與旅行需要不同的準備。先確認醫療時間，再安排航班、住宿及日常生活；入境要求以官方最新規定為準。' : '就诊与旅行需要不同的准备。先确认医疗时间，再安排航班、住宿及日常生活；入境要求以官方最新规定为准。'}</p>
+    <a href={route('why-saipan', 'entry-path')}>{en ? 'Explore the island guide' : traditional ? '閱讀塞班指南' : '阅读塞班指南'} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>

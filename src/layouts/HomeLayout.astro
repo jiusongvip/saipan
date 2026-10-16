@@ -10,6 +10,8 @@ import { buildVisiblePaths, loadAllPages, type PageData } from '../lib/content';
 import { canonicalUrl } from '../lib/seo';
 import type { LangCode } from '../lib/config';
 import '../styles/editorial-home.css';
+import '../styles/decision-atlas.css';
+import DecisionAtlas from '../components/marketing/DecisionAtlas.astro';
 interface Props {
   lang: LangCode;
   page?: PageData | null;
@@ -155,6 +157,7 @@ const metaDescription =
       ))}
     </ol>
   </section>
+  <DecisionAtlas lang={lang} />
   <HomeDiscovery lang={lang} />
   <section class="eh-start container">
     <h2 data-reveal>{copy.start}</h2>
