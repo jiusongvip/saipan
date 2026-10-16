@@ -150,10 +150,10 @@ export function getHeroSlides(lang: LangCode) {
     {
       src: '/images/american-flag.jpg',
       title: en
-        ? 'Born in Saipan.\nA U.S. citizen?'
+        ? 'Born in Saipan.\nA U.S. citizen'
         : hant
-          ? '塞班出生\n美國公民？'
-          : '塞班出生\n美国公民？',
+          ? '塞班出生\n美國公民'
+          : '塞班出生\n美国公民',
       label: en ? 'Birth & documents' : hant ? '出生與證件' : '出生与证件',
       text: en
         ? 'Explore U.S. citizenship rules, birth registration and travel documents before making plans.'
